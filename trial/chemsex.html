@@ -472,9 +472,9 @@
     <label class="field">
       <span class="lbl">Tahun <span class="req">*</span></span>
       <div class="radio-group grid-3" data-req="tahun">
-        <button type="button" class="radio-item" data-val="2024">Tahun 2024</button>
-        <button type="button" class="radio-item" data-val="2025">Tahun 2025</button>
         <button type="button" class="radio-item" data-val="2026">Tahun 2026</button>
+        <button type="button" class="radio-item" data-val="2027">Tahun 2027</button>
+        <button type="button" class="radio-item" data-val="2028">Tahun 2028</button>
       </div>
     </label>
 
@@ -509,19 +509,70 @@
       <span class="lbl">Tanggal Laporan <span class="req">*</span></span>
       <input type="date" id="f-tanggal" data-req="tanggal">
     </label>
+  </div>
+
+  <!-- SECTION 2: Area Jangkauan -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">2</span> Area Jangkauan <span class="section-tag">Wilayah Kontak</span></div>
 
     <label class="field">
-      <span class="lbl">Status Kontak <span class="req">*</span></span>
-      <div class="radio-group horizontal" data-req="status">
-        <button type="button" class="radio-item" data-val="Baru">🆕 Baru</button>
-        <button type="button" class="radio-item" data-val="Lama">🔁 Lama</button>
+      <span class="lbl">Provinsi</span>
+      <div style="padding:11px 12px; background:linear-gradient(135deg, #f0f5f1 0%, #fef7f2 100%); border-radius:10px; font-weight:700; color:var(--sage-deep); font-size:14px; border:1.5px solid var(--sage);">
+        🌾 Jawa Timur <span style="font-weight:400; font-size:11px; color:var(--slate); float:right;">(default · scope Malang-Surabaya)</span>
+      </div>
+    </label>
+
+    <label class="field">
+      <span class="lbl">Kota / Kabupaten <span class="req">*</span>
+        <span class="hint">Pilih wilayah — Kecamatan akan muncul sesuai pilihan (cascading)</span>
+      </span>
+      <div class="radio-group horizontal" data-req="kotakab" id="kotakab-group">
+        <button type="button" class="radio-item" data-val="Kota Malang">🏙 Kota Malang</button>
+        <button type="button" class="radio-item" data-val="Kab Malang">🌾 Kab Malang</button>
+        <button type="button" class="radio-item" data-val="Kota Batu">🏔 Kota Batu</button>
+        <button type="button" class="radio-item" data-val="Kab Pasuruan">🌴 Kab Pasuruan</button>
+      </div>
+    </label>
+
+    <label class="field">
+      <span class="lbl">Kecamatan <span class="req">*</span>
+        <span class="hint">Muncul setelah pilih Kota/Kabupaten</span>
+      </span>
+      <select id="f-kecamatan" data-req="kecamatan" disabled>
+        <option value="">-- Pilih Kota/Kab dulu --</option>
+      </select>
+    </label>
+
+    <label class="field">
+      <span class="lbl">Desa / Kelurahan <span class="req">*</span>
+        <span class="hint">Muncul setelah pilih Kecamatan · cari cepat dengan mengetik di dropdown</span>
+      </span>
+      <select id="f-desa" data-req="desa" disabled>
+        <option value="">-- Pilih Kecamatan dulu --</option>
+      </select>
+      <input type="text" id="f-desa-manual" placeholder="Ketik nama desa/kelurahan..." style="display:none; margin-top:8px; width:100%; padding:11px 12px; font-size:14.5px; border:1.5px solid var(--gold); border-radius:10px; background:#fef9eb; font-family:inherit; color:var(--navy);">
+      <div id="desa-manual-note" style="display:none; margin-top:6px; font-size:11px; color:var(--slate); font-style:italic;">
+        💡 Desa tidak ada di daftar — silakan ketik manual. Kami akan tambahkan ke database.
       </div>
     </label>
   </div>
 
-  <!-- SECTION 2: Identitas Klien -->
+  <!-- SECTION 3: Identitas Klien -->
   <div class="section">
-    <div class="section-title"><span class="section-num">2</span> Identitas Klien <span class="section-tag">Demografis</span></div>
+    <div class="section-title"><span class="section-num">3</span> Identitas Klien <span class="section-tag">Demografis</span></div>
+
+    <label class="field">
+      <span class="lbl">Status Kontak <span class="req">*</span>
+        <span class="hint">💡 Kontak <strong>Lama</strong> nanti akan tarik data dari database (auto-filter berdasarkan PL + area yang dipilih di atas)</span>
+      </span>
+      <div class="radio-group horizontal" data-req="status" id="status-kontak-group">
+        <button type="button" class="radio-item" data-val="Baru">🆕 Baru</button>
+        <button type="button" class="radio-item" data-val="Lama">🔁 Lama</button>
+      </div>
+      <div id="lama-note" style="display:none; margin-top:8px; padding:10px 12px; background:linear-gradient(135deg, #fef9eb 0%, #fef7f2 100%); border-left:3px solid var(--gold); border-radius:6px; font-size:11.5px; color:#8a4d1f; line-height:1.55;">
+        ⏳ <strong>Coming soon</strong> — Dropdown daftar klien yang sudah pernah dijangkau oleh <em>PL ini + di area ini</em>. Sekarang isi manual seperti Baru dulu. Setelah Adib share database klien, integrasi akan aktif otomatis.
+      </div>
+    </label>
 
     <label class="field">
       <span class="lbl">Nama Lengkap Klien <span class="req">*</span></span>
@@ -573,51 +624,11 @@
       <input type="number" id="f-usia" placeholder="Umur klien (tahun)" min="10" max="99" data-req="usia">
     </label>
 
-    <label class="field">
-      <span class="lbl">Provinsi</span>
-      <div style="padding:11px 12px; background:linear-gradient(135deg, #f0f5f1 0%, #fef7f2 100%); border-radius:10px; font-weight:700; color:var(--sage-deep); font-size:14px; border:1.5px solid var(--sage);">
-        🌾 Jawa Timur <span style="font-weight:400; font-size:11px; color:var(--slate); float:right;">(default · scope Malang-Surabaya)</span>
-      </div>
-    </label>
-
-    <label class="field">
-      <span class="lbl">Kota / Kabupaten <span class="req">*</span>
-        <span class="hint">Pilih wilayah — Kecamatan akan muncul sesuai pilihan (cascading)</span>
-      </span>
-      <div class="radio-group horizontal" data-req="kotakab" id="kotakab-group">
-        <button type="button" class="radio-item" data-val="Kota Malang">🏙 Kota Malang</button>
-        <button type="button" class="radio-item" data-val="Kab Malang">🌾 Kab Malang</button>
-        <button type="button" class="radio-item" data-val="Kota Batu">🏔 Kota Batu</button>
-        <button type="button" class="radio-item" data-val="Kab Pasuruan">🌴 Kab Pasuruan</button>
-      </div>
-    </label>
-
-    <label class="field">
-      <span class="lbl">Kecamatan <span class="req">*</span>
-        <span class="hint">Muncul setelah pilih Kota/Kabupaten</span>
-      </span>
-      <select id="f-kecamatan" data-req="kecamatan" disabled>
-        <option value="">-- Pilih Kota/Kab dulu --</option>
-      </select>
-    </label>
-
-    <label class="field">
-      <span class="lbl">Desa / Kelurahan <span class="req">*</span>
-        <span class="hint">Muncul setelah pilih Kecamatan · cari cepat dengan mengetik di dropdown</span>
-      </span>
-      <select id="f-desa" data-req="desa" disabled>
-        <option value="">-- Pilih Kecamatan dulu --</option>
-      </select>
-      <input type="text" id="f-desa-manual" placeholder="Ketik nama desa/kelurahan..." style="display:none; margin-top:8px; width:100%; padding:11px 12px; font-size:14.5px; border:1.5px solid var(--gold); border-radius:10px; background:#fef9eb; font-family:inherit; color:var(--navy);">
-      <div id="desa-manual-note" style="display:none; margin-top:6px; font-size:11px; color:var(--slate); font-style:italic;">
-        💡 Desa tidak ada di daftar — silakan ketik manual. Kami akan tambahkan ke database.
-      </div>
-    </label>
   </div>
 
-  <!-- SECTION 3: Pola Penggunaan Napza -->
+  <!-- SECTION 4: Pola Penggunaan Napza -->
   <div class="section">
-    <div class="section-title"><span class="section-num">3</span> Pola Penggunaan Napza <span class="section-tag">Substance Use</span></div>
+    <div class="section-title"><span class="section-num">4</span> Pola Penggunaan Napza <span class="section-tag">Substance Use</span></div>
 
     <label class="field">
       <span class="lbl">Jenis Napza yang Digunakan <span class="req">*</span>
@@ -670,7 +681,7 @@
 
   <!-- SECTION 4: Kegiatan Penjangkauan -->
   <div class="section">
-    <div class="section-title"><span class="section-num">4</span> Kegiatan Penjangkauan <span class="section-tag">Outreach</span></div>
+    <div class="section-title"><span class="section-num">5</span> Kegiatan Penjangkauan <span class="section-tag">Outreach</span></div>
 
     <label class="field">
       <span class="lbl">Metode Penjangkauan <span class="req">*</span></span>
@@ -683,9 +694,30 @@
 
     <label class="field">
       <span class="lbl">Nama Hotspot <span class="req">*</span>
-        <span class="hint">Lokasi/tempat pertemuan (café, apartemen, panti pijat, online platform, dll)</span>
+        <span class="hint">Pilih jenis lokasi pertemuan · jika tidak ada di list, pilih "Lainnya"</span>
       </span>
-      <input type="text" id="f-hotspot" placeholder="misal: Café XYZ Kota Malang" data-req="hotspot">
+      <select id="f-hotspot" data-req="hotspot">
+        <option value="">-- Pilih jenis hotspot --</option>
+        <option value="Apartemen">🏢 Apartemen</option>
+        <option value="Café / Coffee Shop">☕ Café / Coffee Shop</option>
+        <option value="Diskotik / Club">🎧 Diskotik / Club</option>
+        <option value="Event / Party Private">🎉 Event / Party Private</option>
+        <option value="Fitness Center / Gym">💪 Fitness Center / Gym</option>
+        <option value="Hotel / Guest House">🏨 Hotel / Guest House</option>
+        <option value="Karaoke">🎤 Karaoke</option>
+        <option value="Kost / Rumah Kost">🏠 Kost / Rumah Kost</option>
+        <option value="Online Platform (Grindr/Twitter/dll)">📱 Online Platform (Grindr/Twitter/dll)</option>
+        <option value="Restoran">🍽 Restoran</option>
+        <option value="Rumah Pribadi">🏡 Rumah Pribadi</option>
+        <option value="Salon / Beauty">💇 Salon / Beauty</option>
+        <option value="Sauna / Pool">🏊 Sauna / Pool</option>
+        <option value="Spa / Panti Pijat">💆 Spa / Panti Pijat</option>
+        <option value="__LAINNYA__">➕ Lainnya (ketik manual)</option>
+      </select>
+      <input type="text" id="f-hotspot-manual" placeholder="Ketik nama hotspot..." style="display:none; margin-top:8px; width:100%; padding:11px 12px; font-size:14.5px; border:1.5px solid var(--gold); border-radius:10px; background:#fef9eb; font-family:inherit; color:var(--navy);">
+      <div id="hotspot-manual-note" style="display:none; margin-top:6px; font-size:11px; color:var(--slate); font-style:italic;">
+        💡 Ketik nama spesifik (misal: "Cafe Sarah Lowokwaru" atau "Kost Merjosari No.12")
+      </div>
     </label>
 
     <label class="field">
@@ -742,7 +774,7 @@
 
   <!-- SECTION 5: Rujukan Layanan -->
   <div class="section">
-    <div class="section-title"><span class="section-num">5</span> Rujukan Layanan <span class="section-tag">Referral</span></div>
+    <div class="section-title"><span class="section-num">6</span> Rujukan Layanan <span class="section-tag">Referral</span></div>
 
     <label class="field">
       <span class="lbl">Rujukan yang Diberikan
@@ -779,7 +811,7 @@
 
   <!-- SECTION 6: Logistik Distribusi -->
   <div class="section">
-    <div class="section-title"><span class="section-num">6</span> Logistik Distribusi <span class="section-tag">Supplies</span></div>
+    <div class="section-title"><span class="section-num">7</span> Logistik Distribusi <span class="section-tag">Supplies</span></div>
 
     <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
       <label class="field" style="margin-bottom:6px;">
@@ -915,6 +947,53 @@
       if (val) answers[inp.dataset.req] = val;
       else delete answers[inp.dataset.req];
       updateProgress();
+    });
+  });
+
+  // ========== HOTSPOT DROPDOWN + LAINNYA (Rule 10) ==========
+  const hotspotSelect = document.getElementById('f-hotspot');
+  const hotspotManual = document.getElementById('f-hotspot-manual');
+  const hotspotNote = document.getElementById('hotspot-manual-note');
+  hotspotSelect.addEventListener('change', () => {
+    if (hotspotSelect.value === '__LAINNYA__') {
+      hotspotManual.style.display = 'block';
+      hotspotNote.style.display = 'block';
+      hotspotManual.focus();
+      delete answers.hotspot;
+    } else if (hotspotSelect.value) {
+      answers.hotspot = hotspotSelect.value;
+      hotspotManual.style.display = 'none';
+      hotspotNote.style.display = 'none';
+      hotspotManual.value = '';
+    } else {
+      delete answers.hotspot;
+      hotspotManual.style.display = 'none';
+      hotspotNote.style.display = 'none';
+    }
+    updateProgress();
+  });
+  hotspotManual.addEventListener('input', (e) => {
+    const val = e.target.value.trim();
+    if (val) {
+      answers.hotspot = val + ' (manual)';
+      answers.hotspot_manual = true;
+    } else {
+      delete answers.hotspot;
+      delete answers.hotspot_manual;
+    }
+    updateProgress();
+  });
+
+  // ========== STATUS KONTAK LAMA NOTE (Rule 9) ==========
+  const statusGroup = document.getElementById('status-kontak-group');
+  const lamaNote = document.getElementById('lama-note');
+  statusGroup.querySelectorAll('.radio-item').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (btn.dataset.val === 'Lama') {
+        lamaNote.style.display = 'block';
+      } else {
+        lamaNote.style.display = 'none';
+      }
     });
   });
 
