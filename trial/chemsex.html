@@ -483,25 +483,25 @@
         <span class="hint">Pilih nama Anda dari daftar 19 PL Malang-Surabaya</span>
       </span>
       <div class="pl-grid" data-req="pl">
-        <button type="button" class="radio-item" data-val="Bayu Lesmana">Bayu Lesmana</button>
-        <button type="button" class="radio-item" data-val="Maradona">Maradona</button>
-        <button type="button" class="radio-item" data-val="Husen">Husen</button>
-        <button type="button" class="radio-item" data-val="Paldi">Paldi</button>
-        <button type="button" class="radio-item" data-val="Hendra (KL-MLG)">Hendra (KL-MLG)</button>
         <button type="button" class="radio-item" data-val="Aris">Aris</button>
-        <button type="button" class="radio-item" data-val="Dodik">Dodik</button>
-        <button type="button" class="radio-item" data-val="Nuri">Nuri</button>
-        <button type="button" class="radio-item" data-val="Deni">Deni</button>
-        <button type="button" class="radio-item" data-val="Ibi">Ibi</button>
+        <button type="button" class="radio-item" data-val="Bayu Lesmana">Bayu Lesmana</button>
         <button type="button" class="radio-item" data-val="David">David</button>
+        <button type="button" class="radio-item" data-val="Dedi">Dedi</button>
+        <button type="button" class="radio-item" data-val="Deni">Deni</button>
+        <button type="button" class="radio-item" data-val="Dodik">Dodik</button>
+        <button type="button" class="radio-item" data-val="Eko">Eko</button>
+        <button type="button" class="radio-item" data-val="Hanim">Hanim</button>
+        <button type="button" class="radio-item" data-val="Hendra (KL-MLG)">Hendra (KL-MLG)</button>
+        <button type="button" class="radio-item" data-val="Husen">Husen</button>
+        <button type="button" class="radio-item" data-val="Ibi">Ibi</button>
         <button type="button" class="radio-item" data-val="Imam-Konselor">Imam-Konselor</button>
         <button type="button" class="radio-item" data-val="Karyanto">Karyanto</button>
-        <button type="button" class="radio-item" data-val="Siswanto (KL-SBY)">Siswanto (KL-SBY)</button>
-        <button type="button" class="radio-item" data-val="Hanim">Hanim</button>
-        <button type="button" class="radio-item" data-val="Sotong Hariyono">Sotong Hariyono</button>
-        <button type="button" class="radio-item" data-val="Eko">Eko</button>
+        <button type="button" class="radio-item" data-val="Maradona">Maradona</button>
+        <button type="button" class="radio-item" data-val="Nuri">Nuri</button>
+        <button type="button" class="radio-item" data-val="Paldi">Paldi</button>
         <button type="button" class="radio-item" data-val="Reno">Reno</button>
-        <button type="button" class="radio-item" data-val="Dedi">Dedi</button>
+        <button type="button" class="radio-item" data-val="Siswanto (KL-SBY)">Siswanto (KL-SBY)</button>
+        <button type="button" class="radio-item" data-val="Sotong Hariyono">Sotong Hariyono</button>
       </div>
     </label>
 
@@ -537,21 +537,26 @@
 
     <label class="field">
       <span class="lbl">4 Huruf Pertama Nama Lengkap <span class="req">*</span>
-        <span class="hint">Untuk ID KD (Kode Dampingan). Maks 4 karakter, huruf besar.</span>
+        <span class="hint">Maks 4 karakter huruf besar — dipakai untuk generate ID KD otomatis</span>
       </span>
       <input type="text" id="f-huruf4" placeholder="misal: BUDI" maxlength="4" data-req="huruf4" style="text-transform:uppercase; letter-spacing:2px; font-weight:700;">
     </label>
 
     <label class="field">
-      <span class="lbl">Tanggal Lahir Klien</span>
+      <span class="lbl">Tanggal Lahir Klien
+        <span class="hint">💡 Boleh kosong dulu di pertemuan pertama. Nanti bisa di-backfill di database.</span>
+      </span>
       <input type="date" id="f-tgllahir">
     </label>
 
     <label class="field">
-      <span class="lbl">ID KD (Kode Dampingan) <span class="req">*</span>
-        <span class="hint">Copy dari sistem atau generate otomatis</span>
+      <span class="lbl">ID KD (Kode Dampingan) — <span style="color:var(--sage-deep); font-weight:700;">Otomatis</span>
+        <span class="hint">Format: <code style="background:#f0f5f1; padding:1px 5px; border-radius:3px;">4 huruf nama + DDMMYY</code>. Jika tgl lahir kosong → placeholder <code>123456</code> (di-flag "perlu backfill")</span>
       </span>
-      <input type="text" id="f-idkd" placeholder="misal: KL-MLG-BUDI-19900101" data-req="idkd">
+      <input type="text" id="f-idkd" placeholder="Terisi otomatis" data-req="idkd" readonly style="background:#f0f5f1; font-weight:700; letter-spacing:1.5px; color:var(--sage-deep); font-family:'Courier New', monospace;">
+      <div id="idkd-flag" style="display:none; margin-top:6px; padding:8px 10px; background:#fef5ed; border-left:3px solid var(--gold); border-radius:6px; font-size:11.5px; color:#8a4d1f; line-height:1.5;">
+        ⚠️ <strong>Placeholder tgl lahir (123456)</strong> — flag untuk backfill di database saat data lengkap tersedia
+      </div>
     </label>
 
     <label class="field">
@@ -569,11 +574,38 @@
     </label>
 
     <label class="field">
-      <span class="lbl">Provinsi <span class="req">*</span></span>
-      <div class="radio-group horizontal" data-req="provinsi">
-        <button type="button" class="radio-item" data-val="DKI Jakarta">🏙 DKI Jakarta</button>
-        <button type="button" class="radio-item" data-val="Jawa Timur">🌾 Jawa Timur</button>
+      <span class="lbl">Provinsi</span>
+      <div style="padding:11px 12px; background:linear-gradient(135deg, #f0f5f1 0%, #fef7f2 100%); border-radius:10px; font-weight:700; color:var(--sage-deep); font-size:14px; border:1.5px solid var(--sage);">
+        🌾 Jawa Timur <span style="font-weight:400; font-size:11px; color:var(--slate); float:right;">(default · scope Malang-Surabaya)</span>
       </div>
+    </label>
+
+    <label class="field">
+      <span class="lbl">Kota / Kabupaten <span class="req">*</span>
+        <span class="hint">Pilih wilayah — Kecamatan akan muncul sesuai pilihan (cascading)</span>
+      </span>
+      <div class="radio-group horizontal" data-req="kotakab" id="kotakab-group">
+        <button type="button" class="radio-item" data-val="Kota Malang">🏙 Kota Malang</button>
+        <button type="button" class="radio-item" data-val="Kab Malang">🌾 Kab Malang</button>
+        <button type="button" class="radio-item" data-val="Kota Batu">🏔 Kota Batu</button>
+        <button type="button" class="radio-item" data-val="Kab Pasuruan">🌴 Kab Pasuruan</button>
+      </div>
+    </label>
+
+    <label class="field">
+      <span class="lbl">Kecamatan <span class="req">*</span>
+        <span class="hint">Muncul setelah pilih Kota/Kabupaten</span>
+      </span>
+      <select id="f-kecamatan" data-req="kecamatan" disabled>
+        <option value="">-- Pilih Kota/Kab dulu --</option>
+      </select>
+    </label>
+
+    <label class="field">
+      <span class="lbl">Desa / Kelurahan <span class="req">*</span>
+        <span class="hint">Ketik nama desa atau kelurahan tempat klien tinggal / hotspot</span>
+      </span>
+      <input type="text" id="f-desa" placeholder="misal: Merjosari" data-req="desa">
     </label>
   </div>
 
@@ -655,18 +687,18 @@
         <span class="hint">Pilih semua yang dilakukan di kontak ini</span>
       </span>
       <div class="check-group one-col" data-req="kegiatan" data-multi>
-        <button type="button" class="check-item" data-val="Penjangkauan">🚶 Penjangkauan</button>
-        <button type="button" class="check-item" data-val="Rujukan">🔗 Rujukan</button>
+        <button type="button" class="check-item" data-val="Group Risk Assessment (GRA)">📊 Group Risk Assessment (GRA)</button>
         <button type="button" class="check-item" data-val="Home Visit">🏠 Home Visit</button>
-        <button type="button" class="check-item" data-val="Support Group Chemsex">💬 Support Group Chemsex</button>
-        <button type="button" class="check-item" data-val="Support Group ODHIV">💜 Support Group ODHIV</button>
+        <button type="button" class="check-item" data-val="Individual Risk Assessment (IRA)">📋 Individual Risk Assessment (IRA)</button>
+        <button type="button" class="check-item" data-val="Kader Lokal (Liaison Meeting)">🤝 Kader Lokal (Liaison Meeting)</button>
+        <button type="button" class="check-item" data-val="Konseling Adiksi">🧠 Konseling Adiksi</button>
+        <button type="button" class="check-item" data-val="Penjangkauan">🚶 Penjangkauan</button>
         <button type="button" class="check-item" data-val="Pertemuan FGD">🗣 Pertemuan FGD</button>
         <button type="button" class="check-item" data-val="Pertemuan PWUM Chemsex">👥 Pertemuan PWUM Chemsex</button>
         <button type="button" class="check-item" data-val="Regular Short Training Chemsex">📚 Regular Short Training Chemsex</button>
-        <button type="button" class="check-item" data-val="Kader Lokal (Liaison Meeting)">🤝 Kader Lokal (Liaison)</button>
-        <button type="button" class="check-item" data-val="Konseling Adiksi">🧠 Konseling Adiksi</button>
-        <button type="button" class="check-item" data-val="Individual Risk Assessment (IRA)">📋 Individual Risk Assessment</button>
-        <button type="button" class="check-item" data-val="Group Risk Assessment (GRA)">📊 Group Risk Assessment</button>
+        <button type="button" class="check-item" data-val="Rujukan">🔗 Rujukan</button>
+        <button type="button" class="check-item" data-val="Support Group Chemsex">💬 Support Group Chemsex</button>
+        <button type="button" class="check-item" data-val="Support Group ODHIV">💜 Support Group ODHIV</button>
         <button type="button" class="check-item" data-val="Lainnya">➕ Lainnya</button>
       </div>
     </label>
@@ -812,9 +844,10 @@
   });
   document.getElementById('req-count').textContent = requiredKeys.size;
 
-  // Default date
+  // Default date + Provinsi (static Jawa Timur — Rule 4)
   document.getElementById('f-tanggal').value = new Date().toISOString().slice(0,10);
   answers.tanggal = document.getElementById('f-tanggal').value;
+  answers.provinsi = 'Jawa Timur';
 
   // Radio item click handler
   document.querySelectorAll('.radio-group, .pl-grid').forEach(group => {
@@ -899,19 +932,86 @@
   }
   updateProgress();
 
-  // Auto-uppercase for 4-huruf field + auto-generate ID KD prefix
-  const huruf4 = document.getElementById('f-huruf4');
-  huruf4.addEventListener('input', () => {
-    huruf4.value = huruf4.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0,4);
-    answers.huruf4 = huruf4.value;
-    // Auto-suggest ID KD
-    const tgllahir = document.getElementById('f-tgllahir').value.replace(/-/g,'');
-    const suggest = huruf4.value + (tgllahir ? '-' + tgllahir : '');
+  // ========== ID KD AUTO-GENERATOR (Rule 2 + 3) ==========
+  // Format: 4-huruf-nama + DDMMYY (dari tgl lahir) OR 123456 (fallback flag)
+  function generateIdKd() {
+    const huruf4 = document.getElementById('f-huruf4').value.trim().toUpperCase();
+    const tgl = document.getElementById('f-tgllahir').value; // yyyy-mm-dd
     const idkd = document.getElementById('f-idkd');
-    if (!idkd.value || idkd.value.startsWith(huruf4.value.slice(0,2))) {
-      idkd.value = suggest;
-      if (suggest) answers.idkd = suggest;
+    const flag = document.getElementById('idkd-flag');
+
+    if (!huruf4 || huruf4.length < 1) {
+      idkd.value = '';
+      flag.style.display = 'none';
+      delete answers.idkd;
+      updateProgress();
+      return;
     }
+
+    let ddmmyy = '123456'; // fallback placeholder
+    let isPlaceholder = true;
+    if (tgl) {
+      const [yyyy, mm, dd] = tgl.split('-');
+      ddmmyy = dd + mm + yyyy.slice(2);
+      isPlaceholder = false;
+    }
+
+    const generated = huruf4 + ddmmyy;
+    idkd.value = generated;
+    answers.idkd = generated;
+    answers.idkd_placeholder = isPlaceholder;
+    // Show flag if placeholder
+    flag.style.display = isPlaceholder ? 'block' : 'none';
+    updateProgress();
+  }
+
+  const huruf4El = document.getElementById('f-huruf4');
+  huruf4El.addEventListener('input', () => {
+    huruf4El.value = huruf4El.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0,4);
+    answers.huruf4 = huruf4El.value;
+    generateIdKd();
+  });
+  document.getElementById('f-tgllahir').addEventListener('change', () => {
+    answers.tgllahir = document.getElementById('f-tgllahir').value;
+    generateIdKd();
+  });
+
+  // ========== KECAMATAN CASCADE (Rule 4) ==========
+  const kecamatanData = {
+    "Kota Malang": ["Blimbing", "Kedungkandang", "Klojen", "Lowokwaru", "Sukun"],
+    "Kab Malang": ["Ampelgading", "Bantur", "Bululawang", "Dampit", "Dau", "Donomulyo", "Gedangan", "Gondanglegi", "Jabung", "Kalipare", "Karangploso", "Kasembon", "Kepanjen", "Kromengan", "Lawang", "Ngajum", "Ngantang", "Pagak", "Pagelaran", "Pakis", "Pakisaji", "Poncokusumo", "Pujon", "Singosari", "Sumbermanjing Wetan", "Sumberpucung", "Tajinan", "Tirtoyudo", "Tumpang", "Turen", "Wagir", "Wajak", "Wonosari"],
+    "Kota Batu": ["Batu", "Bumiaji", "Junrejo"],
+    "Kab Pasuruan": ["Bangil", "Beji", "Gempol", "Gondangwetan", "Grati", "Kejayan", "Kraton", "Lekok", "Lumbang", "Nguling", "Pandaan", "Pasrepan", "Pohjentrek", "Prigen", "Purwodadi", "Purwosari", "Puspo", "Rejoso", "Rembang", "Sukorejo", "Tosari", "Tutur", "Winongan", "Wonorejo"]
+  };
+
+  // When Kota/Kab selected, populate Kecamatan dropdown
+  const kotakabGroup = document.getElementById('kotakab-group');
+  const kecSelect = document.getElementById('f-kecamatan');
+  kotakabGroup.querySelectorAll('.radio-item').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const kotakab = btn.dataset.val;
+      // Populate kecamatan
+      kecSelect.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
+      (kecamatanData[kotakab] || []).forEach(kec => {
+        const opt = document.createElement('option');
+        opt.value = kec;
+        opt.textContent = kec;
+        kecSelect.appendChild(opt);
+      });
+      kecSelect.disabled = false;
+      delete answers.kecamatan;
+      updateProgress();
+    });
+  });
+  kecSelect.addEventListener('change', () => {
+    if (kecSelect.value) answers.kecamatan = kecSelect.value;
+    else delete answers.kecamatan;
+    updateProgress();
+  });
+  document.getElementById('f-desa').addEventListener('input', (e) => {
+    const val = e.target.value.trim();
+    if (val) answers.desa = val;
+    else delete answers.desa;
     updateProgress();
   });
 
@@ -944,13 +1044,18 @@
     const info = Array.isArray(answers.informasi) ? answers.informasi.join(', ') : (answers.informasi || '-');
     const distribusi = ['Jarum: '+answers.jarum, 'Kondom: '+answers.kondom, 'KIE: '+answers.kie, 'Kaca: '+answers.kaca, 'Lipbalm: '+answers.lipbalm].join(' · ');
 
+    const idkdDisplay = answers.idkd_placeholder
+      ? `${answers.idkd} <span style="color:#8a4d1f; font-size:11px;">⚠️ placeholder tgl</span>`
+      : answers.idkd;
+    const wilayah = `${answers.kotakab || '-'} · Kec. ${answers.kecamatan || '-'} · ${answers.desa || '-'}`;
     document.getElementById('summary-box').innerHTML = `
-      <strong>👤 Klien:</strong> ${answers.julukan || answers.nama} (${answers.jk}, ${answers.usia}th) — ${answers.provinsi}<br>
-      <strong>🆔 ID KD:</strong> ${answers.idkd}<br>
+      <strong>👤 Klien:</strong> ${answers.julukan || answers.nama} (${answers.jk}, ${answers.usia}th)<br>
+      <strong>🆔 ID KD:</strong> ${idkdDisplay}<br>
+      <strong>📍 Wilayah:</strong> ${answers.provinsi} · ${wilayah}<br>
       <strong>📅 Kontak:</strong> ${answers.status} · ${answers.tanggal} oleh ${answers.pl}<br>
-      <strong>📍 Hotspot:</strong> ${answers.hotspot} (${answers['metode-jangkau']})<br>
+      <strong>🎯 Hotspot:</strong> ${answers.hotspot} (${answers['metode-jangkau']})<br>
       <strong>💊 Napza:</strong> ${napza}<br>
-      <strong>🎯 Kegiatan:</strong> ${kegiatan.substring(0,80)}${kegiatan.length > 80 ? '...' : ''}<br>
+      <strong>🎪 Kegiatan:</strong> ${kegiatan.substring(0,80)}${kegiatan.length > 80 ? '...' : ''}<br>
       <strong>📚 KIE:</strong> ${info.substring(0,80)}${info.length > 80 ? '...' : ''}<br>
       <strong>🔗 Rujukan:</strong> ${rujukan.substring(0,80)}${rujukan.length > 80 ? '...' : ''}<br>
       <strong>📦 Distribusi:</strong> ${distribusi}
