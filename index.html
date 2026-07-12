@@ -832,6 +832,19 @@
           <div class="nav-divider-label">Donor Portfolio</div>
           <div class="donor-group expanded">
             <div class="donor-header">
+              <span class="donor-name">Donor A · ViiV Healthcare</span>
+              <span class="donor-badge active">ACTIVE</span>
+            </div>
+            <div class="donor-sub-items">
+              <a class="nav-item" data-section="l2-A-proposal" data-donor="ViiV Healthcare"><span class="icon">📝</span> Program Proposal</a>
+              <a class="nav-item" data-section="l2-A-budget" data-donor="ViiV Healthcare"><span class="icon">💰</span> Budget</a>
+              <a class="nav-item" data-section="l2-A-kpi" data-donor="ViiV Healthcare"><span class="icon">📈</span> M&amp;E</a>
+              <a class="nav-item" data-section="l2-A-achievement" data-donor="ViiV Healthcare"><span class="icon">✅</span> Achievement</a>
+            </div>
+          </div>
+          <a class="nav-item" data-section="l2-add" style="margin-top:6px;font-style:italic;color:var(--slate);"><span class="icon">➕</span> Tambah donor aktif baru</a>
+          <div class="donor-group expanded">
+            <div class="donor-header">
               <span class="donor-name">📜 Historikal Donor</span>
               <span class="donor-badge hist">STATIC</span>
             </div>
@@ -851,19 +864,6 @@
               <a class="nav-item" data-section="l2-pipeline-matrix" data-donor="Pipeline Pendanaan"><span class="icon">📊</span> Matriks 13+ Donor</a>
             </div>
           </div>
-          <div class="donor-group expanded">
-            <div class="donor-header">
-              <span class="donor-name">Donor A · ViiV Healthcare</span>
-              <span class="donor-badge active">ACTIVE</span>
-            </div>
-            <div class="donor-sub-items">
-              <a class="nav-item" data-section="l2-A-proposal" data-donor="ViiV Healthcare"><span class="icon">📝</span> Program Proposal</a>
-              <a class="nav-item" data-section="l2-A-budget" data-donor="ViiV Healthcare"><span class="icon">💰</span> Budget</a>
-              <a class="nav-item" data-section="l2-A-kpi" data-donor="ViiV Healthcare"><span class="icon">📈</span> M&amp;E</a>
-              <a class="nav-item" data-section="l2-A-achievement" data-donor="ViiV Healthcare"><span class="icon">✅</span> Achievement</a>
-            </div>
-          </div>
-          <a class="nav-item" data-section="l2-add" style="margin-top:6px;font-style:italic;color:var(--slate);"><span class="icon">➕</span> Tambah donor aktif baru</a>
         </div>
       </div>
 
@@ -877,11 +877,10 @@
           <span class="chevron">▶</span>
         </div>
         <div class="nav-items">
-          <a class="nav-item" data-section="l3-outreach"><span class="icon">🚶</span> Outreach Log</a>
-          <a class="nav-item" data-section="l3-testing"><span class="icon">🧪</span> Testing Event</a>
-          <a class="nav-item" data-section="l3-counseling"><span class="icon">💬</span> Counseling Log</a>
-          <a class="nav-item" data-section="l3-referral"><span class="icon">🤝</span> Referral &amp; ADHA</a>
-          <a class="nav-item" data-section="l3-preview"><span class="icon">📱</span> Preview Mobile</a>
+          <a class="nav-item" data-section="l3-master"><span class="icon">📋</span> 1 · Master List Form</a>
+          <a class="nav-item" data-section="l3-form-dast10"><span class="icon">💊</span> 2 · DAST-10 Napza</a>
+          <a class="nav-item" data-section="l3-form-srq29"><span class="icon">🧠</span> 3 · SRQ-29 Mental Health</a>
+          <a class="nav-item" data-section="l3-form-chemsex"><span class="icon">🔥</span> 4 · Chemsex Outreach</a>
         </div>
       </div>
 
@@ -6122,491 +6121,67 @@
         <div class="placeholder-banner"><span class="icon">➕</span><div><strong>Pattern konsisten:</strong> Setiap donor baru akan punya 4 sub-section identik. Mba Watiek tinggal "+ Add Donor" → masukkan nama → 4 template kosong terbentuk otomatis. Indikator KPI bisa di-mapping ke PWA form fields existing atau request field baru kalau perlu.</div></div>
       </section>
 
-      <!-- ====== LAYER 3 SECTIONS ====== -->
+      <!-- ====== LAYER 3 SECTIONS · LIVE PL FORMS ====== -->
 
       <style>
-        /* Layer 3 mobile form layouts */
-        .l3-grid { display: grid; grid-template-columns: 1fr 320px; gap: 28px; align-items: start; margin-top: 18px; }
-        @media (max-width: 900px) { .l3-grid { grid-template-columns: 1fr; } }
-        .l3-grid .l3-info h3 { font-family: 'Lora', Georgia, serif; font-size: 17px; color: var(--clay-deep); margin: 0 0 10px 0; font-weight: 700; }
-        .l3-grid .l3-info p { font-size: 13px; line-height: 1.6; color: var(--navy); margin: 0 0 12px 0; }
-        .l3-grid .l3-info .field-list {
-          background: var(--cream-warm); border-left: 3px solid var(--sage); padding: 12px 16px;
-          border-radius: 6px; margin: 14px 0;
-          position: relative; overflow: hidden;
+        /* Layer 3 · Laporan Lapangan — embedded live PL forms */
+        .l3-form-wrap { max-width: 640px; margin: 22px auto 0; }
+        .l3-form-link {
+          display: flex; align-items: center; gap: 8px;
+          background: var(--clay); color: #fff; text-decoration: none;
+          font-weight: 700; font-size: 12.5px; line-height: 1.4;
+          padding: 12px 16px; border-radius: 12px 12px 0 0;
+          word-break: break-all; transition: background 0.15s;
         }
-        .l3-grid .l3-info .field-list strong { display: block; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--sage-deep); margin-bottom: 8px; position: relative; z-index: 2; }
-        .l3-grid .l3-info .field-list ul { margin: 0; padding-left: 18px; font-size: 12px; line-height: 1.65; color: var(--navy); position: relative; z-index: 2; }
-        /* Diagonal DUMMY watermark */
-        .l3-grid .l3-info .field-list::before {
-          content: "DUMMY";
-          position: absolute;
-          top: 50%;
-          right: 14px;
-          transform: translateY(-50%) rotate(-22deg);
-          font-family: 'Lora', Georgia, serif;
-          font-size: 78px;
-          font-weight: 800;
-          color: var(--clay-deep);
-          opacity: 0.1;
-          letter-spacing: 6px;
-          pointer-events: none;
-          white-space: nowrap;
-          z-index: 1;
-          line-height: 1;
+        .l3-form-link:hover { background: var(--clay-deep); }
+        .l3-form-link .ext { margin-left: auto; flex-shrink: 0; font-size: 14px; }
+        .l3-embed {
+          border: 1px solid var(--border); border-top: none;
+          border-radius: 0 0 14px 14px; overflow: hidden;
+          background: var(--cream); box-shadow: 0 10px 30px rgba(168,50,68,0.10);
         }
-        .l3-grid .l3-info .field-list .dummy-note {
-          margin-top: 12px;
-          padding: 8px 10px;
-          border-top: 1px dashed rgba(168, 50, 68, 0.3);
-          font-size: 10.5px;
-          font-style: italic;
-          color: var(--clay-deep);
-          line-height: 1.5;
-          position: relative;
-          z-index: 2;
-          display: flex;
-          align-items: flex-start;
-          gap: 6px;
+        .l3-embed iframe { display: block; width: 100%; height: 78vh; min-height: 620px; border: 0; }
+        .l3-note {
+          max-width: 640px; margin: 12px auto 0;
+          font-size: 11.5px; color: var(--slate); line-height: 1.6; text-align: center;
         }
-        .l3-grid .l3-info .field-list .dummy-note .ic { font-size: 12px; flex-shrink: 0; }
-        .l3-grid .l3-info .privacy-note { background: rgba(196, 122, 59, 0.08); border-left: 3px solid #c47a3b; padding: 10px 14px; border-radius: 5px; font-size: 11.5px; line-height: 1.55; color: var(--navy); margin-top: 12px; }
-        /* Compact phone version for inline section */
-        .phone-mockup.inline { width: 280px; margin: 0 auto; }
-        .phone-mockup.inline .phone-screen { height: 520px; }
-        .form-row .input.value-num { font-family: 'Lora', Georgia, serif; font-size: 18px; font-weight: 700; color: var(--clay-deep); }
-        .form-row.tap-pill { background: var(--sage-light); border-left: 3px solid var(--sage); }
-        .form-row.tap-pill .input { color: var(--sage-deep); font-weight: 700; }
-        .form-row.warn { background: rgba(196, 122, 59, 0.1); border-left: 3px solid #c47a3b; }
-        .form-row.warn .input { color: #8a4d1f; font-weight: 700; }
-        .pill-row { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
-        .pill-row .pill { background: white; border: 1px solid var(--border); padding: 3px 8px; border-radius: 10px; font-size: 10.5px; color: var(--navy); }
-        .pill-row .pill.active { background: var(--clay); color: white; border-color: var(--clay); font-weight: 600; }
+        .l3-note code { background: var(--gold-tint); padding: 1px 6px; border-radius: 4px; font-size: 11px; }
       </style>
 
-      <!-- ============================================================== -->
-      <!-- L3-OUTREACH: Outreach Log Form                                  -->
-      <!-- ============================================================== -->
-      <section class="section" id="l3-outreach">
-        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Form Harian</div><h1>🚶 Outreach Log</h1><p class="lede">Form harian Petugas Lapangan (PL) — outreach di DIC, area hotspot Penasun, atau komunitas dampingan. <strong>Target completion ≤ 2 menit</strong> · offline-capable · auto geo-tag.</p></div>
+      <!-- L3-MASTER · Master List Form PL -->
+      <section class="section" id="l3-master">
+        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Master List</div><h1>📋 Master List Form PL</h1><p class="lede">Daftar semua formulir digital untuk Petugas Lapangan (PL). Setiap form baru yang ditambahkan otomatis muncul di daftar ini. Klik kartu form untuk mulai isi, atau pilih form spesifik di menu kiri (No. 2 dan seterusnya).</p></div>
+        <div class="l3-form-wrap">
+          <a class="l3-form-link" href="https://adib-psych.github.io/sadar-hati-preview/trial/index.html" target="_blank" rel="noopener">🔗 adib-psych.github.io/sadar-hati-preview/trial/<span class="ext">↗</span></a>
+          <div class="l3-embed"><iframe src="https://adib-psych.github.io/sadar-hati-preview/trial/index.html" title="Master List Form PL — Sadar Hati" loading="lazy"></iframe></div>
+        </div>
+        <p class="l3-note">Master list ini menampilkan versi <strong>live</strong> dari halaman <code>/trial/</code>. Tambahkan form baru sekali di sana — langsung tampil di sini.</p>
+      </section>
 
-        <div class="l3-grid">
-          <div class="l3-info">
-            <h3>🎯 SOP Outreach Sadar Hati · Core Penasun (PWID)</h3>
-            <p>Outreach worker mengisi form ini <strong>setiap selesai sesi outreach</strong> di lapangan. <strong>Target population utama: Penasun (PWID) dan pasangan Penasun</strong> sesuai metodologi ILOM (Indigenous Leaders Outreach Model) — peer-led approach. Geo-tag auto-detect lokasi hotspot sesuai mapping treasury 50+ hotspot Kota Malang. Era ViiV menambah Chemsex populasi sebagai sub-program.</p>
-
-            <div class="field-list">
-              <strong>📋 Field Inputs</strong>
-              <ul>
-                <li><strong>Lokasi (auto-geo)</strong> — GPS detect kecamatan + hotspot tag</li>
-                <li><strong>Populasi target</strong> — dropdown: <strong>Penasun (PWID)</strong> · ODHA · Pasangan PWID · ADHA family · Chemsex · WPS · Waria</li>
-                <li><strong>Jumlah dampingan reached</strong> — counter input</li>
-                <li><strong>Kondom didistribusi</strong> — counter (target ratio per dampingan)</li>
-                <li><strong>IEC material didistribusi</strong> — checkbox materi: Chemsex · HIV/AIDS · Hep C · TB</li>
-                <li><strong>Follow-up flag</strong> — referral ke VCT/MH counseling kalau perlu</li>
-              </ul>
-              <div class="dummy-note"><span class="ic">⚠️</span><span>Sample field list di atas adalah <strong>DUMMY illustrative</strong> — akan disesuaikan dengan kebutuhan actual pelaporan lapangan Sadar Hati (review bersama Mba Watiek + tim PL).</span></div>
-            </div>
-
-            <div class="privacy-note">
-              <strong>🔒 Privacy:</strong> Tidak ada nama personal dampingan disimpan di Outreach Log — hanya counts &amp; aggregate. Identifikasi individual hanya di Counseling Log dengan pseudonym ID.
-            </div>
-          </div>
-
-          <div class="phone-mockup inline">
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <div class="phone-header">
-                <span>🚶 Outreach Log</span>
-                <span class="sync-status">● Online</span>
-              </div>
-              <div class="phone-body">
-                <div class="form-row"><div class="label">📍 Lokasi (auto-geo)</div><div class="input">Klojen, Malang Kota</div></div>
-                <div class="form-row"><div class="label">⏰ Timestamp</div><div class="input">27 Jun 2026 · 19:34</div></div>
-                <div class="form-row"><div class="label">👥 Populasi</div><div class="input">Penasun (PWID) · Pasangan ▾</div>
-                  <div class="pill-row"><span class="pill active">Penasun</span><span class="pill active">Pasangan</span><span class="pill">ODHA</span><span class="pill">Chemsex</span></div>
-                </div>
-                <div class="form-row"><div class="label">🤝 Dampingan reached</div><div class="input value-num">7</div></div>
-                <div class="form-row"><div class="label">💉 Jarum steril didistribusi</div><div class="input value-num">47</div></div>
-                <div class="form-row"><div class="label">📦 Kondom didistribusi</div><div class="input value-num">28</div></div>
-                <div class="form-row"><div class="label">📚 IEC didistribusi</div>
-                  <div class="pill-row"><span class="pill active">HR</span><span class="pill active">HIV</span><span class="pill">Hep C</span><span class="pill">TB</span></div>
-                </div>
-                <div class="form-row tap-pill"><div class="label">🔄 Follow-up</div><div class="input">✓ 2 ref VCT · 1 ref PTRM</div></div>
-                <button class="form-submit">💾 Simpan &amp; Sync</button>
-              </div>
-              <div class="phone-tabs">
-                <div class="phone-tab active"><div class="ic">🚶</div>Outreach</div>
-                <div class="phone-tab"><div class="ic">🧪</div>Testing</div>
-                <div class="phone-tab"><div class="ic">💬</div>Counsel</div>
-                <div class="phone-tab"><div class="ic">🤝</div>ADHA</div>
-              </div>
-            </div>
-          </div>
+      <!-- L3-FORM-DAST10 -->
+      <section class="section" id="l3-form-dast10">
+        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Form PL #2</div><h1>💊 DAST-10 · Skrining Napza</h1><p class="lede">10 pertanyaan Ya/Tidak tentang penggunaan Napza 3 bulan terakhir — asesmen awal IPWL + Harm Reduction outreach. Skor &amp; interpretasi 5 tingkat otomatis, simpan lokal, export CSV.</p></div>
+        <div class="l3-form-wrap">
+          <a class="l3-form-link" href="https://adib-psych.github.io/sadar-hati-preview/trial/dast10.html" target="_blank" rel="noopener">🔗 …/trial/dast10.html<span class="ext">↗</span></a>
+          <div class="l3-embed"><iframe src="https://adib-psych.github.io/sadar-hati-preview/trial/dast10.html" title="DAST-10 Skrining Napza" loading="lazy"></iframe></div>
         </div>
       </section>
 
-      <!-- ============================================================== -->
-      <!-- L3-TESTING: Testing Event Log Form                              -->
-      <!-- ============================================================== -->
-      <section class="section" id="l3-testing">
-        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Form Harian</div><h1>🧪 Testing Event Log</h1><p class="lede">Form testing coordinator setiap event HIV/IMS/Hepatitis bersama Puskesmas partner — Mobile VCT, screening di event komunitas, atau Puskesmas-based testing.</p></div>
-
-        <div class="l3-grid">
-          <div class="l3-info">
-            <h3>🎯 SOP Testing Sadar Hati</h3>
-            <p>Setiap event testing wajib di-log dengan partner Puskesmas + breakdown per jenis tes. <strong>Linkage-to-care flag wajib</strong> untuk reactive HIV — auto-generate referral ke ARV clinic.</p>
-
-            <div class="field-list">
-              <strong>📋 Field Inputs</strong>
-              <ul>
-                <li><strong>Tanggal &amp; Lokasi</strong> — auto + edit manual</li>
-                <li><strong>Partner Puskesmas</strong> — dropdown 8 Puskesmas (Kendalsari, Arjuno, Bangil, dst)</li>
-                <li><strong>Jumlah tested per jenis</strong> — HIV · Syphilis · Hep B · Hep C</li>
-                <li><strong>Reactive count</strong> — counter dengan auto-alert kalau ≥1</li>
-                <li><strong>Linkage-to-care flag</strong> — Sudah / Pending / Decline</li>
-                <li><strong>Biaya operasional</strong> — auto-sum untuk reporting donor</li>
-              </ul>
-              <div class="dummy-note"><span class="ic">⚠️</span><span>Sample field list di atas adalah <strong>DUMMY illustrative</strong> — akan disesuaikan dengan kebutuhan actual pelaporan lapangan Sadar Hati (review bersama Mba Watiek + tim Testing Coordinator + Puskesmas partner).</span></div>
-            </div>
-
-            <div class="privacy-note">
-              <strong>🔒 Privacy:</strong> Reactive case tracked dengan <strong>case ID</strong> (e.g., SH-VCT-2026-0428) — bukan nama. Linkage ke ARV facility dilakukan langsung oleh konselor, BUKAN via sistem.
-            </div>
-          </div>
-
-          <div class="phone-mockup inline">
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <div class="phone-header">
-                <span>🧪 Testing Event</span>
-                <span class="sync-status">● Online</span>
-              </div>
-              <div class="phone-body">
-                <div class="form-row"><div class="label">📅 Tanggal</div><div class="input">28 Juni 2026</div></div>
-                <div class="form-row"><div class="label">🏥 Partner Puskesmas</div><div class="input">Kendalsari ▾</div></div>
-                <div class="form-row"><div class="label">📍 Event lokasi</div><div class="input">Mobile VCT · Sukun community</div></div>
-                <div class="form-row"><div class="label">🧬 Tested HIV</div><div class="input value-num">23</div></div>
-                <div class="form-row"><div class="label">💊 Tested IMS (Syphilis)</div><div class="input value-num">19</div></div>
-                <div class="form-row"><div class="label">🦠 Tested Hep C</div><div class="input value-num">15</div></div>
-                <div class="form-row warn"><div class="label">⚠️ Reactive HIV</div><div class="input">2 · case ID auto-generated</div></div>
-                <div class="form-row tap-pill"><div class="label">🏥 Linkage-to-care</div><div class="input">2/2 ✓ ARV Syaiful Anwar</div></div>
-                <button class="form-submit">💾 Simpan &amp; Sync</button>
-              </div>
-              <div class="phone-tabs">
-                <div class="phone-tab"><div class="ic">🚶</div>Outreach</div>
-                <div class="phone-tab active"><div class="ic">🧪</div>Testing</div>
-                <div class="phone-tab"><div class="ic">💬</div>Counsel</div>
-                <div class="phone-tab"><div class="ic">🤝</div>ADHA</div>
-              </div>
-            </div>
-          </div>
+      <!-- L3-FORM-SRQ29 -->
+      <section class="section" id="l3-form-srq29">
+        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Form PL #3</div><h1>🧠 SRQ-29 · Skrining Kesehatan Mental</h1><p class="lede">29 pertanyaan Ya/Tidak instrumen WHO — screening masalah psikologis, penggunaan zat, gejala psikotik, dan PTSD dalam 30 hari terakhir. 4 sub-domain skor + flag risiko otomatis.</p></div>
+        <div class="l3-form-wrap">
+          <a class="l3-form-link" href="https://adib-psych.github.io/sadar-hati-preview/trial/srq29.html" target="_blank" rel="noopener">🔗 …/trial/srq29.html<span class="ext">↗</span></a>
+          <div class="l3-embed"><iframe src="https://adib-psych.github.io/sadar-hati-preview/trial/srq29.html" title="SRQ-29 Skrining Kesehatan Mental" loading="lazy"></iframe></div>
         </div>
       </section>
 
-      <!-- ============================================================== -->
-      <!-- L3-COUNSELING: Counseling Session Log Form                     -->
-      <!-- ============================================================== -->
-      <section class="section" id="l3-counseling">
-        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Form Harian</div><h1>💬 Counseling Session Log</h1><p class="lede">Form konselor kesehatan mental untuk dampingan Penasun (PWID) recovery · ODHA adjustment · Chemsex (era ViiV) — <strong>privacy-first</strong> dengan pseudonymized ID. Konten kualitatif sesi TIDAK disimpan di sistem (paper-vault).</p></div>
-
-        <div class="l3-grid">
-          <div class="l3-info">
-            <h3>🎯 SOP Counseling Privacy-First · Multi-Population</h3>
-            <p>Hanya <strong>metadata</strong> yang masuk sistem: pseudonym ID, modality, durasi, risk severity. Isi sesi (curhat, trauma, struggle recovery) TIDAK pernah diketik di handphone — di paper-vault terkunci Mba Watiek. <strong>Core population: Penasun dalam proses recovery + ODHA</strong>, plus Chemsex sebagai sub-program era ViiV.</p>
-
-            <div class="field-list">
-              <strong>📋 Field Inputs</strong>
-              <ul>
-                <li><strong>Pseudonym ID</strong> — dropdown by populasi: <strong>SH-2026-PSN-####</strong> (Penasun) · SH-2026-ODH-#### (ODHA) · SH-2026-ADH-#### (ADHA family) · SH-2026-CHM-#### (Chemsex era ViiV)</li>
-                <li><strong>Session modality</strong> — Individual · Group · Couple · Phone</li>
-                <li><strong>Durasi</strong> — slider 15-120 menit</li>
-                <li><strong>Topic kategori</strong> — <strong>Relapse · HIV adjustment · Recovery struggle</strong> · ADHA family · Chemsex · Grief · Stigma</li>
-                <li><strong>Risk severity</strong> — Low / Med / High / Crisis (auto-alert MH supervisor)</li>
-                <li><strong>Next action</strong> — Follow-up / Refer psikiater / Refer ARV / Refer PTRM / Group session</li>
-              </ul>
-              <div class="dummy-note"><span class="ic">⚠️</span><span>Sample field list di atas adalah <strong>DUMMY illustrative</strong> — akan disesuaikan dengan kebutuhan actual pelaporan konseling MH Sadar Hati (review bersama Mba Watiek + tim konselor + ethical board, sensitivity tinggi).</span></div>
-            </div>
-
-            <div class="privacy-note">
-              <strong>🔒 Privacy paramount:</strong> Tidak ada nama personal, alamat, tempat kerja. Kalau dampingan minta close case, ID disabled tapi metadata tetap di archive (anonymous statistik untuk donor reporting).
-            </div>
-          </div>
-
-          <div class="phone-mockup inline">
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <div class="phone-header">
-                <span>💬 Counseling</span>
-                <span class="sync-status" style="background:rgba(196,122,59,0.18); color:#8a4d1f;">⚿ Offline</span>
-              </div>
-              <div class="phone-body">
-                <div class="form-row"><div class="label">🆔 Pseudonym ID</div><div class="input">SH-2026-PSN-0042 ▾</div></div>
-                <div class="form-row"><div class="label">📅 Tanggal sesi</div><div class="input">27 Jun 2026 · 14:30</div></div>
-                <div class="form-row"><div class="label">👤 Modality</div>
-                  <div class="pill-row"><span class="pill active">Individual</span><span class="pill">Group</span><span class="pill">Phone</span></div>
-                </div>
-                <div class="form-row"><div class="label">⏱️ Durasi</div><div class="input value-num">60 min</div></div>
-                <div class="form-row"><div class="label">🏷️ Topic</div>
-                  <div class="pill-row"><span class="pill active">Relapse</span><span class="pill active">HIV adj.</span><span class="pill">Chemsex</span></div>
-                </div>
-                <div class="form-row warn"><div class="label">⚠️ Risk severity</div><div class="input">Medium · self-monitor 2 minggu</div></div>
-                <div class="form-row tap-pill"><div class="label">📋 Next action</div><div class="input">Follow-up · 4 Jul · Group SG</div></div>
-                <button class="form-submit">💾 Save (offline cache)</button>
-              </div>
-              <div class="phone-tabs">
-                <div class="phone-tab"><div class="ic">🚶</div>Outreach</div>
-                <div class="phone-tab"><div class="ic">🧪</div>Testing</div>
-                <div class="phone-tab active"><div class="ic">💬</div>Counsel</div>
-                <div class="phone-tab"><div class="ic">🤝</div>ADHA</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============================================================== -->
-      <!-- L3-REFERRAL: Referral & ADHA Support Form                      -->
-      <!-- ============================================================== -->
-      <section class="section" id="l3-referral">
-        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Form Harian</div><h1>🤝 Referral &amp; ADHA Support</h1><p class="lede">Form tracking rujukan ke layanan kesehatan + distribusi bantuan ADHA (Anak Dengan HIV/AIDS) — nutrition pack, school enrollment, vitamin support.</p></div>
-
-        <div class="l3-grid">
-          <div class="l3-info">
-            <h3>🎯 SOP Referral + ADHA</h3>
-            <p>Form ini melayani 2 fungsi: <strong>(1) Track rujukan</strong> dampingan ke ARV clinic/PTRM/RS dengan status follow-up + <strong>(2) Distribusi bantuan ADHA</strong> untuk anak-anak ODHA dampingan Sadar Hati.</p>
-
-            <div class="field-list">
-              <strong>📋 Field Inputs</strong>
-              <ul>
-                <li><strong>Recipient ID</strong> — pseudonym untuk dampingan / family ID untuk ADHA</li>
-                <li><strong>Tipe support</strong> — Medical Referral · Nutrition Pack · School Fee · Vitamin</li>
-                <li><strong>Foto handover</strong> — wajib consent flag dari recipient (or guardian untuk anak)</li>
-                <li><strong>ADHA-specific:</strong> School enrollment · Nutrition status · ART adherence</li>
-                <li><strong>Follow-up schedule</strong> — auto-calendar reminder 2 minggu kemudian</li>
-              </ul>
-              <div class="dummy-note"><span class="ic">⚠️</span><span>Sample field list di atas adalah <strong>DUMMY illustrative</strong> — akan disesuaikan dengan kebutuhan actual pelaporan lapangan Sadar Hati (review bersama Mba Watiek + tim ADHA + parent/guardian consent protocol).</span></div>
-            </div>
-
-            <div class="privacy-note">
-              <strong>🔒 Photo Consent:</strong> Foto handover untuk donor reporting harus get explicit consent flag. Anak-anak ADHA wajib pakai blur face mode default — only family ID tracking visible.
-            </div>
-          </div>
-
-          <div class="phone-mockup inline">
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <div class="phone-header">
-                <span>🤝 Referral/ADHA</span>
-                <span class="sync-status">● Online</span>
-              </div>
-              <div class="phone-body">
-                <div class="form-row"><div class="label">🆔 Recipient ID</div><div class="input">SH-ADHA-2026-014</div></div>
-                <div class="form-row"><div class="label">👶 Tipe support</div>
-                  <div class="pill-row"><span class="pill active">Nutrition</span><span class="pill active">School</span><span class="pill">Medical</span></div>
-                </div>
-                <div class="form-row"><div class="label">📦 Item handover</div><div class="input">Nutrition pack #28 · SPP Juli</div></div>
-                <div class="form-row"><div class="label">📸 Foto handover</div><div class="input">✓ Captured · ✓ Consent (guardian)</div></div>
-                <div class="form-row"><div class="label">🎒 School enrollment</div><div class="input">SD Kelas 3 · aktif</div></div>
-                <div class="form-row tap-pill"><div class="label">💊 ART adherence (ADHA)</div><div class="input">95% (1 missed dose minggu ini)</div></div>
-                <div class="form-row"><div class="label">📅 Follow-up</div><div class="input">11 Juli 2026 · auto-reminder</div></div>
-                <button class="form-submit">💾 Simpan &amp; Sync</button>
-              </div>
-              <div class="phone-tabs">
-                <div class="phone-tab"><div class="ic">🚶</div>Outreach</div>
-                <div class="phone-tab"><div class="ic">🧪</div>Testing</div>
-                <div class="phone-tab"><div class="ic">💬</div>Counsel</div>
-                <div class="phone-tab active"><div class="ic">🤝</div>ADHA</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="l3-preview">
-        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Preview Mobile</div><h1>📱 Preview Tampilan Mobile — Showcase 4 Forms</h1><p class="lede">Showcase 4 form harian Sadar Hati Field App side-by-side. Thumb-friendly · offline-capable · auto-sync ke Layer 2 internal dashboard saat connected. Target completion <strong>≤ 2 menit per laporan</strong>.</p></div>
-
-        <!-- Hero stat untuk SAHA Field App spec -->
-        <div class="hero-stat sage" style="margin-top:18px;">
-          <div>
-            <div class="big-label">Target Completion</div>
-            <div class="big-num">≤ 2min</div>
-          </div>
-          <div class="side">
-            <h3>Sadar Hati Field App · PWA Specification</h3>
-            <p><strong>Progressive Web App (PWA)</strong> — installable ke homescreen Android/iPhone tanpa Play Store/App Store. Bekerja <strong>offline-first</strong> dengan IndexedDB cache. Sync ke server saat connected (auto-detect WiFi/4G).</p>
-            <p>Workflow PL (Petugas Lapangan): outreach session → buka app → pick form → tap-tap-tap → simpan. <strong>Dropdown pre-defined, no manual typing</strong> kecuali catatan ad-hoc.</p>
-            <div class="citation">📊 Replacement modern dari paper-based "Buku Harian PO" + "Laporan Harian PL" template treasury era 2012</div>
-          </div>
-        </div>
-
-        <h2 class="section-h2" style="margin-top:32px;">📱 4 Forms Side-by-Side</h2>
-        <p style="font-size:13px; color:var(--slate); line-height:1.6; margin:4px 0 18px 0;">Tap setiap mockup untuk navigate ke detail form section masing-masing. Hover untuk preview animation.</p>
-
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin: 18px 0;">
-
-          <!-- Mini Phone 1: Outreach -->
-          <div style="text-align:center;">
-            <div class="phone-mockup inline" style="width: 220px; margin: 0 auto;">
-              <div class="phone-notch"></div>
-              <div class="phone-screen" style="height: 420px; padding: 10px 10px 6px;">
-                <div class="phone-header" style="font-size: 12px;">
-                  <span>🚶 Outreach</span>
-                  <span class="sync-status" style="font-size: 8px;">● Online</span>
-                </div>
-                <div class="phone-body">
-                  <div class="form-row" style="padding: 6px 8px;"><div class="label" style="font-size: 8px;">📍 Lokasi</div><div class="input" style="font-size: 10px;">Klojen, Malang</div></div>
-                  <div class="form-row" style="padding: 6px 8px;"><div class="label" style="font-size: 8px;">👥 Populasi</div><div class="input" style="font-size: 10px;">Penasun · Pasangan</div></div>
-                  <div class="form-row" style="padding: 6px 8px;"><div class="label" style="font-size: 8px;">💉 Jarum steril</div><div class="input value-num" style="font-size: 14px;">47</div></div>
-                  <div class="form-row" style="padding: 6px 8px;"><div class="label" style="font-size: 8px;">📦 Kondom</div><div class="input value-num" style="font-size: 14px;">28</div></div>
-                  <div class="form-row tap-pill" style="padding: 6px 8px;"><div class="label" style="font-size: 8px;">🔄 Follow-up</div><div class="input" style="font-size: 10px;">2 VCT · 1 PTRM</div></div>
-                  <button class="form-submit" style="font-size: 10px; padding: 6px;">💾 Sync</button>
-                </div>
-              </div>
-            </div>
-            <div style="font-family: 'Lora', Georgia, serif; font-size: 13px; font-weight: 700; color: var(--clay-deep); margin-top: 10px;">Outreach Log</div>
-            <div style="font-size: 10.5px; color: var(--slate); margin-top: 2px;">Field PL · 50+ hotspot</div>
-          </div>
-
-          <!-- Mini Phone 2: Testing -->
-          <div style="text-align:center;">
-            <div class="phone-mockup inline" style="width: 220px; margin: 0 auto;">
-              <div class="phone-notch"></div>
-              <div class="phone-screen" style="height: 420px; padding: 10px 10px 6px;">
-                <div class="phone-header" style="font-size: 12px;">
-                  <span>🧪 Testing</span>
-                  <span class="sync-status" style="font-size: 8px;">● Online</span>
-                </div>
-                <div class="phone-body">
-                  <div class="form-row" style="padding: 6px 8px;"><div class="label" style="font-size: 8px;">🏥 Partner</div><div class="input" style="font-size: 10px;">PKM Kendalsari</div></div>
-                  <div class="form-row" style="padding: 6px 8px;"><div class="label" style="font-size: 8px;">🧬 HIV</div><div class="input value-num" style="font-size: 14px;">23</div></div>
-                  <div class="form-row" style="padding: 6px 8px;"><div class="label" style="font-size: 8px;">💊 IMS</div><div class="input value-num" style="font-size: 14px;">19</div></div>
-                  <div class="form-row warn" style="padding: 6px 8px;"><div class="label" style="font-size: 8px;">⚠️ Reactive</div><div class="input" style="font-size: 10px;">2 · auto ID</div></div>
-                  <div class="form-row tap-pill" style="padding: 6px 8px;"><div class="label" style="font-size: 8px;">🏥 Linkage</div><div class="input" style="font-size: 10px;">2/2 ✓ ARV</div></div>
-                  <button class="form-submit" style="font-size: 10px; padding: 6px;">💾 Sync</button>
-                </div>
-              </div>
-            </div>
-            <div style="font-family: 'Lora', Georgia, serif; font-size: 13px; font-weight: 700; color: var(--clay-deep); margin-top: 10px;">Testing Event</div>
-            <div style="font-size: 10.5px; color: var(--slate); margin-top: 2px;">Coord + Puskesmas</div>
-          </div>
-
-          <!-- Mini Phone 3: Counseling -->
-          <div style="text-align:center;">
-            <div class="phone-mockup inline" style="width: 220px; margin: 0 auto;">
-              <div class="phone-notch"></div>
-              <div class="phone-screen" style="height: 420px; padding: 10px 10px 6px;">
-                <div class="phone-header" style="font-size: 12px;">
-                  <span>💬 Counsel</span>
-                  <span class="sync-status" style="font-size: 8px; background:rgba(196,122,59,0.18); color:#8a4d1f;">⚿ Offline</span>
-                </div>
-                <div class="phone-body">
-                  <div class="form-row" style="padding: 6px 8px;"><div class="label" style="font-size: 8px;">🆔 Pseudonym</div><div class="input" style="font-size: 10px;">SH-PSN-0042</div></div>
-                  <div class="form-row" style="padding: 6px 8px;"><div class="label" style="font-size: 8px;">👤 Modality</div><div class="input" style="font-size: 10px;">Individual</div></div>
-                  <div class="form-row" style="padding: 6px 8px;"><div class="label" style="font-size: 8px;">⏱️ Durasi</div><div class="input value-num" style="font-size: 14px;">60 min</div></div>
-                  <div class="form-row" style="padding: 6px 8px;"><div class="label" style="font-size: 8px;">🏷️ Topic</div><div class="input" style="font-size: 10px;">Relapse · HIV adj</div></div>
-                  <div class="form-row warn" style="padding: 6px 8px;"><div class="label" style="font-size: 8px;">⚠️ Risk</div><div class="input" style="font-size: 10px;">Medium</div></div>
-                  <button class="form-submit" style="font-size: 10px; padding: 6px;">💾 Cache</button>
-                </div>
-              </div>
-            </div>
-            <div style="font-family: 'Lora', Georgia, serif; font-size: 13px; font-weight: 700; color: var(--clay-deep); margin-top: 10px;">Counseling</div>
-            <div style="font-size: 10.5px; color: var(--slate); margin-top: 2px;">MH Konselor · Privacy-first</div>
-          </div>
-
-          <!-- Mini Phone 4: ADHA -->
-          <div style="text-align:center;">
-            <div class="phone-mockup inline" style="width: 220px; margin: 0 auto;">
-              <div class="phone-notch"></div>
-              <div class="phone-screen" style="height: 420px; padding: 10px 10px 6px;">
-                <div class="phone-header" style="font-size: 12px;">
-                  <span>🤝 ADHA</span>
-                  <span class="sync-status" style="font-size: 8px;">● Online</span>
-                </div>
-                <div class="phone-body">
-                  <div class="form-row" style="padding: 6px 8px;"><div class="label" style="font-size: 8px;">🆔 Recipient</div><div class="input" style="font-size: 10px;">SH-ADHA-014</div></div>
-                  <div class="form-row" style="padding: 6px 8px;"><div class="label" style="font-size: 8px;">👶 Support</div><div class="input" style="font-size: 10px;">Nutrition + School</div></div>
-                  <div class="form-row" style="padding: 6px 8px;"><div class="label" style="font-size: 8px;">📸 Foto</div><div class="input" style="font-size: 10px;">✓ Captured + Consent</div></div>
-                  <div class="form-row" style="padding: 6px 8px;"><div class="label" style="font-size: 8px;">🎒 School</div><div class="input" style="font-size: 10px;">SD Kelas 3 · aktif</div></div>
-                  <div class="form-row tap-pill" style="padding: 6px 8px;"><div class="label" style="font-size: 8px;">💊 ART</div><div class="input" style="font-size: 10px;">95% · 1 missed</div></div>
-                  <button class="form-submit" style="font-size: 10px; padding: 6px;">💾 Sync</button>
-                </div>
-              </div>
-            </div>
-            <div style="font-family: 'Lora', Georgia, serif; font-size: 13px; font-weight: 700; color: var(--clay-deep); margin-top: 10px;">Referral &amp; ADHA</div>
-            <div style="font-size: 10.5px; color: var(--slate); margin-top: 2px;">Tracking + Bantuan anak</div>
-          </div>
-
-        </div>
-
-        <!-- Technical Spec -->
-        <h2 class="section-h2" style="margin-top:32px;">⚙️ Technical Spec Sadar Hati Field App</h2>
-        <div class="cards">
-          <div class="card" style="background:var(--sage-light); border-color:var(--sage);">
-            <div class="label">📱 Platform</div>
-            <div class="value" style="font-size:17px;">PWA</div>
-            <div class="desc">Progressive Web App · install ke homescreen · tidak perlu Play Store</div>
-          </div>
-          <div class="card" style="background:var(--gold-tint); border-color:#d4a017;">
-            <div class="label">📡 Connectivity</div>
-            <div class="value" style="font-size:17px;">Offline-First</div>
-            <div class="desc">IndexedDB cache · auto-sync ke Layer 2 dashboard saat WiFi/4G connected</div>
-          </div>
-          <div class="card" style="background:var(--clay-tint); border-color:var(--clay);">
-            <div class="label">📵 Device support</div>
-            <div class="value" style="font-size:17px;">Low-end ready</div>
-            <div class="desc">Android RAM 2GB+ atau iPhone · target HP murah tim lapangan</div>
-          </div>
-          <div class="card" style="background:var(--pink-tint); border-color:var(--clay-deep);">
-            <div class="label">🔒 Privacy</div>
-            <div class="value" style="font-size:17px;">Pseudonym ID</div>
-            <div class="desc">No personal data · case ID auto-generate · consent flag wajib untuk foto</div>
-          </div>
-        </div>
-
-        <!-- Roadmap -->
-        <h2 class="section-h2" style="margin-top:32px;">🌱 Field App Development Roadmap</h2>
-        <p style="font-size:13px; color:var(--slate); line-height:1.6; margin:4px 0 18px 0;">3-phase development plan untuk Sadar Hati Field App PWA.</p>
-
-        <div style="position: relative; padding-left: 32px; margin: 20px 0;">
-          <div style="position: absolute; left: 14px; top: 14px; bottom: 14px; width: 3px; background: linear-gradient(180deg, var(--clay) 0%, #c47a3b 50%, #6b4d7a 100%); border-radius: 2px;"></div>
-
-          <div style="position: relative; margin-bottom: 18px;">
-            <span style="position: absolute; left: -32px; top: 4px; background: var(--clay); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; box-shadow: 0 0 0 4px white;">1</span>
-            <div style="background: var(--clay-tint); border: 2px solid var(--clay); border-radius: 10px; padding: 14px 18px;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                <strong style="font-family: 'Lora', Georgia, serif; font-size: 15px; color: var(--clay-deep);">Phase 1 · MVP 4 Forms</strong>
-                <span style="background: var(--clay); color: white; font-size: 10px; padding: 3px 10px; border-radius: 12px; letter-spacing: 0.5px; font-weight: 700;">🚧 SAMPLE READY · 28 Jun 2026</span>
-              </div>
-              <p style="font-size: 12.5px; color: var(--navy); line-height: 1.55; margin: 0;">4 forms harian (Outreach · Testing · Counseling · ADHA) — UI/UX mockup sudah ready (lihat showcase atas). Next: framework choice (React Native vs Vue PWA vs Flutter Web).</p>
-            </div>
-          </div>
-
-          <div style="position: relative; margin-bottom: 18px;">
-            <span style="position: absolute; left: -32px; top: 4px; background: #c47a3b; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; box-shadow: 0 0 0 4px white;">2</span>
-            <div style="background: rgba(196, 122, 59, 0.08); border: 2px solid #c47a3b; border-radius: 10px; padding: 14px 18px;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                <strong style="font-family: 'Lora', Georgia, serif; font-size: 15px; color: #8a4d1f;">Phase 2 · Pilot Implementation</strong>
-                <span style="background: #c47a3b; color: white; font-size: 10px; padding: 3px 10px; border-radius: 12px; letter-spacing: 0.5px; font-weight: 700;">📋 PLANNED · Q4 2026</span>
-              </div>
-              <p style="font-size: 12.5px; color: var(--navy); line-height: 1.55; margin: 0;">Pilot dengan 5 PL Kota Malang · 2-bulan field testing · feedback &amp; iterations. Train tim lapangan + dokumentasi SOP.</p>
-            </div>
-          </div>
-
-          <div style="position: relative;">
-            <span style="position: absolute; left: -32px; top: 4px; background: #6b4d7a; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; box-shadow: 0 0 0 4px white;">3</span>
-            <div style="background: #e6dfee; border: 2px solid #6b4d7a; border-radius: 10px; padding: 14px 18px;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                <strong style="font-family: 'Lora', Georgia, serif; font-size: 15px; color: #4a3358;">Phase 3 · Full Rollout</strong>
-                <span style="background: #6b4d7a; color: white; font-size: 10px; padding: 3px 10px; border-radius: 12px; letter-spacing: 0.5px; font-weight: 700;">🚀 FUTURE · 2027</span>
-              </div>
-              <p style="font-size: 12.5px; color: var(--navy); line-height: 1.55; margin: 0;">Rollout ke semua tim lapangan Sadar Hati. Layer 2 dashboard auto-sync real-time. Replacement paper-based reporting penuh — savings biaya kertas + waktu rekap manual.</p>
-            </div>
-          </div>
-        </div>
-
-        <div style="background:var(--cream-warm); border-left:3px solid var(--sage); padding:12px 18px; border-radius:6px; margin-top:18px; font-size:12.5px; line-height:1.55; color:var(--navy);">
-          <strong>💡 Strategic value untuk donor:</strong> Field App PWA = <strong>data quality jump</strong> from manual rekap monthly → real-time auto-aggregate. Donor proposal akan menyertakan <em>"Sadar Hati uses live mobile field reporting dengan offline-first capability"</em> = institutional capacity signal yang langka di NGO regional Indonesia.
+      <!-- L3-FORM-CHEMSEX -->
+      <section class="section" id="l3-form-chemsex">
+        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Form PL #4</div><h1>🔥 Penjangkauan ATS-Chemsex</h1><p class="lede">Form laporan harian PL untuk penjangkauan komunitas Chemsex Malang–Surabaya (proyek ViiV). Diisi tiap kontak individual dengan klien — 7 section · area jangkauan cascading · ID KD otomatis · simpan lokal.</p></div>
+        <div class="l3-form-wrap">
+          <a class="l3-form-link" href="https://adib-psych.github.io/sadar-hati-preview/trial/chemsex.html" target="_blank" rel="noopener">🔗 …/trial/chemsex.html<span class="ext">↗</span></a>
+          <div class="l3-embed"><iframe src="https://adib-psych.github.io/sadar-hati-preview/trial/chemsex.html" title="Penjangkauan ATS-Chemsex" loading="lazy"></iframe></div>
         </div>
       </section>
 
