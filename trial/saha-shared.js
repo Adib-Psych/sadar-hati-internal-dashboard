@@ -177,5 +177,10 @@
   function missing() { return REQ.filter(k => !(val[k] != null && String(val[k]).trim() !== "")); }
   function push(rec) { return _push ? _push(rec) : Promise.reject(new Error("Firebase belum siap")); }
 
+  // Back/Home context-aware: di dalam dashboard (iframe) -> postMessage ke parent (balik ke Master List);
+  // standalone (HP PL) -> ke daftar form (index.html).
+  window.sahaBack = function (e) { if (window.self !== window.top) { if (e) e.preventDefault(); window.parent.postMessage({ saha: 'nav', to: 'l3-master' }, '*'); return false; } return true; };
+  window.sahaHome = function () { if (window.self !== window.top) { window.parent.postMessage({ saha: 'nav', to: 'l3-master' }, '*'); return; } window.location.href = 'index.html'; };
+
   window.SAHA = { buildIdentity, getIdentity, isValid, missing, push, ready: () => _ready };
 })();

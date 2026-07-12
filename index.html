@@ -6323,6 +6323,7 @@ function updateBreadcrumb(item) {
 <!-- SAHA helpers: nav-switch + copy-link (plain script, dipanggil dari onclick) -->
 <script>
   window.SAHA_GO = function(id){ var el=document.querySelector('.nav-item[data-section="'+id+'"]'); if(el) el.click(); };
+  window.addEventListener('message', function(e){ if(e.origin!==location.origin) return; var d=e.data; if(d && d.saha==='nav' && typeof d.to==='string' && window.SAHA_GO) SAHA_GO(d.to); });
   window.SAHA_COPY = function(btn){
     var url=btn.getAttribute('data-url');
     function ok(){ var t=btn.innerHTML; btn.innerHTML='✓ Tersalin'; btn.classList.add('done'); setTimeout(function(){ btn.innerHTML=t; btn.classList.remove('done'); },1500); }

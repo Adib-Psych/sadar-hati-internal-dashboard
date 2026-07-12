@@ -313,7 +313,7 @@
 <div class="container">
 
   <div class="top-bar">
-    <a href="index.html">← Kembali</a>
+    <a href="index.html" onclick="return sahaBack(event)">← Kembali</a>
     <span style="color:var(--slate);">Sadar Hati Foundation</span>
   </div>
 
@@ -524,7 +524,7 @@
     alert('✅ Hasil tersimpan (cloud + HP ini).');
     closeModal();
     if (confirm('Isi lagi untuk dampingan lain?')) window.location.reload();
-    else window.location.href = 'index.html';
+    else sahaHome();
   }
 
   function closeModal() {

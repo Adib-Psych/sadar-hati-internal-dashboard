@@ -450,7 +450,7 @@
 <div class="container">
 
   <div class="top-bar">
-    <a href="index.html">← Kembali</a>
+    <a href="index.html" onclick="return sahaBack(event)">← Kembali</a>
     <span style="color:var(--slate);">Sadar Hati · ViiV Chemsex</span>
   </div>
 
@@ -1309,7 +1309,9 @@
     }
   }
 
+  function sahaBack(e){ if(window.self!==window.top){ if(e) e.preventDefault(); window.parent.postMessage({saha:'nav',to:'l3-master'},'*'); return false; } return true; }
   function goHome() {
+    if(window.self!==window.top){ window.parent.postMessage({saha:'nav',to:'l3-master'},'*'); return; }
     window.location.href = 'index.html';
   }
 </script>
