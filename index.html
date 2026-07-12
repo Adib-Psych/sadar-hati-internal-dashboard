@@ -158,7 +158,7 @@
     user-select: none;
   }
   .donor-header:hover { background: var(--sage-tint); }
-  .donor-header .donor-name { display: flex; align-items: center; gap: 6px; }
+  .donor-header .donor-name { display: flex; align-items: center; gap: 6px; flex: 1; }
   .donor-header .donor-name::before {
     content: ""; width: 6px; height: 6px;
     background: var(--sage); border-radius: 50%;
@@ -180,6 +180,8 @@
   .donor-group.expanded > .donor-sub-items { display: block; }
   .donor-sub-items .nav-item { font-size: 11.5px; padding: 5px 8px; }
   .donor-group.expanded > .donor-header .donor-name::before { background: var(--coral); }
+  .donor-header .chevron { font-size: 10px; color: var(--slate); transition: transform 0.2s; margin-left: 6px; }
+  .donor-group.expanded > .donor-header .chevron { transform: rotate(90deg); }
 
   .sidebar-footer {
     padding: 12px 18px;
@@ -796,16 +798,16 @@
     <nav class="nav">
 
       <!-- LAYER 1 -->
-      <div class="nav-layer expanded" data-layer="1">
+      <div class="nav-layer" data-layer="1">
         <div class="nav-layer-header">
           <div style="display:flex;align-items:center;">
             <span class="dot"></span>
-            <span>Layer 1 · Publik Website</span>
+            <span>Layer 3 · Publik Website</span>
           </div>
           <span class="chevron">▶</span>
         </div>
         <div class="nav-items">
-          <a class="nav-item active" data-section="l1-about"><span class="icon">🏠</span> About Sadar Hati</a>
+          <a class="nav-item" data-section="l1-about"><span class="icon">🏠</span> About Sadar Hati</a>
           <a class="nav-item" data-section="l1-program"><span class="icon">🎯</span> Program</a>
           <a class="nav-item" data-section="l1-sahawood"><span class="icon">🕶️</span> SAHAWOOD <span style="background:#d4a017; color:white; padding:1px 6px; border-radius:3px; font-size:9px; margin-left:4px;">NEW</span></a>
           <a class="nav-item" data-section="l1-tim"><span class="icon">👥</span> Tim</a>
@@ -833,7 +835,7 @@
           <div class="donor-group expanded">
             <div class="donor-header">
               <span class="donor-name">Donor A · ViiV Healthcare</span>
-              <span class="donor-badge active">ACTIVE</span>
+              <span class="donor-badge active">ACTIVE</span><span class="chevron">▶</span>
             </div>
             <div class="donor-sub-items">
               <a class="nav-item" data-section="l2-A-proposal" data-donor="ViiV Healthcare"><span class="icon">📝</span> Program Proposal</a>
@@ -843,10 +845,10 @@
             </div>
           </div>
           <a class="nav-item" data-section="l2-add" style="margin-top:6px;font-style:italic;color:var(--slate);"><span class="icon">➕</span> Tambah donor aktif baru</a>
-          <div class="donor-group expanded">
+          <div class="donor-group">
             <div class="donor-header">
               <span class="donor-name">📜 Historikal Donor</span>
-              <span class="donor-badge hist">STATIC</span>
+              <span class="donor-badge hist">STATIC</span><span class="chevron">▶</span>
             </div>
             <div class="donor-sub-items">
               <a class="nav-item" data-section="l2-hist-gf" data-donor="Historikal Donor"><span class="icon">🌐</span> Global Fund (R4 + R8)</a>
@@ -855,10 +857,10 @@
               <a class="nav-item" data-section="l2-hist-lapas" data-donor="Historikal Donor"><span class="icon">🏛️</span> LAPAS Kemenkumham 2023</a>
             </div>
           </div>
-          <div class="donor-group expanded">
+          <div class="donor-group">
             <div class="donor-header">
               <span class="donor-name">🎯 Pipeline Pendanaan</span>
-              <span class="donor-badge hist" style="background:#d4a017;">PIPELINE</span>
+              <span class="donor-badge hist" style="background:#d4a017;">PIPELINE</span><span class="chevron">▶</span>
             </div>
             <div class="donor-sub-items">
               <a class="nav-item" data-section="l2-pipeline-matrix" data-donor="Pipeline Pendanaan"><span class="icon">📊</span> Matriks 13+ Donor</a>
@@ -872,7 +874,7 @@
         <div class="nav-layer-header">
           <div style="display:flex;align-items:center;">
             <span class="dot"></span>
-            <span>Layer 3 · Laporan Lapangan</span>
+            <span>Layer 1 · Laporan Lapangan</span>
           </div>
           <span class="chevron">▶</span>
         </div>
@@ -881,7 +883,7 @@
           <a class="nav-item" data-section="l3-form-chemsex"><span class="icon">🔥</span> 2 · Chemsex Outreach</a>
           <a class="nav-item" data-section="l3-form-dast10"><span class="icon">💊</span> 3 · DAST-10 Napza</a>
           <a class="nav-item" data-section="l3-form-srq29"><span class="icon">🧠</span> 4 · SRQ-29 Mental Health</a>
-          <a class="nav-item" data-section="l3-loghari"><span class="icon">🗂️</span> 5 · Log Harian / Database</a>
+          <a class="nav-item active" data-section="l3-loghari"><span class="icon">🗂️</span> 5 · Log Harian / Database</a>
         </div>
       </div>
 
@@ -904,9 +906,9 @@
 
     <div class="topbar">
       <div class="breadcrumb" id="breadcrumb">
-        <span class="layer-tag l1">Layer 1 · Publik</span>
+        <span class="layer-tag l3">Layer 1 · Laporan Lapangan</span>
         <span class="sep">/</span>
-        <span class="current">About Sadar Hati</span>
+        <span class="current">Log Harian / Database</span>
       </div>
       <div class="topbar-actions">
         <button class="btn">↻ Refresh</button>
@@ -918,9 +920,9 @@
 
       <!-- ====== LAYER 1 SECTIONS ====== -->
 
-      <section class="section active" id="l1-about">
+      <section class="section" id="l1-about">
         <div class="hero">
-          <div class="eyebrow">Layer 1 · Halaman Publik · About Sadar Hati</div>
+          <div class="eyebrow">Layer 3 · Halaman Publik · About Sadar Hati</div>
           <h1>24 Tahun Perjalanan Yayasan Sadar Hati</h1>
           <p class="lede">Dari sekumpulan pemuda aktivis di Surabaya pada <strong>1 Februari 2002</strong>, hingga komunitas Harm Reduction terkemuka di Jawa Timur — Sadar Hati telah menjadi rumah bagi ribuan dampingan, jejaring kemitraan internasional &amp; nasional, dan ribuan jam pengabdian lintas-generasi.</p>
         </div>
@@ -1455,7 +1457,7 @@
 
         <!-- HERO -->
         <div class="hero">
-          <div class="eyebrow">Layer 1 · Halaman Publik · Program Sadar Hati</div>
+          <div class="eyebrow">Layer 3 · Halaman Publik · Program Sadar Hati</div>
           <h1>Program — Dari Klasik ke Kontemporer</h1>
           <p class="lede">Sadar Hati menjalankan program multi-pilar yang berakar dari pendekatan klasik Harm Reduction sejak 2002 — <strong>Strategi ILOM, 12 Komponen Pendekatan, dan Peer Worker Model</strong> — sambil terus beradaptasi dengan tantangan baru: Chemsex, kesehatan mental, dan dukungan ADHA. Methodology kami telah teruji lintas 24 tahun, lintas 6 donor internasional &amp; nasional, lintas 6+ kabupaten/kota Jawa Timur.</p>
         </div>
@@ -1925,7 +1927,7 @@
           <div style="position:absolute; bottom:-30px; left:-30px; width:160px; height:160px; background:radial-gradient(circle, rgba(212,160,23,0.18) 0%, transparent 70%); border-radius:50%;"></div>
 
           <div style="position:relative;">
-            <div style="font-size:11px; letter-spacing:2.5px; text-transform:uppercase; opacity:0.85; font-weight:700;">Layer 1 · Halaman Publik · Marketplace</div>
+            <div style="font-size:11px; letter-spacing:2.5px; text-transform:uppercase; opacity:0.85; font-weight:700;">Layer 3 · Halaman Publik · Marketplace</div>
             <div style="font-family:'Lora', Georgia, serif; font-size:48px; font-weight:700; line-height:1; margin:10px 0 6px 0; letter-spacing:-1px;">SAHAWOOD<span style="color:#d4a017;">·</span></div>
             <div style="font-size:18px; opacity:0.95; font-style:italic; margin-bottom:14px;">Tatap Masa Depan · See The Future · COOL and CARE</div>
             <p style="font-size:14px; line-height:1.65; opacity:0.97; margin:0; max-width:780px;">Social enterprise milik <strong>Yayasan Sadar Hati</strong> — produksi <strong>kacamata kayu</strong> dan <strong>jam tangan kayu</strong> handcrafted dari kayu limbah, dikerjakan oleh komunitas <strong>mantan pencandu narkoba, mantan napi, ODHA, dan perempuan miskin kota</strong>. Setiap produk yang Anda beli = jalan menuju empowerment ekonomi mereka.</p>
@@ -2186,7 +2188,7 @@
 
       <section class="section" id="l1-tim">
         <div class="hero">
-          <div class="eyebrow">Layer 1 · Halaman Publik</div>
+          <div class="eyebrow">Layer 3 · Halaman Publik</div>
           <h1>Tim Sadar Hati</h1>
           <p class="lede">Direksi, pengurus harian, koordinator program, tim outreach, konselor, dan jaringan relawan.</p>
         </div>
@@ -2454,7 +2456,7 @@
         </style>
 
         <div class="hero">
-          <div class="eyebrow">Layer 1 · Halaman Publik · Data &amp; Milestone</div>
+          <div class="eyebrow">Layer 3 · Halaman Publik · Data &amp; Milestone</div>
           <h1>📊 Data &amp; Milestone Publik</h1>
           <p class="lede">Infografis pencapaian Sadar Hati lintas <strong>24 tahun perjalanan (2002-2026)</strong> — bukan sekadar statistik, tapi <em>story</em> tentang konteks epidemi, skala operasional, dan dampak nyata. Data historis dari treasury era HCPI 2010-2014 + data current era ViiV regional ASEAN.</p>
         </div>
@@ -3161,7 +3163,7 @@
 
       <section class="section" id="l1-report">
         <div class="hero">
-          <div class="eyebrow">Layer 1 · Halaman Publik</div>
+          <div class="eyebrow">Layer 3 · Halaman Publik</div>
           <h1>Report</h1>
           <p class="lede">Annual report, quarterly report, dan dokumen publikasi yang bisa diunduh sebagai PDF.</p>
         </div>
@@ -3186,7 +3188,7 @@
       <!-- ============================================================== -->
       <section class="section" id="l1-materi">
         <div class="hero">
-          <div class="eyebrow">Layer 1 · Halaman Publik · Materi Training</div>
+          <div class="eyebrow">Layer 3 · Halaman Publik · Materi Training</div>
           <h1>📚 Materi Training &amp; Pembelajaran</h1>
           <p class="lede">Sadar Hati Foundation memiliki arsip <strong>527+ materi training</strong> hasil akumulasi sejak 2009 — modul HIV-TB integrated, MMT, Advokasi, Pernas OST, Kemenkes guidelines, dan banyak lagi. Halaman ini akan dikembangkan menjadi <strong>LMS (Learning Management System)</strong> publik untuk capacity building komunitas, mahasiswa, dan praktisi.</p>
         </div>
@@ -3463,7 +3465,7 @@
       <!-- ============================================================== -->
       <section class="section" id="l1-gallery">
         <div class="hero">
-          <div class="eyebrow">Layer 1 · Halaman Publik · Gallery</div>
+          <div class="eyebrow">Layer 3 · Halaman Publik · Gallery</div>
           <h1>🖼️ Galeri Kegiatan Sadar Hati</h1>
           <p class="lede">Dokumentasi visual perjalanan Sadar Hati lintas era — sebagai bagian dari komitmen transparansi institusional. Setiap event diabadikan untuk akuntabilitas mitra, donor, dampingan, dan komunitas. <strong>2.622+ foto</strong> ter-archive di treasury Adib's era HCPI 2011-2014.</p>
         </div>
@@ -3965,7 +3967,7 @@
 
       <section class="section" id="l1-contact">
         <div class="hero">
-          <div class="eyebrow">Layer 1 · Halaman Publik · Contact Us</div>
+          <div class="eyebrow">Layer 3 · Halaman Publik · Contact Us</div>
           <h1>✉️ Hubungi Kami</h1>
           <p class="lede">Yayasan Sadar Hati terbuka untuk <strong>kemitraan</strong>, <strong>donasi</strong>, <strong>rujukan dampingan</strong>, dan <strong>kolaborasi advokasi</strong>. Mari menebar manfaat bersama untuk kelompok rentan di Malang Raya dan sekitarnya.</p>
         </div>
@@ -6177,7 +6179,7 @@
 
       <!-- L3-MASTER · Master List Form PL -->
       <section class="section" id="l3-master">
-        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Master List</div><h1>📋 Master List Form PL</h1><p class="lede"><strong>Isi di sini</strong> membuka form langsung di halaman ini (tanpa pindah halaman). <strong>Copy link</strong> untuk dibagikan ke HP petugas lewat chat/WhatsApp — mereka isi dari HP masing-masing. Semua submission otomatis masuk ke <strong>Log Harian</strong> (No. 5).</p></div>
+        <div class="hero"><div class="eyebrow">Layer 1 · Laporan Lapangan · Master List</div><h1>📋 Master List Form PL</h1><p class="lede"><strong>Isi di sini</strong> membuka form langsung di halaman ini (tanpa pindah halaman). <strong>Copy link</strong> untuk dibagikan ke HP petugas lewat chat/WhatsApp — mereka isi dari HP masing-masing. Semua submission otomatis masuk ke <strong>Log Harian</strong> (No. 5).</p></div>
         <div class="ml-grid">
           <div class="ml-card chemsex">
             <div class="tag">ViiV · Kobo Replica</div><h3>🔥 Chemsex Outreach</h3>
@@ -6200,7 +6202,7 @@
 
       <!-- L3-FORM-CHEMSEX -->
       <section class="section" id="l3-form-chemsex">
-        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Form PL #2</div><h1>🔥 Penjangkauan ATS-Chemsex</h1><p class="lede">Form laporan harian PL untuk penjangkauan komunitas Chemsex Malang–Surabaya (proyek ViiV). 7 section · area jangkauan cascading · ID KD otomatis · tersimpan ke database.</p></div>
+        <div class="hero"><div class="eyebrow">Layer 1 · Laporan Lapangan · Form PL #2</div><h1>🔥 Penjangkauan ATS-Chemsex</h1><p class="lede">Form laporan harian PL untuk penjangkauan komunitas Chemsex Malang–Surabaya (proyek ViiV). 7 section · area jangkauan cascading · ID KD otomatis · tersimpan ke database.</p></div>
         <div class="l3-form-wrap">
           <div class="l3-form-linkbar"><span class="u">…/trial/chemsex.html</span><button data-url="https://adib-psych.github.io/sadar-hati-preview/trial/chemsex.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
           <div class="l3-embed"><iframe src="https://adib-psych.github.io/sadar-hati-preview/trial/chemsex.html" title="Penjangkauan ATS-Chemsex" loading="lazy"></iframe></div>
@@ -6209,7 +6211,7 @@
 
       <!-- L3-FORM-DAST10 -->
       <section class="section" id="l3-form-dast10">
-        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Form PL #3</div><h1>💊 DAST-10 · Skrining Napza</h1><p class="lede">10 pertanyaan Ya/Tidak penggunaan Napza 3 bulan terakhir — asesmen awal IPWL + Harm Reduction. Identitas &amp; area sama dengan Chemsex (1 kesatuan) · tersimpan ke database.</p></div>
+        <div class="hero"><div class="eyebrow">Layer 1 · Laporan Lapangan · Form PL #3</div><h1>💊 DAST-10 · Skrining Napza</h1><p class="lede">10 pertanyaan Ya/Tidak penggunaan Napza 3 bulan terakhir — asesmen awal IPWL + Harm Reduction. Identitas &amp; area sama dengan Chemsex (1 kesatuan) · tersimpan ke database.</p></div>
         <div class="l3-form-wrap">
           <div class="l3-form-linkbar"><span class="u">…/trial/dast10.html</span><button data-url="https://adib-psych.github.io/sadar-hati-preview/trial/dast10.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
           <div class="l3-embed"><iframe src="https://adib-psych.github.io/sadar-hati-preview/trial/dast10.html" title="DAST-10 Skrining Napza" loading="lazy"></iframe></div>
@@ -6218,7 +6220,7 @@
 
       <!-- L3-FORM-SRQ29 -->
       <section class="section" id="l3-form-srq29">
-        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Form PL #4</div><h1>🧠 SRQ-29 · Skrining Kesehatan Mental</h1><p class="lede">29 pertanyaan instrumen WHO — 4 sub-domain + flag risiko. Identitas &amp; area sama dengan Chemsex (1 kesatuan) · tersimpan ke database.</p></div>
+        <div class="hero"><div class="eyebrow">Layer 1 · Laporan Lapangan · Form PL #4</div><h1>🧠 SRQ-29 · Skrining Kesehatan Mental</h1><p class="lede">29 pertanyaan instrumen WHO — 4 sub-domain + flag risiko. Identitas &amp; area sama dengan Chemsex (1 kesatuan) · tersimpan ke database.</p></div>
         <div class="l3-form-wrap">
           <div class="l3-form-linkbar"><span class="u">…/trial/srq29.html</span><button data-url="https://adib-psych.github.io/sadar-hati-preview/trial/srq29.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
           <div class="l3-embed"><iframe src="https://adib-psych.github.io/sadar-hati-preview/trial/srq29.html" title="SRQ-29 Skrining Kesehatan Mental" loading="lazy"></iframe></div>
@@ -6226,8 +6228,8 @@
       </section>
 
       <!-- L3-LOGHARI · Log Harian / Database -->
-      <section class="section" id="l3-loghari">
-        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Database</div><h1>🗂️ Log Harian / Database</h1><p class="lede">Semua submission form PL (Chemsex · DAST-10 · SRQ-29) terkumpul real-time di sini. Akses terbatas — hanya staf yang login (data sensitif dilindungi).</p></div>
+      <section class="section active" id="l3-loghari">
+        <div class="hero"><div class="eyebrow">Layer 1 · Laporan Lapangan · Database</div><h1>🗂️ Log Harian / Database</h1><p class="lede">Semua submission form PL (Chemsex · DAST-10 · SRQ-29) terkumpul real-time di sini. Akses terbatas — hanya staf yang login (data sensitif dilindungi).</p></div>
         <div id="lh-login" class="lh-login">
           <div class="lh-login-card">
             <div class="lh-login-title">🔒 Login Staf</div>
@@ -6299,9 +6301,9 @@ function updateBreadcrumb(item) {
   const layer = item.closest('.nav-layer');
   const layerNum = layer.dataset.layer;
   const layerLabels = {
-    '1': { name: 'Layer 1 · Publik', cls: 'l1' },
+    '1': { name: 'Layer 3 · Publik', cls: 'l1' },
     '2': { name: 'Layer 2 · Internal', cls: 'l2' },
-    '3': { name: 'Layer 3 · Laporan Lapangan', cls: 'l3' }
+    '3': { name: 'Layer 1 · Laporan Lapangan', cls: 'l3' }
   };
   const lab = layerLabels[layerNum];
   const itemText = item.innerText.trim();
