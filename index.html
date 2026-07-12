@@ -878,9 +878,10 @@
         </div>
         <div class="nav-items">
           <a class="nav-item" data-section="l3-master"><span class="icon">📋</span> 1 · Master List Form</a>
-          <a class="nav-item" data-section="l3-form-dast10"><span class="icon">💊</span> 2 · DAST-10 Napza</a>
-          <a class="nav-item" data-section="l3-form-srq29"><span class="icon">🧠</span> 3 · SRQ-29 Mental Health</a>
-          <a class="nav-item" data-section="l3-form-chemsex"><span class="icon">🔥</span> 4 · Chemsex Outreach</a>
+          <a class="nav-item" data-section="l3-form-chemsex"><span class="icon">🔥</span> 2 · Chemsex Outreach</a>
+          <a class="nav-item" data-section="l3-form-dast10"><span class="icon">💊</span> 3 · DAST-10 Napza</a>
+          <a class="nav-item" data-section="l3-form-srq29"><span class="icon">🧠</span> 4 · SRQ-29 Mental Health</a>
+          <a class="nav-item" data-section="l3-loghari"><span class="icon">🗂️</span> 5 · Log Harian / Database</a>
         </div>
       </div>
 
@@ -6124,64 +6125,132 @@
       <!-- ====== LAYER 3 SECTIONS · LIVE PL FORMS ====== -->
 
       <style>
-        /* Layer 3 · Laporan Lapangan — embedded live PL forms */
-        .l3-form-wrap { max-width: 640px; margin: 22px auto 0; }
-        .l3-form-link {
-          display: flex; align-items: center; gap: 8px;
-          background: var(--clay); color: #fff; text-decoration: none;
-          font-weight: 700; font-size: 12.5px; line-height: 1.4;
-          padding: 12px 16px; border-radius: 12px 12px 0 0;
-          word-break: break-all; transition: background 0.15s;
-        }
-        .l3-form-link:hover { background: var(--clay-deep); }
-        .l3-form-link .ext { margin-left: auto; flex-shrink: 0; font-size: 14px; }
-        .l3-embed {
-          border: 1px solid var(--border); border-top: none;
-          border-radius: 0 0 14px 14px; overflow: hidden;
-          background: var(--cream); box-shadow: 0 10px 30px rgba(168,50,68,0.10);
-        }
-        .l3-embed iframe { display: block; width: 100%; height: 78vh; min-height: 620px; border: 0; }
-        .l3-note {
-          max-width: 640px; margin: 12px auto 0;
-          font-size: 11.5px; color: var(--slate); line-height: 1.6; text-align: center;
-        }
-        .l3-note code { background: var(--gold-tint); padding: 1px 6px; border-radius: 4px; font-size: 11px; }
+        .l3-form-wrap { max-width: 680px; margin: 22px auto 0; }
+        .l3-form-linkbar { display:flex; align-items:center; gap:8px; background:var(--clay); color:#fff; font-weight:700; font-size:12.5px; padding:11px 14px; border-radius:12px 12px 0 0; }
+        .l3-form-linkbar .u { word-break:break-all; opacity:.92; }
+        .l3-form-linkbar button { margin-left:auto; flex-shrink:0; background:rgba(255,255,255,.2); color:#fff; border:1px solid rgba(255,255,255,.5); border-radius:8px; padding:5px 10px; font-size:11px; font-weight:700; cursor:pointer; }
+        .l3-form-linkbar button:hover { background:rgba(255,255,255,.34); }
+        .l3-embed { border:1px solid var(--border); border-top:none; border-radius:0 0 14px 14px; overflow:hidden; background:var(--cream); box-shadow:0 10px 30px rgba(168,50,68,0.10); }
+        .l3-embed iframe { display:block; width:100%; height:78vh; min-height:620px; border:0; }
+        .ml-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(255px,1fr)); gap:16px; margin-top:20px; }
+        .ml-card { background:#fff; border:1px solid var(--border); border-left:5px solid var(--clay); border-radius:14px; padding:18px 16px; box-shadow:0 4px 14px rgba(0,0,0,0.05); display:flex; flex-direction:column; text-align:left; }
+        .ml-card.chemsex { border-left-color:var(--coral); }
+        .ml-card.srq { border-left-color:var(--sage); }
+        .ml-card .tag { font-size:9.5px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--slate); }
+        .ml-card h3 { font-family:'Lora',Georgia,serif; font-size:17px; margin:3px 0 4px; color:var(--navy); }
+        .ml-card p { font-size:12px; color:var(--slate); line-height:1.5; margin:6px 0 14px; flex:1; }
+        .ml-actions { display:flex; gap:8px; }
+        .ml-actions button { flex:1; border:none; border-radius:9px; padding:10px 8px; font-size:12px; font-weight:700; cursor:pointer; font-family:inherit; }
+        .ml-fill { background:var(--clay); color:#fff; }
+        .ml-fill:hover { background:var(--clay-deep); }
+        .ml-copy { background:var(--clay-tint); color:var(--clay-deep); }
+        .ml-copy.done { background:var(--sage); color:#fff; }
+        .ml-note { max-width:680px; margin:18px auto 0; font-size:11.5px; color:var(--navy); line-height:1.6; background:var(--gold-tint); border-radius:8px; padding:12px 14px; }
+        .ml-note a { color:var(--clay); }
+        .lh-login { max-width:380px; margin:30px auto; }
+        .lh-login-card { background:#fff; border:1px solid var(--border); border-radius:16px; padding:26px 22px; box-shadow:0 8px 26px rgba(0,0,0,0.07); text-align:center; }
+        .lh-login-title { font-family:'Lora',Georgia,serif; font-size:19px; font-weight:700; color:var(--clay-deep); }
+        .lh-login-sub { font-size:12.5px; color:var(--slate); margin:6px 0 16px; }
+        .lh-in { width:100%; padding:12px 14px; font-size:14px; border:1.5px solid var(--border); border-radius:10px; margin-bottom:10px; font-family:inherit; box-sizing:border-box; }
+        .lh-in:focus { outline:none; border-color:var(--clay); }
+        .lh-btn { width:100%; background:var(--clay); color:#fff; border:none; border-radius:10px; padding:12px; font-size:14px; font-weight:700; cursor:pointer; font-family:inherit; }
+        .lh-btn:hover { background:var(--clay-deep); }
+        .lh-err { color:var(--clay); font-size:12px; margin-top:10px; min-height:16px; }
+        .lh-toolbar { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:18px 0 14px; }
+        .lh-stat { font-size:13px; color:var(--navy); }
+        .lh-fin { padding:8px 10px; border:1.5px solid var(--border); border-radius:8px; font-size:12.5px; font-family:inherit; background:#fff; }
+        .lh-btn-sm { padding:8px 12px; border:none; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer; background:var(--clay); color:#fff; font-family:inherit; }
+        .lh-logout { background:var(--slate); margin-left:auto; }
+        .lh-table-wrap { overflow-x:auto; border:1px solid var(--border); border-radius:12px; }
+        .lh-table { width:100%; border-collapse:collapse; font-size:12.5px; }
+        .lh-table th { background:var(--clay-tint); color:var(--clay-deep); text-align:left; padding:10px 12px; font-size:10.5px; text-transform:uppercase; letter-spacing:.5px; }
+        .lh-table td { padding:9px 12px; border-top:1px solid var(--border); color:var(--navy); vertical-align:top; }
+        .lh-table tr:hover td { background:var(--cream); }
+        .lh-badge { display:inline-block; padding:2px 8px; border-radius:10px; font-size:10px; font-weight:700; white-space:nowrap; }
+        .lh-badge.chemsex { background:var(--gold-tint); color:#8a4d1f; }
+        .lh-badge.dast10 { background:var(--clay-tint); color:var(--clay-deep); }
+        .lh-badge.srq29 { background:var(--sage-light); color:var(--sage-deep); }
+        .lh-detail { color:var(--clay); cursor:pointer; font-weight:700; white-space:nowrap; }
+        .lh-empty { text-align:center; color:var(--slate); padding:30px; }
+        .lh-flag { color:var(--clay); font-weight:700; font-size:11px; }
       </style>
 
       <!-- L3-MASTER · Master List Form PL -->
       <section class="section" id="l3-master">
-        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Master List</div><h1>📋 Master List Form PL</h1><p class="lede">Daftar semua formulir digital untuk Petugas Lapangan (PL). Setiap form baru yang ditambahkan otomatis muncul di daftar ini. Klik kartu form untuk mulai isi, atau pilih form spesifik di menu kiri (No. 2 dan seterusnya).</p></div>
-        <div class="l3-form-wrap">
-          <a class="l3-form-link" href="https://adib-psych.github.io/sadar-hati-preview/trial/index.html" target="_blank" rel="noopener">🔗 adib-psych.github.io/sadar-hati-preview/trial/<span class="ext">↗</span></a>
-          <div class="l3-embed"><iframe src="https://adib-psych.github.io/sadar-hati-preview/trial/index.html" title="Master List Form PL — Sadar Hati" loading="lazy"></iframe></div>
+        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Master List</div><h1>📋 Master List Form PL</h1><p class="lede"><strong>Isi di sini</strong> membuka form langsung di halaman ini (tanpa pindah halaman). <strong>Copy link</strong> untuk dibagikan ke HP petugas lewat chat/WhatsApp — mereka isi dari HP masing-masing. Semua submission otomatis masuk ke <strong>Log Harian</strong> (No. 5).</p></div>
+        <div class="ml-grid">
+          <div class="ml-card chemsex">
+            <div class="tag">ViiV · Kobo Replica</div><h3>🔥 Chemsex Outreach</h3>
+            <p>Penjangkauan komunitas Chemsex Malang–Surabaya. 7 section · area cascading · ID KD otomatis.</p>
+            <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l3-form-chemsex')">📝 Isi di sini</button><button class="ml-copy" data-url="https://adib-psych.github.io/sadar-hati-preview/trial/chemsex.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          </div>
+          <div class="ml-card dast">
+            <div class="tag">Skrining Napza</div><h3>💊 DAST-10</h3>
+            <p>10 pertanyaan Ya/Tidak penggunaan Napza 3 bulan terakhir. Skor + interpretasi 5 tingkat otomatis.</p>
+            <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l3-form-dast10')">📝 Isi di sini</button><button class="ml-copy" data-url="https://adib-psych.github.io/sadar-hati-preview/trial/dast10.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          </div>
+          <div class="ml-card srq">
+            <div class="tag">Skrining Mental Health</div><h3>🧠 SRQ-29</h3>
+            <p>29 pertanyaan instrumen WHO. 4 sub-domain (neurosis · zat · psikotik · PTSD) + flag risiko.</p>
+            <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l3-form-srq29')">📝 Isi di sini</button><button class="ml-copy" data-url="https://adib-psych.github.io/sadar-hati-preview/trial/srq29.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          </div>
         </div>
-        <p class="l3-note">Master list ini menampilkan versi <strong>live</strong> dari halaman <code>/trial/</code>. Tambahkan form baru sekali di sana — langsung tampil di sini.</p>
+        <div class="ml-note">💡 <strong>Konsep (sama seperti Dashboard Wakaf):</strong> "Isi di sini" = form-input untuk kamu/staf. "Copy link" = PWA link untuk petugas lapangan isi dari HP sendiri. Master list ini juga live di <a href="https://adib-psych.github.io/sadar-hati-preview/trial/" target="_blank" rel="noopener">/trial/</a> — form baru cukup ditambah sekali di sana.</div>
+      </section>
+
+      <!-- L3-FORM-CHEMSEX -->
+      <section class="section" id="l3-form-chemsex">
+        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Form PL #2</div><h1>🔥 Penjangkauan ATS-Chemsex</h1><p class="lede">Form laporan harian PL untuk penjangkauan komunitas Chemsex Malang–Surabaya (proyek ViiV). 7 section · area jangkauan cascading · ID KD otomatis · tersimpan ke database.</p></div>
+        <div class="l3-form-wrap">
+          <div class="l3-form-linkbar"><span class="u">…/trial/chemsex.html</span><button data-url="https://adib-psych.github.io/sadar-hati-preview/trial/chemsex.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          <div class="l3-embed"><iframe src="https://adib-psych.github.io/sadar-hati-preview/trial/chemsex.html" title="Penjangkauan ATS-Chemsex" loading="lazy"></iframe></div>
+        </div>
       </section>
 
       <!-- L3-FORM-DAST10 -->
       <section class="section" id="l3-form-dast10">
-        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Form PL #2</div><h1>💊 DAST-10 · Skrining Napza</h1><p class="lede">10 pertanyaan Ya/Tidak tentang penggunaan Napza 3 bulan terakhir — asesmen awal IPWL + Harm Reduction outreach. Skor &amp; interpretasi 5 tingkat otomatis, simpan lokal, export CSV.</p></div>
+        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Form PL #3</div><h1>💊 DAST-10 · Skrining Napza</h1><p class="lede">10 pertanyaan Ya/Tidak penggunaan Napza 3 bulan terakhir — asesmen awal IPWL + Harm Reduction. Identitas &amp; area sama dengan Chemsex (1 kesatuan) · tersimpan ke database.</p></div>
         <div class="l3-form-wrap">
-          <a class="l3-form-link" href="https://adib-psych.github.io/sadar-hati-preview/trial/dast10.html" target="_blank" rel="noopener">🔗 …/trial/dast10.html<span class="ext">↗</span></a>
+          <div class="l3-form-linkbar"><span class="u">…/trial/dast10.html</span><button data-url="https://adib-psych.github.io/sadar-hati-preview/trial/dast10.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
           <div class="l3-embed"><iframe src="https://adib-psych.github.io/sadar-hati-preview/trial/dast10.html" title="DAST-10 Skrining Napza" loading="lazy"></iframe></div>
         </div>
       </section>
 
       <!-- L3-FORM-SRQ29 -->
       <section class="section" id="l3-form-srq29">
-        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Form PL #3</div><h1>🧠 SRQ-29 · Skrining Kesehatan Mental</h1><p class="lede">29 pertanyaan Ya/Tidak instrumen WHO — screening masalah psikologis, penggunaan zat, gejala psikotik, dan PTSD dalam 30 hari terakhir. 4 sub-domain skor + flag risiko otomatis.</p></div>
+        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Form PL #4</div><h1>🧠 SRQ-29 · Skrining Kesehatan Mental</h1><p class="lede">29 pertanyaan instrumen WHO — 4 sub-domain + flag risiko. Identitas &amp; area sama dengan Chemsex (1 kesatuan) · tersimpan ke database.</p></div>
         <div class="l3-form-wrap">
-          <a class="l3-form-link" href="https://adib-psych.github.io/sadar-hati-preview/trial/srq29.html" target="_blank" rel="noopener">🔗 …/trial/srq29.html<span class="ext">↗</span></a>
+          <div class="l3-form-linkbar"><span class="u">…/trial/srq29.html</span><button data-url="https://adib-psych.github.io/sadar-hati-preview/trial/srq29.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
           <div class="l3-embed"><iframe src="https://adib-psych.github.io/sadar-hati-preview/trial/srq29.html" title="SRQ-29 Skrining Kesehatan Mental" loading="lazy"></iframe></div>
         </div>
       </section>
 
-      <!-- L3-FORM-CHEMSEX -->
-      <section class="section" id="l3-form-chemsex">
-        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Form PL #4</div><h1>🔥 Penjangkauan ATS-Chemsex</h1><p class="lede">Form laporan harian PL untuk penjangkauan komunitas Chemsex Malang–Surabaya (proyek ViiV). Diisi tiap kontak individual dengan klien — 7 section · area jangkauan cascading · ID KD otomatis · simpan lokal.</p></div>
-        <div class="l3-form-wrap">
-          <a class="l3-form-link" href="https://adib-psych.github.io/sadar-hati-preview/trial/chemsex.html" target="_blank" rel="noopener">🔗 …/trial/chemsex.html<span class="ext">↗</span></a>
-          <div class="l3-embed"><iframe src="https://adib-psych.github.io/sadar-hati-preview/trial/chemsex.html" title="Penjangkauan ATS-Chemsex" loading="lazy"></iframe></div>
+      <!-- L3-LOGHARI · Log Harian / Database -->
+      <section class="section" id="l3-loghari">
+        <div class="hero"><div class="eyebrow">Layer 3 · Laporan Lapangan · Database</div><h1>🗂️ Log Harian / Database</h1><p class="lede">Semua submission form PL (Chemsex · DAST-10 · SRQ-29) terkumpul real-time di sini. Akses terbatas — hanya staf yang login (data sensitif dilindungi).</p></div>
+        <div id="lh-login" class="lh-login">
+          <div class="lh-login-card">
+            <div class="lh-login-title">🔒 Login Staf</div>
+            <div class="lh-login-sub">Masuk pakai akun Firebase yang tadi dibuat (email + password).</div>
+            <input type="email" id="lh-email" class="lh-in" placeholder="Email" autocomplete="username">
+            <input type="password" id="lh-pass" class="lh-in" placeholder="Password" autocomplete="current-password">
+            <button class="lh-btn" id="lh-login-btn">Masuk</button>
+            <div class="lh-err" id="lh-login-err"></div>
+          </div>
+        </div>
+        <div id="lh-data" style="display:none;">
+          <div class="lh-toolbar">
+            <div class="lh-stat">Total: <strong id="lh-count">0</strong> laporan</div>
+            <select id="lh-f-form" class="lh-fin"><option value="">Semua form</option><option value="chemsex">🔥 Chemsex</option><option value="dast10">💊 DAST-10</option><option value="srq29">🧠 SRQ-29</option></select>
+            <select id="lh-f-pl" class="lh-fin"><option value="">Semua PL</option></select>
+            <input type="text" id="lh-f-q" class="lh-fin" placeholder="Cari nama/kode/area...">
+            <button class="lh-btn-sm" id="lh-export">📥 CSV</button>
+            <button class="lh-btn-sm lh-logout" id="lh-logout">Logout <span id="lh-user"></span></button>
+          </div>
+          <div class="lh-table-wrap">
+            <table class="lh-table"><thead><tr><th>Waktu</th><th>Form</th><th>PL</th><th>Klien / ID KD</th><th>Area</th><th>Ringkasan</th><th></th></tr></thead><tbody id="lh-tbody"></tbody></table>
+          </div>
+          <div class="lh-empty" id="lh-empty" style="display:none;">Belum ada data yang cocok.</div>
         </div>
       </section>
 
@@ -6248,6 +6317,82 @@ function updateBreadcrumb(item) {
     <span class="current">${itemText}</span>
   `;
 }
+</script>
+
+
+<!-- SAHA helpers: nav-switch + copy-link (plain script, dipanggil dari onclick) -->
+<script>
+  window.SAHA_GO = function(id){ var el=document.querySelector('.nav-item[data-section="'+id+'"]'); if(el) el.click(); };
+  window.SAHA_COPY = function(btn){
+    var url=btn.getAttribute('data-url');
+    function ok(){ var t=btn.innerHTML; btn.innerHTML='✓ Tersalin'; btn.classList.add('done'); setTimeout(function(){ btn.innerHTML=t; btn.classList.remove('done'); },1500); }
+    function fb(){ var i=document.createElement('input'); i.value=url; document.body.appendChild(i); i.select(); try{document.execCommand('copy');}catch(e){} document.body.removeChild(i); ok(); }
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(url).then(ok).catch(fb); } else fb();
+  };
+</script>
+
+<!-- Log Harian: Firebase Auth + Firestore live read -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+  import { getFirestore, collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyC7127G5fsZprEGfeiqLrRqevTg6Qs2fko",
+    authDomain: "sadar-hati-hub.firebaseapp.com",
+    projectId: "sadar-hati-hub",
+    storageBucket: "sadar-hati-hub.firebasestorage.app",
+    messagingSenderId: "576423718259",
+    appId: "1:576423718259:web:76600bbdf4f06892b36906"
+  };
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app), auth = getAuth(app);
+  const $ = id => document.getElementById(id);
+  let ALL = [], unsub = null;
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+  function fmt(iso){ if(!iso) return '-'; const d=new Date(iso); if(isNaN(d)) return String(iso); return d.toLocaleString('id-ID',{day:'2-digit',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'}); }
+  function ringkas(x){ if(x.form==='chemsex'){ const a=x.answers||{}; const n=Array.isArray(a.napza)?a.napza.join(', '):(a.napza||'-'); return 'Napza: '+n; } if(x.form==='dast10') return 'Skor '+(x.skor==null?'-':x.skor)+' · '+(x.interpretasi||'-'); if(x.form==='srq29') return (x.skor||'-')+' · '+(x.interpretasi||'-'); return '-'; }
+  const loginBtn=$('lh-login-btn');
+  if(loginBtn){
+    loginBtn.addEventListener('click', async ()=>{ $('lh-login-err').textContent=''; try{ await signInWithEmailAndPassword(auth, $('lh-email').value.trim(), $('lh-pass').value); }catch(e){ $('lh-login-err').textContent='Login gagal: '+(e.code||e.message||''); } });
+    $('lh-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') loginBtn.click(); });
+    $('lh-logout').addEventListener('click', ()=> signOut(auth));
+    ['lh-f-form','lh-f-pl','lh-f-q'].forEach(id=>{ const el=$(id); el.addEventListener('input',render); el.addEventListener('change',render); });
+    $('lh-export').addEventListener('click', doExport);
+    onAuthStateChanged(auth, user=>{
+      if(user){ $('lh-login').style.display='none'; $('lh-data').style.display='block'; $('lh-user').textContent='· '+(user.email||''); listen(); }
+      else { $('lh-login').style.display='block'; $('lh-data').style.display='none'; if(unsub){unsub();unsub=null;} ALL=[]; }
+    });
+  }
+  function listen(){
+    if(unsub) return;
+    const qy = query(collection(db,'submissions'), orderBy('created_at','desc'));
+    unsub = onSnapshot(qy, snap=>{ ALL=[]; snap.forEach(d=>{ const x=d.data(); x.__id=d.id; if(!String(x.form||'').startsWith('__')) ALL.push(x); }); fillPL(); render(); },
+      err=>{ if($('lh-login-err')) $('lh-login-err').textContent='Gagal baca data: '+(err.code||err.message); console.error('[LogHarian]',err); });
+  }
+  function fillPL(){ const sel=$('lh-f-pl'), cur=sel.value; const pls=[...new Set(ALL.map(x=>x.pl).filter(Boolean))].sort(); sel.innerHTML='<option value="">Semua PL</option>'+pls.map(p=>'<option>'+esc(p)+'</option>').join(''); sel.value=cur; }
+  function filtered(){ const ff=$('lh-f-form').value, fp=$('lh-f-pl').value, q=$('lh-f-q').value.trim().toLowerCase();
+    return ALL.filter(x=>{ if(ff&&x.form!==ff) return false; if(fp&&x.pl!==fp) return false;
+      if(q){ const k=x.klien||{},w=x.wilayah||{}; const hay=[x.pl,k.nama,k.julukan,k.idkd,w.kotakab,w.kecamatan,w.desa].join(' ').toLowerCase(); if(!hay.includes(q)) return false; } return true; }); }
+  function render(){ const rows=filtered(); $('lh-count').textContent=rows.length; const tb=$('lh-tbody'), empty=$('lh-empty');
+    if(!rows.length){ tb.innerHTML=''; empty.style.display='block'; return; } empty.style.display='none';
+    tb.innerHTML=rows.map((x,i)=>{ const k=x.klien||{},w=x.wilayah||{};
+      const klien=esc(k.julukan||k.nama||'-')+(k.idkd?' <span class="lh-flag">('+esc(k.idkd)+(k.idkd_placeholder?' ⚠️':'')+')</span>':'');
+      const area=esc([w.kotakab,w.kecamatan,w.desa].filter(Boolean).join(' · ')||'-');
+      const label=x.form==='chemsex'?'🔥 Chemsex':x.form==='dast10'?'💊 DAST':'🧠 SRQ';
+      return '<tr><td>'+fmt(x.created_at)+'</td><td><span class="lh-badge '+esc(x.form)+'">'+label+'</span></td><td>'+esc(x.pl||'-')+'</td><td>'+klien+'</td><td>'+area+'</td><td>'+esc(ringkas(x))+'</td><td><span class="lh-detail" data-i="'+i+'">Detail</span></td></tr>';
+    }).join('');
+    tb.querySelectorAll('.lh-detail').forEach(el=>el.addEventListener('click',()=>detail(rows[+el.dataset.i])));
+  }
+  function detail(x){ const k=x.klien||{},w=x.wilayah||{};
+    alert(['Form: '+x.form,'Waktu: '+fmt(x.created_at),'PL: '+(x.pl||'-'),'Klien: '+(k.nama||'-')+' / '+(k.julukan||'-'),'ID KD: '+(k.idkd||'-')+(k.idkd_placeholder?' (placeholder tgl)':''),'JK / Usia: '+(k.jk||'-')+' / '+(k.usia||'-'),'Area: '+[w.kotakab,w.kecamatan,w.desa].filter(Boolean).join(' · '),'Ringkas: '+ringkas(x),x.interpretasi?('Interpretasi: '+x.interpretasi):'',x.catatan_klinis?('Catatan: '+x.catatan_klinis):''].filter(Boolean).join('\n')); }
+  function doExport(){ const rows=filtered(); if(!rows.length){ alert('Tidak ada data untuk di-export.'); return; }
+    const H=['Waktu','Form','PL','Tahun','Tanggal','Nama','Julukan','ID KD','Placeholder','JK','Usia','Kota/Kab','Kecamatan','Desa','Skor','Interpretasi','Catatan'];
+    const row=x=>{ const k=x.klien||{},w=x.wilayah||{}; return [x.created_at,x.form,x.pl,x.tahun,x.tanggal,k.nama,k.julukan,k.idkd,k.idkd_placeholder?'YA':'',k.jk,k.usia,w.kotakab,w.kecamatan,w.desa,x.skor,x.interpretasi,x.catatan_klinis].map(v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"').join(','); };
+    const csv=[H.join(',')].concat(rows.map(row)).join('\n');
+    const blob=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8;'}); const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download='SadarHati_LogHarian.csv'; a.click(); URL.revokeObjectURL(url);
+  }
+  console.log('[LogHarian] module siap');
 </script>
 
 </body>

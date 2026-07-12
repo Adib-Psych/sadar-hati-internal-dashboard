@@ -323,25 +323,12 @@
     <p>Drug Abuse Screening Test. Isi bersama dampingan Anda. Pertanyaan tentang penggunaan Napza dalam <strong>3 bulan terakhir</strong>.</p>
   </div>
 
-  <!-- Identitas Section -->
+  <!-- Shared Identity/Area block (SAHA) -->
+  <div class="section"><div id="saha-identity"></div></div>
+
+  <!-- Konteks Klinis (DAST-specific) -->
   <div class="section">
-    <div class="section-title">📋 Identitas Assessment</div>
-    <label class="field">
-      <span class="lbl">Kab / Kota</span>
-      <input type="text" id="f-kabkota" placeholder="misal: Kota Malang">
-    </label>
-    <label class="field">
-      <span class="lbl">Nama PL (Petugas Lapangan)</span>
-      <input type="text" id="f-pl" placeholder="Nama Anda">
-    </label>
-    <label class="field">
-      <span class="lbl">Nama / Kode Dampingan</span>
-      <input type="text" id="f-dampingan" placeholder="Nama atau kode inisial">
-    </label>
-    <label class="field">
-      <span class="lbl">Tanggal Lahir Dampingan</span>
-      <input type="date" id="f-tgllahir">
-    </label>
+    <div class="section-title">🩺 Konteks Klinis</div>
     <label class="field">
       <span class="lbl">Tipe Pengguna Drugs</span>
       <select id="f-tipepengguna">
@@ -366,10 +353,6 @@
         <option value="LGBTQI">LGBTQI+</option>
         <option value="Lainnya">Lainnya</option>
       </select>
-    </label>
-    <label class="field">
-      <span class="lbl">Tanggal Assessment</span>
-      <input type="date" id="f-tanggal">
     </label>
   </div>
 
@@ -405,6 +388,8 @@
   </div>
 </div>
 
+<script src="saha-data.js"></script>
+<script src="saha-shared.js"></script>
 <script>
   const questions = [
     "Apakah Anda menggunakan obat-obatan selain yang diperlukan untuk alasan medis?",
@@ -434,9 +419,8 @@
     container.appendChild(div);
   });
 
-  // Set default date
-  const today = new Date().toISOString().slice(0,10);
-  document.getElementById('f-tanggal').value = today;
+  // Render shared identity/area block (SAHA)
+  SAHA.buildIdentity('saha-identity');
 
   function answerQ(qn, ans, btn) {
     answers[qn] = ans;
@@ -510,31 +494,37 @@
 
   function saveResult() {
     if (!window._lastResult) return;
+    if (!window.SAHA || !SAHA.isValid()) {
+      alert('Lengkapi dulu Identitas & Area (bagian atas) sebelum simpan.\nBelum lengkap: ' + (window.SAHA ? SAHA.missing().join(', ') : 'modul belum siap'));
+      return;
+    }
+    const id = SAHA.getIdentity();
     const key = 'sh-dast-' + Date.now();
-    const data = {
+    const record = {
+      form: 'dast10',
       instrumen: 'DAST-10',
-      tanggal: document.getElementById('f-tanggal').value,
-      kabkota: document.getElementById('f-kabkota').value,
-      pl: document.getElementById('f-pl').value,
-      dampingan: document.getElementById('f-dampingan').value,
-      tgllahir: document.getElementById('f-tgllahir').value,
-      tipepengguna: document.getElementById('f-tipepengguna').value,
-      kelompoksasaran: document.getElementById('f-kelompoksasaran').value,
+      pl: id.pl || '',
+      created_at: new Date().toISOString(),
+      schema_version: 'dast-1.0',
+      tahun: id.tahun || '',
+      tanggal: id.tanggal || '',
+      wilayah: { provinsi: 'Jawa Timur', kotakab: id.kotakab || '', kecamatan: id.kecamatan || '', desa: id.desa || '', desa_manual: !!id.desa_manual },
+      klien: { nama: id.nama || '', julukan: id.julukan || '', idkd: id.idkd || '', idkd_placeholder: !!id.idkd_placeholder, jk: id.jk || '', usia: id.usia || '', tgllahir: id.tgllahir || '' },
+      konteks: { tipe_pengguna: document.getElementById('f-tipepengguna').value, kelompok_sasaran: document.getElementById('f-kelompoksasaran').value },
       answers: answers,
       skor: window._lastResult.score,
       interpretasi: window._lastResult.level,
-      catatan_klinis: window._lastResult.desc,
-      timestamp: new Date().toISOString()
+      catatan_klinis: window._lastResult.desc
     };
-    localStorage.setItem(key, JSON.stringify(data));
-    alert('✅ Hasil tersimpan di HP ini (localStorage). Bisa di-export ke CSV dari halaman utama.');
-    closeModal();
-    // Reset form for next entry
-    if (confirm('Isi lagi untuk dampingan lain?')) {
-      window.location.reload();
-    } else {
-      window.location.href = 'index.html';
+    localStorage.setItem(key, JSON.stringify(record));
+    if (window.SAHA) {
+      SAHA.push(record).then(cid => { try { localStorage.setItem(key + '__cloud', cid); } catch (e) {} })
+        .catch(err => console.warn('[Firestore] push gagal, tersimpan lokal:', err && err.message));
     }
+    alert('✅ Hasil tersimpan (cloud + HP ini).');
+    closeModal();
+    if (confirm('Isi lagi untuk dampingan lain?')) window.location.reload();
+    else window.location.href = 'index.html';
   }
 
   function closeModal() {

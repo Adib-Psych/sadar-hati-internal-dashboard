@@ -1256,6 +1256,21 @@
     };
     localStorage.setItem(key, JSON.stringify(data));
 
+    // Push ke Firestore (cloud) — online-first; localStorage di atas = fallback offline
+    if (window.__pushSubmission) {
+      window.__pushSubmission({
+        form: 'chemsex',
+        pl: answers.pl || '',
+        created_at: data.timestamp,
+        schema_version: 'chemsex-1.0',
+        wilayah: { provinsi: answers.provinsi || '', kotakab: answers.kotakab || '', kecamatan: answers.kecamatan || '', desa: answers.desa || '' },
+        klien: data.klien,
+        identitas: data.identitas,
+        answers: data.answers
+      }).then(id => { try { localStorage.setItem(key + '__cloud', id); } catch(e){} })
+        .catch(err => console.warn('[Firestore] push gagal, tersimpan lokal:', err && err.message));
+    }
+
     // Build summary
     const napza = Array.isArray(answers.napza) ? answers.napza.join(', ') : (answers.napza || '-');
     const kegiatan = Array.isArray(answers.kegiatan) ? answers.kegiatan.join(', ') : (answers.kegiatan || '-');
@@ -1296,6 +1311,30 @@
 
   function goHome() {
     window.location.href = 'index.html';
+  }
+</script>
+
+<!-- Firebase (Firestore) — Sadar Hati Hub · push submission ke cloud -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyC7127G5fsZprEGfeiqLrRqevTg6Qs2fko",
+    authDomain: "sadar-hati-hub.firebaseapp.com",
+    projectId: "sadar-hati-hub",
+    storageBucket: "sadar-hati-hub.firebasestorage.app",
+    messagingSenderId: "576423718259",
+    appId: "1:576423718259:web:76600bbdf4f06892b36906"
+  };
+  try {
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    window.__pushSubmission = (record) => addDoc(collection(db, 'submissions'), record).then(r => r.id);
+    window.__firebaseReady = true;
+    console.log('[Firebase] siap (sadar-hati-hub) — Chemsex');
+  } catch (e) {
+    window.__firebaseReady = false;
+    console.error('[Firebase] init gagal:', e);
   }
 </script>
 </body>
