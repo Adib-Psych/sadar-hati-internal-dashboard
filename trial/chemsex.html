@@ -603,9 +603,15 @@
 
     <label class="field">
       <span class="lbl">Desa / Kelurahan <span class="req">*</span>
-        <span class="hint">Ketik nama desa atau kelurahan tempat klien tinggal / hotspot</span>
+        <span class="hint">Muncul setelah pilih Kecamatan · cari cepat dengan mengetik di dropdown</span>
       </span>
-      <input type="text" id="f-desa" placeholder="misal: Merjosari" data-req="desa">
+      <select id="f-desa" data-req="desa" disabled>
+        <option value="">-- Pilih Kecamatan dulu --</option>
+      </select>
+      <input type="text" id="f-desa-manual" placeholder="Ketik nama desa/kelurahan..." style="display:none; margin-top:8px; width:100%; padding:11px 12px; font-size:14.5px; border:1.5px solid var(--gold); border-radius:10px; background:#fef9eb; font-family:inherit; color:var(--navy);">
+      <div id="desa-manual-note" style="display:none; margin-top:6px; font-size:11px; color:var(--slate); font-style:italic;">
+        💡 Desa tidak ada di daftar — silakan ketik manual. Kami akan tambahkan ke database.
+      </div>
     </label>
   </div>
 
@@ -976,42 +982,176 @@
     generateIdKd();
   });
 
-  // ========== KECAMATAN CASCADE (Rule 4) ==========
-  const kecamatanData = {
-    "Kota Malang": ["Blimbing", "Kedungkandang", "Klojen", "Lowokwaru", "Sukun"],
-    "Kab Malang": ["Ampelgading", "Bantur", "Bululawang", "Dampit", "Dau", "Donomulyo", "Gedangan", "Gondanglegi", "Jabung", "Kalipare", "Karangploso", "Kasembon", "Kepanjen", "Kromengan", "Lawang", "Ngajum", "Ngantang", "Pagak", "Pagelaran", "Pakis", "Pakisaji", "Poncokusumo", "Pujon", "Singosari", "Sumbermanjing Wetan", "Sumberpucung", "Tajinan", "Tirtoyudo", "Tumpang", "Turen", "Wagir", "Wajak", "Wonosari"],
-    "Kota Batu": ["Batu", "Bumiaji", "Junrejo"],
-    "Kab Pasuruan": ["Bangil", "Beji", "Gempol", "Gondangwetan", "Grati", "Kejayan", "Kraton", "Lekok", "Lumbang", "Nguling", "Pandaan", "Pasrepan", "Pohjentrek", "Prigen", "Purwodadi", "Purwosari", "Puspo", "Rejoso", "Rembang", "Sukorejo", "Tosari", "Tutur", "Winongan", "Wonorejo"]
+  // ========== KECAMATAN + DESA CASCADE (Rule 4 + 6) ==========
+  const wilayahData = {
+    "Kota Malang": {
+      "Blimbing": ["Arjosari", "Balearjosari", "Blimbing", "Bunulrejo", "Jodipan", "Kesatrian", "Pandanwangi", "Polehan", "Polowijen", "Purwantoro", "Purwodadi"],
+      "Kedungkandang": ["Arjowinangun", "Bumiayu", "Buring", "Cemorokandang", "Kedungkandang", "Kotalama", "Lesanpuro", "Madyopuro", "Mergosono", "Sawojajar", "Tlogowaru", "Wonokoyo"],
+      "Klojen": ["Bareng", "Gadingasri", "Kasin", "Kauman", "Kesatrian", "Kiduldalem", "Klojen", "Oro-oro Dowo", "Penanggungan", "Rampal Celaket", "Samaan", "Sukoharjo"],
+      "Lowokwaru": ["Dinoyo", "Jatimulyo", "Ketawanggede", "Lowokwaru", "Merjosari", "Mojolangu", "Sumbersari", "Tasikmadu", "Tlogomas", "Tulusrejo", "Tunggulwulung", "Tunjungsekar"],
+      "Sukun": ["Bakalankrajan", "Bandulan", "Bandungrejosari", "Ciptomulyo", "Gadang", "Karangbesuki", "Kebonsari", "Mulyorejo", "Pisangcandi", "Sukun", "Tanjungrejo"]
+    },
+    "Kota Batu": {
+      "Batu": ["Ngaglik", "Oro-Oro Ombo", "Pesanggrahan", "Sidomulyo", "Sisir", "Songgokerto", "Sumberejo", "Temas"],
+      "Bumiaji": ["Bulukerto", "Bumiaji", "Giripurno", "Gunungsari", "Pandanrejo", "Punten", "Sumberbrantas", "Sumbergondo", "Tulungrejo"],
+      "Junrejo": ["Beji", "Dadaprejo", "Junrejo", "Mojorejo", "Pendem", "Tlekung", "Torongrejo"]
+    },
+    "Kab Malang": {
+      "Ampelgading": ["Argoyuwono", "Lebakharjo", "Mulyoasri", "Purwoharjo", "Simojayan", "Sonowangi", "Tamanasri", "Tamansatriyan", "Tirtomarto", "Tirtomoyo", "Wirotaman", "Purwodadi", "Tawangagung"],
+      "Bantur": ["Bandungrejo", "Bantur", "Karangsari", "Pringgondani", "Rejoyoso", "Srigonco", "Sumberbening", "Wonokerto", "Wonorejo", "Rejosari"],
+      "Bululawang": ["Bakalan", "Bululawang", "Gading", "Kasembon", "Krebet", "Krebet Senggrong", "Kuwolu", "Lumbangsari", "Pringu", "Sempalwadak", "Sudimoro", "Sukonolo", "Wandanpuro", "Bumirejo"],
+      "Dampit": ["Amadanom", "Baturetno", "Bumirejo", "Dampit", "Jambangan", "Majangtengah", "Pamotan", "Pojok", "Rembun", "Srimulyo", "Sukodono", "Sumbersuko"],
+      "Dau": ["Gading Kulon", "Kalisongo", "Karangwidoro", "Kucur", "Landungsari", "Mulyoagung", "Petungsewu", "Selorejo", "Sumbersekar", "Tegalweru"],
+      "Donomulyo": ["Banjarejo", "Donomulyo", "Kedungsalam", "Mentaraman", "Purwodadi", "Purworejo", "Sumberoto", "Tempursari", "Tlogosari", "Tulungrejo"],
+      "Gedangan": ["Gajahrejo", "Gedangan", "Girimulyo", "Kalipare", "Segaran", "Sidodadi", "Sindurejo", "Sumberejo", "Tumpakrejo"],
+      "Gondanglegi": ["Bulupitu", "Ganjaran", "Gondanglegi Kulon", "Gondanglegi Wetan", "Kenongo", "Ketawang", "Panggungrejo", "Putat Kidul", "Putat Lor", "Putukrejo", "Sepanjang", "Sukorejo", "Sukosari", "Urek-urek"],
+      "Jabung": ["Argosari", "Boro Rejo", "Gadingkembar", "Gunungjati", "Jabung", "Kemantren", "Kemiri", "Ngadirejo", "Pandansari Lor", "Sidomulyo", "Sidorejo", "Slamparejo", "Sukolilo", "Sukopuro", "Taji"],
+      "Kalipare": ["Arjosari", "Arjowilangun", "Kalipare", "Kaliasri", "Kalirejo", "Putukrejo", "Sumberpetung", "Tumpakrejo"],
+      "Karangploso": ["Ampeldento", "Bocek", "Donowarih", "Girimoyo", "Kepuharjo", "Ngenep", "Ngijo", "Tawangargo", "Tegalgondo"],
+      "Kasembon": ["Bayem", "Kasembon", "Pait", "Pondokagung", "Sukosari", "Wonoagung"],
+      "Kepanjen": ["Ardirejo", "Cepokomulyo", "Curungrejo", "Dilem", "Jatirejoyoso", "Jenggolo", "Kedungpedaringan", "Kepanjen", "Mangunrejo", "Mojosari", "Ngadilangkung", "Panggungrejo", "Panggungsari", "Sengguruh", "Sukoraharjo", "Talangagung", "Tegalsari"],
+      "Kromengan": ["Jambuwer", "Jatikerto", "Karangrejo", "Kromengan", "Ngadirejo", "Ngajum", "Peniwen", "Slorok"],
+      "Lawang": ["Bedali", "Kalirejo", "Ketindan", "Lawang", "Mulyoarjo", "Sidodadi", "Sidoluhur", "Srigading", "Sumberngepoh", "Sumberporong", "Turirejo", "Wonorejo"],
+      "Ngajum": ["Balesari", "Banjarsari", "Kesamben", "Kranggan", "Maguan", "Ngajum", "Ngasem", "Palaan"],
+      "Ngantang": ["Banjarejo", "Banturejo", "Jombok", "Kaumrejo", "Mulyorejo", "Ngantru", "Pagersari", "Pandansari", "Purworejo", "Sidodadi", "Sumberagung", "Tulungrejo", "Waturejo"],
+      "Pagak": ["Gampingan", "Pagak", "Pandanrejo", "Sempol", "Sumbermanjing Kulon", "Sumberkerto", "Sumberrejo", "Tlogorejo"],
+      "Pagelaran": ["Balearjo", "Banjarejo", "Brongkal", "Clumprit", "Kademangan", "Kanigoro", "Karangsuko", "Pagelaran", "Sidorejo", "Suwaru"],
+      "Pakis": ["Ampeldento", "Asrikaton", "Banjarejo", "Bunutwetan", "Kedungrejo", "Mangliawan", "Pakis Jajar", "Pakis Kembar", "Pucangsongo", "Sekarpuro", "Sukoanyar", "Sumberkradenan", "Sumberpasir", "Tirtomoyo", "Tirtomoyo"],
+      "Pakisaji": ["Genengan", "Glanggang", "Jatisari", "Karangduren", "Karangpandan", "Kebonagung", "Kendalpayak", "Pakisaji", "Permanu", "Sutojayan", "Wadung", "Wonokerso"],
+      "Poncokusumo": ["Argosuko", "Belung", "Dawuhan", "Gubugklakah", "Jambesari", "Karangnongko", "Karanganyar", "Ngadireso", "Ngadas", "Ngebruk", "Pajaran", "Pandansari", "Poncokusumo", "Sumber", "Wonomulyo", "Wonorejo", "Wringinanom"],
+      "Pujon": ["Bendosari", "Madiredo", "Ngabab", "Ngroto", "Pandesari", "Pujon Kidul", "Pujon Lor", "Sukomulyo", "Tawangsari", "Wiyurejo"],
+      "Singosari": ["Ardimulyo", "Baturetno", "Candirenggo", "Dengkol", "Gunungrejo", "Klampok", "Langlang", "Purwoasri", "Randuagung", "Singosari", "Tamanharjo", "Tunjungtirto", "Watugede", "Wonorejo"],
+      "Sumbermanjing Wetan": ["Argotirto", "Druju", "Harjokuncaran", "Klepu", "Kedungbanteng", "Ringinkembar", "Ringinsari", "Sekarbanyu", "Sidoasri", "Sitiarjo", "Sumberagung", "Sumbermanjing Kulon", "Sumbermanjing Wetan", "Tambakasri", "Tambakrejo"],
+      "Sumberpucung": ["Jatiguwi", "Karangkates", "Ngebruk", "Sambigede", "Senggreng", "Sumberpucung", "Ternyang"],
+      "Tajinan": ["Gunungronggo", "Gunungsari", "Jambearjo", "Jatisari", "Ngawonggo", "Pandanmulyo", "Purwosekar", "Randugading", "Sumbersuko", "Tajinan", "Tangkilsari"],
+      "Tirtoyudo": ["Ampelgading", "Gadungsari", "Jogomulyan", "Kepatihan", "Pujiharjo", "Purwodadi", "Sukorejo", "Sumbertangkil", "Tamankuncaran", "Tirtoyudo", "Tlogosari", "Wonoagung"],
+      "Tumpang": ["Benjor", "Bokor", "Duwet", "Duwet Krajan", "Jeru", "Kambingan", "Kidal", "Malangsuko", "Ngingit", "Pandanajeng", "Pulungdowo", "Slamet", "Tulusbesar", "Tumpang", "Wringinsongo"],
+      "Turen": ["Gedog Kulon", "Gedog Wetan", "Jeru", "Kedok", "Kemulan", "Pagedangan", "Sanankerto", "Sananrejo", "Sawahan", "Sedayu", "Sitiarjo", "Talok", "Tanggung", "Tawangrejeni", "Tumpakrejo", "Turen", "Undaan"],
+      "Wagir": ["Dalisodo", "Gondowangi", "Jedong", "Mendalanwangi", "Pandanlandung", "Pandanrejo", "Parangargo", "Petungsewu", "Sidorahayu", "Sitirejo", "Sukodadi", "Sumbersuko"],
+      "Wajak": ["Bambang", "Blayu", "Codo", "Dadapan", "Kidangbang", "Ngembal", "Patokpicis", "Sukoanyar", "Sukolilo", "Sumberputih", "Wajak", "Wonoayu"],
+      "Wonosari": ["Bangelan", "Kebobang", "Kluwut", "Plaosan", "Plandi", "Sumberdem", "Sumberkembar", "Sumbertempur", "Wonosari"]
+    },
+    "Kab Pasuruan": {
+      "Bangil": ["Bangil", "Dermo", "Gempeng", "Kalianyar", "Kalirejo", "Kauman", "Kersikan", "Kidul Dalem", "Kolursari", "Latek", "Manaruwi", "Masangan", "Pogar", "Raci", "Tambakan", "Wonorejo"],
+      "Beji": ["Baujeng", "Beji", "Cangkringmalang", "Glanggang", "Gunung Sari", "Kedungboto", "Kedungringin", "Ngembe", "Pagak", "Sidowayah", "Sladi", "Wonokoyo"],
+      "Gempol": ["Bulusari", "Carat", "Gempol", "Jeruk Purut", "Kejapanan", "Kepulungan", "Legok", "Ngerong", "Randupitu", "Sumbersuko", "Wonosari", "Winong"],
+      "Gondangwetan": ["Bayeman", "Brambang", "Gayam", "Gondangrejo", "Gondangwetan", "Kaligung", "Karangsentul", "Keboncandi", "Kebonsari", "Ranggeh", "Sekarputih", "Tebas", "Tenggilis Rejo", "Wonojati"],
+      "Grati": ["Cukurgondang", "Grati Tunon", "Kambingan Rejo", "Karanglo", "Kedawung Kulon", "Kedawung Wetan", "Kalipang", "Karangkliwon", "Krobokan Kidul", "Plososari", "Rebalas", "Sumberagung", "Sumberdawe", "Trewung"],
+      "Kejayan": ["Ambal-Ambil", "Kayukebek", "Kedemungan", "Kedung Pengaron", "Kejayan", "Klinter", "Kurung", "Linggo", "Luwuk", "Oro-Oro Pule", "Pacar Keling", "Patebon", "Pengarengan", "Pukul", "Randu Gong", "Ranggeh", "Sladi", "Sumber Suko", "Tanggulangin", "Tundosoro", "Wangkal Kejayan", "Wonosari"],
+      "Kraton": ["Bendungan", "Curah Dukuh", "Dhompo", "Gambir Kuning", "Jeruk", "Kalirejo", "Karanganyar", "Klampisrejo", "Kraton", "Ngabar", "Pukul", "Rejosari", "Selotambak", "Semare", "Sidogiri", "Tambakrejo", "Tambaksari", "Tampung", "Wonorejo"],
+      "Lekok": ["Alastlogo", "Balunganyar", "Branang", "Gejugjati", "Jatirejo", "Pasinan", "Semedusari", "Tampung", "Tambakan", "Wates"],
+      "Lumbang": ["Bulukandang", "Cukurgondang", "Karangasem", "Kronto", "Lumbang", "Panditan", "Pancur", "Wangunsari", "Watuprapat", "Welulang"],
+      "Nguling": ["Dandanggendis", "Kapasan", "Kedawang", "Mlaten", "Nguling", "Randusari", "Sanganom", "Sedarum", "Sudimulyo", "Sumberanyar", "Watestani", "Watuprapat", "Wotgalih"],
+      "Pandaan": ["Banjarkejen", "Banjarsari", "Durensewu", "Jogosari", "Karangjati", "Kutorejo", "Pandaan", "Petir", "Plintahan", "Sebani", "Sumbergedang", "Sumberrejo", "Tawangrejo", "Wonokoyo"],
+      "Pasrepan": ["Ampelsari", "Galih", "Jogorepuh", "Klakah", "Lemahbang", "Mangguan", "Pasrepan", "Petung", "Pohgading", "Pusung Malang", "Rejosari", "Sapulante", "Sibon", "Sudimulyo", "Tempuran", "Terkuni", "Tlogorejo", "Wonorejo"],
+      "Pohjentrek": ["Kertosari", "Parasrejo", "Pleret", "Pohjentrek", "Sukorejo", "Sungikulon", "Sungiwetan", "Susukanrejo", "Tidu", "Warungdowo"],
+      "Prigen": ["Bulukandang", "Candiwates", "Dayurejo", "Gambiran", "Jatiarjo", "Ketanireng", "Ledug", "Lumbangrejo", "Pecalukan", "Prigen", "Sekargadung", "Sukoreno", "Sukolilo"],
+      "Purwodadi": ["Cowek", "Dawuhansengon", "Gerbo", "Jatisari", "Kayukebek", "Parerejo", "Purwodadi", "Purwosari", "Semut", "Sentul", "Sukolilo", "Tambaksari"],
+      "Purwosari": ["Bakalan", "Cendono", "Karangrejo", "Kayoman", "Martopuro", "Pucangsari", "Purwosari", "Sekarmojo", "Semut", "Sengonagung", "Sumberrejo", "Tejowangi", "Tenggilis Rejo"],
+      "Puspo": ["Jimbaran", "Keduwung", "Kemiri", "Palangsari", "Pusung Malang", "Puspo", "Puspoagung", "Puspojati", "Sumberpitu"],
+      "Rejoso": ["Arjosari", "Jarangan", "Jeladri", "Kawisrejo", "Ketegan", "Kalirejo", "Kedungbako", "Manikrejo", "Patuguran", "Rejoso Kidul", "Rejoso Lor", "Sadengrejo", "Segoropuro", "Sekarmojo", "Toyaning"],
+      "Rembang": ["Genengwaru", "Kalisat", "Kanigoro", "Krengih", "Mojoparon", "Orobulu", "Oro Oro Ombo Kulon", "Oro Oro Ombo Wetan", "Pajaran", "Pekoren", "Rembang", "Sumberglagah", "Tampung", "Tempuran", "Tampung", "Tokol"],
+      "Sukorejo": ["Candibinangun", "Curahrejo", "Dukuhsari", "Glagahsari", "Gunting", "Kalirejo", "Kaligintung", "Kandangrejo", "Kepulungan", "Ngadimulyo", "Ngadiwono", "Pakukerto", "Sebandung", "Sukorejo", "Suwayuwo", "Wonokerto"],
+      "Tosari": ["Baledono", "Kandangan", "Keduwung", "Mororejo", "Ngadiwono", "Podokoyo", "Sedaeng", "Tosari", "Wonokitri", "Wonokerto"],
+      "Tutur": ["Andonosari", "Blarang", "Gendro", "Kalipucang", "Kayukebek", "Ngadirejo", "Ngembal", "Ngerong", "Pungging", "Tlogosari", "Tutur", "Wonosari"],
+      "Winongan": ["Bandaran", "Gadingsari", "Jeladri", "Kadenrejo", "Karangtengah", "Kedungrejo", "Menyarik", "Minggir", "Mendalan", "Prodo", "Sruwi", "Sumberrejo", "Tenggilis Rejo", "Umbulan", "Winongan Kidul", "Winongan Lor"],
+      "Wonorejo": ["Cobanjoyo", "Jatigunting", "Karangasem", "Karangjati", "Kejayan", "Kendang Dukuh", "Kluwut", "Rebono", "Sambisirah", "Sladi", "Sugihwaras", "Sukorame", "Wonorejo"]
+    }
   };
 
-  // When Kota/Kab selected, populate Kecamatan dropdown
+  // Cascading Kota/Kab → Kecamatan → Desa
   const kotakabGroup = document.getElementById('kotakab-group');
   const kecSelect = document.getElementById('f-kecamatan');
+  const desaSelect = document.getElementById('f-desa');
+  const desaManual = document.getElementById('f-desa-manual');
+  const desaNote = document.getElementById('desa-manual-note');
+
   kotakabGroup.querySelectorAll('.radio-item').forEach(btn => {
     btn.addEventListener('click', () => {
       const kotakab = btn.dataset.val;
       // Populate kecamatan
       kecSelect.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
-      (kecamatanData[kotakab] || []).forEach(kec => {
+      const kecs = Object.keys(wilayahData[kotakab] || {}).sort();
+      kecs.forEach(kec => {
         const opt = document.createElement('option');
         opt.value = kec;
         opt.textContent = kec;
         kecSelect.appendChild(opt);
       });
       kecSelect.disabled = false;
+      // Reset desa
+      desaSelect.innerHTML = '<option value="">-- Pilih Kecamatan dulu --</option>';
+      desaSelect.disabled = true;
+      desaManual.style.display = 'none';
+      desaNote.style.display = 'none';
+      desaManual.value = '';
       delete answers.kecamatan;
+      delete answers.desa;
       updateProgress();
     });
   });
+
   kecSelect.addEventListener('change', () => {
-    if (kecSelect.value) answers.kecamatan = kecSelect.value;
-    else delete answers.kecamatan;
+    if (kecSelect.value) {
+      answers.kecamatan = kecSelect.value;
+      // Populate desa
+      const kotakab = answers.kotakab;
+      const desas = (wilayahData[kotakab] && wilayahData[kotakab][kecSelect.value]) || [];
+      desaSelect.innerHTML = '<option value="">-- Pilih Desa/Kelurahan --</option>';
+      // Sort alphabetically + dedupe
+      const uniqueDesas = [...new Set(desas)].sort();
+      uniqueDesas.forEach(desa => {
+        const opt = document.createElement('option');
+        opt.value = desa;
+        opt.textContent = desa;
+        desaSelect.appendChild(opt);
+      });
+      // Add "Lainnya" fallback
+      const other = document.createElement('option');
+      other.value = '__LAINNYA__';
+      other.textContent = '➕ Lainnya (ketik manual)';
+      desaSelect.appendChild(other);
+      desaSelect.disabled = false;
+    } else {
+      delete answers.kecamatan;
+      desaSelect.innerHTML = '<option value="">-- Pilih Kecamatan dulu --</option>';
+      desaSelect.disabled = true;
+    }
+    desaManual.style.display = 'none';
+    desaNote.style.display = 'none';
+    desaManual.value = '';
+    delete answers.desa;
     updateProgress();
   });
-  document.getElementById('f-desa').addEventListener('input', (e) => {
+
+  desaSelect.addEventListener('change', () => {
+    if (desaSelect.value === '__LAINNYA__') {
+      desaManual.style.display = 'block';
+      desaNote.style.display = 'block';
+      desaManual.focus();
+      delete answers.desa;
+    } else if (desaSelect.value) {
+      answers.desa = desaSelect.value;
+      desaManual.style.display = 'none';
+      desaNote.style.display = 'none';
+      desaManual.value = '';
+    } else {
+      delete answers.desa;
+      desaManual.style.display = 'none';
+      desaNote.style.display = 'none';
+    }
+    updateProgress();
+  });
+
+  desaManual.addEventListener('input', (e) => {
     const val = e.target.value.trim();
-    if (val) answers.desa = val;
-    else delete answers.desa;
+    if (val) {
+      answers.desa = val + ' (manual)';
+      answers.desa_manual = true;
+    } else {
+      delete answers.desa;
+      delete answers.desa_manual;
+    }
     updateProgress();
   });
 
