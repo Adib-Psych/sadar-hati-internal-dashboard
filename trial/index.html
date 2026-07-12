@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Formulir Assessment · Sadar Hati Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --wine: #a83244;
+    --wine-deep: #7a1f30;
+    --sage: #5b7553;
+    --sage-deep: #3e5538;
+    --gold: #d4a017;
+    --pink: #e8a5a5;
+    --cream: #fef7f2;
+    --navy: #1f2937;
+    --slate: #64748b;
+    --clay-tint: #f4efea;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0;
+    padding: 20px 16px 40px 16px;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(180deg, #fef7f2 0%, #f4efea 100%);
+    color: var(--navy);
+    min-height: 100vh;
+  }
+  .container { max-width: 480px; margin: 0 auto; }
+
+  .brand-header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .brand-logo {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--wine);
+    letter-spacing: 0.5px;
+  }
+  .brand-tag {
+    font-size: 11px;
+    color: var(--slate);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--wine) 0%, var(--wine-deep) 100%);
+    color: white;
+    border-radius: 18px;
+    padding: 28px 22px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 24px rgba(168, 50, 68, 0.25);
+  }
+  .hero h1 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 26px;
+    font-weight: 700;
+    margin: 8px 0 6px 0;
+    line-height: 1.2;
+  }
+  .hero p {
+    font-size: 14px;
+    opacity: 0.95;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .hero .eyebrow {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.85;
+    font-weight: 700;
+  }
+
+  .form-card {
+    background: white;
+    border-radius: 16px;
+    padding: 22px 20px;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-left: 5px solid transparent;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .form-card:active { transform: scale(0.98); }
+  .form-card.dast { border-left-color: var(--wine); }
+  .form-card.srq { border-left-color: var(--sage); }
+  .form-card .badge {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    border-radius: 20px;
+    margin-bottom: 8px;
+  }
+  .form-card.dast .badge { background: rgba(168, 50, 68, 0.12); color: var(--wine-deep); }
+  .form-card.srq .badge { background: rgba(91, 117, 83, 0.14); color: var(--sage-deep); }
+  .form-card h2 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 6px 0 6px 0;
+    line-height: 1.25;
+  }
+  .form-card p {
+    font-size: 13px;
+    color: var(--slate);
+    line-height: 1.55;
+    margin: 0 0 12px 0;
+  }
+  .form-card .meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 11.5px;
+    color: var(--slate);
+  }
+  .form-card .meta span {
+    background: var(--cream);
+    padding: 4px 10px;
+    border-radius: 12px;
+  }
+
+  .info-box {
+    background: rgba(212, 160, 23, 0.10);
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 20px;
+    font-size: 12.5px;
+    color: var(--navy);
+    line-height: 1.6;
+  }
+  .info-box strong { color: #8a4d1f; }
+
+  .footer {
+    text-align: center;
+    margin-top: 28px;
+    font-size: 11px;
+    color: var(--slate);
+    line-height: 1.65;
+  }
+  .footer a { color: var(--wine); text-decoration: none; }
+
+  /* Storage indicator */
+  #storage-info {
+    background: white;
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--slate);
+    text-align: center;
+    border: 1px dashed #d0d7de;
+  }
+  #storage-info strong { color: var(--wine); }
+  .btn-export {
+    display: inline-block;
+    background: var(--wine);
+    color: white;
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-clear {
+    display: inline-block;
+    background: transparent;
+    color: var(--slate);
+    padding: 8px 16px;
+    font-size: 11.5px;
+    text-decoration: underline;
+    border: none;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="brand-header">
+    <div class="brand-logo">🌱 Sadar Hati Foundation</div>
+    <div class="brand-tag">Formulir Assessment · Trial 2026</div>
+  </div>
+
+  <div class="hero">
+    <div class="eyebrow">📋 Digital Assessment Form</div>
+    <h1>Pilih Instrumen Assessment</h1>
+    <p>Kedua instrumen ini bisa diisi oleh pekerja lapangan (PL) bersama dampingan — durasi rata-rata 3-8 menit. Skor akan dihitung otomatis dengan interpretasi tingkat masalah langsung.</p>
+  </div>
+
+  <a class="form-card dast" href="dast10.html">
+    <div class="badge">Skrining Napza</div>
+    <h2>💊 DAST-10 · Drug Abuse Screening</h2>
+    <p>10 pertanyaan Ya/Tidak tentang penggunaan Napza dalam 3 bulan terakhir. Cocok untuk asesmen awal IPWL + Harm Reduction outreach.</p>
+    <div class="meta">
+      <span>⏱ ~3 menit</span>
+      <span>📊 10 item</span>
+      <span>🎯 5 tingkat masalah</span>
+    </div>
+  </a>
+
+  <a class="form-card srq" href="srq29.html">
+    <div class="badge">Skrining Mental Health</div>
+    <h2>🧠 SRQ-29 · Self-Reporting Questionnaire</h2>
+    <p>29 pertanyaan Ya/Tidak WHO instrument — screening masalah psikologis, penggunaan zat, gejala psikotik, dan PTSD dalam 30 hari terakhir.</p>
+    <div class="meta">
+      <span>⏱ ~7 menit</span>
+      <span>📊 29 item</span>
+      <span>🎯 4 sub-domain</span>
+    </div>
+  </a>
+
+  <div class="info-box">
+    <strong>🔒 Privasi & Etika:</strong> Data assessment tersimpan lokal di HP pekerja lapangan (localStorage). Bisa di-export sebagai CSV/PDF untuk arsip resmi. Jangan lupa <strong>informed consent</strong> dari dampingan sebelum mengisi. Jawaban bersifat rahasia — hanya digunakan untuk membantu pemecahan masalah.
+  </div>
+
+  <div id="storage-info">
+    <div>Riwayat pengisian tersimpan: <strong id="save-count">0 entri</strong></div>
+    <button class="btn-export" onclick="exportAll()">📥 Export Semua ke CSV</button>
+    <br>
+    <button class="btn-clear" onclick="clearAll()">🗑 Hapus semua riwayat</button>
+  </div>
+
+  <div class="footer">
+    Berdasarkan formulir asesmen resmi <strong>Sadar Hati Foundation</strong><br>
+    DAST-10 (Skinner, 1982) · SRQ (WHO)<br>
+    <a href="../">← Kembali ke Dashboard Utama</a>
+  </div>
+
+</div>
+
+<script>
+  // Count all saved entries
+  function updateCount() {
+    let count = 0;
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key.startsWith('sh-dast-') || key.startsWith('sh-srq-')) count++;
+    }
+    document.getElementById('save-count').textContent = count + ' entri';
+  }
+  updateCount();
+
+  function exportAll() {
+    const rows = [['Instrumen', 'Tanggal', 'Kab/Kota', 'Nama PL', 'Kode Dampingan', 'Tgl Lahir', 'Tipe Pengguna', 'Kelompok Sasaran', 'Skor Total', 'Interpretasi', 'Detail JSON']];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key.startsWith('sh-dast-') || key.startsWith('sh-srq-')) {
+        try {
+          const data = JSON.parse(localStorage.getItem(key));
+          const instr = key.startsWith('sh-dast-') ? 'DAST-10' : 'SRQ-29';
+          rows.push([
+            instr,
+            data.tanggal || '',
+            data.kabkota || '',
+            data.pl || '',
+            data.dampingan || '',
+            data.tgllahir || '',
+            data.tipepengguna || '',
+            data.kelompoksasaran || '',
+            data.skor ?? '',
+            data.interpretasi || '',
+            JSON.stringify(data.answers || {})
+          ]);
+        } catch (e) {}
+      }
+    }
+    if (rows.length === 1) {
+      alert('Belum ada data untuk di-export.');
+      return;
+    }
+    const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+    const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'SadarHati_Assessment_' + new Date().toISOString().slice(0,10) + '.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function clearAll() {
+    if (!confirm('Hapus SEMUA riwayat assessment yang tersimpan di HP ini?')) return;
+    const keys = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key.startsWith('sh-dast-') || key.startsWith('sh-srq-')) keys.push(key);
+    }
+    keys.forEach(k => localStorage.removeItem(k));
+    updateCount();
+    alert('Riwayat sudah dihapus.');
+  }
+</script>
+</body>
+</html>
