@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Penjangkauan ATS-Chemsex · Sadar Hati Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --wine: #a83244;
+    --wine-deep: #7a1f30;
+    --sage: #5b7553;
+    --sage-deep: #3e5538;
+    --gold: #d4a017;
+    --cream: #fef7f2;
+    --navy: #1f2937;
+    --slate: #64748b;
+    --blue: #4f7ba8;
+    --purple: #6b4d7a;
+    --orange: #c47c2a;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0;
+    padding: 14px 12px 100px 12px;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(180deg, #fef7f2 0%, #f4efea 100%);
+    color: var(--navy);
+    min-height: 100vh;
+    font-size: 14px;
+  }
+  .container { max-width: 480px; margin: 0 auto; }
+
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 12px;
+  }
+  .top-bar a {
+    color: var(--slate);
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 12px;
+    background: white;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--wine) 0%, var(--wine-deep) 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 18px 16px;
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 140px; height: 140px;
+    background: radial-gradient(circle, rgba(212,160,23,0.20) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero .eyebrow {
+    font-size: 10px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    opacity: 0.9;
+    font-weight: 700;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 6px 0 4px 0;
+    line-height: 1.25;
+    position: relative;
+  }
+  .hero p {
+    font-size: 12px;
+    opacity: 0.94;
+    line-height: 1.5;
+    margin: 6px 0 0 0;
+    position: relative;
+  }
+
+  /* Sticky progress bar */
+  .progress-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: white;
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    background: #f0e7d8;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--wine) 0%, var(--gold) 100%);
+    width: 0%;
+    transition: width 0.25s;
+  }
+  .progress-label {
+    font-size: 11px;
+    color: var(--slate);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .progress-label strong { color: var(--wine); font-size: 13px; }
+
+  .section {
+    background: white;
+    border-radius: 14px;
+    padding: 16px 14px;
+    margin-bottom: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+  }
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--wine-deep);
+    margin: 0 0 10px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0e7d8;
+  }
+  .section-num {
+    background: var(--wine);
+    color: white;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'Manrope', sans-serif;
+  }
+  .section-tag {
+    margin-left: auto;
+    font-size: 9.5px;
+    color: var(--slate);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  label.field {
+    display: block;
+    margin-bottom: 12px;
+  }
+  label.field .lbl {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .req { color: var(--wine); font-weight: 800; }
+  .hint {
+    font-size: 10.5px;
+    color: var(--slate);
+    font-style: italic;
+    display: block;
+    margin-top: 2px;
+    font-weight: 400;
+  }
+
+  label.field input[type="text"],
+  label.field input[type="number"],
+  label.field input[type="date"],
+  label.field select {
+    width: 100%;
+    padding: 11px 12px;
+    font-size: 14.5px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    background: #fafafa;
+    font-family: inherit;
+    color: var(--navy);
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  label.field input:focus, label.field select:focus {
+    outline: none;
+    border-color: var(--wine);
+    background: white;
+  }
+
+  /* Radio group */
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .radio-group.horizontal {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  .radio-group.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .radio-item {
+    padding: 10px 12px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--navy);
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.1s;
+  }
+  .radio-item::before {
+    content: '';
+    width: 16px; height: 16px;
+    border: 2px solid #d1d5db;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: white;
+  }
+  .radio-item.selected {
+    border-color: var(--wine);
+    background: linear-gradient(135deg, rgba(168,50,68,0.06) 0%, rgba(168,50,68,0.02) 100%);
+    color: var(--wine-deep);
+    font-weight: 700;
+  }
+  .radio-item.selected::before {
+    border-color: var(--wine);
+    background: var(--wine);
+    box-shadow: inset 0 0 0 3px white;
+  }
+  .radio-group.grid-3 .radio-item {
+    justify-content: center;
+    text-align: center;
+    padding: 10px 6px;
+    font-size: 12px;
+  }
+  .radio-group.grid-3 .radio-item::before { display: none; }
+
+  /* Checkbox group */
+  .check-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  .check-group.one-col {
+    grid-template-columns: 1fr;
+  }
+  .check-item {
+    padding: 10px 12px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.1s;
+  }
+  .check-item::before {
+    content: '';
+    width: 16px; height: 16px;
+    border: 2px solid #d1d5db;
+    border-radius: 4px;
+    flex-shrink: 0;
+    background: white;
+  }
+  .check-item.selected {
+    border-color: var(--sage);
+    background: rgba(91,117,83,0.06);
+    color: var(--sage-deep);
+    font-weight: 700;
+  }
+  .check-item.selected::before {
+    border-color: var(--sage);
+    background: var(--sage);
+    box-shadow: inset 0 0 0 2px white;
+  }
+  .check-item.selected::after {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 11px;
+    font-weight: 900;
+    margin-left: 3px;
+    z-index: 2;
+    margin-top: -1px;
+  }
+
+  /* PL name grid (19 options) */
+  .pl-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    max-height: 260px;
+    overflow-y: auto;
+    padding: 4px;
+    background: #fafafa;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+  }
+  .pl-grid .radio-item {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  /* Submit bar */
+  .submit-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, white 40%);
+    padding: 14px 12px 18px 12px;
+    z-index: 60;
+  }
+  .submit-inner {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    gap: 8px;
+  }
+  .btn-draft {
+    padding: 14px 12px;
+    background: white;
+    color: var(--slate);
+    border: 1.5px solid #e5e7eb;
+    border-radius: 26px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .btn-submit {
+    flex: 1;
+    background: linear-gradient(135deg, var(--wine) 0%, var(--wine-deep) 100%);
+    color: white;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 26px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: 0 6px 16px rgba(168, 50, 68, 0.30);
+  }
+  .btn-submit:disabled {
+    background: #d1d5db;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+
+  /* Success modal */
+  .result-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 100;
+    padding: 20px 14px;
+    overflow-y: auto;
+    align-items: center;
+    justify-content: center;
+  }
+  .result-overlay.show { display: flex; }
+  .result-card {
+    background: white;
+    border-radius: 20px;
+    max-width: 440px;
+    width: 100%;
+    padding: 26px 22px;
+    text-align: center;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .check-icon {
+    width: 72px; height: 72px;
+    margin: 0 auto 12px auto;
+    background: linear-gradient(135deg, var(--sage) 0%, var(--sage-deep) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 36px;
+    box-shadow: 0 8px 20px rgba(91, 117, 83, 0.35);
+  }
+  .result-card h2 {
+    font-family: 'Lora', Georgia, serif;
+    color: var(--sage-deep);
+    margin: 10px 0 8px 0;
+  }
+  .summary-box {
+    background: var(--cream);
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 12.5px;
+    line-height: 1.65;
+    margin: 12px 0;
+    color: var(--navy);
+  }
+  .summary-box strong { color: var(--wine-deep); }
+  .result-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .result-actions button {
+    flex: 1;
+    padding: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .btn-new { background: var(--wine); color: white; }
+  .btn-home { background: #e5e7eb; color: var(--navy); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="top-bar">
+    <a href="index.html">← Kembali</a>
+    <span style="color:var(--slate);">Sadar Hati · ViiV Chemsex</span>
+  </div>
+
+  <div class="hero">
+    <div class="eyebrow">🔥 ViiV Healthcare · Chemsex Malang-Surabaya</div>
+    <h1>Penjangkauan Pengguna ATS-Chemsex</h1>
+    <p>Formulir laporan harian PL untuk penjangkauan komunitas <strong>chemsex (ATS/Methamphetamin)</strong>. Isi setiap kontak individual dengan klien.</p>
+  </div>
+
+  <div class="progress-sticky">
+    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    <div class="progress-label"><strong id="filled-count">0</strong>/<span id="req-count">21</span> wajib</div>
+  </div>
+
+  <!-- SECTION 1: Identitas Laporan -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">1</span> Identitas Laporan <span class="section-tag">PL Info</span></div>
+
+    <label class="field">
+      <span class="lbl">Tahun <span class="req">*</span></span>
+      <div class="radio-group grid-3" data-req="tahun">
+        <button type="button" class="radio-item" data-val="2024">Tahun 2024</button>
+        <button type="button" class="radio-item" data-val="2025">Tahun 2025</button>
+        <button type="button" class="radio-item" data-val="2026">Tahun 2026</button>
+      </div>
+    </label>
+
+    <label class="field">
+      <span class="lbl">Nama PL <span class="req">*</span>
+        <span class="hint">Pilih nama Anda dari daftar 19 PL Malang-Surabaya</span>
+      </span>
+      <div class="pl-grid" data-req="pl">
+        <button type="button" class="radio-item" data-val="Bayu Lesmana">Bayu Lesmana</button>
+        <button type="button" class="radio-item" data-val="Maradona">Maradona</button>
+        <button type="button" class="radio-item" data-val="Husen">Husen</button>
+        <button type="button" class="radio-item" data-val="Paldi">Paldi</button>
+        <button type="button" class="radio-item" data-val="Hendra (KL-MLG)">Hendra (KL-MLG)</button>
+        <button type="button" class="radio-item" data-val="Aris">Aris</button>
+        <button type="button" class="radio-item" data-val="Dodik">Dodik</button>
+        <button type="button" class="radio-item" data-val="Nuri">Nuri</button>
+        <button type="button" class="radio-item" data-val="Deni">Deni</button>
+        <button type="button" class="radio-item" data-val="Ibi">Ibi</button>
+        <button type="button" class="radio-item" data-val="David">David</button>
+        <button type="button" class="radio-item" data-val="Imam-Konselor">Imam-Konselor</button>
+        <button type="button" class="radio-item" data-val="Karyanto">Karyanto</button>
+        <button type="button" class="radio-item" data-val="Siswanto (KL-SBY)">Siswanto (KL-SBY)</button>
+        <button type="button" class="radio-item" data-val="Hanim">Hanim</button>
+        <button type="button" class="radio-item" data-val="Sotong Hariyono">Sotong Hariyono</button>
+        <button type="button" class="radio-item" data-val="Eko">Eko</button>
+        <button type="button" class="radio-item" data-val="Reno">Reno</button>
+        <button type="button" class="radio-item" data-val="Dedi">Dedi</button>
+      </div>
+    </label>
+
+    <label class="field">
+      <span class="lbl">Tanggal Laporan <span class="req">*</span></span>
+      <input type="date" id="f-tanggal" data-req="tanggal">
+    </label>
+
+    <label class="field">
+      <span class="lbl">Status Kontak <span class="req">*</span></span>
+      <div class="radio-group horizontal" data-req="status">
+        <button type="button" class="radio-item" data-val="Baru">🆕 Baru</button>
+        <button type="button" class="radio-item" data-val="Lama">🔁 Lama</button>
+      </div>
+    </label>
+  </div>
+
+  <!-- SECTION 2: Identitas Klien -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">2</span> Identitas Klien <span class="section-tag">Demografis</span></div>
+
+    <label class="field">
+      <span class="lbl">Nama Lengkap Klien <span class="req">*</span></span>
+      <input type="text" id="f-nama" placeholder="Nama lengkap sesuai KTP/kartu" data-req="nama">
+    </label>
+
+    <label class="field">
+      <span class="lbl">Nama Panggilan / Julukan <span class="req">*</span>
+        <span class="hint">Pastikan penulisan konsisten di setiap pengisian</span>
+      </span>
+      <input type="text" id="f-julukan" placeholder="Nickname atau alias" data-req="julukan">
+    </label>
+
+    <label class="field">
+      <span class="lbl">4 Huruf Pertama Nama Lengkap <span class="req">*</span>
+        <span class="hint">Untuk ID KD (Kode Dampingan). Maks 4 karakter, huruf besar.</span>
+      </span>
+      <input type="text" id="f-huruf4" placeholder="misal: BUDI" maxlength="4" data-req="huruf4" style="text-transform:uppercase; letter-spacing:2px; font-weight:700;">
+    </label>
+
+    <label class="field">
+      <span class="lbl">Tanggal Lahir Klien</span>
+      <input type="date" id="f-tgllahir">
+    </label>
+
+    <label class="field">
+      <span class="lbl">ID KD (Kode Dampingan) <span class="req">*</span>
+        <span class="hint">Copy dari sistem atau generate otomatis</span>
+      </span>
+      <input type="text" id="f-idkd" placeholder="misal: KL-MLG-BUDI-19900101" data-req="idkd">
+    </label>
+
+    <label class="field">
+      <span class="lbl">Jenis Kelamin <span class="req">*</span></span>
+      <div class="radio-group grid-3" data-req="jk">
+        <button type="button" class="radio-item" data-val="Laki-laki">♂ Laki-laki</button>
+        <button type="button" class="radio-item" data-val="Perempuan">♀ Perempuan</button>
+        <button type="button" class="radio-item" data-val="Transgender">⚧ Transgender</button>
+      </div>
+    </label>
+
+    <label class="field">
+      <span class="lbl">Usia <span class="req">*</span></span>
+      <input type="number" id="f-usia" placeholder="Umur klien (tahun)" min="10" max="99" data-req="usia">
+    </label>
+
+    <label class="field">
+      <span class="lbl">Provinsi <span class="req">*</span></span>
+      <div class="radio-group horizontal" data-req="provinsi">
+        <button type="button" class="radio-item" data-val="DKI Jakarta">🏙 DKI Jakarta</button>
+        <button type="button" class="radio-item" data-val="Jawa Timur">🌾 Jawa Timur</button>
+      </div>
+    </label>
+  </div>
+
+  <!-- SECTION 3: Pola Penggunaan Napza -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">3</span> Pola Penggunaan Napza <span class="section-tag">Substance Use</span></div>
+
+    <label class="field">
+      <span class="lbl">Jenis Napza yang Digunakan <span class="req">*</span>
+        <span class="hint">Pilih semua yang sesuai (multi-select)</span>
+      </span>
+      <div class="check-group" data-req="napza" data-multi>
+        <button type="button" class="check-item" data-val="Sabu (Methamphetamin)">💎 Sabu (Methamphetamin)</button>
+        <button type="button" class="check-item" data-val="Extacy (inex/cece)">🌀 Extacy (inex/cece)</button>
+        <button type="button" class="check-item" data-val="Heroin (Putaw)">🕳 Heroin (Putaw)</button>
+        <button type="button" class="check-item" data-val="Ganja/Cannabis">🌿 Ganja/Cannabis</button>
+        <button type="button" class="check-item" data-val="LSD">🧬 LSD</button>
+        <button type="button" class="check-item" data-val="Tembakau Gorila">🐒 Tembakau Gorila</button>
+        <button type="button" class="check-item" data-val="Ketamin">💠 Ketamin</button>
+        <button type="button" class="check-item" data-val="Opium">🌺 Opium</button>
+        <button type="button" class="check-item" data-val="Mushroom">🍄 Mushroom</button>
+        <button type="button" class="check-item" data-val="Popers">🔥 Popers</button>
+        <button type="button" class="check-item" data-val="Subutex/Subuxone">💊 Subutex/Subuxone</button>
+        <button type="button" class="check-item" data-val="Benzodiazepin">💤 Benzodiazepin</button>
+        <button type="button" class="check-item" data-val="Lainnya">➕ Lainnya</button>
+      </div>
+    </label>
+
+    <label class="field">
+      <span class="lbl">Metode Penggunaan <span class="req">*</span></span>
+      <div class="radio-group horizontal" data-req="metode">
+        <button type="button" class="radio-item" data-val="Dihirup">👃 Dihirup</button>
+        <button type="button" class="radio-item" data-val="Dihisap">💨 Dihisap</button>
+        <button type="button" class="radio-item" data-val="Disuntik">💉 Disuntik</button>
+        <button type="button" class="radio-item" data-val="Sublingual">👅 Sublingual</button>
+        <button type="button" class="radio-item" data-val="Ditelan">💊 Ditelan</button>
+      </div>
+    </label>
+
+    <label class="field">
+      <span class="lbl">Menggunakan <strong>Sabu</strong> sebelum berhubungan seksual (3 bulan terakhir)? <span class="req">*</span></span>
+      <div class="radio-group horizontal" data-req="sabu-sex">
+        <button type="button" class="radio-item" data-val="Ya">Ya</button>
+        <button type="button" class="radio-item" data-val="Tidak">Tidak</button>
+      </div>
+    </label>
+
+    <label class="field">
+      <span class="lbl">Menggunakan <strong>narkoba jenis lain (selain Sabu)</strong> sebelum berhubungan seksual (3 bulan terakhir)? <span class="req">*</span></span>
+      <div class="radio-group horizontal" data-req="other-sex">
+        <button type="button" class="radio-item" data-val="Ya">Ya</button>
+        <button type="button" class="radio-item" data-val="Tidak">Tidak</button>
+      </div>
+    </label>
+  </div>
+
+  <!-- SECTION 4: Kegiatan Penjangkauan -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">4</span> Kegiatan Penjangkauan <span class="section-tag">Outreach</span></div>
+
+    <label class="field">
+      <span class="lbl">Metode Penjangkauan <span class="req">*</span></span>
+      <div class="radio-group grid-3" data-req="metode-jangkau">
+        <button type="button" class="radio-item" data-val="Individu">👤 Individu</button>
+        <button type="button" class="radio-item" data-val="Kelompok">👥 Kelompok</button>
+        <button type="button" class="radio-item" data-val="Virtual">💻 Virtual</button>
+      </div>
+    </label>
+
+    <label class="field">
+      <span class="lbl">Nama Hotspot <span class="req">*</span>
+        <span class="hint">Lokasi/tempat pertemuan (café, apartemen, panti pijat, online platform, dll)</span>
+      </span>
+      <input type="text" id="f-hotspot" placeholder="misal: Café XYZ Kota Malang" data-req="hotspot">
+    </label>
+
+    <label class="field">
+      <span class="lbl">Jenis Kegiatan <span class="req">*</span>
+        <span class="hint">Pilih semua yang dilakukan di kontak ini</span>
+      </span>
+      <div class="check-group one-col" data-req="kegiatan" data-multi>
+        <button type="button" class="check-item" data-val="Penjangkauan">🚶 Penjangkauan</button>
+        <button type="button" class="check-item" data-val="Rujukan">🔗 Rujukan</button>
+        <button type="button" class="check-item" data-val="Home Visit">🏠 Home Visit</button>
+        <button type="button" class="check-item" data-val="Support Group Chemsex">💬 Support Group Chemsex</button>
+        <button type="button" class="check-item" data-val="Support Group ODHIV">💜 Support Group ODHIV</button>
+        <button type="button" class="check-item" data-val="Pertemuan FGD">🗣 Pertemuan FGD</button>
+        <button type="button" class="check-item" data-val="Pertemuan PWUM Chemsex">👥 Pertemuan PWUM Chemsex</button>
+        <button type="button" class="check-item" data-val="Regular Short Training Chemsex">📚 Regular Short Training Chemsex</button>
+        <button type="button" class="check-item" data-val="Kader Lokal (Liaison Meeting)">🤝 Kader Lokal (Liaison)</button>
+        <button type="button" class="check-item" data-val="Konseling Adiksi">🧠 Konseling Adiksi</button>
+        <button type="button" class="check-item" data-val="Individual Risk Assessment (IRA)">📋 Individual Risk Assessment</button>
+        <button type="button" class="check-item" data-val="Group Risk Assessment (GRA)">📊 Group Risk Assessment</button>
+        <button type="button" class="check-item" data-val="Lainnya">➕ Lainnya</button>
+      </div>
+    </label>
+
+    <label class="field">
+      <span class="lbl">Informasi yang Diberikan <span class="req">*</span>
+        <span class="hint">KIE — pilih semua topik yang diedukasi</span>
+      </span>
+      <div class="check-group" data-req="informasi" data-multi>
+        <button type="button" class="check-item" data-val="HIV dan AIDS">🎗 HIV &amp; AIDS</button>
+        <button type="button" class="check-item" data-val="Narkoba">🚫 Narkoba</button>
+        <button type="button" class="check-item" data-val="ARV">💊 ARV</button>
+        <button type="button" class="check-item" data-val="TB (Screening)">🫁 TB Screening</button>
+        <button type="button" class="check-item" data-val="IMS">🦠 IMS</button>
+        <button type="button" class="check-item" data-val="PrEP">🛡 PrEP</button>
+        <button type="button" class="check-item" data-val="Hepatitis C">🟡 Hepatitis C</button>
+        <button type="button" class="check-item" data-val="Life skill &amp; soft skill">🌱 Life &amp; Soft Skill</button>
+        <button type="button" class="check-item" data-val="Mental health">🧠 Mental Health</button>
+        <button type="button" class="check-item" data-val="Positive Prevention">➕ Positive Prevention</button>
+        <button type="button" class="check-item" data-val="PPIA (PMTCT)">🤰 PPIA (PMTCT)</button>
+        <button type="button" class="check-item" data-val="Rehabilitasi">🏥 Rehabilitasi</button>
+        <button type="button" class="check-item" data-val="Paralegal">⚖ Paralegal</button>
+        <button type="button" class="check-item" data-val="Lainnya">➕ Lainnya</button>
+      </div>
+    </label>
+
+    <label class="field">
+      <span class="lbl">Pernah tes HIV sebelumnya? <span class="req">*</span></span>
+      <div class="radio-group horizontal" data-req="tes-hiv">
+        <button type="button" class="radio-item" data-val="Ya">Ya</button>
+        <button type="button" class="radio-item" data-val="Tidak">Tidak</button>
+      </div>
+    </label>
+  </div>
+
+  <!-- SECTION 5: Rujukan Layanan -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">5</span> Rujukan Layanan <span class="section-tag">Referral</span></div>
+
+    <label class="field">
+      <span class="lbl">Rujukan yang Diberikan
+        <span class="hint">Multi-select — kosongkan bila tidak ada rujukan</span>
+      </span>
+      <div class="check-group" data-multi id="rujukan-group">
+        <button type="button" class="check-item" data-val="VCT">🔬 VCT</button>
+        <button type="button" class="check-item" data-val="Oral Quick">💧 Oral Quick</button>
+        <button type="button" class="check-item" data-val="Test IMS">🦠 Test IMS</button>
+        <button type="button" class="check-item" data-val="Screening TBC">🫁 Screening TBC</button>
+        <button type="button" class="check-item" data-val="PrEP">🛡 PrEP</button>
+        <button type="button" class="check-item" data-val="LASS">💉 LASS</button>
+        <button type="button" class="check-item" data-val="ARV">💊 ARV</button>
+        <button type="button" class="check-item" data-val="Keswa">🧠 Keswa</button>
+        <button type="button" class="check-item" data-val="Hep C">🟡 Hep C</button>
+        <button type="button" class="check-item" data-val="Hep B">🟠 Hep B</button>
+        <button type="button" class="check-item" data-val="KDS">🤝 KDS</button>
+        <button type="button" class="check-item" data-val="PPIA">🤰 PPIA</button>
+        <button type="button" class="check-item" data-val="Rehabilitasi">🏥 Rehabilitasi</button>
+        <button type="button" class="check-item" data-val="Terapi Substitusi (PTRM/Subuxon)">💊 Terapi Substitusi</button>
+        <button type="button" class="check-item" data-val="Pemberdayaan Ekonomi">💼 Pemberdayaan Ekonomi</button>
+        <button type="button" class="check-item" data-val="Lainnya">➕ Lainnya</button>
+      </div>
+    </label>
+
+    <label class="field" id="akses-container" style="display:none;">
+      <span class="lbl">Apakah Klien Mengakses Layanan yang Dirujuk? <span class="req">*</span></span>
+      <div class="radio-group horizontal" data-req="akses">
+        <button type="button" class="radio-item" data-val="Ya">✅ Ya</button>
+        <button type="button" class="radio-item" data-val="Tidak">❌ Tidak</button>
+      </div>
+    </label>
+  </div>
+
+  <!-- SECTION 6: Logistik Distribusi -->
+  <div class="section">
+    <div class="section-title"><span class="section-num">6</span> Logistik Distribusi <span class="section-tag">Supplies</span></div>
+
+    <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+      <label class="field" style="margin-bottom:6px;">
+        <span class="lbl">💉 Jarum Steril <span class="req">*</span></span>
+        <input type="number" id="f-jarum" placeholder="0" min="0" value="0" data-req="jarum">
+      </label>
+      <label class="field" style="margin-bottom:6px;">
+        <span class="lbl">🎈 Kondom <span class="req">*</span></span>
+        <input type="number" id="f-kondom" placeholder="0" min="0" value="0" data-req="kondom">
+      </label>
+      <label class="field" style="margin-bottom:6px;">
+        <span class="lbl">📄 KIE (leaflet) <span class="req">*</span></span>
+        <input type="number" id="f-kie" placeholder="0" min="0" value="0" data-req="kie">
+      </label>
+      <label class="field" style="margin-bottom:6px;">
+        <span class="lbl">🔍 Kaca Steril <span class="req">*</span></span>
+        <input type="number" id="f-kaca" placeholder="0" min="0" value="0" data-req="kaca">
+      </label>
+      <label class="field" style="margin-bottom:6px;">
+        <span class="lbl">💋 Lipbalm <span class="req">*</span></span>
+        <input type="number" id="f-lipbalm" placeholder="0" min="0" value="0" data-req="lipbalm">
+      </label>
+      <label class="field" style="margin-bottom:6px;">
+        <span class="lbl">➕ Lainnya (jumlah)</span>
+        <input type="number" id="f-lainjumlah" placeholder="0" min="0" value="0">
+      </label>
+    </div>
+
+    <label class="field" style="margin-top:6px;">
+      <span class="lbl">Lainnya, sebutkan
+        <span class="hint">Bila ada item lain yang didistribusikan</span>
+      </span>
+      <input type="text" id="f-lainnyadesk" placeholder="misal: pelumas, kartu KDS, dll">
+    </label>
+  </div>
+
+</div>
+
+<div class="submit-bar">
+  <div class="submit-inner">
+    <button class="btn-draft" onclick="saveDraft()">💾 Draft</button>
+    <button class="btn-submit" id="btn-submit" disabled onclick="submitForm()">📤 Submit Laporan</button>
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div class="result-overlay" id="result-overlay">
+  <div class="result-card">
+    <div class="check-icon">✓</div>
+    <h2>Laporan Tersimpan!</h2>
+    <p style="font-size:13px; color:var(--slate); margin:0;">Data penjangkauan berhasil disimpan di HP Anda.</p>
+    <div class="summary-box" id="summary-box"></div>
+    <div class="result-actions">
+      <button class="btn-new" onclick="startNew()">➕ Isi Klien Baru</button>
+      <button class="btn-home" onclick="goHome()">Selesai</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // State
+  const answers = {};
+  let requiredKeys = new Set();
+
+  // Discover all required keys
+  document.querySelectorAll('[data-req]').forEach(el => {
+    requiredKeys.add(el.dataset.req);
+  });
+  document.getElementById('req-count').textContent = requiredKeys.size;
+
+  // Default date
+  document.getElementById('f-tanggal').value = new Date().toISOString().slice(0,10);
+  answers.tanggal = document.getElementById('f-tanggal').value;
+
+  // Radio item click handler
+  document.querySelectorAll('.radio-group, .pl-grid').forEach(group => {
+    const reqKey = group.dataset.req;
+    group.querySelectorAll('.radio-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        group.querySelectorAll('.radio-item').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        if (reqKey) answers[reqKey] = btn.dataset.val;
+        updateProgress();
+      });
+    });
+  });
+
+  // Checkbox item click handler
+  document.querySelectorAll('.check-group').forEach(group => {
+    const reqKey = group.dataset.req;
+    group.querySelectorAll('.check-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('selected');
+        if (reqKey) {
+          const selected = Array.from(group.querySelectorAll('.check-item.selected')).map(b => b.dataset.val);
+          if (selected.length > 0) answers[reqKey] = selected;
+          else delete answers[reqKey];
+        }
+        updateProgress();
+      });
+    });
+  });
+
+  // Rujukan handler — jika ada minimal 1, tampilkan pertanyaan akses
+  document.querySelectorAll('#rujukan-group .check-item').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setTimeout(() => {
+        const anySelected = document.querySelectorAll('#rujukan-group .check-item.selected').length > 0;
+        const akses = document.getElementById('akses-container');
+        if (anySelected) {
+          akses.style.display = 'block';
+          requiredKeys.add('akses');
+          const rujukan = Array.from(document.querySelectorAll('#rujukan-group .check-item.selected')).map(b => b.dataset.val);
+          answers.rujukan = rujukan;
+        } else {
+          akses.style.display = 'none';
+          requiredKeys.delete('akses');
+          delete answers.akses;
+          delete answers.rujukan;
+          akses.querySelectorAll('.radio-item').forEach(b => b.classList.remove('selected'));
+        }
+        document.getElementById('req-count').textContent = requiredKeys.size;
+        updateProgress();
+      }, 20);
+    });
+  });
+
+  // Text/number/date input handler
+  document.querySelectorAll('input[data-req]').forEach(inp => {
+    inp.addEventListener('input', () => {
+      const val = inp.value.trim();
+      if (val) answers[inp.dataset.req] = val;
+      else delete answers[inp.dataset.req];
+      updateProgress();
+    });
+  });
+
+  // Optional text inputs
+  ['f-tgllahir', 'f-lainjumlah', 'f-lainnyadesk'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', () => {
+      answers[id.replace('f-','')] = el.value;
+    });
+  });
+
+  function updateProgress() {
+    const filled = Array.from(requiredKeys).filter(k => {
+      const v = answers[k];
+      return v !== undefined && v !== '' && !(Array.isArray(v) && v.length === 0);
+    }).length;
+    document.getElementById('filled-count').textContent = filled;
+    const pct = requiredKeys.size ? (filled / requiredKeys.size) * 100 : 0;
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('btn-submit').disabled = (filled !== requiredKeys.size);
+  }
+  updateProgress();
+
+  // Auto-uppercase for 4-huruf field + auto-generate ID KD prefix
+  const huruf4 = document.getElementById('f-huruf4');
+  huruf4.addEventListener('input', () => {
+    huruf4.value = huruf4.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0,4);
+    answers.huruf4 = huruf4.value;
+    // Auto-suggest ID KD
+    const tgllahir = document.getElementById('f-tgllahir').value.replace(/-/g,'');
+    const suggest = huruf4.value + (tgllahir ? '-' + tgllahir : '');
+    const idkd = document.getElementById('f-idkd');
+    if (!idkd.value || idkd.value.startsWith(huruf4.value.slice(0,2))) {
+      idkd.value = suggest;
+      if (suggest) answers.idkd = suggest;
+    }
+    updateProgress();
+  });
+
+  function submitForm() {
+    const key = 'sh-chemsex-' + Date.now();
+    const data = {
+      instrumen: 'Penjangkauan ATS-Chemsex',
+      timestamp: new Date().toISOString(),
+      answers: { ...answers },
+      identitas: {
+        tahun: answers.tahun,
+        pl: answers.pl,
+        tanggal: answers.tanggal
+      },
+      klien: {
+        nama: answers.nama,
+        julukan: answers.julukan,
+        idkd: answers.idkd,
+        jk: answers.jk,
+        usia: answers.usia,
+        provinsi: answers.provinsi
+      }
+    };
+    localStorage.setItem(key, JSON.stringify(data));
+
+    // Build summary
+    const napza = Array.isArray(answers.napza) ? answers.napza.join(', ') : (answers.napza || '-');
+    const kegiatan = Array.isArray(answers.kegiatan) ? answers.kegiatan.join(', ') : (answers.kegiatan || '-');
+    const rujukan = Array.isArray(answers.rujukan) ? answers.rujukan.join(', ') : '-';
+    const info = Array.isArray(answers.informasi) ? answers.informasi.join(', ') : (answers.informasi || '-');
+    const distribusi = ['Jarum: '+answers.jarum, 'Kondom: '+answers.kondom, 'KIE: '+answers.kie, 'Kaca: '+answers.kaca, 'Lipbalm: '+answers.lipbalm].join(' · ');
+
+    document.getElementById('summary-box').innerHTML = `
+      <strong>👤 Klien:</strong> ${answers.julukan || answers.nama} (${answers.jk}, ${answers.usia}th) — ${answers.provinsi}<br>
+      <strong>🆔 ID KD:</strong> ${answers.idkd}<br>
+      <strong>📅 Kontak:</strong> ${answers.status} · ${answers.tanggal} oleh ${answers.pl}<br>
+      <strong>📍 Hotspot:</strong> ${answers.hotspot} (${answers['metode-jangkau']})<br>
+      <strong>💊 Napza:</strong> ${napza}<br>
+      <strong>🎯 Kegiatan:</strong> ${kegiatan.substring(0,80)}${kegiatan.length > 80 ? '...' : ''}<br>
+      <strong>📚 KIE:</strong> ${info.substring(0,80)}${info.length > 80 ? '...' : ''}<br>
+      <strong>🔗 Rujukan:</strong> ${rujukan.substring(0,80)}${rujukan.length > 80 ? '...' : ''}<br>
+      <strong>📦 Distribusi:</strong> ${distribusi}
+    `;
+    document.getElementById('result-overlay').classList.add('show');
+  }
+
+  function saveDraft() {
+    const key = 'sh-chemsex-draft-' + Date.now();
+    localStorage.setItem(key, JSON.stringify({ instrumen: 'Chemsex-DRAFT', answers, timestamp: new Date().toISOString() }));
+    alert('💾 Draft tersimpan. Bisa dilanjutkan nanti.');
+  }
+
+  function startNew() {
+    if (confirm('Simpan laporan ini + reset form untuk klien baru?')) {
+      window.location.reload();
+    }
+  }
+
+  function goHome() {
+    window.location.href = 'index.html';
+  }
+</script>
+</body>
+</html>
