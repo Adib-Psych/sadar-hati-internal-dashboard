@@ -795,36 +795,19 @@
       <div class="system-tag">Integrated Hub v0.3 · Heart of Hope</div>
     </div>
 
-    <nav class="nav">
+        <nav class="nav">
 
-
-
-      <!-- LAYER 2 -->
-      <div class="nav-layer expanded" data-layer="2">
-        <div class="nav-layer-header">
+      <!-- ========== LAYER 2A · EXTERNAL DASHBOARD (OPEN, no login) ========== -->
+      <div class="nav-layer expanded" data-layer="2" data-zone="2A">
+        <div class="nav-layer-header zone2a">
           <div style="display:flex;align-items:center;">
             <span class="dot"></span>
-            <span>Layer 2 · Internal Dashboard</span>
+            <span>🟢 Layer 2A · External Dashboard</span>
           </div>
-          <span class="chevron">▶</span>
+          <span class="zone-badge open">TERBUKA</span><span class="chevron">▶</span>
         </div>
         <div class="nav-items">
-          <a class="nav-item nav-overview" data-section="l2-overview-program"><span class="icon">🎯</span> Overview Overall Program</a>
-          <a class="nav-item nav-overview" data-section="l2-overview-budget"><span class="icon">💼</span> Overview Budget Status</a>
-          <div class="nav-divider-label">Donor Portfolio</div>
-          <div class="donor-group expanded">
-            <div class="donor-header">
-              <span class="donor-name">Donor A · ViiV Healthcare</span>
-              <span class="donor-badge active">ACTIVE</span><span class="chevron">▶</span>
-            </div>
-            <div class="donor-sub-items">
-              <a class="nav-item" data-section="l2-A-proposal" data-donor="ViiV Healthcare"><span class="icon">📝</span> Program Proposal</a>
-              <a class="nav-item" data-section="l2-A-budget" data-donor="ViiV Healthcare"><span class="icon">💰</span> Budget</a>
-              <a class="nav-item" data-section="l2-A-kpi" data-donor="ViiV Healthcare"><span class="icon">📈</span> M&amp;E</a>
-              <a class="nav-item" data-section="l2-A-achievement" data-donor="ViiV Healthcare"><span class="icon">✅</span> Achievement</a>
-            </div>
-          </div>
-          <a class="nav-item" data-section="l2-add" style="margin-top:6px;font-style:italic;color:var(--slate);"><span class="icon">➕</span> Tambah donor aktif baru</a>
+          <a class="nav-item nav-overview active" data-section="l2-overview-program"><span class="icon">🎯</span> Overview Overall Program</a>
           <div class="donor-group">
             <div class="donor-header">
               <span class="donor-name">📜 Historikal Donor</span>
@@ -843,17 +826,8 @@
           </div>
           <div class="donor-group">
             <div class="donor-header">
-              <span class="donor-name">🎯 Pipeline Pendanaan</span>
-              <span class="donor-badge hist" style="background:#d4a017;">PIPELINE</span><span class="chevron">▶</span>
-            </div>
-            <div class="donor-sub-items">
-              <a class="nav-item" data-section="l2-pipeline-matrix" data-donor="Pipeline Pendanaan"><span class="icon">📊</span> Matriks 13+ Donor</a>
-            </div>
-          </div>
-          <div class="donor-group">
-            <div class="donor-header">
               <span class="donor-name">🏛️ Rekam Jejak Institusi</span>
-              <span class="donor-badge hist" style="background:var(--sage-deep);">KNOWLEDGE</span><span class="chevron">▶</span>
+              <span class="donor-badge hist" style="background:var(--sage-deep);color:#fff;">KNOWLEDGE</span><span class="chevron">▶</span>
             </div>
             <div class="donor-sub-items">
               <a class="nav-item" data-section="l2-rj-kredensial" data-donor="Rekam Jejak Institusi"><span class="icon">🏅</span> Kredensial &amp; Legalitas</a>
@@ -864,24 +838,58 @@
               <a class="nav-item" data-section="l2-rj-governance" data-donor="Rekam Jejak Institusi"><span class="icon">⚖️</span> Governance &amp; Estafet Kepemimpinan</a>
             </div>
           </div>
+          <div class="donor-group expanded">
+            <div class="donor-header">
+              <span class="donor-name">📝 Form Laporan Lapangan</span>
+              <span class="donor-badge" style="background:var(--clay);color:#fff;">ENTRY</span><span class="chevron">▶</span>
+            </div>
+            <div class="donor-sub-items">
+              <a class="nav-item" data-section="l1-master" data-donor="Form Laporan Lapangan"><span class="icon">📋</span> 1 · Master List Form</a>
+              <a class="nav-item" data-section="l1-form-checkin" data-donor="Form Laporan Lapangan"><span class="icon">📍</span> 2 · Form Field Check-In</a>
+              <a class="nav-item" data-section="l1-form-chemsex" data-donor="Form Laporan Lapangan"><span class="icon">🔥</span> 3 · Chemsex Outreach</a>
+              <a class="nav-item" data-section="l1-form-dast10" data-donor="Form Laporan Lapangan"><span class="icon">💊</span> 4 · DAST-10 Napza</a>
+              <a class="nav-item" data-section="l1-form-srq29" data-donor="Form Laporan Lapangan"><span class="icon">🧠</span> 5 · SRQ-29 Mental Health</a>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- LAYER 1 -->
-      <div class="nav-layer expanded" data-layer="1">
-        <div class="nav-layer-header">
+      <!-- ========== LAYER 2B · INTERNAL DASHBOARD (LOCKED, staff login) ========== -->
+      <div class="nav-layer expanded zone-locked" data-layer="2" data-zone="2B">
+        <div class="nav-layer-header zone2b">
           <div style="display:flex;align-items:center;">
             <span class="dot"></span>
-            <span>Layer 1 · Laporan Lapangan</span>
+            <span>🔴 Layer 2B · Internal Dashboard</span>
           </div>
-          <span class="chevron">▶</span>
+          <span class="lock-ind" title="Butuh login staf">🔒</span><span class="chevron">▶</span>
         </div>
         <div class="nav-items">
-          <a class="nav-item" data-section="l1-master"><span class="icon">📋</span> 1 · Master List Form</a>
-          <a class="nav-item" data-section="l1-form-chemsex"><span class="icon">🔥</span> 2 · Chemsex Outreach</a>
-          <a class="nav-item" data-section="l1-form-dast10"><span class="icon">💊</span> 3 · DAST-10 Napza</a>
-          <a class="nav-item" data-section="l1-form-srq29"><span class="icon">🧠</span> 4 · SRQ-29 Mental Health</a>
-          <a class="nav-item active" data-section="l1-loghari"><span class="icon">🗂️</span> 5 · Log Harian / Database</a>
+          <div class="nav-divider-label">Donor Aktif</div>
+          <div class="donor-group expanded">
+            <div class="donor-header">
+              <span class="donor-name">Donor A · ViiV Healthcare</span>
+              <span class="donor-badge active">ACTIVE</span><span class="chevron">▶</span>
+            </div>
+            <div class="donor-sub-items">
+              <a class="nav-item" data-section="l2-A-proposal" data-donor="ViiV Healthcare"><span class="icon">📝</span> Program Proposal</a>
+              <a class="nav-item" data-section="l2-A-budget" data-donor="ViiV Healthcare"><span class="icon">💰</span> Budget</a>
+              <a class="nav-item" data-section="l2-A-kpi" data-donor="ViiV Healthcare"><span class="icon">📈</span> M&amp;E</a>
+              <a class="nav-item" data-section="l2-A-achievement" data-donor="ViiV Healthcare"><span class="icon">✅</span> Achievement</a>
+            </div>
+          </div>
+          <a class="nav-item" data-section="l2-add" style="margin-top:6px;font-style:italic;color:var(--slate);"><span class="icon">➕</span> Tambah donor aktif baru</a>
+          <div class="nav-divider-label">Keuangan &amp; Pipeline</div>
+          <a class="nav-item" data-section="l2-overview-budget"><span class="icon">💼</span> Overview Budget Status</a>
+          <a class="nav-item" data-section="l2-pipeline-matrix" data-donor="Pipeline Pendanaan"><span class="icon">🎯</span> Pipeline Pendanaan</a>
+          <div class="nav-divider-label">Laporan Lapangan · Output</div>
+          <a class="nav-item" data-section="l1-loghari"><span class="icon">🗂️</span> Log Harian (Absensi + Jangkauan)</a>
+          <a class="nav-item" data-section="l2-out-chemsex"><span class="icon">🔥</span> Chemsex Outreach · Output</a>
+          <a class="nav-item" data-section="l2-out-dast10"><span class="icon">💊</span> DAST-10 · Output</a>
+          <a class="nav-item" data-section="l2-out-srq29"><span class="icon">🧠</span> SRQ-29 · Output</a>
+          <a class="nav-item" data-section="" style="opacity:.5;font-style:italic;pointer-events:none;"><span class="icon">➕</span> Form lain (menyusul)</a>
+          <div class="nav-divider-label">Analitik &amp; Data</div>
+          <a class="nav-item" data-section="l2-me-dashboard"><span class="icon">📊</span> M&amp;E Dashboard</a>
+          <a class="nav-item" data-section="l2-clients"><span class="icon">👥</span> Clients Database</a>
         </div>
       </div>
 
@@ -904,13 +912,13 @@
 
     <div class="topbar">
       <div class="breadcrumb" id="breadcrumb">
-        <span class="layer-tag l1">Layer 1 · Laporan Lapangan</span>
+        <span class="layer-tag zone2a">🟢 Layer 2A · External</span>
         <span class="sep">/</span>
-        <span class="current">Log Harian / Database</span>
+        <span class="current">Overview Overall Program</span>
       </div>
       <div class="topbar-actions">
-        <button class="btn">↻ Refresh</button>
-        <button class="btn primary">+ New Entry</button>
+        <span class="saha-authbar saha-authed-only">🔓 Staf <span class="saha-user"></span></span>
+        <button class="btn saha-logout saha-authed-only">Logout</button>
       </div>
     </div>
 
@@ -937,9 +945,9 @@
       <!-- ====== LAYER 2 SECTIONS ====== -->
 
       <!-- 🎯 OVERVIEW OVERALL PROGRAM (aggregated across active donors) -->
-      <section class="section" id="l2-overview-program">
+      <section class="section active" id="l2-overview-program">
         <div class="hero">
-          <div class="eyebrow">Layer 2 · Internal · Overview Overall Program</div>
+          <div class="eyebrow">🟢 Layer 2A · External · Overview Semua Program</div>
           <h1>Overview Overall Program</h1>
           <p class="lede">Konsolidasi <strong>KPI · Achievement · Pending Task</strong> dari semua donor &amp; program yang aktif tahun ini. Auto-aggregate dari masing-masing Donor portfolio di bawah.</p>
         </div>
@@ -1060,7 +1068,7 @@
       <!-- 💼 OVERVIEW BUDGET STATUS -->
       <section class="section" id="l2-overview-budget">
         <div class="hero">
-          <div class="eyebrow">Layer 2 · Internal · Overview Budget Status</div>
+          <div class="eyebrow">🔴 Layer 2B · Internal · Overview Budget Status</div>
           <h1>Overview Budget Status</h1>
           <p class="lede">Burning budget summary untuk semua program &amp; donor aktif tahun ini — <strong>realisasi vs proposed budget</strong>. Alert otomatis kalau penyerapan terlalu lambat atau terlalu cepat.</p>
         </div>
@@ -2229,7 +2237,7 @@
           <div class="side" style="position:relative; z-index:1;">
             <!-- Logo Kemenkumham embed -->
             <div style="display:flex; align-items:center; gap:14px; margin-bottom:12px;">
-              <img src="Knowledge%20Assets%20SAHA/06_Visual_Archive/Maps/logo_pengayoman_kemenkumham.png" alt="Logo Pengayoman Kemenkumham" style="width:60px; height:60px; background:white; border-radius:8px; padding:6px; flex-shrink:0;">
+              <img src="data:image/png;base64,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" alt="Logo Pengayoman Kemenkumham" style="width:60px; height:60px; background:white; border-radius:8px; padding:6px; flex-shrink:0;">
               <div>
                 <div style="font-size:11px; letter-spacing:1.5px; text-transform:uppercase; opacity:0.85; font-weight:700;">🏛️ Lembaga Pemasyarakatan Kelas I Malang</div>
                 <div style="font-family:'Lora', Georgia, serif; font-size:17px; font-weight:700; margin-top:3px;">Jl. Asahan, Blimbing · Kota Malang</div>
@@ -4950,6 +4958,31 @@
         .lh-detail { color:var(--clay); cursor:pointer; font-weight:700; white-space:nowrap; }
         .lh-empty { text-align:center; color:var(--slate); padding:30px; }
         .lh-flag { color:var(--clay); font-weight:700; font-size:11px; }
+        /* ===== ACCESS ZONES 2A / 2B ===== */
+        [data-zone="2A"] .nav-layer-header .dot { background: var(--sage); }
+        [data-zone="2B"] .nav-layer-header .dot { background: var(--clay); }
+        .zone-badge { font-size:8.5px; font-weight:800; letter-spacing:.4px; padding:2px 7px; border-radius:9px; margin-right:6px; }
+        .zone-badge.open { background:var(--sage-light); color:var(--sage-deep); }
+        .lock-ind { font-size:12px; margin-right:6px; transition:opacity .2s; }
+        .nav-layer:not(.zone-locked) .lock-ind { opacity:.3; }
+        .nav-layer.zone-locked[data-zone="2B"] .nav-items::after {
+          content:"🔒 Login staf untuk membuka"; display:block; font-size:10px; color:var(--clay-deep);
+          background:var(--clay-tint); border:1px dashed var(--clay); border-radius:8px;
+          padding:6px 10px; margin:8px 6px 2px; text-align:center; font-weight:700;
+        }
+        .layer-tag.zone2a { background:var(--sage-light); color:var(--sage-deep); }
+        .layer-tag.zone2b { background:var(--clay-light); color:var(--clay-deep); }
+        .saha-authed-only { display:none !important; }
+        body.saha-authed .saha-authed-only { display:inline-flex !important; align-items:center; }
+        .saha-authbar { gap:6px; font-size:12px; font-weight:700; color:var(--sage-deep); background:var(--sage-light); padding:6px 12px; border-radius:20px; }
+        .topbar-actions .saha-logout { background:var(--slate); color:#fff; }
+        /* ===== placeholder cards (new 2B/2A sections) ===== */
+        .ph-wrap { background:#fff; border:1px dashed var(--slate-light); border-radius:14px; padding:34px 26px; text-align:center; margin-top:14px; }
+        .ph-wrap .big { font-size:42px; line-height:1; }
+        .ph-wrap h3 { font-family:'Lora',Georgia,serif; color:var(--clay-deep); font-size:19px; margin:12px 0 6px; }
+        .ph-wrap p { color:var(--slate); font-size:13px; max-width:560px; margin:0 auto; line-height:1.6; }
+        .ph-link { display:inline-block; margin-top:14px; background:var(--clay); color:#fff; border:none; border-radius:9px; padding:9px 16px; font-size:12.5px; font-weight:700; cursor:pointer; font-family:inherit; }
+        .ph-link:hover { background:var(--clay-deep); }
       </style>
 
       <!-- L3-MASTER · Master List Form PL -->
@@ -5002,19 +5035,9 @@
         </div>
       </section>
 
-      <!-- L3-LOGHARI · Log Harian / Database -->
-      <section class="section active" id="l1-loghari">
-        <div class="hero"><div class="eyebrow">Layer 1 · Laporan Lapangan · Database</div><h1>🗂️ Log Harian / Database</h1><p class="lede">Semua submission form PL (Chemsex · DAST-10 · SRQ-29) terkumpul real-time di sini. Akses terbatas — hanya staf yang login (data sensitif dilindungi).</p></div>
-        <div id="lh-login" class="lh-login">
-          <div class="lh-login-card">
-            <div class="lh-login-title">🔒 Login Staf</div>
-            <div class="lh-login-sub">Masuk pakai akun Firebase yang tadi dibuat (email + password).</div>
-            <input type="email" id="lh-email" class="lh-in" placeholder="Email" autocomplete="username">
-            <input type="password" id="lh-pass" class="lh-in" placeholder="Password" autocomplete="current-password">
-            <button class="lh-btn" id="lh-login-btn">Masuk</button>
-            <div class="lh-err" id="lh-login-err"></div>
-          </div>
-        </div>
+      <!-- 2B-LOGHARI · Log Harian / Database (auth via global 2B gate) -->
+      <section class="section" id="l1-loghari">
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Log Harian</div><h1>🗂️ Log Harian / Database</h1><p class="lede">Log harian tim lapangan — absensi &amp; jangkauan, plus semua submission form PL (Chemsex · DAST-10 · SRQ-29) yang masuk real-time dari Firestore. <em>Form input absensi+jangkauan menyusul;</em> untuk sekarang menampilkan database submission langsung.</p></div>
         <div id="lh-data" style="display:none;">
           <div class="lh-toolbar">
             <div class="lh-stat">Total: <strong id="lh-count">0</strong> laporan</div>
@@ -5022,13 +5045,71 @@
             <select id="lh-f-pl" class="lh-fin"><option value="">Semua PL</option></select>
             <input type="text" id="lh-f-q" class="lh-fin" placeholder="Cari nama/kode/area...">
             <button class="lh-btn-sm" id="lh-export">📥 CSV</button>
-            <button class="lh-btn-sm lh-logout" id="lh-logout">Logout <span id="lh-user"></span></button>
+            <button class="lh-btn-sm lh-logout saha-logout" id="lh-logout">Logout <span id="lh-user" class="saha-user"></span></button>
           </div>
           <div class="lh-table-wrap">
             <table class="lh-table"><thead><tr><th>Waktu</th><th>Form</th><th>PL</th><th>Klien / ID KD</th><th>Area</th><th>Ringkasan</th><th></th></tr></thead><tbody id="lh-tbody"></tbody></table>
           </div>
           <div class="lh-empty" id="lh-empty" style="display:none;">Belum ada data yang cocok.</div>
         </div>
+      </section>
+
+
+      <!-- ====== 2B LOGIN GATE ====== -->
+      <section class="section" id="l2b-login">
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Internal Dashboard</div><h1>🔒 Area Internal — Login Staf</h1><p class="lede">Bagian ini berisi data sensitif: donor aktif &amp; budget, output form lapangan, M&amp;E, dan database klien. Hanya staf Sadar Hati yang login yang bisa membuka. Form entry (Layer 2A) tetap terbuka tanpa login untuk PL.</p></div>
+        <div class="lh-login">
+          <div class="lh-login-card">
+            <div class="lh-login-title">🔒 Login Staf</div>
+            <div class="lh-login-sub">Masuk pakai akun Firebase (email + password) yang dibuat tim M&amp;E.</div>
+            <input type="email" id="saha-email" class="lh-in" placeholder="Email" autocomplete="username">
+            <input type="password" id="saha-pass" class="lh-in" placeholder="Password" autocomplete="current-password">
+            <button class="lh-btn" id="saha-login-btn">Masuk</button>
+            <div class="lh-err" id="saha-login-err"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== 2A · FORM FIELD CHECK-IN (placeholder) ====== -->
+      <section class="section" id="l1-form-checkin">
+        <div class="hero"><div class="eyebrow">🟢 Layer 2A · Form Laporan Lapangan · #2</div><h1>📍 Form Field Check-In</h1><p class="lede">Check-in cepat petugas lapangan (PL) saat mulai penjangkauan: lokasi, waktu, dan status kehadiran. Ringkas — untuk memantau aktivitas harian tim sebelum mengisi form asesmen lengkap.</p></div>
+        <div class="placeholder-banner"><span class="icon">🚧</span><div><strong>Form dalam penyiapan.</strong> Struktur field check-in (nama PL · tanggal/jam · titik lokasi cascading · catatan singkat) akan dibangun mengikuti pola form Chemsex, lalu disimpan ke Firestore &amp; muncul di <em>Log Harian</em> (2B). Untuk sekarang PL memakai Master List &amp; form asesmen yang sudah aktif.</div></div>
+        <div class="ph-wrap"><div class="big">📍</div><h3>Field Check-In — Coming Soon</h3><p>Form absensi + titik jangkauan harian. Sama seperti form lain: "Isi di sini" untuk staf, "Copy link" untuk PL isi dari HP.</p><button class="ph-link" onclick="SAHA_GO('l1-master')">← Kembali ke Master List Form</button></div>
+      </section>
+
+      <!-- ====== 2B · CHEMSEX OUTPUT HOUSE (placeholder) ====== -->
+      <section class="section" id="l2-out-chemsex">
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>🔥 Chemsex Outreach — Output &amp; Analitik</h1><p class="lede">Rangkuman hasil penjangkauan Chemsex dari submission PL: jumlah dijangkau, praktik chemsex teridentifikasi, tes HIV/IMS, distribusi kondom, dan tren per periode. Ditarik dari Log Harian (Firestore).</p></div>
+        <div class="placeholder-banner"><span class="icon">📊</span><div><strong>Output house — dalam penyiapan.</strong> Halaman ini akan meng-agregat submission form Chemsex jadi ringkasan &amp; grafik (bukan data mentah). Sumber: koleksi <code>submissions</code> Firestore. Sementara, lihat data mentah di Log Harian.</div></div>
+        <div class="ph-wrap"><div class="big">🔥</div><h3>Analitik Chemsex — Coming Soon</h3><p>Agregasi otomatis dari form Chemsex Outreach yang masuk. Terhubung ke Master DB Klien untuk analisis kohort.</p><button class="ph-link" onclick="SAHA_GO('l1-loghari')">→ Lihat data mentah di Log Harian</button></div>
+      </section>
+
+      <!-- ====== 2B · DAST-10 OUTPUT HOUSE (placeholder) ====== -->
+      <section class="section" id="l2-out-dast10">
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>💊 DAST-10 — Output &amp; Analitik</h1><p class="lede">Distribusi skor &amp; tingkat keparahan penggunaan Napza dari skrining DAST-10: proporsi per kategori risiko, rujukan IPWL, dan tren. Ditarik dari Log Harian (Firestore).</p></div>
+        <div class="placeholder-banner"><span class="icon">📊</span><div><strong>Output house — dalam penyiapan.</strong> Akan merangkum skor DAST-10 (5 tingkat interpretasi) &amp; rujukan, bukan data mentah. Sumber: koleksi <code>submissions</code> Firestore.</div></div>
+        <div class="ph-wrap"><div class="big">💊</div><h3>Analitik DAST-10 — Coming Soon</h3><p>Ringkasan otomatis skor &amp; interpretasi dari skrining Napza yang masuk.</p><button class="ph-link" onclick="SAHA_GO('l1-loghari')">→ Lihat data mentah di Log Harian</button></div>
+      </section>
+
+      <!-- ====== 2B · SRQ-29 OUTPUT HOUSE (placeholder) ====== -->
+      <section class="section" id="l2-out-srq29">
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>🧠 SRQ-29 — Output &amp; Analitik</h1><p class="lede">Rangkuman skrining kesehatan mental SRQ-29 (WHO): 4 sub-domain (neurosis · zat · psikotik · PTSD), flag risiko, dan rujukan jiwa. Ditarik dari Log Harian (Firestore).</p></div>
+        <div class="placeholder-banner"><span class="icon">📊</span><div><strong>Output house — dalam penyiapan.</strong> Akan merangkum hasil SRQ-29 per sub-domain &amp; flag risiko, bukan data mentah. Sumber: koleksi <code>submissions</code> Firestore.</div></div>
+        <div class="ph-wrap"><div class="big">🧠</div><h3>Analitik SRQ-29 — Coming Soon</h3><p>Ringkasan otomatis sub-domain &amp; flag risiko dari skrining kesehatan mental yang masuk.</p><button class="ph-link" onclick="SAHA_GO('l1-loghari')">→ Lihat data mentah di Log Harian</button></div>
+      </section>
+
+      <!-- ====== 2B · M&E DASHBOARD (placeholder) ====== -->
+      <section class="section" id="l2-me-dashboard">
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Monitoring &amp; Evaluation</div><h1>📊 M&amp;E Dashboard</h1><p class="lede">Ringkasan lintas-program untuk tim M&amp;E: capaian vs target, cascade layanan HIV, dan indikator kunci semua donor. Angka agregat yang sama menjadi sumber ("push") untuk Overview publik di website (Layer 3).</p></div>
+        <div class="placeholder-banner"><span class="icon">🚧</span><div><strong>Dashboard M&amp;E — dalam penyiapan.</strong> Akan merangkum output semua form + capaian donor jadi satu panel indikator (target vs realisasi, cascade, tren). Angka terverifikasi di sini yang dikirim ke <code>public_stats</code> Firestore untuk website publik.</div></div>
+        <div class="ph-wrap"><div class="big">📊</div><h3>M&amp;E Summary — Coming Soon</h3><p>Satu panel indikator kunci lintas donor &amp; program — sumber angka resmi untuk laporan &amp; website.</p><button class="ph-link" onclick="SAHA_GO('l2-A-kpi')">→ Lihat M&amp;E ViiV (contoh)</button></div>
+      </section>
+
+      <!-- ====== 2B · CLIENTS DATABASE (placeholder) ====== -->
+      <section class="section" id="l2-clients">
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Database Klien (RAHASIA)</div><h1>👥 Clients Database</h1><p class="lede">Master data klien dampingan: nama/kode, status baru–lama, lokasi, dan riwayat layanan. Data paling sensitif — hanya M&amp;E/staf berwenang. Roster bernama disimpan terpisah &amp; terlindungi; dashboard menampilkan agregat + pencarian terbatas.</p></div>
+        <div class="placeholder-banner archival"><span class="icon">🔐</span><div><strong>Data sensitif — akses M&amp;E only.</strong> Master DB berisi <strong>3.155 klien</strong> (dari data Chemsex YSH) sudah diekstrak &amp; tersimpan aman (Google Drive "Database Sadar Hati" + lokal M&amp;E). Integrasi ke dashboard dibangun bertahap dengan kontrol akses ketat — nama klien tidak akan tampil di zona publik.</div></div>
+        <div class="ph-wrap"><div class="big">👥</div><h3>Clients Database — Coming Soon</h3><p>Terhubung ke Master DB Klien (3.155 record: baru/lama · lokasi · layanan). Pencarian &amp; profil klien untuk staf berwenang.</p></div>
       </section>
 
     </div>
@@ -5053,46 +5134,47 @@ document.querySelectorAll('.donor-header').forEach(header => {
   });
 });
 
-// Nav item click
+// Nav item click (with 2B auth gate)
+function sahaSetActive(sectionId){
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const section = document.getElementById(sectionId);
+  if (section) { section.classList.add('active'); const c=document.querySelector('.content'); if(c) c.scrollTop = 0; }
+}
 document.querySelectorAll('.nav-item').forEach(item => {
   item.addEventListener('click', e => {
     e.preventDefault();
     e.stopPropagation();
     const sectionId = item.dataset.section;
     if (!sectionId) return;
+    const zone2b = item.closest('[data-zone="2B"]');
     document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
     item.classList.add('active');
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.classList.add('active');
-      document.querySelector('.content').scrollTop = 0;
+    if (zone2b && !window.SAHA_AUTH) {
+      window.SAHA_PENDING = sectionId;
+      sahaSetActive('l2b-login');
+      document.getElementById('breadcrumb').innerHTML =
+        '<span class="layer-tag zone2b">🔴 Layer 2B · Internal</span><span class="sep">/</span><span class="current">🔒 Login Staf diperlukan</span>';
+      return;
     }
+    sahaSetActive(sectionId);
     updateBreadcrumb(item);
   });
 });
 
 function updateBreadcrumb(item) {
   const layer = item.closest('.nav-layer');
-  const layerNum = layer.dataset.layer;
-  const layerLabels = {
-    '1': { name: 'Layer 1 · Laporan Lapangan', cls: 'l1' },
-    '2': { name: 'Layer 2 · Internal', cls: 'l2' },
-    '3': { name: 'Layer 3 · Publik (arsip)', cls: 'l3' }
+  const zone = layer ? layer.dataset.zone : null;
+  const zoneLabels = {
+    '2A': { name: '🟢 Layer 2A · External', cls: 'zone2a' },
+    '2B': { name: '🔴 Layer 2B · Internal', cls: 'zone2b' }
   };
-  const lab = layerLabels[layerNum];
+  const lab = zoneLabels[zone] || { name: 'Layer 2', cls: 'l2' };
   const itemText = item.innerText.trim();
   const donorName = item.dataset.donor;
-  let extra = '';
-  if (donorName) {
-    extra = `<span class="sep">/</span><span>${donorName}</span>`;
-  }
-  document.getElementById('breadcrumb').innerHTML = `
-    <span class="layer-tag ${lab.cls}">${lab.name}</span>
-    <span class="sep">/</span>
-    ${extra}
-    <span class="current">${itemText}</span>
-  `;
+  const parts = [`<span class="layer-tag ${lab.cls}">${lab.name}</span>`];
+  if (donorName) parts.push(`<span>${donorName}</span>`);
+  parts.push(`<span class="current">${itemText}</span>`);
+  document.getElementById('breadcrumb').innerHTML = parts.join('<span class="sep">/</span>');
 }
 </script>
 
@@ -5129,23 +5211,46 @@ function updateBreadcrumb(item) {
   function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
   function fmt(iso){ if(!iso) return '-'; const d=new Date(iso); if(isNaN(d)) return String(iso); return d.toLocaleString('id-ID',{day:'2-digit',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'}); }
   function ringkas(x){ if(x.form==='chemsex'){ const a=x.answers||{}; const n=Array.isArray(a.napza)?a.napza.join(', '):(a.napza||'-'); return 'Napza: '+n; } if(x.form==='dast10') return 'Skor '+(x.skor==null?'-':x.skor)+' · '+(x.interpretasi||'-'); if(x.form==='srq29') return (x.skor||'-')+' · '+(x.interpretasi||'-'); return '-'; }
-  const loginBtn=$('lh-login-btn');
-  if(loginBtn){
-    loginBtn.addEventListener('click', async ()=>{ $('lh-login-err').textContent=''; try{ await signInWithEmailAndPassword(auth, $('lh-email').value.trim(), $('lh-pass').value); }catch(e){ $('lh-login-err').textContent='Login gagal: '+(e.code||e.message||''); } });
-    $('lh-pass').addEventListener('keydown', e=>{ if(e.key==='Enter') loginBtn.click(); });
-    $('lh-logout').addEventListener('click', ()=> signOut(auth));
-    ['lh-f-form','lh-f-pl','lh-f-q'].forEach(id=>{ const el=$(id); el.addEventListener('input',render); el.addEventListener('change',render); });
-    $('lh-export').addEventListener('click', doExport);
-    onAuthStateChanged(auth, user=>{
-      if(user){ $('lh-login').style.display='none'; $('lh-data').style.display='block'; $('lh-user').textContent='· '+(user.email||''); listen(); }
-      else { $('lh-login').style.display='block'; $('lh-data').style.display='none'; if(unsub){unsub();unsub=null;} ALL=[]; }
-    });
+  // ===== GLOBAL 2B AUTH GATE (generalized from Log Harian) =====
+  const gateBtn=$('saha-login-btn');
+  if(gateBtn){
+    gateBtn.addEventListener('click', async ()=>{ const err=$('saha-login-err'); if(err)err.textContent=''; try{ await signInWithEmailAndPassword(auth, $('saha-email').value.trim(), $('saha-pass').value); }catch(e){ if(err)err.textContent='Login gagal: '+(e.code||e.message||''); } });
+    const pw=$('saha-pass'); if(pw) pw.addEventListener('keydown', e=>{ if(e.key==='Enter') gateBtn.click(); });
   }
+  document.querySelectorAll('.saha-logout').forEach(b=>b.addEventListener('click', ()=> signOut(auth)));
+  ['lh-f-form','lh-f-pl','lh-f-q'].forEach(id=>{ const el=$(id); if(el){ el.addEventListener('input',render); el.addEventListener('change',render); } });
+  if($('lh-export')) $('lh-export').addEventListener('click', doExport);
+  function sahaLock(){
+    window.SAHA_AUTH=false;
+    document.body.classList.remove('saha-authed');
+    document.querySelectorAll('[data-zone="2B"]').forEach(z=>z.classList.add('zone-locked'));
+    if($('lh-data')) $('lh-data').style.display='none';
+    if(unsub){ unsub(); unsub=null; } ALL=[];
+    const active=document.querySelector('.section.active');
+    if(active && document.querySelector('[data-zone="2B"] .nav-item[data-section="'+active.id+'"]')){
+      const home=document.querySelector('.nav-item[data-section="l2-overview-program"]'); if(home) home.click();
+    }
+  }
+  function sahaUnlock(user){
+    window.SAHA_AUTH=true;
+    document.body.classList.add('saha-authed');
+    document.querySelectorAll('[data-zone="2B"]').forEach(z=>z.classList.remove('zone-locked'));
+    document.querySelectorAll('.saha-user').forEach(el=>el.textContent='· '+(user.email||''));
+    if($('lh-data')) $('lh-data').style.display='block';
+    listen();
+    const active=document.querySelector('.section.active');
+    if(active && active.id==='l2b-login'){
+      const target=window.SAHA_PENDING||'l2-A-proposal';
+      const nav=document.querySelector('.nav-item[data-section="'+target+'"]'); if(nav) nav.click();
+      window.SAHA_PENDING=null;
+    }
+  }
+  onAuthStateChanged(auth, user=> user ? sahaUnlock(user) : sahaLock());
   function listen(){
     if(unsub) return;
     const qy = query(collection(db,'submissions'), orderBy('created_at','desc'));
     unsub = onSnapshot(qy, snap=>{ ALL=[]; snap.forEach(d=>{ const x=d.data(); x.__id=d.id; if(!String(x.form||'').startsWith('__')) ALL.push(x); }); fillPL(); render(); },
-      err=>{ if($('lh-login-err')) $('lh-login-err').textContent='Gagal baca data: '+(err.code||err.message); console.error('[LogHarian]',err); });
+      err=>{ if($('saha-login-err')) $('saha-login-err').textContent='Gagal baca data: '+(err.code||err.message); console.error('[LogHarian]',err); });
   }
   function fillPL(){ const sel=$('lh-f-pl'), cur=sel.value; const pls=[...new Set(ALL.map(x=>x.pl).filter(Boolean))].sort(); sel.innerHTML='<option value="">Semua PL</option>'+pls.map(p=>'<option>'+esc(p)+'</option>').join(''); sel.value=cur; }
   function filtered(){ const ff=$('lh-f-form').value, fp=$('lh-f-pl').value, q=$('lh-f-q').value.trim().toLowerCase();
