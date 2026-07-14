@@ -803,6 +803,15 @@
   .tim-name { font-weight: 700; font-size: 13px; }
   .tim-role { font-size: 11px; color: var(--slate); margin-top: 2px; }
 
+
+/* === cross-tab bars (output houses) === */
+.xtab{margin:6px 0 18px;}
+.xrow{display:grid;grid-template-columns:190px 1fr auto;align-items:center;gap:12px;margin:8px 0;font-size:13px;}
+.xrow .xlab{color:var(--navy-soft);font-weight:600;text-align:right;line-height:1.25;}
+.xrow .xtrack{background:var(--slate-lighter);border-radius:7px;height:24px;overflow:hidden;}
+.xrow .xfill{height:100%;border-radius:7px;display:flex;align-items:center;justify-content:flex-end;padding-right:9px;color:#fff;font-weight:800;font-size:11.5px;min-width:0;transition:width .6s ease;}
+.xrow .xval{font-weight:700;color:var(--navy-soft);font-size:12.5px;white-space:nowrap;}
+@media(max-width:680px){.xrow{grid-template-columns:112px 1fr auto;gap:7px;font-size:11.5px;}.xrow .xlab{font-size:11px;}.xrow .xval{font-size:11px;}}
 </style>
 </head>
 <body>
@@ -908,7 +917,9 @@
           <a class="nav-item" data-section="l2-out-chemsex"><span class="icon">🔥</span> Chemsex Outreach · Output</a>
           <a class="nav-item" data-section="l2-out-dast10"><span class="icon">💊</span> DAST-10 · Output</a>
           <a class="nav-item" data-section="l2-out-srq29"><span class="icon">🧠</span> SRQ-29 · Output</a>
-          <a class="nav-item" data-section="" style="opacity:.5;font-style:italic;pointer-events:none;"><span class="icon">➕</span> Form lain (menyusul)</a>
+          <a class="nav-item" data-section="l2-out-ira"><span class="icon">⚕️</span> IRA · Risiko Pribadi</a>
+          <a class="nav-item" data-section="l2-out-konseling"><span class="icon">💬</span> Konseling · Output</a>
+          <a class="nav-item" data-section="l2-out-gra"><span class="icon">👥</span> GRA · Risiko Kelompok</a>
           <div class="nav-divider-label">Analitik &amp; Data</div>
           <a class="nav-item" data-section="l2-me-dashboard"><span class="icon">📊</span> M&amp;E Dashboard</a>
           <a class="nav-item" data-section="l2-clients"><span class="icon">👥</span> Clients Database</a>
@@ -5324,16 +5335,255 @@
 
       <!-- ====== 2B · DAST-10 OUTPUT HOUSE (placeholder) ====== -->
       <section class="section" id="l2-out-dast10">
-        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>💊 DAST-10 — Output &amp; Analitik</h1><p class="lede">Distribusi skor &amp; tingkat keparahan penggunaan Napza dari skrining DAST-10: proporsi per kategori risiko, rujukan IPWL, dan tren. Ditarik dari Log Harian (Firestore).</p></div>
-        <div class="placeholder-banner"><span class="icon">📊</span><div><strong>Output house — dalam penyiapan.</strong> Akan merangkum skor DAST-10 (5 tingkat interpretasi) &amp; rujukan, bukan data mentah. Sumber: koleksi <code>submissions</code> Firestore.</div></div>
-        <div class="ph-wrap"><div class="big">💊</div><h3>Analitik DAST-10 — Coming Soon</h3><p>Ringkasan otomatis skor &amp; interpretasi dari skrining Napza yang masuk.</p><button class="ph-link" onclick="SAHA_GO('l1-loghari')">→ Lihat data mentah di Log Harian</button></div>
+
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>💊 DAST-10 — Skrining Keparahan Penggunaan Napza</h1><p class="lede"><strong>Drug Abuse Screening Test</strong> (10 item, tervalidasi) mengukur tingkat keparahan penggunaan napza 3 bulan terakhir → dasar rujukan ke Faskes. Instrumen <strong>Assessment Mental Health (KoBo)</strong>, Malang–Surabaya–Sidoarjo–Jakarta. Angka agregat, nol identitas.</p></div>
+
+        <div class="cards">
+          <div class="card"><div class="label">Total Di-skrining</div><div class="value">1.911</div><div class="desc">klien menjalani DAST-10</div></div>
+          <div class="card" style="background:linear-gradient(135deg,var(--clay) 0%,var(--clay-deep) 100%);color:#fff;border-color:var(--clay-deep);"><div class="label" style="color:#fff;opacity:.85;">Skor ≥3 · Perlu Rujukan</div><div class="value" style="color:#fff;">707</div><div class="desc" style="color:#fff;opacity:.9;">37,0% — tingkat sedang ke atas</div></div>
+          <div class="card"><div class="label">Substansial–Parah (≥6)</div><div class="value">147</div><div class="desc">7,7% — prioritas intervensi</div></div>
+          <div class="card" style="background:var(--sage-light);border-color:var(--sage);"><div class="label">Rata-rata Skor</div><div class="value" style="color:var(--sage-deep);">2,41</div><div class="desc">dari skala 0–10</div></div>
+        </div>
+
+        <h2 class="section-h2" style="margin-top:30px;">📊 Distribusi Tingkat Keparahan</h2>
+        <p style="font-size:13px;color:var(--slate);line-height:1.6;margin:4px 0 14px;">Mayoritas berada di level rendah, tapi <strong>37,0%</strong> (707 klien) mencapai skor ≥3 — ambang di mana instrumen menyarankan rujukan layanan kesehatan.</p>
+        <div class="xtab"><div class="xrow"><div class="xlab">0 · Tidak ada masalah</div><div class="xtrack"><div class="xfill" style="width:2.5%;background:#5b7553;"></div></div><div class="xval">5 · 0,3%</div></div><div class="xrow"><div class="xlab">1–2 · Rendah</div><div class="xtrack"><div class="xfill" style="width:62.7%;background:#8fae7f;">63%</div></div><div class="xval">1.199 · 62,7%</div></div><div class="xrow"><div class="xlab">3–5 · Sedang</div><div class="xtrack"><div class="xfill" style="width:29.3%;background:#d4a017;">29%</div></div><div class="xval">560 · 29,3%</div></div><div class="xrow"><div class="xlab">6–8 · Substansial</div><div class="xtrack"><div class="xfill" style="width:7.1%;background:#c96b2f;"></div></div><div class="xval">135 · 7,1%</div></div><div class="xrow"><div class="xlab">9–10 · Parah</div><div class="xtrack"><div class="xfill" style="width:2.5%;background:#a83244;"></div></div><div class="xval">12 · 0,6%</div></div></div>
+
+        <h2 class="section-h2" style="margin-top:30px;">🗺️ Indikator Silang — Tingkat Rujukan (skor ≥3) per Wilayah</h2>
+        <p style="font-size:13px;color:var(--slate);line-height:1.6;margin:4px 0 14px;">Keparahan <strong>tidak merata</strong> secara geografis. Jakarta menonjol tinggi (basis kecil, n=105); Malang punya volume terbesar dengan proporsi terkendali.</p>
+        <div class="xtab"><div class="xrow"><div class="xlab">Jakarta</div><div class="xtrack"><div class="xfill" style="width:86.7%;background:#a83244;">87%</div></div><div class="xval">86,7% · n=105</div></div><div class="xrow"><div class="xlab">Surabaya</div><div class="xtrack"><div class="xfill" style="width:58.6%;background:#c96b2f;">59%</div></div><div class="xval">58,6% · n=345</div></div><div class="xrow"><div class="xlab">Sidoarjo</div><div class="xtrack"><div class="xfill" style="width:40.6%;background:#c96b2f;">41%</div></div><div class="xval">40,6% · n=276</div></div><div class="xrow"><div class="xlab">Malang</div><div class="xtrack"><div class="xfill" style="width:25.5%;background:#d4a017;">26%</div></div><div class="xval">25,5% · n=1.185</div></div></div>
+
+        <h2 class="section-h2" style="margin-top:30px;">👥 Indikator Silang — Tingkat Rujukan per Kelompok Sasaran</h2>
+        <p style="font-size:13px;color:var(--slate);line-height:1.6;margin:4px 0 14px;"><strong>WPS</strong> menunjukkan proporsi keparahan tertinggi — sinyal kebutuhan layanan terintegrasi napza+SRHR untuk kelompok ini.</p>
+        <div class="xtab"><div class="xrow"><div class="xlab">WPS</div><div class="xtrack"><div class="xfill" style="width:80.4%;background:#a83244;">80%</div></div><div class="xval">80,4% · n=56</div></div><div class="xrow"><div class="xlab">Risti / Umum</div><div class="xtrack"><div class="xfill" style="width:36.4%;background:#8fae7f;">36%</div></div><div class="xval">36,4% · n=1.348</div></div><div class="xrow"><div class="xlab">Transgender</div><div class="xtrack"><div class="xfill" style="width:28.6%;background:#8fae7f;">29%</div></div><div class="xval">28,6% · n=7</div></div><div class="xrow"><div class="xlab">PSP</div><div class="xtrack"><div class="xfill" style="width:28.2%;background:#8fae7f;">28%</div></div><div class="xval">28,2% · n=174</div></div><div class="xrow"><div class="xlab">LSL</div><div class="xtrack"><div class="xfill" style="width:19.4%;background:#8fae7f;">19%</div></div><div class="xval">19,4% · n=93</div></div></div>
+
+        <h2 class="section-h2" style="margin-top:30px;">🧾 Rincian per Item (data tabel · bisa di-export)</h2>
+        <p style="font-size:13px;color:var(--slate);line-height:1.6;margin:4px 0 10px;"><strong>Klik judul kolom</strong> buat sortir (mis. % positif terbanyak); ketik buat cari item; <strong>Export CSV</strong> ikut hasil.</p>
+        <div class="saha-tblbox">
+  <div class="saha-tbar">
+    <input class="saha-tsearch" placeholder="🔍 Cari pertanyaan...">
+    <button class="lh-btn-sm" onclick="SAHA_EXPORT_TABLE(this)">📥 Export CSV</button>
+    <span class="saha-thint">↕ klik judul kolom buat sortir</span>
+  </div>
+  <div class="lh-table-wrap">
+    <table class="lh-table saha-sortable"><thead><tr><th>Pertanyaan DAST-10</th><th>Skor Positif</th><th>Skor 0</th><th>% Positif</th></tr></thead>
+    <tbody>
+<tr><td style="font-weight:600;">Q1. Pakai obat selain alasan medis</td><td>871</td><td>1.040</td><td>45,6%</td></tr>
+<tr><td style="font-weight:600;">Q2. Salahgunakan >1 obat sekaligus</td><td>411</td><td>1.498</td><td>21,5%</td></tr>
+<tr><td style="font-weight:600;">Q3. Tak bisa berhenti walau ingin</td><td>1.391</td><td>520</td><td>72,8%</td></tr>
+<tr><td style="font-weight:600;">Q4. Pingsan/blackout akibat napza</td><td>104</td><td>1.807</td><td>5,4%</td></tr>
+<tr><td style="font-weight:600;">Q5. Merasa bersalah soal pemakaian</td><td>502</td><td>1.409</td><td>26,3%</td></tr>
+<tr><td style="font-weight:600;">Q6. Pasangan/ortu mengeluh</td><td>388</td><td>1.523</td><td>20,3%</td></tr>
+<tr><td style="font-weight:600;">Q7. Mengabaikan keluarga karena napza</td><td>281</td><td>1.630</td><td>14,7%</td></tr>
+<tr><td style="font-weight:600;">Q8. Terlibat kegiatan ilegal demi napza</td><td>286</td><td>1.625</td><td>15,0%</td></tr>
+<tr><td style="font-weight:600;">Q9. Gejala withdrawal saat berhenti</td><td>221</td><td>1.690</td><td>11,6%</td></tr>
+<tr><td style="font-weight:600;">Q10. Masalah medis akibat napza</td><td>143</td><td>1.768</td><td>7,5%</td></tr>
+    </tbody></table>
+  </div>
+</div>
+<p style="font-size:12px;color:var(--slate);margin:8px 2px 0;">10 item skrining · skor 1 tiap jawaban memberi poin (Q3 dibalik, sesuai instrumen DAST-10 tervalidasi).</p>
+        <div class="placeholder-banner archival" style="margin-top:20px;"><span class="icon">🔐</span><div><strong>Data mentah level-klien (bernama) tidak ditanam di halaman ini.</strong> Yang tampil = agregat & indikator silang de-identifikasi. Baris per-klien (nama, tgl lahir, hasil) tetap di sumber terlindungi (KoBo / Master DB). Untuk telusur per-nama pakai <strong>Client Finder</strong> di menu Clients Database (butuh login).</div></div>
+        <div class="source-attr" style="margin-top:22px;">📄 <strong>Sumber:</strong> Assessment Mental Health Klien Pengguna Methamphetamine (KoboToolbox) · Bagian I DAST-10 · n=1.911 · snapshot Jul 2026.</div>
+
       </section>
 
       <!-- ====== 2B · SRQ-29 OUTPUT HOUSE (placeholder) ====== -->
       <section class="section" id="l2-out-srq29">
-        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>🧠 SRQ-29 — Output &amp; Analitik</h1><p class="lede">Rangkuman skrining kesehatan mental SRQ-29 (WHO): 4 sub-domain (neurosis · zat · psikotik · PTSD), flag risiko, dan rujukan jiwa. Ditarik dari Log Harian (Firestore).</p></div>
-        <div class="placeholder-banner"><span class="icon">📊</span><div><strong>Output house — dalam penyiapan.</strong> Akan merangkum hasil SRQ-29 per sub-domain &amp; flag risiko, bukan data mentah. Sumber: koleksi <code>submissions</code> Firestore.</div></div>
-        <div class="ph-wrap"><div class="big">🧠</div><h3>Analitik SRQ-29 — Coming Soon</h3><p>Ringkasan otomatis sub-domain &amp; flag risiko dari skrining kesehatan mental yang masuk.</p><button class="ph-link" onclick="SAHA_GO('l1-loghari')">→ Lihat data mentah di Log Harian</button></div>
+
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>🧠 SRQ-29 — Skrining Kesehatan Jiwa</h1><p class="lede"><strong>Self-Reporting Questionnaire</strong> (WHO) mengukur beban kesehatan jiwa 30 hari terakhir: depresi/ansietas, gejala psikotik, trauma, dan pikiran bunuh diri. Dari instrumen <strong>Assessment Mental Health (KoBo)</strong>. Angka agregat, nol identitas.</p></div>
+
+        <div class="cards">
+          <div class="card"><div class="label">Total Di-skrining</div><div class="value">1.423</div><div class="desc">klien menjalani SRQ-29</div></div>
+          <div class="card" style="background:linear-gradient(135deg,var(--clay) 0%,var(--clay-deep) 100%);color:#fff;border-color:var(--clay-deep);"><div class="label" style="color:#fff;opacity:.85;">Kemungkinan Gangguan Mental Umum</div><div class="value" style="color:#fff;">20,3%</div><div class="desc" style="color:#fff;opacity:.9;">289 klien · SRQ-20 skor ≥6</div></div>
+          <div class="card" style="background:var(--clay-tint);border-color:var(--clay);"><div class="label">Pikiran Bunuh Diri (item 17)</div><div class="value" style="color:var(--clay-deep);">39</div><div class="desc">2,7% — perlu tindak lanjut segera</div></div>
+          <div class="card"><div class="label">Gejala Psikotik</div><div class="value">15,1%</div><div class="desc">215 klien · item 22–24</div></div>
+        </div>
+
+        <h2 class="section-h2" style="margin-top:30px;">🔗 Indikator Silang — Makin Berat Adiksi, Makin Tinggi Beban Jiwa</h2>
+        <p style="font-size:13px;color:var(--slate);line-height:1.6;margin:4px 0 14px;">Menyilangkan <strong>keparahan DAST-10</strong> dengan <strong>kemungkinan gangguan mental (SRQ-20 ≥6)</strong> pada 1.423 klien yang mengisi keduanya. Terlihat gradien jelas: dari <strong>13,8%</strong> di adiksi rendah melonjak ke <strong>66,7%</strong> di adiksi parah — bukti kuat kebutuhan <strong>layanan napza & jiwa yang terintegrasi</strong>.</p>
+        <div class="xtab"><div class="xrow"><div class="xlab">DAST 1–2 · Rendah</div><div class="xtrack"><div class="xfill" style="width:13.8%;background:#8fae7f;">14%</div></div><div class="xval">13,8% · n=983</div></div><div class="xrow"><div class="xlab">DAST 3–5 · Sedang</div><div class="xtrack"><div class="xfill" style="width:31.7%;background:#d4a017;">32%</div></div><div class="xval">31,7% · n=378</div></div><div class="xrow"><div class="xlab">DAST 6–8 · Substansial</div><div class="xtrack"><div class="xfill" style="width:54.7%;background:#c96b2f;">55%</div></div><div class="xval">54,7% · n=53</div></div><div class="xrow"><div class="xlab">DAST 9–10 · Parah</div><div class="xtrack"><div class="xfill" style="width:66.7%;background:#a83244;">67%</div></div><div class="xval">66,7% · n=6</div></div></div>
+
+        <h2 class="section-h2" style="margin-top:30px;">🩺 Beban per Domain Kesehatan Jiwa</h2>
+        <div class="xtab"><div class="xrow"><div class="xlab">Gangguan Mental Umum (SRQ-20 ≥6)</div><div class="xtrack"><div class="xfill" style="width:81.2%;background:#a83244;">20%</div></div><div class="xval">20,3% · 289 org</div></div><div class="xrow"><div class="xlab">Gejala Psikotik (item 22–24)</div><div class="xtrack"><div class="xfill" style="width:60.4%;background:#c96b2f;">15%</div></div><div class="xval">15,1% · 215 org</div></div><div class="xrow"><div class="xlab">PTSD ≥3 gejala (item 25–29)</div><div class="xtrack"><div class="xfill" style="width:30.4%;background:#d4a017;"></div></div><div class="xval">7,6% · 108 org</div></div><div class="xrow"><div class="xlab">Pikiran mengakhiri hidup (item 17)</div><div class="xtrack"><div class="xfill" style="width:10.8%;background:#7a1f30;"></div></div><div class="xval">2,7% · 39 org</div></div></div>
+
+        <h2 class="section-h2" style="margin-top:30px;">🧾 Rincian 29 Item (data tabel · bisa di-export)</h2>
+        <p style="font-size:13px;color:var(--slate);line-height:1.6;margin:4px 0 10px;"><strong>Klik judul kolom</strong> buat sortir; ketik gejala/domain buat cari; <strong>Export CSV</strong> ikut hasil.</p>
+        <div class="saha-tblbox">
+  <div class="saha-tbar">
+    <input class="saha-tsearch" placeholder="🔍 Cari gejala / domain...">
+    <button class="lh-btn-sm" onclick="SAHA_EXPORT_TABLE(this)">📥 Export CSV</button>
+    <span class="saha-thint">↕ klik judul kolom buat sortir</span>
+  </div>
+  <div class="lh-table-wrap">
+    <table class="lh-table saha-sortable"><thead><tr><th>Item SRQ-29</th><th>Domain</th><th>Jawab 'Ya'</th><th>% Ya</th></tr></thead>
+    <tbody>
+<tr><td style="font-weight:600;">1. Apakah Anda sering menderita sakit kepala?</td><td>Depresi/Ansietas (CMD)</td><td>403</td><td>28,3%</td></tr>
+<tr><td style="font-weight:600;">2. Apakah Anda kehilangan nafsu makan?</td><td>Depresi/Ansietas (CMD)</td><td>416</td><td>29,2%</td></tr>
+<tr><td style="font-weight:600;">3. Apakah tidur Anda tidak lelap?</td><td>Depresi/Ansietas (CMD)</td><td>563</td><td>39,6%</td></tr>
+<tr><td style="font-weight:600;">4. Apakah Anda mudah menjadi takut?</td><td>Depresi/Ansietas (CMD)</td><td>140</td><td>9,8%</td></tr>
+<tr><td style="font-weight:600;">5. Apakah Anda merasa cemas, tegang dan khawatir?</td><td>Depresi/Ansietas (CMD)</td><td>264</td><td>18,6%</td></tr>
+<tr><td style="font-weight:600;">6. Apakah tangan Anda gemetar?</td><td>Depresi/Ansietas (CMD)</td><td>229</td><td>16,1%</td></tr>
+<tr><td style="font-weight:600;">7. Apakah Anda mengalami gangguan pencernaan?</td><td>Depresi/Ansietas (CMD)</td><td>214</td><td>15,0%</td></tr>
+<tr><td style="font-weight:600;">8. Apakah Anda merasa sulit berpikir jernih?</td><td>Depresi/Ansietas (CMD)</td><td>219</td><td>15,4%</td></tr>
+<tr><td style="font-weight:600;">9. Apakah Anda merasa tidak bahagia?</td><td>Depresi/Ansietas (CMD)</td><td>147</td><td>10,3%</td></tr>
+<tr><td style="font-weight:600;">10. Apakah Anda lebih sering menangis?</td><td>Depresi/Ansietas (CMD)</td><td>98</td><td>6,9%</td></tr>
+<tr><td style="font-weight:600;">11. Apakah Anda merasa sulit untuk menikmati aktivitas sehari-hari?</td><td>Depresi/Ansietas (CMD)</td><td>161</td><td>11,3%</td></tr>
+<tr><td style="font-weight:600;">12. Apakah Anda mengalami kesulitan untuk mengambil keputusan?</td><td>Depresi/Ansietas (CMD)</td><td>226</td><td>15,9%</td></tr>
+<tr><td style="font-weight:600;">13. Apakah aktivitas/tugas sehari-hari Anda terbengkalai?</td><td>Depresi/Ansietas (CMD)</td><td>140</td><td>9,8%</td></tr>
+<tr><td style="font-weight:600;">14. Apakah Anda merasa tidak mampu berperan dalam kehidupan ini?</td><td>Depresi/Ansietas (CMD)</td><td>88</td><td>6,2%</td></tr>
+<tr><td style="font-weight:600;">15. Apakah Anda kehilangan minat terhadap banyak hal?</td><td>Depresi/Ansietas (CMD)</td><td>191</td><td>13,4%</td></tr>
+<tr><td style="font-weight:600;">16. Apakah Anda merasa tidak berharga?</td><td>Depresi/Ansietas (CMD)</td><td>120</td><td>8,4%</td></tr>
+<tr><td style="font-weight:600;">17. Apakah Anda mempunyai pikiran untuk mengakhiri hidup Anda?</td><td>Depresi/Ansietas (CMD)</td><td>39</td><td>2,7%</td></tr>
+<tr><td style="font-weight:600;">18. Apakah Anda merasa lelah sepanjang waktu?</td><td>Depresi/Ansietas (CMD)</td><td>321</td><td>22,6%</td></tr>
+<tr><td style="font-weight:600;">19. Apakah Anda merasa tidak enak di perut?</td><td>Depresi/Ansietas (CMD)</td><td>230</td><td>16,2%</td></tr>
+<tr><td style="font-weight:600;">20. Apakah Anda mudah lelah?</td><td>Depresi/Ansietas (CMD)</td><td>471</td><td>33,1%</td></tr>
+<tr><td style="font-weight:600;">21. Apakah Anda minum alkohol lebih banyak dari biasanya atau Apakah Anda menggunakan narkoba?</td><td>Napza/Alkohol</td><td>599</td><td>42,1%</td></tr>
+<tr><td style="font-weight:600;">22. Apakah Anda yakin bahwa seseorang mencoba mencelakai Anda dengan cara tertentu?</td><td>Psikotik</td><td>59</td><td>4,1%</td></tr>
+<tr><td style="font-weight:600;">23. Apakah ada yang mengganggu atau hal yang tidak biasa dalam pikiran Anda?</td><td>Psikotik</td><td>144</td><td>10,1%</td></tr>
+<tr><td style="font-weight:600;">24. Apakah Anda pernah mendengar suara tanpa tahu sumbernya atau yang orang lain tidak dapat mendengar?</td><td>Psikotik</td><td>76</td><td>5,3%</td></tr>
+<tr><td style="font-weight:600;">25. Apakah Anda mengalami mimpi yang mengganggu tentang suatu bencana/musibah atau adakah saat-saat Anda seolah mengalami kembali kejadian bencana itu?</td><td>PTSD/Trauma</td><td>114</td><td>8,0%</td></tr>
+<tr><td style="font-weight:600;">26. Apakah Anda menghindari kegiatan, tempat, orang atau pikiran yang mengingatkan Anda akan bencana tersebut?</td><td>PTSD/Trauma</td><td>121</td><td>8,5%</td></tr>
+<tr><td style="font-weight:600;">27. Apakah minat Anda terhadap teman dan kegiatan yang biasa Anda lakukan berkurang?</td><td>PTSD/Trauma</td><td>222</td><td>15,6%</td></tr>
+<tr><td style="font-weight:600;">28. Apakah Anda merasa sangat terganggu jika berada dalam situasi yang mengingatkan Anda akan bencana atau jika Anda berpikir tentang bencana itu?</td><td>PTSD/Trauma</td><td>113</td><td>7,9%</td></tr>
+<tr><td style="font-weight:600;">29. Apakah Anda kesulitan memahami atau mengekspresikan perasaan Anda?</td><td>PTSD/Trauma</td><td>240</td><td>16,9%</td></tr>
+    </tbody></table>
+  </div>
+</div>
+<p style="font-size:12px;color:var(--slate);margin:8px 2px 0;">SRQ-20 (item 1–20) skor ambang ≥6 = kemungkinan gangguan mental umum. Item 21 napza, 22–24 psikotik, 25–29 trauma/PTSD.</p>
+        <div class="placeholder-banner archival" style="margin-top:20px;"><span class="icon">🔐</span><div><strong>Data mentah level-klien (bernama) tidak ditanam di halaman ini.</strong> Yang tampil = agregat & indikator silang de-identifikasi. Baris per-klien (nama, tgl lahir, hasil) tetap di sumber terlindungi (KoBo / Master DB). Item 17 (pikiran bunuh diri) & kasus reaktif ditindaklanjuti konselor secara langsung, di luar dashboard. Untuk telusur per-nama pakai <strong>Client Finder</strong> di menu Clients Database (butuh login).</div></div>
+        <div class="source-attr" style="margin-top:22px;">📄 <strong>Sumber:</strong> Assessment Mental Health Klien Pengguna Methamphetamine (KoboToolbox) · Bagian II SRQ-29 · n=1.423 · snapshot Jul 2026.</div>
+
+      </section>
+      <section class="section" id="l2-out-ira">
+
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>⚕️ IRA — Penilaian Risiko Pribadi</h1><p class="lede"><strong>Individual Risk Assessment</strong>: memetakan perilaku berisiko HIV per individu — berbagi alat, pola kondom, jumlah pasangan — sebagai dasar rencana pengurangan risiko. Instrumen <strong>Lembar Penilaian Risiko Pribadi (KoBo)</strong>. Angka agregat, nol identitas.</p></div>
+
+        <div class="cards">
+          <div class="card"><div class="label">Total Assessment</div><div class="value">1.819</div><div class="desc">penilaian risiko individual</div></div>
+          <div class="card" style="background:linear-gradient(135deg,var(--clay) 0%,var(--clay-deep) 100%);color:#fff;border-color:var(--clay-deep);"><div class="label" style="color:#fff;opacity:.85;">Berbagi Jarum/Alat Hisap</div><div class="value" style="color:#fff;">76,5%</div><div class="desc" style="color:#fff;opacity:.9;">1.392 pinjam · 1.471 pinjamkan</div></div>
+          <div class="card" style="background:var(--clay-tint);border-color:var(--clay);"><div class="label">Kondom "Selalu" Pakai</div><div class="value" style="color:var(--clay-deep);">2,9%</div><div class="desc">hanya 51 dari 1.776 — celah pencegahan</div></div>
+          <div class="card"><div class="label">Seks ≥2 Pasangan/bln</div><div class="value">56,9%</div><div class="desc">1.000 klien</div></div>
+        </div>
+
+        <h2 class="section-h2" style="margin-top:30px;">🛡️ Pola Pemakaian Kondom</h2>
+        <p style="font-size:13px;color:var(--slate);line-height:1.6;margin:4px 0 14px;">Hanya <strong>2,9%</strong> yang konsisten pakai kondom — mayoritas "tidak pernah". Ini indikator prioritas untuk program distribusi kondom & KIE.</p>
+        <div class="xtab"><div class="xrow"><div class="xlab">Selalu pakai</div><div class="xtrack"><div class="xfill" style="width:2.9%;background:#5b7553;"></div></div><div class="xval">51 · 2,9%</div></div><div class="xrow"><div class="xlab">Kadang-kadang</div><div class="xtrack"><div class="xfill" style="width:37.7%;background:#d4a017;">38%</div></div><div class="xval">669 · 37,7%</div></div><div class="xrow"><div class="xlab">Tidak pernah</div><div class="xtrack"><div class="xfill" style="width:59.5%;background:#a83244;">59%</div></div><div class="xval">1.056 · 59,5%</div></div></div>
+
+        <h2 class="section-h2" style="margin-top:30px;">🔗 Indikator Silang — Kondom "Tidak Pernah" × Jumlah Pasangan</h2>
+        <p style="font-size:13px;color:var(--slate);line-height:1.6;margin:4px 0 14px;">Menariknya, kelompok <strong>≥2 pasangan</strong> justru sedikit lebih sering pakai kondom dibanding yang 1 pasangan — kemungkinan persepsi "pasangan tetap = aman". Keduanya tetap tinggi & butuh intervensi.</p>
+        <div class="xtab"><div class="xrow"><div class="xlab">≥2 pasangan/bln</div><div class="xtrack"><div class="xfill" style="width:49.9%;background:#c96b2f;">50%</div></div><div class="xval">49,9% · n=1.000</div></div><div class="xrow"><div class="xlab">1 pasangan/bln</div><div class="xtrack"><div class="xfill" style="width:72.0%;background:#a83244;">72%</div></div><div class="xval">72,0% · n=744</div></div></div>
+
+        <h2 class="section-h2" style="margin-top:30px;">💞 Jenis Pasangan Seks (1 bln terakhir)</h2>
+        <div class="xtab"><div class="xrow"><div class="xlab">Pacar</div><div class="xtrack"><div class="xfill" style="width:100.0%;background:#5b7553;">44%</div></div><div class="xval">790</div></div><div class="xrow"><div class="xlab">Suami/Isteri</div><div class="xtrack"><div class="xfill" style="width:50.0%;background:#5b7553;">22%</div></div><div class="xval">395</div></div><div class="xrow"><div class="xlab">PSP</div><div class="xtrack"><div class="xfill" style="width:36.3%;background:#5b7553;">16%</div></div><div class="xval">287</div></div><div class="xrow"><div class="xlab">WPS</div><div class="xtrack"><div class="xfill" style="width:23.2%;background:#5b7553;">10%</div></div><div class="xval">183</div></div><div class="xrow"><div class="xlab">Lainnya</div><div class="xtrack"><div class="xfill" style="width:18.7%;background:#5b7553;">8%</div></div><div class="xval">148</div></div></div>
+
+        <h2 class="section-h2" style="margin-top:30px;">🧾 Rincian Indikator Risiko (data tabel · bisa di-export)</h2>
+        <p style="font-size:13px;color:var(--slate);line-height:1.6;margin:4px 0 10px;"><strong>Klik judul kolom</strong> buat sortir; ketik buat cari; <strong>Export CSV</strong> ikut hasil.</p>
+        <div class="saha-tblbox">
+  <div class="saha-tbar">
+    <input class="saha-tsearch" placeholder="🔍 Cari indikator...">
+    <button class="lh-btn-sm" onclick="SAHA_EXPORT_TABLE(this)">📥 Export CSV</button>
+    <span class="saha-thint">↕ klik judul kolom buat sortir</span>
+  </div>
+  <div class="lh-table-wrap">
+    <table class="lh-table saha-sortable"><thead><tr><th>Indikator Risiko</th><th>Kategori</th><th>Jumlah 'Ya'</th><th>% dari terisi</th></tr></thead>
+    <tbody>
+<tr><td style="font-weight:600;">Pinjamkan jarum / alat hisap ke orang</td><td>Berbagi alat</td><td>1.471</td><td>80,9%</td></tr>
+<tr><td style="font-weight:600;">Pinjam jarum / alat hisap dari orang</td><td>Berbagi alat</td><td>1.392</td><td>76,5%</td></tr>
+<tr><td style="font-weight:600;">Seks dengan >1 pasangan (1 bln)</td><td>Seksual</td><td>1.000</td><td>56,9%</td></tr>
+<tr><td style="font-weight:600;">Kondom: tidak pernah pakai</td><td>Seksual</td><td>1.056</td><td>59,5%</td></tr>
+<tr><td style="font-weight:600;">Kondom: selalu pakai</td><td>Seksual</td><td>51</td><td>2,9%</td></tr>
+<tr><td style="font-weight:600;">Hisap botol poppers bergantian</td><td>Berbagi alat</td><td>51</td><td>2,8%</td></tr>
+    </tbody></table>
+  </div>
+</div>
+<p style="font-size:12px;color:var(--slate);margin:8px 2px 0;">Perilaku berisiko individual dalam 1 bulan terakhir. Persentase dihitung dari baris yang mengisi item tsb.</p>
+        <div class="placeholder-banner archival" style="margin-top:20px;"><span class="icon">🔐</span><div><strong>Data mentah level-klien (bernama) tidak ditanam di halaman ini.</strong> Yang tampil = agregat & indikator silang de-identifikasi. Baris per-klien (nama, tgl lahir, hasil) tetap di sumber terlindungi (KoBo / Master DB). Untuk telusur per-nama pakai <strong>Client Finder</strong> di menu Clients Database (butuh login).</div></div>
+        <div class="source-attr" style="margin-top:22px;">📄 <strong>Sumber:</strong> Lembar Penilaian Risiko Pribadi IRA (KoboToolbox) · n=1.819 · Malang–Surabaya–Sidoarjo–Jakarta · snapshot Jul 2026.</div>
+
+      </section>
+      <section class="section" id="l2-out-konseling">
+
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>💬 Konseling — Output Layanan Konselor</h1><p class="lede">Rekap <strong>sesi konseling</strong> oleh konselor komunitas: volume layanan, cakupan klien, dan tindak lanjut. Instrumen <strong>Laporan Konseling oleh Konselor (KoBo)</strong>, 2024-04-28 – 2026-06-30. Isi konseling bersifat rahasia — hanya agregat ditampilkan.</p></div>
+
+        <div class="cards">
+          <div class="card" style="background:linear-gradient(135deg,var(--clay) 0%,var(--clay-deep) 100%);color:#fff;border-color:var(--clay-deep);"><div class="label" style="color:#fff;opacity:.85;">Total Sesi Konseling</div><div class="value" style="color:#fff;">461</div><div class="desc" style="color:#fff;opacity:.9;">sesi tercatat</div></div>
+          <div class="card"><div class="label">Klien Unik Dikonseling</div><div class="value">427</div><div class="desc">≈ 1,1 sesi per klien</div></div>
+          <div class="card" style="background:var(--sage-light);border-color:var(--sage);"><div class="label">Dijadwalkan Sesi Lanjutan</div><div class="value" style="color:var(--sage-deep);">88,5%</div><div class="desc">408 sesi punya tanggal lanjutan</div></div>
+          <div class="card"><div class="label">Konselor Aktif</div><div class="value">10</div><div class="desc">petugas memberi konseling</div></div>
+        </div>
+
+        <h2 class="section-h2" style="margin-top:30px;">📈 Tren Sesi Konseling per Bulan</h2>
+        <p style="font-size:13px;color:var(--slate);line-height:1.6;margin:4px 0 14px;">Volume meningkat tajam di 2026, memuncak <strong>Jun 2026 (334 sesi)</strong> seiring penguatan layanan konseling. Bulan tanpa batang = tidak ada pencatatan.</p>
+        <div class="mchart"><div class="mbar" title="2024-04: 1 sesi"><div class="mbar-fill" style="height:3%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2024-06: 1 sesi"><div class="mbar-fill" style="height:3%"></div><div class="mbar-lbl">06</div></div><div class="mbar" title="2024-09: 2 sesi"><div class="mbar-fill" style="height:3%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2024-10: 15 sesi"><div class="mbar-fill" style="height:4%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2025-08: 4 sesi"><div class="mbar-fill" style="height:3%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2025-09: 3 sesi"><div class="mbar-fill" style="height:3%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2025-10: 11 sesi"><div class="mbar-fill" style="height:3%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2025-12: 14 sesi"><div class="mbar-fill" style="height:4%"></div><div class="mbar-lbl">12</div></div><div class="mbar" title="2026-01: 18 sesi"><div class="mbar-fill" style="height:5%"></div><div class="mbar-lbl">01</div></div><div class="mbar" title="2026-02: 5 sesi"><div class="mbar-fill" style="height:3%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2026-03: 5 sesi"><div class="mbar-fill" style="height:3%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2026-04: 34 sesi"><div class="mbar-fill" style="height:10%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2026-05: 14 sesi"><div class="mbar-fill" style="height:4%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2026-06: 334 sesi"><div class="mbar-fill" style="height:100%"></div><div class="mbar-lbl">06</div></div></div>
+
+        <h2 class="section-h2" style="margin-top:30px;">👷 Produktivitas per Konselor (data tabel · bisa di-export)</h2>
+        <p style="font-size:13px;color:var(--slate);line-height:1.6;margin:4px 0 10px;"><strong>Klik judul kolom</strong> buat sortir; ketik buat cari konselor; <strong>Export CSV</strong> ikut hasil.</p>
+        <div class="saha-tblbox">
+  <div class="saha-tbar">
+    <input class="saha-tsearch" placeholder="🔍 Cari konselor...">
+    <button class="lh-btn-sm" onclick="SAHA_EXPORT_TABLE(this)">📥 Export CSV</button>
+    <span class="saha-thint">↕ klik judul kolom buat sortir</span>
+  </div>
+  <div class="lh-table-wrap">
+    <table class="lh-table saha-sortable"><thead><tr><th>Konselor</th><th>Jumlah Sesi</th></tr></thead>
+    <tbody>
+<tr><td style="font-weight:600;">Nuri</td><td>105</td></tr>
+<tr><td style="font-weight:600;">Dodik</td><td>74</td></tr>
+<tr><td style="font-weight:600;">David</td><td>70</td></tr>
+<tr><td style="font-weight:600;">Sotong H</td><td>68</td></tr>
+<tr><td style="font-weight:600;">Hanim</td><td>45</td></tr>
+<tr><td style="font-weight:600;">Ibi</td><td>39</td></tr>
+<tr><td style="font-weight:600;">Dedi</td><td>32</td></tr>
+<tr><td style="font-weight:600;">Karyanto</td><td>16</td></tr>
+    </tbody></table>
+  </div>
+</div>
+<p style="font-size:12px;color:var(--slate);margin:8px 2px 0;">Data staf (bukan identitas klien). Isi/hasil konseling bersifat sangat sensitif → tidak ditampilkan.</p>
+        <div class="placeholder-banner archival" style="margin-top:20px;"><span class="icon">🔐</span><div><strong>Data mentah level-klien (bernama) tidak ditanam di halaman ini.</strong> Yang tampil = agregat & indikator silang de-identifikasi. Baris per-klien (nama, tgl lahir, hasil) tetap di sumber terlindungi (KoBo / Master DB). Deskripsi kondisi, hasil, & rencana tindak lanjut klien TIDAK ditanam — sangat sensitif. Untuk telusur per-nama pakai <strong>Client Finder</strong> di menu Clients Database (butuh login).</div></div>
+        <div class="source-attr" style="margin-top:22px;">📄 <strong>Sumber:</strong> Laporan Konseling oleh Konselor (KoboToolbox) · 461 sesi · 427 klien · 2024-04-28–2026-06-30 · snapshot Jul 2026.</div>
+
+      </section>
+      <section class="section" id="l2-out-gra">
+
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>👥 GRA — Penilaian Risiko Kelompok</h1><p class="lede"><strong>Group Risk Assessment</strong>: sesi penilaian & pengurangan risiko berbasis kelompok/komunitas — menjangkau banyak orang sekaligus lewat diskusi terfasilitasi. Instrumen <strong>Penilaian Risiko Kelompok (KoBo)</strong>. Angka agregat, nol identitas.</p></div>
+
+        <div class="cards">
+          <div class="card" style="background:linear-gradient(135deg,var(--clay) 0%,var(--clay-deep) 100%);color:#fff;border-color:var(--clay-deep);"><div class="label" style="color:#fff;opacity:.85;">Total Sesi Grup</div><div class="value" style="color:#fff;">804</div><div class="desc" style="color:#fff;opacity:.9;">penilaian risiko kelompok</div></div>
+          <div class="card"><div class="label">Total Peserta</div><div class="value">1.717</div><div class="desc">≈ 2,1 peserta per sesi</div></div>
+          <div class="card" style="background:var(--sage-light);border-color:var(--sage);"><div class="label">Peserta Laki-laki</div><div class="value" style="color:var(--sage-deep);">85,1%</div><div class="desc">1.462 LK · 249 PR · 6 TG</div></div>
+          <div class="card"><div class="label">Fasilitator Aktif</div><div class="value">15</div><div class="desc">PL/konselor memimpin sesi</div></div>
+        </div>
+
+        <h2 class="section-h2" style="margin-top:30px;">📈 Tren Sesi Grup per Bulan</h2>
+        <p style="font-size:13px;color:var(--slate);line-height:1.6;margin:4px 0 14px;">Aktivitas kelompok konsisten sepanjang 2024–2026, memuncak <strong>Jun 2026 (237 sesi)</strong>. Bulan tanpa batang = tidak ada pencatatan.</p>
+        <div class="mchart"><div class="mbar" title="2024-04: 1 sesi"><div class="mbar-fill" style="height:3%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2024-05: 6 sesi"><div class="mbar-fill" style="height:3%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2024-09: 21 sesi"><div class="mbar-fill" style="height:9%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2024-10: 25 sesi"><div class="mbar-fill" style="height:11%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2024-11: 14 sesi"><div class="mbar-fill" style="height:6%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2024-12: 21 sesi"><div class="mbar-fill" style="height:9%"></div><div class="mbar-lbl">12</div></div><div class="mbar" title="2025-01: 54 sesi"><div class="mbar-fill" style="height:23%"></div><div class="mbar-lbl">01</div></div><div class="mbar" title="2025-07: 1 sesi"><div class="mbar-fill" style="height:3%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2025-08: 18 sesi"><div class="mbar-fill" style="height:8%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2025-09: 31 sesi"><div class="mbar-fill" style="height:13%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2025-10: 55 sesi"><div class="mbar-fill" style="height:23%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2025-11: 24 sesi"><div class="mbar-fill" style="height:10%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2025-12: 59 sesi"><div class="mbar-fill" style="height:25%"></div><div class="mbar-lbl">12</div></div><div class="mbar" title="2026-01: 50 sesi"><div class="mbar-fill" style="height:21%"></div><div class="mbar-lbl">01</div></div><div class="mbar" title="2026-02: 55 sesi"><div class="mbar-fill" style="height:23%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2026-03: 60 sesi"><div class="mbar-fill" style="height:25%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2026-04: 39 sesi"><div class="mbar-fill" style="height:16%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2026-05: 33 sesi"><div class="mbar-fill" style="height:14%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2026-06: 237 sesi"><div class="mbar-fill" style="height:100%"></div><div class="mbar-lbl">06</div></div></div>
+
+        <h2 class="section-h2" style="margin-top:30px;">🧑‍🤝‍🧑 Komposisi Gender Peserta</h2>
+        <div class="xtab"><div class="xrow"><div class="xlab">Laki-laki</div><div class="xtrack"><div class="xfill" style="width:85.1%;background:#5b7553;">85%</div></div><div class="xval">1.462 · 85,1%</div></div><div class="xrow"><div class="xlab">Perempuan</div><div class="xtrack"><div class="xfill" style="width:14.5%;background:#d4a017;">15%</div></div><div class="xval">249 · 14,5%</div></div><div class="xrow"><div class="xlab">Transgender</div><div class="xtrack"><div class="xfill" style="width:2.5%;background:#c96b2f;"></div></div><div class="xval">6 · 0,3%</div></div></div>
+
+        <h2 class="section-h2" style="margin-top:30px;">🎯 Sesi per Kelompok Sasaran (data tabel · bisa di-export)</h2>
+        <p style="font-size:13px;color:var(--slate);line-height:1.6;margin:4px 0 10px;"><strong>Klik judul kolom</strong> buat sortir; ketik buat cari; <strong>Export CSV</strong> ikut hasil.</p>
+        <div class="saha-tblbox">
+  <div class="saha-tbar">
+    <input class="saha-tsearch" placeholder="🔍 Cari kelompok...">
+    <button class="lh-btn-sm" onclick="SAHA_EXPORT_TABLE(this)">📥 Export CSV</button>
+    <span class="saha-thint">↕ klik judul kolom buat sortir</span>
+  </div>
+  <div class="lh-table-wrap">
+    <table class="lh-table saha-sortable"><thead><tr><th>Kelompok Sasaran</th><th>Jumlah Sesi Grup</th><th>% dari total</th></tr></thead>
+    <tbody>
+<tr><td style="font-weight:600;">Risti / Umum</td><td>647</td><td>80,5%</td></tr>
+<tr><td style="font-weight:600;">PSP</td><td>92</td><td>11,4%</td></tr>
+<tr><td style="font-weight:600;">LSL</td><td>44</td><td>5,5%</td></tr>
+<tr><td style="font-weight:600;">WPS</td><td>18</td><td>2,2%</td></tr>
+<tr><td style="font-weight:600;">Transgender</td><td>3</td><td>0,4%</td></tr>
+    </tbody></table>
+  </div>
+</div>
+<p style="font-size:12px;color:var(--slate);margin:8px 2px 0;">Sesi penilaian risiko tingkat kelompok. Peserta dicatat agregat (jumlah + gender), tanpa identitas individual.</p>
+        <div class="placeholder-banner archival" style="margin-top:20px;"><span class="icon">🔐</span><div><strong>Data mentah level-klien (bernama) tidak ditanam di halaman ini.</strong> Yang tampil = agregat & indikator silang de-identifikasi. Baris per-klien (nama, tgl lahir, hasil) tetap di sumber terlindungi (KoBo / Master DB). Nama peserta grup dicatat di KoBo untuk verifikasi, TIDAK ditarik ke dashboard. Untuk telusur per-nama pakai <strong>Client Finder</strong> di menu Clients Database (butuh login).</div></div>
+        <div class="source-attr" style="margin-top:22px;">📄 <strong>Sumber:</strong> Penilaian Risiko Kelompok GRA (KoboToolbox) · 804 sesi · 1.717 peserta · snapshot Jul 2026.</div>
+
       </section>
 
       <!-- ====== 2B · M&E DASHBOARD (placeholder) ====== -->
