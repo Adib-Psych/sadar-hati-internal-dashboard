@@ -6295,8 +6295,27 @@
 
       <!-- ====== 2B · CLIENTS DATABASE (placeholder) ====== -->
       <section class="section" id="l2-clients">
-        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Database Klien (RAHASIA · M&amp;E only)</div><h1>👥 Clients Database</h1><p class="lede">Agregat dari <strong>Master DB Klien Chemsex YSH</strong> — <strong>3.155 record</strong>, periode <strong>2024–2026</strong>. Halaman ini menampilkan <strong>ringkasan tanpa identitas</strong>: roster bernama disimpan terpisah &amp; terlindungi dan <strong>tidak pernah dimuat ke halaman ini</strong>. Pencarian klien bernama akan ditarik <em>live</em> dari Firestore untuk staf terautentikasi (tahap berikutnya).</p></div>
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Database Klien (RAHASIA · M&amp;E only)</div><h1>👥 Clients Database</h1><p class="lede">Agregat dari <strong>Master DB Klien Chemsex YSH</strong> — <strong>3.155 record</strong>, periode <strong>2024–2026</strong>. Pencarian klien bernama ditarik <em>live</em> dari Firestore (hanya staf login); agregat di bawah tanpa identitas.</p></div>
 
+        <h2 class="section-h2" style="margin-top:4px;">🔎 Cari Klien <span style="font-size:12px;font-weight:400;color:var(--slate);">· live dari Firestore · staf login</span></h2>
+        <div id="cf-locked" class="placeholder-banner archival"><span class="icon">🔒</span><div><strong>Login staf dulu</strong> untuk mengaktifkan pencarian klien bernama (buka menu 2B mana pun lalu login). Data ditarik <em>live</em>, tidak tersimpan di halaman ini.</div></div>
+        <div class="saha-tblbox" id="cf-panel" style="display:none;">
+          <div class="saha-tbar">
+            <input id="cf-q" class="saha-tsearch" placeholder="🔍 nama / julukan / ID KD / wilayah...">
+            <select id="cf-thn" class="lh-fin"><option value="">Semua tahun</option></select>
+            <select id="cf-bln" class="lh-fin"><option value="">Semua bulan</option></select>
+            <select id="cf-loc" class="lh-fin"><option value="">Semua wilayah</option></select>
+            <select id="cf-pl" class="lh-fin"><option value="">Semua PL</option></select>
+            <button class="lh-btn-sm" id="cf-export">📥 Export hasil</button>
+          </div>
+          <div style="font-size:13px;color:var(--navy);margin-bottom:10px;">Menampilkan <strong id="cf-count">0</strong> klien <span style="color:var(--slate);font-size:11.5px;">(diurutkan per PL)</span></div>
+          <div class="lh-table-wrap" style="max-height:520px;overflow:auto;">
+            <table class="lh-table" id="cf-table"><thead><tr><th>PL</th><th>Nama</th><th>Julukan</th><th>ID KD</th><th>JK</th><th>Usia</th><th>Wilayah</th><th>Th Aktif</th><th>Hasil HIV</th></tr></thead><tbody id="cf-tbody"></tbody></table>
+          </div>
+          <div style="font-size:11px;color:var(--slate);margin-top:8px;">🔐 Data ini muncul hanya di layar staf yang login &amp; tidak tersimpan di kode. Maks 1.000 baris ditampilkan; pakai filter buat mempersempit, atau Export buat semua hasil.</div>
+        </div>
+
+        <h2 class="section-h2" style="margin-top:30px;">📊 Ringkasan Agregat</h2>
         <div class="cards">
           <div class="card" style="background:linear-gradient(135deg,var(--clay) 0%,var(--clay-deep) 100%); color:#fff; border-color:var(--clay-deep);">
             <div class="label" style="color:#fff; opacity:.85;">Total Klien</div>
@@ -6600,6 +6619,63 @@ function updateBreadcrumb(item) {
     a.href=u; a.download='SadarHati_export.csv'; a.click(); URL.revokeObjectURL(u);
   };
 })();
+</script>
+<script type="module">
+/* Client Finder — live from Firestore, staf login only */
+import { getApp, getApps, initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+const cfg = { apiKey:"AIzaSyC7127G5fsZprEGfeiqLrRqevTg6Qs2fko", authDomain:"sadar-hati-hub.firebaseapp.com", projectId:"sadar-hati-hub", storageBucket:"sadar-hati-hub.firebasestorage.app", messagingSenderId:"576423718259", appId:"1:576423718259:web:76600bbdf4f06892b36906" };
+const app = getApps().length ? getApp() : initializeApp(cfg);
+const db = getFirestore(app), auth = getAuth(app);
+const $ = id => document.getElementById(id);
+let ALL = [], loaded = false;
+const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const MONTHS = {'01':'Januari','02':'Februari','03':'Maret','04':'April','05':'Mei','06':'Juni','07':'Juli','08':'Agustus','09':'September','10':'Oktober','11':'November','12':'Desember'};
+function opts(sel, vals, labelFn){ if(!sel) return; const cur=sel.value, first=sel.options[0].outerHTML; sel.innerHTML = first + vals.map(v=>'<option value="'+esc(v)+'">'+esc(labelFn?labelFn(v):v)+'</option>').join(''); sel.value=cur; }
+function fillFilters(){
+  const yr=[...new Set(ALL.map(x=>x._thn).filter(Boolean).flatMap(s=>String(s).split(/[;,\s]+/)).filter(Boolean))].sort().reverse();
+  opts($('cf-thn'), yr);
+  opts($('cf-bln'), [...new Set(ALL.map(x=>x._bln).filter(Boolean))].sort(), v=>MONTHS[v]||v);
+  opts($('cf-loc'), [...new Set(ALL.map(x=>x.Kab_Kota).filter(Boolean))].sort());
+  opts($('cf-pl'), [...new Set(ALL.map(x=>x.PL_Utama).filter(Boolean))].sort());
+}
+function filtered(){
+  const q=($('cf-q').value||'').trim().toLowerCase(), th=$('cf-thn').value, bl=$('cf-bln').value, lc=$('cf-loc').value, pl=$('cf-pl').value;
+  return ALL.filter(x=>{
+    if(q && String(x._search||'').indexOf(q)<0) return false;
+    if(th && String(x._thn||'').indexOf(th)<0) return false;
+    if(bl && x._bln!==bl) return false;
+    if(lc && x.Kab_Kota!==lc) return false;
+    if(pl && x.PL_Utama!==pl) return false;
+    return true;
+  }).sort((a,b)=> String(a.PL_Utama||'').localeCompare(String(b.PL_Utama||'')) || String(a.Nama_Lengkap||'').localeCompare(String(b.Nama_Lengkap||'')));
+}
+function render(){
+  const rows=filtered();
+  if($('cf-count')) $('cf-count').textContent=rows.length;
+  if($('cf-tbody')) $('cf-tbody').innerHTML = rows.slice(0,1000).map(x=>'<tr><td style="font-weight:600;">'+esc(x.PL_Utama)+'</td><td>'+esc(x.Nama_Lengkap)+'</td><td>'+esc(x.Nama_Panggilan)+'</td><td>'+esc(x.ID_KD)+'</td><td>'+esc(x.Jenis_Kelamin)+'</td><td>'+esc(x.Usia)+'</td><td>'+esc(x.Kab_Kota)+'</td><td>'+esc(x.Tahun_Aktif)+'</td><td>'+esc(x.Hasil_HIV)+'</td></tr>').join('');
+}
+async function load(){
+  try { const snap=await getDocs(collection(db,'clients')); ALL=[]; snap.forEach(d=>ALL.push(d.data())); loaded=true; fillFilters(); render(); }
+  catch(e){ const l=$('cf-locked'); if(l){ l.style.display='block'; l.innerHTML='<span class="icon">⚠️</span><div>Gagal memuat data klien: '+esc(e.code||e.message)+'. Cek rule Firestore (baca clients = login).</div>'; } }
+}
+onAuthStateChanged(auth, u=>{
+  if(!$('cf-panel')) return;
+  if(u){ if($('cf-locked'))$('cf-locked').style.display='none'; $('cf-panel').style.display='block'; if(!loaded) load(); }
+  else { if($('cf-locked'))$('cf-locked').style.display='block'; $('cf-panel').style.display='none'; }
+});
+['cf-q','cf-thn','cf-bln','cf-loc','cf-pl'].forEach(id=>{ const el=$(id); if(el){ el.addEventListener('input',render); el.addEventListener('change',render); } });
+const exp=$('cf-export');
+if(exp) exp.addEventListener('click',()=>{
+  const rows=filtered(); if(!rows.length){ alert('Tidak ada hasil untuk di-export.'); return; }
+  const H=['PL','Nama','Julukan','ID_KD','JK','Usia','Wilayah','Tahun_Aktif','Hasil_HIV','Kontak_Pertama','Kontak_Terakhir'];
+  const line=x=>[x.PL_Utama,x.Nama_Lengkap,x.Nama_Panggilan,x.ID_KD,x.Jenis_Kelamin,x.Usia,x.Kab_Kota,x.Tahun_Aktif,x.Hasil_HIV,x.Kontak_Pertama,x.Kontak_Terakhir].map(v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"').join(',');
+  const csv=[H.join(',')].concat(rows.map(line)).join('\n');
+  const b=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8;'}); const u=URL.createObjectURL(b);
+  const a=document.createElement('a'); a.href=u; a.download='ClientFinder_hasil.csv'; a.click(); URL.revokeObjectURL(u);
+});
+window.CF_MOCK = function(arr){ ALL=arr; loaded=true; fillFilters(); render(); if($('cf-locked'))$('cf-locked').style.display='none'; if($('cf-panel'))$('cf-panel').style.display='block'; };
 </script>
 </body>
 </html>
