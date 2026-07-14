@@ -6227,9 +6227,89 @@
 
       <!-- ====== 2B · CLIENTS DATABASE (placeholder) ====== -->
       <section class="section" id="l2-clients">
-        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Database Klien (RAHASIA)</div><h1>👥 Clients Database</h1><p class="lede">Master data klien dampingan: nama/kode, status baru–lama, lokasi, dan riwayat layanan. Data paling sensitif — hanya M&amp;E/staf berwenang. Roster bernama disimpan terpisah &amp; terlindungi; dashboard menampilkan agregat + pencarian terbatas.</p></div>
-        <div class="placeholder-banner archival"><span class="icon">🔐</span><div><strong>Data sensitif — akses M&amp;E only.</strong> Master DB berisi <strong>3.155 klien</strong> (dari data Chemsex YSH) sudah diekstrak &amp; tersimpan aman (Google Drive "Database Sadar Hati" + lokal M&amp;E). Integrasi ke dashboard dibangun bertahap dengan kontrol akses ketat — nama klien tidak akan tampil di zona publik.</div></div>
-        <div class="ph-wrap"><div class="big">👥</div><h3>Clients Database — Coming Soon</h3><p>Terhubung ke Master DB Klien (3.155 record: baru/lama · lokasi · layanan). Pencarian &amp; profil klien untuk staf berwenang.</p></div>
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Database Klien (RAHASIA · M&amp;E only)</div><h1>👥 Clients Database</h1><p class="lede">Agregat dari <strong>Master DB Klien Chemsex YSH</strong> — <strong>3.155 record</strong>, periode <strong>2024–2026</strong>. Halaman ini menampilkan <strong>ringkasan tanpa identitas</strong>: roster bernama disimpan terpisah &amp; terlindungi dan <strong>tidak pernah dimuat ke halaman ini</strong>. Pencarian klien bernama akan ditarik <em>live</em> dari Firestore untuk staf terautentikasi (tahap berikutnya).</p></div>
+
+        <div class="cards">
+          <div class="card" style="background:linear-gradient(135deg,var(--clay) 0%,var(--clay-deep) 100%); color:#fff; border-color:var(--clay-deep);">
+            <div class="label" style="color:#fff; opacity:.85;">Total Klien</div>
+            <div class="value" style="color:#fff;">3.155</div>
+            <div class="desc" style="color:#fff; opacity:.9;">record unik · Chemsex YSH 2024–2026</div>
+          </div>
+          <div class="card">
+            <div class="label">Klien Baru 2026</div>
+            <div class="value">800</div>
+            <div class="desc">kontak pertama di 2026 · dari 1.460 aktif tahun ini</div>
+          </div>
+          <div class="card">
+            <div class="label">Sebaran Wilayah</div>
+            <div class="value">5</div>
+            <div class="desc">Malang · Sidoarjo · Jakarta Barat · Surabaya</div>
+          </div>
+          <div class="card" style="background:var(--sage-light); border-color:var(--sage);">
+            <div class="label">Tes HIV (Program)</div>
+            <div class="value" style="color:var(--sage-deep);">1.889</div>
+            <div class="desc">60% dari total klien</div>
+          </div>
+        </div>
+
+        <h2 class="section-h2" style="margin-top:30px;">📈 Klien Baru vs Lama</h2>
+        <p style="font-size:13px; color:var(--slate); line-height:1.6; margin:4px 0 14px 0;">Dari <strong>1.460 klien aktif di 2026</strong>: <strong>800 baru</strong> (kontak pertama tahun ini) dan <strong>660 lama</strong> (dampingan berlanjut dari tahun sebelumnya). Tren akuisisi klien baru per tahun di bawah — 2026 masih berjalan.</p>
+        <div class="budget-row"><div class="item-name">2024 · klien baru</div><div class="bar-track"><div class="bar-fill" style="width:99%; background:#a83244;"></div></div><div class="bar-percent">1.165</div></div>
+        <div class="budget-row"><div class="item-name">2025 · klien baru</div><div class="bar-track"><div class="bar-fill" style="width:100%; background:#a83244;"></div></div><div class="bar-percent">1.180</div></div>
+        <div class="budget-row"><div class="item-name">2026 · klien baru <span style="color:var(--slate); font-weight:400;">(berjalan)</span></div><div class="bar-track"><div class="bar-fill" style="width:68%; background:#c6693f;"></div></div><div class="bar-percent">800</div></div>
+
+        <h2 class="section-h2" style="margin-top:30px;">🗺️ Sebaran per Wilayah</h2>
+        <div class="budget-row"><div class="item-name">Kota Malang</div><div class="bar-track"><div class="bar-fill" style="width:100%; background:#a83244;"></div></div><div class="bar-percent">1.530</div></div>
+        <div class="budget-row"><div class="item-name">Kab. Sidoarjo</div><div class="bar-track"><div class="bar-fill" style="width:36%; background:#a83244;"></div></div><div class="bar-percent">554</div></div>
+        <div class="budget-row"><div class="item-name">Jakarta Barat</div><div class="bar-track"><div class="bar-fill" style="width:30%; background:#a83244;"></div></div><div class="bar-percent">457</div></div>
+        <div class="budget-row"><div class="item-name">Surabaya</div><div class="bar-track"><div class="bar-fill" style="width:25%; background:#a83244;"></div></div><div class="bar-percent">387</div></div>
+        <div class="budget-row"><div class="item-name">Kab. Malang</div><div class="bar-track"><div class="bar-fill" style="width:15%; background:#a83244;"></div></div><div class="bar-percent">227</div></div>
+
+        <h2 class="section-h2" style="margin-top:30px;">🧑‍🤝‍🧑 Demografi &amp; Populasi Kunci</h2>
+        <div class="cards">
+          <div class="card"><div class="label">Laki-laki</div><div class="value">2.436</div><div class="desc">77% dari total</div></div>
+          <div class="card"><div class="label">Perempuan</div><div class="value">702</div><div class="desc">22%</div></div>
+          <div class="card"><div class="label">Transgender</div><div class="value">17</div><div class="desc">0,5% · komunitas TG</div></div>
+          <div class="card" style="background:var(--gold-tint); border-color:#d4a017;"><div class="label">Populasi Kunci</div><div class="value" style="color:#8a6b0f;">779+</div><div class="desc">PSP 519 · LSL 260 · TG 21</div></div>
+        </div>
+
+        <h2 class="section-h2" style="margin-top:30px;">🩺 Cakupan Layanan</h2>
+        <p style="font-size:13px; color:var(--slate); line-height:1.6; margin:4px 0 14px 0;">Proporsi klien yang mengakses tiap layanan (dari 3.155 total). Menunjukkan model layanan terintegrasi — tes, IMS, keswa, hingga PrEP/ARV.</p>
+        <div class="budget-row"><div class="item-name">Tes HIV</div><div class="bar-track"><div class="bar-fill" style="width:60%; background:#5b7553;"></div></div><div class="bar-percent">1.889</div></div>
+        <div class="budget-row"><div class="item-name">Akses VCT</div><div class="bar-track"><div class="bar-fill" style="width:57%; background:#5b7553;"></div></div><div class="bar-percent">1.783</div></div>
+        <div class="budget-row"><div class="item-name">Screening IMS</div><div class="bar-track"><div class="bar-fill" style="width:53%; background:#5b7553;"></div></div><div class="bar-percent">1.675</div></div>
+        <div class="budget-row"><div class="item-name">Asesmen Risiko (IRA)</div><div class="bar-track"><div class="bar-fill" style="width:41%; background:#5b7553;"></div></div><div class="bar-percent">1.284</div></div>
+        <div class="budget-row"><div class="item-name">Kesehatan Mental</div><div class="bar-track"><div class="bar-fill" style="width:32%; background:#5b7553;"></div></div><div class="bar-percent">1.023</div></div>
+        <div class="budget-row"><div class="item-name">Dukungan Keswa</div><div class="bar-track"><div class="bar-fill" style="width:26%; background:#5b7553;"></div></div><div class="bar-percent">824</div></div>
+        <div class="budget-row"><div class="item-name">PrEP</div><div class="bar-track"><div class="bar-fill" style="width:9%; background:#6e8f6a;"></div></div><div class="bar-percent">292</div></div>
+        <div class="budget-row"><div class="item-name">ARV</div><div class="bar-track"><div class="bar-fill" style="width:4%; background:#6e8f6a;"></div></div><div class="bar-percent">110</div></div>
+
+        <h2 class="section-h2" style="margin-top:30px;">🧬 Kaskade HIV · Agregat</h2>
+        <div class="hero-stat sage" style="margin-top:8px;">
+          <div>
+            <div class="big-label">Tertaut ARV (dari reaktif)</div>
+            <div class="big-num" style="font-size:64px;">61%</div>
+          </div>
+          <div class="side">
+            <h3>Tes → Reaktif → ARV</h3>
+            <p>Dari <strong>1.889 klien dites HIV</strong>, <strong>181 reaktif</strong>, dan <strong>110 tercatat mengakses ARV</strong> — linkage <strong>±61%</strong>. Sisanya <strong>±71 klien reaktif</strong> belum tercatat memulai ARV: bisa jadi lag pencatatan, rujukan ke layanan lain, atau perlu <strong>follow-up nyata</strong>.</p>
+            <div class="citation">⚠️ Angka agregat (tanpa identitas). Daftar bernama untuk follow-up ada di roster terlindungi — akses M&amp;E.</div>
+          </div>
+        </div>
+
+        <h2 class="section-h2" style="margin-top:30px;">🧹 Kelengkapan Data — Perlu Ditindaklanjuti</h2>
+        <p style="font-size:13px; color:var(--slate); line-height:1.6; margin:4px 0 14px 0;">Hasil cek Master DB. Ini gap yang perlu dibersihkan/dilengkapi supaya angka makin bisa dipertanggungjawabkan (bagian dari agenda akuntabilitas data).</p>
+        <div style="background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden;">
+          <div style="display:flex; gap:12px; padding:11px 16px; border-bottom:1px solid var(--slate-lighter); align-items:flex-start;"><span style="font-size:16px;">🎂</span><div style="font-size:13px;"><strong>Usia:</strong> 42 record nilai tidak valid (mis. 0 atau &gt;90; ada yang 338). Perlu dibersihkan.</div></div>
+          <div style="display:flex; gap:12px; padding:11px 16px; border-bottom:1px solid var(--slate-lighter); align-items:flex-start;"><span style="font-size:16px;">🏷️</span><div style="font-size:13px;"><strong>Tipe Kelompok:</strong> 603 record kosong (19%) + penulisan tidak konsisten (“Risti / Umum” vs “Risti/Umum”). Perlu distandarkan.</div></div>
+          <div style="display:flex; gap:12px; padding:11px 16px; border-bottom:1px solid var(--slate-lighter); align-items:flex-start;"><span style="font-size:16px;">🧪</span><div style="font-size:13px;"><strong>Hasil HIV:</strong> 768 record “tidak diketahui” (24%). Perlu update dari catatan tes.</div></div>
+          <div style="display:flex; gap:12px; padding:11px 16px; align-items:flex-start;"><span style="font-size:16px;">💉</span><div style="font-size:13px;"><strong>Akses LASS (3) &amp; Rehab (0):</strong> nyaris kosong — kemungkinan belum tercatat, bukan berarti nol layanan. Perlu dikonfirmasi.</div></div>
+        </div>
+
+        <div class="placeholder-banner archival" style="margin-top:20px;"><span class="icon">🔐</span><div><strong>Roster bernama = RAHASIA, disimpan terpisah.</strong> File Master DB (3.155 klien, dengan nama &amp; status HIV) ada di Google Drive “Database Sadar Hati” + lokal M&amp;E — <strong>tidak</strong> ditanam di halaman ini karena gerbang login bersifat sisi-klien. Pencarian &amp; profil klien bernama akan dibangun via <strong>Firestore</strong> (ditarik live setelah login, tidak tersimpan di kode). Edit data hanya oleh tim M&amp;E.</div></div>
+
+        <div class="source-attr" style="margin-top:24px;">📄 <strong>Sumber:</strong> Master_DB_Klien_Chemsex_YSH_v1.xlsx — ekstraksi data Chemsex YSH (REDCap + form lapangan), periode <strong>2024–2026</strong>. Seluruh angka di halaman ini bersifat <strong>agregat, nol identitas</strong>. Terakhir diperbarui: Jul 2026.</div>
+
       </section>
 
     </div>
