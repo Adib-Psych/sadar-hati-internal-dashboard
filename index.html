@@ -337,6 +337,14 @@
   .mbar { flex:1; min-width:15px; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; }
   .mbar-fill { width:70%; background:linear-gradient(180deg,#c6693f,#a83244); border-radius:3px 3px 0 0; min-height:3px; }
   .mbar-lbl { font-size:8.5px; color:var(--slate); margin-top:4px; height:12px; }
+  .saha-tbar { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:10px; }
+  .saha-tsearch { padding:8px 12px; border:1.5px solid var(--border); border-radius:8px; font-size:12.5px; font-family:inherit; width:230px; max-width:100%; }
+  .saha-tsearch:focus { outline:none; border-color:var(--clay); }
+  .saha-thint { font-size:11px; color:var(--slate); }
+  table.saha-sortable th { cursor:pointer; user-select:none; white-space:nowrap; }
+  table.saha-sortable th:hover { background:var(--clay); color:#fff; }
+  table.saha-sortable th[data-sort=up]::after { content:' \25B2'; font-size:9px; }
+  table.saha-sortable th[data-sort=down]::after { content:' \25BC'; font-size:9px; }
   .bar-percent {
     font-weight: 700; min-width: 50px;
     text-align: right; color: var(--sage-deep);
@@ -5276,11 +5284,16 @@
         <div class="mchart"><div class="mbar" title="2024-02: 63 kontak"><div class="mbar-fill" style="height:10%"></div><div class="mbar-lbl">02</div></div><div class="mbar" title="2024-03: 291 kontak"><div class="mbar-fill" style="height:47%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2024-04: 224 kontak"><div class="mbar-fill" style="height:36%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2024-05: 375 kontak"><div class="mbar-fill" style="height:61%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2024-06: 347 kontak"><div class="mbar-fill" style="height:56%"></div><div class="mbar-lbl">06</div></div><div class="mbar" title="2024-07: 349 kontak"><div class="mbar-fill" style="height:57%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2024-08: 367 kontak"><div class="mbar-fill" style="height:60%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2024-09: 339 kontak"><div class="mbar-fill" style="height:55%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2024-10: 376 kontak"><div class="mbar-fill" style="height:61%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2024-11: 297 kontak"><div class="mbar-fill" style="height:48%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2024-12: 297 kontak"><div class="mbar-fill" style="height:48%"></div><div class="mbar-lbl">12</div></div><div class="mbar" title="2025-01: 248 kontak"><div class="mbar-fill" style="height:40%"></div><div class="mbar-lbl">01</div></div><div class="mbar" title="2025-02: 1 kontak"><div class="mbar-fill" style="height:4%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2025-07: 328 kontak"><div class="mbar-fill" style="height:53%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2025-08: 556 kontak"><div class="mbar-fill" style="height:90%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2025-09: 433 kontak"><div class="mbar-fill" style="height:70%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2025-10: 577 kontak"><div class="mbar-fill" style="height:94%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2025-11: 414 kontak"><div class="mbar-fill" style="height:67%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2025-12: 516 kontak"><div class="mbar-fill" style="height:84%"></div><div class="mbar-lbl">12</div></div><div class="mbar" title="2026-01: 564 kontak"><div class="mbar-fill" style="height:92%"></div><div class="mbar-lbl">01</div></div><div class="mbar" title="2026-02: 546 kontak"><div class="mbar-fill" style="height:89%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2026-03: 417 kontak"><div class="mbar-fill" style="height:68%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2026-04: 553 kontak"><div class="mbar-fill" style="height:90%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2026-05: 519 kontak"><div class="mbar-fill" style="height:84%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2026-06: 616 kontak"><div class="mbar-fill" style="height:100%"></div><div class="mbar-lbl">06</div></div></div>
 
         <h2 class="section-h2" style="margin-top:30px;">👷 Produktivitas per Petugas Lapangan</h2>
-        <p style="font-size:13px; color:var(--slate); line-height:1.6; margin:4px 0 10px 0;">Tabel bisa di-<strong>export CSV</strong>. Ini data staf (bukan identitas klien).</p>
-        <button class="lh-btn-sm" onclick="SAHA_EXPORT_CHEMSEX()" style="margin-bottom:12px;">📥 Export CSV</button>
-        <div class="lh-table-wrap">
-          <table class="lh-table"><thead><tr><th>Petugas Lapangan</th><th>Kontak</th><th>Baru</th><th>Lanjutan</th><th>Kondom</th><th>KIE</th></tr></thead>
-          <tbody>
+        <p style="font-size:13px; color:var(--slate); line-height:1.6; margin:4px 0 10px 0;">Data staf (bukan identitas klien). <strong>Klik judul kolom</strong> buat sortir (mis. capaian terbanyak, alfabet); ketik di kotak cari buat filter; <strong>Export CSV</strong> ikut hasil sort/filter.</p>
+        <div class="saha-tblbox">
+          <div class="saha-tbar">
+            <input class="saha-tsearch" placeholder="🔍 Cari petugas lapangan...">
+            <button class="lh-btn-sm" onclick="SAHA_EXPORT_TABLE(this)">📥 Export CSV</button>
+            <span class="saha-thint">↕ klik judul kolom buat sortir</span>
+          </div>
+          <div class="lh-table-wrap">
+            <table class="lh-table saha-sortable"><thead><tr><th>Petugas Lapangan</th><th>Kontak</th><th>Baru</th><th>Lanjutan</th><th>Kondom</th><th>KIE</th></tr></thead>
+            <tbody>
 <tr><td style="font-weight:600;">Dodik</td><td>1.376</td><td>297</td><td>1.079</td><td>2.058</td><td>1.203</td></tr>
 <tr><td style="font-weight:600;">Nuri</td><td>1.348</td><td>483</td><td>865</td><td>8.902</td><td>1.393</td></tr>
 <tr><td style="font-weight:600;">Ibi</td><td>1.094</td><td>154</td><td>940</td><td>2.518</td><td>861</td></tr>
@@ -5299,21 +5312,13 @@
 <tr><td style="font-weight:600;">Eko</td><td>74</td><td>57</td><td>17</td><td>311</td><td>10</td></tr>
 <tr><td style="font-weight:600;">Hendra</td><td>40</td><td>24</td><td>16</td><td>15</td><td>3</td></tr>
 <tr><td style="font-weight:600;">Deni</td><td>3</td><td>1</td><td>2</td><td>16</td><td>3</td></tr>
-          </tbody></table>
+            </tbody></table>
+          </div>
         </div>
 
         <div class="placeholder-banner archival" style="margin-top:20px;"><span class="icon">🔐</span><div><strong>Data mentah level-klien (bernama) tidak ditanam di sini.</strong> Halaman ini menampilkan agregat + ringkasan staf. Baris per-klien (nama, tgl lahir, hasil tes) tetap di sumber terlindungi (KoBo / Master DB), diakses M&amp;E langsung. Kalau perlu ditarik ke dashboard, dibangun via Firestore (login).</div></div>
 
         <div class="source-attr" style="margin-top:22px;">📄 <strong>Sumber:</strong> Penjangkauan Pengguna ATS-Chemsex Malang–Surabaya (KoboToolbox) · 9.623 kontak · Feb 2024–Jun 2026. Agregat, nol identitas. Snapshot Jul 2026.</div>
-
-        <script>
-        function SAHA_EXPORT_CHEMSEX(){
-          var d=[["PL", "Kontak", "Baru", "Lama", "Kondom", "KIE"], ["Dodik", 1376, 297, 1079, 2058, 1203], ["Nuri", 1348, 483, 865, 8902, 1393], ["Ibi", 1094, 154, 940, 2518, 861], ["David", 960, 190, 770, 4057, 970], ["Hanim", 697, 270, 427, 1910, 7], ["Aris", 663, 262, 401, 3373, 673], ["Karyanto", 588, 166, 422, 56, 8], ["Hendra (KL-MLG)", 509, 130, 379, 349, 56], ["Sotong Hariyono", 493, 182, 311, 0, 0], ["Bayu Lesmana", 417, 181, 236, 286, 20], ["Paldi", 347, 101, 246, 52, 8], ["Maradona", 295, 141, 154, 132, 0], ["Husen", 267, 97, 170, 63, 0], ["Reno", 258, 131, 127, 1415, 26], ["Dedi", 192, 121, 71, 1104, 55], ["Eko", 74, 57, 17, 311, 10], ["Hendra", 40, 24, 16, 15, 3], ["Deni", 3, 1, 2, 16, 3]];
-          var csv=d.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
-          var b=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'});var u=URL.createObjectURL(b);
-          var a=document.createElement('a');a.href=u;a.download='ChemsexOutreach_perPL.csv';a.click();URL.revokeObjectURL(u);
-        }
-        </script>
 
       </section>
 
@@ -6541,5 +6546,60 @@ function updateBreadcrumb(item) {
   console.log('[LogHarian] module siap');
 </script>
 
+<script>
+/* SAHA sortable/filterable/exportable tables (Excel-like) */
+(function(){
+  function pv(s){
+    s=(s||'').trim();
+    var num=s.replace(/[^\d,.\-]/g,'');
+    if(num && /\d/.test(s) && !/[A-Za-z]{2,}/.test(s)){
+      num=num.replace(/\./g,'').replace(',','.');
+      var n=parseFloat(num);
+      if(!isNaN(n)) return {t:1,v:n};
+    }
+    return {t:0,v:s.toLowerCase()};
+  }
+  function wire(tbl){
+    if(!tbl.tHead||!tbl.tBodies[0]) return;
+    var ths=tbl.tHead.rows[0].cells, tb=tbl.tBodies[0], cur=-1, asc=true;
+    for(var i=0;i<ths.length;i++){(function(ci){
+      ths[ci].addEventListener('click',function(){
+        asc = (cur===ci) ? !asc : true; cur=ci;
+        var rows=[].slice.call(tb.rows);
+        rows.sort(function(a,b){
+          var x=pv(a.cells[ci].innerText), y=pv(b.cells[ci].innerText);
+          if(x.t&&y.t) return asc? x.v-y.v : y.v-x.v;
+          return asc? (''+x.v).localeCompare(''+y.v) : (''+y.v).localeCompare(''+x.v);
+        });
+        rows.forEach(function(r){tb.appendChild(r);});
+        for(var k=0;k<ths.length;k++) ths[k].removeAttribute('data-sort');
+        ths[ci].setAttribute('data-sort', asc?'up':'down');
+      });
+    })(i);}
+  }
+  document.querySelectorAll('table.saha-sortable').forEach(wire);
+  document.querySelectorAll('.saha-tsearch').forEach(function(inp){
+    inp.addEventListener('input',function(){
+      var q=inp.value.toLowerCase(), box=inp.closest('.saha-tblbox'); if(!box) return;
+      box.querySelectorAll('table.saha-sortable tbody tr').forEach(function(tr){
+        tr.style.display = tr.innerText.toLowerCase().indexOf(q)>-1 ? '' : 'none';
+      });
+    });
+  });
+  window.SAHA_EXPORT_TABLE=function(btn){
+    var box=btn.closest('.saha-tblbox'); if(!box) return;
+    var tbl=box.querySelector('table.saha-sortable'); if(!tbl) return;
+    var out=[[].slice.call(tbl.tHead.rows[0].cells).map(function(t){return t.innerText.replace(/[▲▼]/g,'').trim();})];
+    [].slice.call(tbl.tBodies[0].rows).forEach(function(tr){
+      if(tr.style.display==='none') return;
+      out.push([].slice.call(tr.cells).map(function(c){return c.innerText.trim();}));
+    });
+    var csv=out.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+    var b=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8;'});
+    var u=URL.createObjectURL(b), a=document.createElement('a');
+    a.href=u; a.download='SadarHati_export.csv'; a.click(); URL.revokeObjectURL(u);
+  };
+})();
+</script>
 </body>
 </html>
