@@ -291,6 +291,9 @@
 
   /* Fraunces for display numbers (hero + card); titles stay Lora */
   .big-num, .card .value { font-family: 'Fraunces', Georgia, serif !important; }
+  /* Fraunces is wider than Lora -> give the two long-value heroes a wider number column + keep on one line */
+  #l2-hist-viiv .hero-stat, #l2-hist-lapas .hero-stat { grid-template-columns: 360px 1fr; }
+  #l2-hist-viiv .hero-stat .big-num, #l2-hist-lapas .hero-stat .big-num { white-space: nowrap; }
   .placeholder-banner {
     background: var(--sage-tint);
     border: 1px dashed var(--sage);
