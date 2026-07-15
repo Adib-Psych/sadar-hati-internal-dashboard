@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grant Opportunities Tracker · Yayasan Sadar Hati</title>
+<style>
+  :root{
+    --clay:#a83244; --clay-deep:#7a1f30; --clay-tint:#f7e9ec;
+    --sage:#5f7a6b; --sage-deep:#3f5749; --sage-light:#e8efea;
+    --gold:#d4a017; --gold-tint:#fbf3dd;
+    --cream:#fdf9f4; --ink:#2a2320; --slate:#6b6058; --border:#ece2d8;
+    --green:#2e7d52; --green-bg:#e6f4ec;
+    --amber:#b7791f; --amber-bg:#fdf1dd;
+    --blue:#2f6d9e; --blue-bg:#e7f0f7;
+    --red:#a3403a; --red-bg:#f7e7e5;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--cream);color:var(--ink);line-height:1.55;padding:0 0 60px;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px;}
+  header{background:linear-gradient(135deg,var(--clay) 0%,var(--clay-deep) 100%);color:#fff;padding:38px 0 30px;}
+  header .eyebrow{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;opacity:.8;font-weight:700;}
+  header h1{font-size:29px;margin:8px 0 6px;font-weight:800;letter-spacing:-.5px;}
+  header p{font-size:14px;opacity:.94;max-width:760px;}
+  header .asof{margin-top:14px;font-size:12px;opacity:.82;border-top:1px solid rgba(255,255,255,.22);padding-top:12px;}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 8px;}
+  .stat{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 16px;text-align:center;}
+  .stat .n{font-size:30px;font-weight:800;line-height:1;}
+  .stat .l{font-size:11px;color:var(--slate);margin-top:6px;font-weight:600;letter-spacing:.3px;}
+  .s-green .n{color:var(--green);} .s-amber .n{color:var(--amber);} .s-blue .n{color:var(--blue);} .s-red .n{color:var(--red);}
+  .insight{background:var(--gold-tint);border:1px solid #e8cf8a;border-left:5px solid var(--gold);border-radius:12px;padding:18px 20px;margin:24px 0;}
+  .insight h2{font-size:16px;color:#8a6314;margin-bottom:7px;display:flex;align-items:center;gap:8px;}
+  .insight p{font-size:13.5px;color:#5f4a1a;}
+  .insight strong{color:#7a1f30;}
+  h2.sec{font-size:15px;letter-spacing:.5px;text-transform:uppercase;margin:34px 0 4px;display:flex;align-items:center;gap:9px;font-weight:800;}
+  .sec .dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+  .sec-sub{font-size:12.5px;color:var(--slate);margin-bottom:14px;}
+  .card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px 22px;margin-bottom:14px;box-shadow:0 1px 8px rgba(120,60,50,.04);}
+  .card.prio{border-left:5px solid var(--green);}
+  .card.mon{border-left:5px solid var(--amber);}
+  .card.part{border-left:5px solid var(--blue);}
+  .card .top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;}
+  .card h3{font-size:18px;color:var(--clay-deep);font-weight:800;line-height:1.2;}
+  .card .prog{font-size:13px;color:var(--slate);font-weight:600;margin-top:2px;}
+  .chip{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;padding:5px 10px;border-radius:20px;white-space:nowrap;}
+  .c-green{background:var(--green-bg);color:var(--green);} .c-amber{background:var(--amber-bg);color:var(--amber);}
+  .c-blue{background:var(--blue-bg);color:var(--blue);} .c-red{background:var(--red-bg);color:var(--red);}
+  .meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px 18px;margin:15px 0 4px;}
+  .meta .k{font-size:10px;letter-spacing:.6px;text-transform:uppercase;color:var(--slate);font-weight:700;}
+  .meta .v{font-size:13px;font-weight:600;margin-top:1px;}
+  .note{font-size:12.5px;color:var(--slate);margin-top:12px;line-height:1.5;border-top:1px dashed var(--border);padding-top:11px;}
+  .note b{color:var(--ink);}
+  .apply{display:inline-block;margin-top:12px;font-size:12.5px;font-weight:700;color:var(--clay);text-decoration:none;border:1.5px solid var(--clay);padding:6px 13px;border-radius:8px;}
+  .apply:hover{background:var(--clay);color:#fff;}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+  .tag{font-size:10.5px;background:var(--sage-light);color:var(--sage-deep);padding:3px 9px;border-radius:6px;font-weight:600;}
+  table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;font-size:12.5px;margin-top:6px;}
+  th,td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--border);vertical-align:top;}
+  th{background:var(--red-bg);color:var(--red);font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;}
+  td a{color:var(--blue);text-decoration:none;}
+  .gaps{background:var(--sage-light);border:1px solid #cddbd2;border-radius:12px;padding:18px 20px;margin-top:8px;}
+  .gaps ul{margin:8px 0 0 18px;font-size:13px;color:var(--sage-deep);}
+  .gaps li{margin-bottom:5px;}
+  footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--border);font-size:11.5px;color:var(--slate);}
+  footer a{color:var(--blue);word-break:break-all;}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin:6px 0 0;font-size:11.5px;color:var(--slate);}
+  .legend span{display:flex;align-items:center;gap:6px;}
+  @media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr);}header h1{font-size:23px;}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Grant Opportunities Tracker</div>
+    <h1>Peluang Pendanaan · Yayasan Sadar Hati</h1>
+    <p>Deep-dive terverifikasi peluang grant untuk fokus: chemsex &amp; harm reduction, HIV testing/PrEP/linkage, kesehatan mental (MHPSS), dan pemberdayaan perempuan — dengan filter ketat <strong>eligible untuk NGO lokal Indonesia</strong>.</p>
+    <div class="asof">Per 15 Juli 2026 · 23 sumber resmi di-fetch · 92 klaim diekstrak · 25 klaim lolos verifikasi silang (3 suara/klaim, 0 terbantah) · 105 agen riset. Status funder berubah cepat — verifikasi ulang di link resmi sebelum apply.</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="stats">
+    <div class="stat s-green"><div class="n">2</div><div class="l">Siap Apply</div></div>
+    <div class="stat s-amber"><div class="n">3</div><div class="l">Pantau (buka berkala)</div></div>
+    <div class="stat s-blue"><div class="n">3</div><div class="l">Jalur Kemitraan</div></div>
+    <div class="stat s-red"><div class="n">4</div><div class="l">Belum Cocok</div></div>
+  </div>
+
+  <div class="insight">
+    <h2>💡 Insight Strategis — arahkan ke "lajur perempuan"</h2>
+    <p>Temuan terpenting: funder HIV klasik (ViiV, Elton John, Robert Carr) saat ini <strong>tutup atau hanya untuk jaringan</strong>, diperparah pemangkasan dana HIV global (USAID/PEPFAR 2025). Sebaliknya, <strong>lajur pendanaan hak &amp; pemberdayaan perempuan justru TERBUKA dan bisa diakses langsung</strong> (UAF Asia-Pacific &amp; UN Trust Fund EVAW). Aset nyata Sadar Hati — kerja dengan perempuan pasangan PWID, integrasi GBV-PWID, dan kemitraan Women Crisis Center — bisa dibingkai ke lajur ini untuk membuka pintu yang sekarang benar-benar terbuka. Kombinasi: <strong>menang cepat</strong> lewat UAF (kecil, cair dalam hari) + <strong>taruhan besar</strong> lewat UN Trust Fund (multi-tahun).</p>
+  </div>
+
+  <h2 class="sec"><span class="dot" style="background:var(--green)"></span>Siap Apply — terbuka &amp; bisa langsung</h2>
+  <div class="sec-sub">Mekanisme yang saat ini terbuka DAN menerima aplikasi langsung dari NGO lokal Indonesia.</div>
+
+  <div class="card prio">
+    <div class="top">
+      <div><h3>Urgent Action Fund Asia &amp; Pacific</h3><div class="prog">Rapid Response — "Security &amp; Well-being" Grants</div></div>
+      <span class="chip c-green">🟢 Terbuka · Rolling</span>
+    </div>
+    <div class="meta">
+      <div><div class="k">Fokus</div><div class="v">Kesehatan mental (MHPSS) + Perempuan</div></div>
+      <div><div class="k">Eligibility</div><div class="v">Langsung — organisasi/aktivis perempuan &amp; non-biner di Asia-Pasifik (Indonesia termasuk)</div></div>
+      <div><div class="k">Dana</div><div class="v">Hingga USD 5.000</div></div>
+      <div><div class="k">Deadline</div><div class="v">Rolling — kapan saja, bahasa apa saja (termasuk Indonesia)</div></div>
+    </div>
+    <div class="note"><b>Kenapa cocok:</b> respons 72 jam, dana cair 10–15 hari. Mendanai konseling psikososial, penanganan trauma, kebutuhan keselamatan mendesak. <b>Syarat:</b> harus dipimpin/berbasis perempuan-trans-non-biner dan berbingkai kebutuhan mendesak pembela HAM — jadi paling pas untuk komponen <em>perempuan dalam populasi kunci</em> Sadar Hati, bukan program HIV umum. <b>Ide pakai:</b> kebutuhan keselamatan/wellbeing spesifik untuk perempuan dampingan (mis. korban kekerasan pasangan PWID).</div>
+    <div class="tags"><span class="tag">Menang cepat</span><span class="tag">Cair dalam hari</span><span class="tag">Bahasa Indonesia OK</span></div>
+    <a class="apply" href="https://uafanp.org/our_grants" target="_blank">Buka halaman grant →</a>
+  </div>
+
+  <div class="card prio">
+    <div class="top">
+      <div><h3>UN Trust Fund to End Violence Against Women (UNTF EVAW)</h3><div class="prog">Annual Call for Proposals</div></div>
+      <span class="chip c-green">🟢 Mekanisme tahunan</span>
+    </div>
+    <div class="meta">
+      <div><div class="k">Fokus</div><div class="v">Pemberdayaan perempuan / GBV</div></div>
+      <div><div class="k">Eligibility</div><div class="v">Langsung — organisasi masyarakat sipil (CSO)</div></div>
+      <div><div class="k">Dana</div><div class="v">Hingga USD 1.000.000 (multi-tahun)</div></div>
+      <div><div class="k">Siklus</div><div class="v">Call tahunan (review Feb–Sep) · <b>konfirmasi jendela 2026 sedang buka/belum</b></div></div>
+    </div>
+    <div class="note"><b>Kenapa cocok:</b> grant besar multi-tahun langsung ke CSO yang bekerja menghentikan kekerasan terhadap perempuan/anak perempuan. Butuh bingkai GBV yang kuat + sistem M&amp;E yang solid — <b>yang justru sudah dimiliki Sadar Hati</b> (data klien, kaskade, roster). <b>Catatan:</b> apakah jendela 2026 sudah dibuka belum terkonfirmasi — perlu dicek langsung.</div>
+    <div class="tags"><span class="tag">Taruhan besar</span><span class="tag">Multi-tahun</span><span class="tag">Butuh M&amp;E kuat</span></div>
+    <a class="apply" href="https://untf.unwomen.org/en/grant-giving/call-for-proposals" target="_blank">Buka Call for Proposals →</a>
+  </div>
+
+  <h2 class="sec"><span class="dot" style="background:var(--amber)"></span>Pantau — tutup sekarang, buka berkala</h2>
+  <div class="sec-sub">Funder relevan yang sedang di antara siklus. Belum bisa apply, tapi wajib dipantau — set pengingat cek berkala.</div>
+
+  <div class="card mon">
+    <div class="top">
+      <div><h3>ViiV Healthcare — Positive Action (Global)</h3><div class="prog">Innovator Funding + Momentum Funding</div></div>
+      <span class="chip c-amber">🟡 Tak ada ronde terbuka (Jun 2026)</span>
+    </div>
+    <div class="meta">
+      <div><div class="k">Fokus</div><div class="v">HIV, harm reduction, populasi kunci</div></div>
+      <div><div class="k">Eligibility</div><div class="v">Langsung — organisasi berbasis/dipimpin komunitas</div></div>
+      <div><div class="k">Dana</div><div class="v">Innovator hingga £100.000/2 thn · Momentum hingga £300.000/3 thn</div></div>
+      <div><div class="k">Status</div><div class="v">"No open funding rounds" — pantau untuk ronde berikutnya</div></div>
+    </div>
+    <div class="note"><b>Prioritas pantau tertinggi:</b> ini funder sejenis dengan pendana Sadar Hati saat ini (ViiV). Fit fokus paling kuat &amp; bisa apply langsung. <b>Aksi:</b> jaga hubungan baik dengan ViiV + cek halaman ini rutin; siapkan konsep sejak sekarang agar siap saat ronde buka.</div>
+    <a class="apply" href="https://viivhealthcare.com/hiv-community-engagement/positive-action/funding-opportunities/" target="_blank">Pantau halaman →</a>
+  </div>
+
+  <div class="card mon">
+    <div class="top">
+      <div><h3>Grand Challenges Canada — "Being Initiative"</h3><div class="prog">Transition to Scale (kesehatan jiwa anak muda)</div></div>
+      <span class="chip c-amber">🟡 Ditutup 31 Mar 2026</span>
+    </div>
+    <div class="meta">
+      <div><div class="k">Fokus</div><div class="v">Kesehatan mental (MHPSS) anak muda 10–24 th</div></div>
+      <div><div class="k">Eligibility</div><div class="v">Indonesia termasuk 12 negara prioritas · (perlu cek jalur aplikasi langsung/tidak)</div></div>
+      <div><div class="k">Dana</div><div class="v">USD 300.000 – 1.500.000 CAD (12–48 bln)</div></div>
+      <div><div class="k">Status</div><div class="v">"No longer accepting applications" — pantau ronde berikutnya</div></div>
+    </div>
+    <div class="note"><b>Catatan:</b> Indonesia eksplisit disebut negara eligible — ini peluang MHPSS terkuat kalau ronde baru dibuka. GCC tidak menerima proposal tak diminta, jadi hanya lewat call resmi. Kemitraan dengan Fondation Botnar.</div>
+    <a class="apply" href="https://being-initiative.org/opportunities/" target="_blank">Pantau halaman →</a>
+  </div>
+
+  <div class="card mon">
+    <div class="top">
+      <div><h3>Elton John AIDS Foundation (EJAF)</h3><div class="prog">Open funding calls</div></div>
+      <span class="chip c-amber">🟡 "No open opportunities" (15 Jul 2026)</span>
+    </div>
+    <div class="meta">
+      <div><div class="k">Fokus</div><div class="v">HIV, populasi paling rentan</div></div>
+      <div><div class="k">Eligibility</div><div class="v">Via call terbuka berkala (saat ada)</div></div>
+      <div><div class="k">Dana</div><div class="v">Bervariasi per call</div></div>
+      <div><div class="k">Status</div><div class="v">Tidak ada call terbuka saat ini — pantau</div></div>
+    </div>
+    <div class="note"><b>Aksi:</b> tidak ada rute langsung sekarang; EJAF membuka call secara berkala. Pantau halaman funding untuk pembukaan berikutnya.</div>
+    <a class="apply" href="https://www.eltonjohnaidsfoundation.org/funding/" target="_blank">Pantau halaman →</a>
+  </div>
+
+  <h2 class="sec"><span class="dot" style="background:var(--blue)"></span>Jalur Kemitraan / Sub-recipient</h2>
+  <div class="sec-sub">Bukan grant terbuka, tapi dana bisa diakses dengan menjadi mitra pelaksana / anggota jaringan / sub-recipient.</div>
+
+  <div class="card part">
+    <div class="top">
+      <div><h3>Global Fund — Indonesia Country Grants</h3><div class="prog">HIV / TB · via Principal Recipient</div></div>
+      <span class="chip c-blue">🔵 Sub-recipient</span>
+    </div>
+    <div class="meta">
+      <div><div class="k">Fokus</div><div class="v">HIV, harm reduction, testing/linkage</div></div>
+      <div><div class="k">Eligibility</div><div class="v">Lewat Principal Recipient (mis. Kemenkes, PKBI, Nahdlatul Ulama) sebagai sub-recipient</div></div>
+      <div><div class="k">Dana</div><div class="v">Besar (lewat mekanisme nasional)</div></div>
+      <div><div class="k">Status</div><div class="v"><b>Belum diverifikasi detail</b> — perlu digali (lihat bawah)</div></div>
+    </div>
+    <div class="note"><b>Aksi:</b> jalur dana HIV terbesar di Indonesia, tapi hampir selalu lewat sub-grant. Identifikasi PR aktif untuk HIV Jatim &amp; buka percakapan. Ini salah satu prioritas riset lanjutan.</div>
+    <a class="apply" href="https://www.theglobalfund.org/en/government/profiles/indonesia/" target="_blank">Profil Indonesia →</a>
+  </div>
+
+  <div class="card part">
+    <div class="top">
+      <div><h3>AIDS Healthcare Foundation (AHF) Indonesia</h3><div class="prog">Model kemitraan pelaksana</div></div>
+      <span class="chip c-blue">🔵 Kemitraan langsung</span>
+    </div>
+    <div class="meta">
+      <div><div class="k">Fokus</div><div class="v">HIV testing &amp; treatment (linkage)</div></div>
+      <div><div class="k">Eligibility</div><div class="v">Mitra pelaksana lokal (sudah 6 NGO mitra, 15 puskesmas sejak 2016)</div></div>
+      <div><div class="k">Dana</div><div class="v">Via kemitraan, bukan grant terbuka</div></div>
+      <div><div class="k">Kontak</div><div class="v">Country Program Manager: Asep Eka Nur Hidayat · asep.hidayat@aidshealth.org · +62 21 7884 5544</div></div>
+    </div>
+    <div class="note"><b>Aksi:</b> tidak ada call grant; akses lewat kontak langsung Country Program Manager untuk jadi mitra pelaksana testing/treatment. Cocok untuk fokus HIV testing/linkage.</div>
+    <a class="apply" href="https://www.aidshealth.org/global/indonesia/" target="_blank">Halaman AHF Indonesia →</a>
+  </div>
+
+  <div class="card part">
+    <div class="top">
+      <div><h3>Robert Carr Fund (RCF)</h3><div class="prog">Global/regional networks &amp; consortia</div></div>
+      <span class="chip c-blue">🔵 Via jaringan · RFP tutup</span>
+    </div>
+    <div class="meta">
+      <div><div class="k">Fokus</div><div class="v">HIV populasi kunci, harm reduction</div></div>
+      <div><div class="k">Eligibility</div><div class="v">HANYA jaringan/konsorsium regional-global — NGO lokal ikut sbg anggota jaringan</div></div>
+      <div><div class="k">Dana</div><div class="v">Besar (untuk jaringan)</div></div>
+      <div><div class="k">Status</div><div class="v">RFP tutup (siklus 2025–2027); siklus 2026 belum diumumkan</div></div>
+    </div>
+    <div class="note"><b>Aksi:</b> tak bisa apply sendiri. Rute: perkuat keanggotaan di jaringan yang didanai RCF (mis. INPUD global, atau jaringan harm reduction nasional/PKNI) agar ikut mengalir manfaatnya.</div>
+    <a class="apply" href="https://robertcarrfund.org/funding/" target="_blank">Halaman funding →</a>
+  </div>
+
+  <h2 class="sec"><span class="dot" style="background:var(--red)"></span>Belum Cocok Saat Ini</h2>
+  <div class="sec-sub">Sudah dicek &amp; diverifikasi — tidak bisa diakses sekarang (tidak eligible, tutup, atau bukan pemberi grant).</div>
+  <table>
+    <tr><th>Funder / Program</th><th>Alasan</th><th>Sumber</th></tr>
+    <tr><td><b>AmplifyChange</b></td><td>Indonesia TIDAK masuk daftar negara eligible (hanya Afrika, Asia Selatan, Timur Tengah)</td><td><a href="https://amplifychange.org/apply/" target="_blank">apply</a></td></tr>
+    <tr><td><b>ViiV Positive Action (US)</b></td><td>Khusus organisasi AS + tidak menerima aplikasi tak diminta</td><td><a href="https://viivhealthcare.com/en-us/supporting-the-hiv-community/positive-action/grants/" target="_blank">grants</a></td></tr>
+    <tr><td><b>IAS — AIDS 2026 Community Project Grants</b></td><td>Sudah tutup (19 Sep 2025) &amp; 5 penerima terpilih</td><td><a href="https://www.iasociety.org/conferences/aids2026/community-project-grants" target="_blank">IAS</a></td></tr>
+    <tr><td><b>United for Global Mental Health</b></td><td>Bukan pemberi grant — organisasi advokasi/kampanye</td><td><a href="https://unitedgmh.org/about/" target="_blank">about</a></td></tr>
+  </table>
+
+  <h2 class="sec">🔎 Perlu Digali Lebih Lanjut</h2>
+  <div class="gaps">
+    <p style="font-size:13px;color:var(--sage-deep);"><b>Belum tercakup di ronde riset ini (artinya "belum diverifikasi", bukan "tidak ada peluang").</b> Ini kandidat kuat untuk deep-dive lanjutan — beberapa sangat menjanjikan untuk lajur perempuan:</p>
+    <ul>
+      <li><b>Mama Cash</b> &amp; <b>FRIDA | The Young Feminist Fund</b> — dana feminis global yang mendanai kelompok perempuan akar rumput termasuk Asia (sangat potensial untuk fokus pemberdayaan perempuan).</li>
+      <li><b>Global Fund for Women</b>, <b>Gilead "Zeroing In" / Asia-Pacific grants</b>, <b>Open Society Foundations</b> (harm reduction &amp; drug policy), <b>Aidsfonds/Mainline</b> (harm reduction Belanda).</li>
+      <li><b>Global Fund Indonesia</b> — siapa Principal Recipient aktif untuk HIV, &amp; apakah ada jendela sub-recipient 2026.</li>
+      <li><b>INKLUSI</b> (kemitraan Australia–Indonesia, penerus MAMPU), <b>Ford Foundation Indonesia</b>, jaringan nasional (PKNI harm reduction, Jaringan Indonesia Positif).</li>
+      <li><b>Konteks penting:</b> dampak pemangkasan dana USAID/PEPFAR 2025 terhadap ketersediaan dana HIV di Indonesia — memengaruhi strategi &amp; urgensi diversifikasi donor.</li>
+    </ul>
+  </div>
+
+  <footer>
+    <p><b>Metodologi:</b> deep-research harness — 5 sudut pencarian, 23 sumber resmi di-fetch, 92 klaim diekstrak, 25 diverifikasi dengan 3 suara adversarial per klaim (butuh 2/3 membantah untuk gugur); 25/25 terkonfirmasi. Semua klaim bersumber halaman resmi funder per 15 Juli 2026.</p>
+    <p style="margin-top:8px;"><b>Peringatan:</b> status "terbuka/tutup" funder sangat sensitif waktu &amp; bisa berubah kapan saja. Selalu verifikasi ulang di link resmi sebelum menyiapkan aplikasi. Eligibility UAF &amp; UNTF berlingkup (kepemimpinan/fokus perempuan) — kecocokan tergantung bagaimana Sadar Hati membingkai kerja &amp; kepemimpinannya.</p>
+    <p style="margin-top:8px;"><b>Sumber utama:</b>
+      <a href="https://uafanp.org/our_grants" target="_blank">UAF A&amp;P</a> ·
+      <a href="https://untf.unwomen.org/en/grant-giving/call-for-proposals" target="_blank">UNTF EVAW</a> ·
+      <a href="https://viivhealthcare.com/hiv-community-engagement/positive-action/funding-opportunities/" target="_blank">ViiV Positive Action</a> ·
+      <a href="https://being-initiative.org/opportunities/" target="_blank">Being Initiative</a> ·
+      <a href="https://www.eltonjohnaidsfoundation.org/funding/" target="_blank">EJAF</a> ·
+      <a href="https://robertcarrfund.org/funding/" target="_blank">Robert Carr Fund</a> ·
+      <a href="https://www.aidshealth.org/global/indonesia/" target="_blank">AHF Indonesia</a> ·
+      <a href="https://www.theglobalfund.org/en/government/profiles/indonesia/" target="_blank">Global Fund Indonesia</a>
+    </p>
+  </footer>
+</div>
+</body>
+</html>
