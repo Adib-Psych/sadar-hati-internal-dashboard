@@ -880,6 +880,9 @@
               <a class="nav-item" data-section="l1-form-chemsex" data-donor="Form Laporan Lapangan"><span class="icon">🔥</span> 3 · Chemsex Outreach</a>
               <a class="nav-item" data-section="l1-form-dast10" data-donor="Form Laporan Lapangan"><span class="icon">💊</span> 4 · DAST-10 Napza</a>
               <a class="nav-item" data-section="l1-form-srq29" data-donor="Form Laporan Lapangan"><span class="icon">🧠</span> 5 · SRQ-29 Mental Health</a>
+              <a class="nav-item" data-section="l1-form-ira" data-donor="Form Laporan Lapangan"><span class="icon">⚕️</span> 6 · IRA Risiko Pribadi</a>
+              <a class="nav-item" data-section="l1-form-gra" data-donor="Form Laporan Lapangan"><span class="icon">👥</span> 7 · GRA Risiko Kelompok</a>
+              <a class="nav-item" data-section="l1-form-konseling" data-donor="Form Laporan Lapangan"><span class="icon">💬</span> 8 · Konseling</a>
             </div>
           </div>
         </div>
@@ -5197,6 +5200,21 @@
             <p>29 pertanyaan instrumen WHO. 4 sub-domain (neurosis · zat · psikotik · PTSD) + flag risiko.</p>
             <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l1-form-srq29')">📝 Isi di sini</button><button class="ml-copy" data-url="trial/srq29.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
           </div>
+          <div class="ml-card dast">
+            <div class="tag">Risiko Pribadi</div><h3>⚕️ Risiko Pribadi</h3>
+            <p>Perilaku berisiko 1 bulan terakhir: berbagi alat, kondom, pasangan + rencana pengurangan risiko.</p>
+            <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l1-form-ira')">📝 Isi di sini</button><button class="ml-copy" data-url="trial/ira.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          </div>
+          <div class="ml-card srq">
+            <div class="tag">Risiko Kelompok</div><h3>👥 Risiko Kelompok</h3>
+            <p>Sesi kelompok: jumlah peserta (L/P/TG), daftar peserta, tindakan & rencana pengurangan risiko.</p>
+            <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l1-form-gra')">📝 Isi di sini</button><button class="ml-copy" data-url="trial/gra.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          </div>
+          <div class="ml-card dast">
+            <div class="tag">Konseling</div><h3>💬 Konseling</h3>
+            <p>Laporan sesi konseling: kondisi dampingan, hasil, rencana tindak lanjut + jadwal lanjutan. Rahasia.</p>
+            <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l1-form-konseling')">📝 Isi di sini</button><button class="ml-copy" data-url="trial/konseling.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          </div>
         </div>
         <div class="ml-note">💡 <strong>Konsep (sama seperti Dashboard Wakaf):</strong> "Isi di sini" = form-input untuk kamu/staf. "Copy link" = PWA link untuk petugas lapangan isi dari HP sendiri. Master list ini juga live di <a href="trial/" target="_blank" rel="noopener">/trial/</a> — form baru cukup ditambah sekali di sana.</div>
       </section>
@@ -5225,6 +5243,30 @@
         <div class="l1-form-wrap">
           <div class="l1-form-linkbar"><span class="u">…/trial/srq29.html</span><button data-url="trial/srq29.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
           <div class="l1-embed"><iframe src="trial/srq29.html" title="SRQ-29 Skrining Kesehatan Mental" loading="lazy"></iframe></div>
+        </div>
+      </section>
+
+      <section class="section" id="l1-form-ira">
+        <div class="hero"><div class="eyebrow">Layer 1 · Laporan Lapangan · Form PL #6</div><h1>⚕️ IRA · Penilaian Risiko Pribadi</h1><p class="lede">Penilaian risiko HIV individual — berbagi alat, pola kondom, pasangan, rencana pengurangan risiko. Identitas & area sama (1 kesatuan) · tersimpan ke database.</p></div>
+        <div class="l1-form-wrap">
+          <div class="l1-form-linkbar"><span class="u">…/trial/ira.html</span><button data-url="trial/ira.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          <div class="l1-embed"><iframe src="trial/ira.html" title="IRA · Penilaian Risiko Pribadi" loading="lazy"></iframe></div>
+        </div>
+      </section>
+
+      <section class="section" id="l1-form-gra">
+        <div class="hero"><div class="eyebrow">Layer 1 · Laporan Lapangan · Form PL #7</div><h1>👥 GRA · Penilaian Risiko Kelompok</h1><p class="lede">Penilaian risiko berbasis kelompok/komunitas — jumlah peserta, tindakan & rencana pengurangan risiko. Tersimpan ke database.</p></div>
+        <div class="l1-form-wrap">
+          <div class="l1-form-linkbar"><span class="u">…/trial/gra.html</span><button data-url="trial/gra.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          <div class="l1-embed"><iframe src="trial/gra.html" title="GRA · Penilaian Risiko Kelompok" loading="lazy"></iframe></div>
+        </div>
+      </section>
+
+      <section class="section" id="l1-form-konseling">
+        <div class="hero"><div class="eyebrow">Layer 1 · Laporan Lapangan · Form PL #8</div><h1>💬 Konseling · Laporan Konselor</h1><p class="lede">Laporan sesi konseling oleh konselor. Isi bersifat rahasia (M&E internal). Identitas & area sama · tersimpan ke database.</p></div>
+        <div class="l1-form-wrap">
+          <div class="l1-form-linkbar"><span class="u">…/trial/konseling.html</span><button data-url="trial/konseling.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          <div class="l1-embed"><iframe src="trial/konseling.html" title="Konseling · Laporan Konselor" loading="lazy"></iframe></div>
         </div>
       </section>
 

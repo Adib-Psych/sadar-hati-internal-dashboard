@@ -236,6 +236,27 @@
     </div>
   </a>
 
+  <a class="form-card dast" href="ira.html" style="border-left-color:#a83244;">
+    <div class="badge">⚕️ Penilaian Risiko Pribadi</div>
+    <h2>⚕️ IRA · Individual Risk Assessment</h2>
+    <p>Perilaku berisiko HIV per individu (1 bln terakhir): berbagi alat, pola kondom, pasangan seks + rencana pengurangan risiko.</p>
+    <div class="meta"><span>⏱ ~6 menit</span><span>💉 berbagi alat</span><span>🎯 rencana risiko</span></div>
+  </a>
+
+  <a class="form-card srq" href="gra.html">
+    <div class="badge">👥 Penilaian Risiko Kelompok</div>
+    <h2>👥 GRA · Group Risk Assessment</h2>
+    <p>Sesi penilaian risiko berbasis kelompok/komunitas: jumlah peserta (L/P/TG), daftar peserta, tindakan & rencana pengurangan risiko.</p>
+    <div class="meta"><span>⏱ ~5 menit</span><span>👥 per kelompok</span><span>🎯 rencana grup</span></div>
+  </a>
+
+  <a class="form-card dast" href="konseling.html" style="border-left-color:#5b7553;">
+    <div class="badge" style="background:rgba(91,117,83,0.14);color:#3e5538;">💬 Laporan Konseling</div>
+    <h2>💬 Konseling · Laporan Konselor</h2>
+    <p>Laporan sesi konseling oleh konselor: kondisi dampingan, hasil, rencana tindak lanjut + jadwal lanjutan. Bersifat rahasia.</p>
+    <div class="meta"><span>⏱ ~4 menit</span><span>🔒 rahasia</span><span>💬 per sesi</span></div>
+  </a>
+
   <div class="info-box">
     <strong>🔒 Privasi & Etika:</strong> Data assessment tersimpan lokal di HP pekerja lapangan (localStorage). Bisa di-export sebagai CSV/PDF untuk arsip resmi. Jangan lupa <strong>informed consent</strong> dari dampingan sebelum mengisi. Jawaban bersifat rahasia — hanya digunakan untuk membantu pemecahan masalah.
   </div>
@@ -261,7 +282,7 @@
     let count = 0;
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      if (key.startsWith('sh-dast-') || key.startsWith('sh-srq-')) count++;
+      if (key.startsWith('sh-') && !key.endsWith('__cloud')) count++;
     }
     document.getElementById('save-count').textContent = count + ' entri';
   }
