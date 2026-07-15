@@ -1,9 +1,9 @@
 /* ============================================================
    SAHA Shared — Sadar Hati Hub
-   Blok identitas/area bersama (dipakai DAST-10, SRQ-29, dst)
+   Blok identitas/area bersama (dipakai DAST-10, SRQ-29, IRA, Konseling, dst)
    + Firestore push ke collection 'submissions'.
-   Konsisten dengan chemsex.html supaya semua data 1 kesatuan.
-   Load SETELAH saha-data.js (window.SAHA_DATA).
+   + PRE-FILL dari roster klien (saha-roster.js) — cari nama -> auto isi PL, Kab/Kota, JK, tgl lahir.
+   Load SETELAH saha-data.js (window.SAHA_DATA). saha-roster.js di-load otomatis.
    ============================================================ */
 (function () {
   const D = window.SAHA_DATA || { PL_LIST: [], wilayahData: {} };
@@ -30,6 +30,16 @@
     } catch (e) { console.error("[SAHA] Firebase init gagal:", e); }
   })();
 
+  /* ---------- Roster pre-fill (load saha-roster.js) ---------- */
+  let _fillDatalist = () => {};
+  if (!window.SAHA_ROSTER) {
+    const rs = document.createElement("script");
+    rs.src = "saha-roster.js";
+    rs.onload = () => { console.log("[SAHA] roster siap:", (window.SAHA_ROSTER || []).length); _fillDatalist(); };
+    rs.onerror = () => console.warn("[SAHA] roster tidak dimuat (pre-fill nonaktif)");
+    document.head.appendChild(rs);
+  }
+
   /* ---------- Scoped CSS ---------- */
   const CSS = `
   .saha-block{ }
@@ -55,21 +65,36 @@
   .saha-chip.sel{ border-color:var(--wine,#a83244); background:var(--wine,#a83244); color:#fff; }
   .saha-flag{ margin-top:6px; padding:8px 10px; background:#fef5ed; border-left:3px solid var(--gold,#d4a017);
     border-radius:6px; font-size:11px; color:#8a4d1f; line-height:1.5; }
+  .saha-quick{ background:linear-gradient(135deg,#f0f5f1,#eef5ff); border:1.5px solid var(--sage,#5b7553);
+    border-radius:12px; padding:12px 13px; margin-bottom:6px; }
+  .saha-quick .saha-lbl{ margin-top:0; color:var(--sage-deep,#3e5538); }
+  .saha-quick .qok{ margin-top:7px; font-size:11.5px; color:var(--sage-deep,#3e5538); font-weight:600; display:none; }
   `;
   const st = document.createElement("style"); st.textContent = CSS; document.head.appendChild(st);
 
   /* ---------- state ---------- */
   const val = {};
+  let _el = null;
+  const KAB_ALIAS = { "Kabupaten Malang": "Kab Malang" }; // roster label -> wilayahData key
 
   /* ---------- build ---------- */
   function chips(field, arr) {
     return arr.map(v => `<button type="button" class="saha-chip" data-f="${field}" data-v="${String(v).replace(/"/g,'&quot;')}">${v}</button>`).join("");
   }
+  const KOTAKAB = ["Kota Malang", "Kabupaten Malang", "Surabaya", "Kabupaten Sidoarjo", "Jakarta Barat"];
   function buildIdentity(containerId) {
     const el = document.getElementById(containerId);
     if (!el) { console.warn("[SAHA] container tidak ada:", containerId); return; }
+    _el = el;
     el.innerHTML = `
       <div class="saha-block">
+        <div class="saha-quick">
+          <div class="saha-lbl">⚡ Isi Cepat — cari klien lama (auto-isi)</div>
+          <input type="text" class="saha-in" id="saha-cari" list="saha-roster-dl" autocomplete="off" placeholder="ketik nama klien lalu pilih...">
+          <datalist id="saha-roster-dl"></datalist>
+          <div class="qok" id="saha-cari-ok"></div>
+        </div>
+
         <div class="saha-h">1 · Identitas Laporan</div>
         <div class="saha-lbl">Tahun <span class="rq">*</span></div>
         <div class="saha-chips" data-g="tahun">${chips("tahun", ["2026", "2027", "2028"])}</div>
@@ -80,11 +105,12 @@
 
         <div class="saha-h">2 · Area Jangkauan</div>
         <div class="saha-lbl">Provinsi</div>
-        <div class="saha-static">🌾 Jawa Timur</div>
+        <div class="saha-static">🌾 Jawa Timur / DKI</div>
         <div class="saha-lbl">Kota / Kabupaten <span class="rq">*</span></div>
-        <div class="saha-chips" data-g="kotakab">${chips("kotakab", ["Kota Malang", "Kab Malang", "Kota Batu", "Kab Pasuruan"])}</div>
+        <div class="saha-chips" data-g="kotakab">${chips("kotakab", KOTAKAB)}</div>
         <div class="saha-lbl">Kecamatan <span class="rq">*</span></div>
         <select class="saha-in" id="saha-kec" disabled><option value="">-- pilih Kota/Kab dulu --</option></select>
+        <input type="text" class="saha-in" id="saha-kec-manual" placeholder="Ketik kecamatan..." style="display:none;margin-top:6px;">
         <div class="saha-lbl">Desa / Kelurahan <span class="rq">*</span></div>
         <select class="saha-in" id="saha-desa" disabled><option value="">-- pilih Kecamatan dulu --</option></select>
         <input type="text" class="saha-in" id="saha-desa-manual" placeholder="Ketik desa/kelurahan..." style="display:none;margin-top:6px;">
@@ -107,6 +133,7 @@
         <input type="number" class="saha-in" id="saha-usia" min="10" max="99" placeholder="umur klien (tahun)">
       </div>`;
     wire(el);
+    _fillDatalist();
   }
 
   /* ---------- wiring ---------- */
@@ -126,24 +153,17 @@
       });
     });
 
-    const kec = el.querySelector("#saha-kec"), desa = el.querySelector("#saha-desa"), dman = el.querySelector("#saha-desa-manual");
+    const kec = el.querySelector("#saha-kec"), kman = el.querySelector("#saha-kec-manual"),
+      desa = el.querySelector("#saha-desa"), dman = el.querySelector("#saha-desa-manual");
     kec.addEventListener("change", () => { val.kecamatan = kec.value; populateDesa(el, val.kotakab, kec.value); });
+    kman.addEventListener("input", () => { val.kecamatan = kman.value.trim(); });
     desa.addEventListener("change", () => {
       if (desa.value === "__LAINNYA__") { dman.style.display = "block"; val.desa = ""; val.desa_manual = true; }
       else { dman.style.display = "none"; val.desa = desa.value; val.desa_manual = false; }
     });
     dman.addEventListener("input", () => { val.desa = dman.value.trim(); val.desa_manual = true; });
 
-    const h4 = el.querySelector("#saha-huruf4"), tgl = el.querySelector("#saha-tgllahir"),
-      idkdEl = el.querySelector("#saha-idkd"), flag = el.querySelector("#saha-idkd-flag");
-    function idkd() {
-      const a = (h4.value || "").trim().toUpperCase();
-      const d = tgl.value; let dd = "123456", ph = true;
-      if (d) { const p = d.split("-"); dd = p[2] + p[1] + p[0].slice(2); ph = false; }
-      const id = a ? (a + dd) : "";
-      idkdEl.value = id; val.idkd = id; val.idkd_placeholder = ph && !!a; val.tgllahir = d || "";
-      flag.style.display = (ph && !!a) ? "block" : "none";
-    }
+    const h4 = el.querySelector("#saha-huruf4"), tgl = el.querySelector("#saha-tgllahir");
     h4.addEventListener("input", () => { h4.value = h4.value.toUpperCase(); idkd(); });
     tgl.addEventListener("change", idkd);
 
@@ -151,23 +171,99 @@
       const inp = el.querySelector("#saha-" + f);
       inp.addEventListener("input", () => { val[f] = inp.value.trim(); });
     });
+
+    const cari = el.querySelector("#saha-cari");
+    if (cari) {
+      cari.addEventListener("change", () => tryPrefill(el, cari.value));
+      cari.addEventListener("input", () => { if ((window.SAHA_ROSTER || []).some(r => r.n === cari.value)) tryPrefill(el, cari.value); });
+    }
+  }
+
+  function idkd() {
+    if (!_el) return;
+    const h4 = _el.querySelector("#saha-huruf4"), tgl = _el.querySelector("#saha-tgllahir"),
+      idkdEl = _el.querySelector("#saha-idkd"), flag = _el.querySelector("#saha-idkd-flag");
+    const a = (h4.value || "").trim().toUpperCase();
+    const d = tgl.value; let dd = "123456", ph = true;
+    if (d) { const p = d.split("-"); dd = p[2] + p[1] + p[0].slice(2); ph = false; }
+    const id = a ? (a + dd) : "";
+    idkdEl.value = id; val.idkd = id; val.idkd_placeholder = ph && !!a; val.tgllahir = d || "";
+    flag.style.display = (ph && !!a) ? "block" : "none";
   }
 
   function populateKec(el, kotakab) {
-    const kec = el.querySelector("#saha-kec"), desa = el.querySelector("#saha-desa");
-    const kecs = Object.keys(D.wilayahData[kotakab] || {}).sort();
-    kec.innerHTML = '<option value="">-- Pilih Kecamatan --</option>' + kecs.map(k => `<option value="${k}">${k}</option>`).join("");
-    kec.disabled = kecs.length === 0;
-    desa.innerHTML = '<option value="">-- Pilih Kecamatan dulu --</option>'; desa.disabled = true;
+    const kec = el.querySelector("#saha-kec"), kman = el.querySelector("#saha-kec-manual"),
+      desa = el.querySelector("#saha-desa"), dman = el.querySelector("#saha-desa-manual");
+    const wkey = KAB_ALIAS[kotakab] || kotakab;
+    const kecs = Object.keys(D.wilayahData[wkey] || {}).sort();
+    if (kecs.length) {
+      kec.style.display = ""; kec.disabled = false; kman.style.display = "none"; kman.value = "";
+      kec.innerHTML = '<option value="">-- Pilih Kecamatan --</option>' + kecs.map(k => `<option value="${k}">${k}</option>`).join("");
+    } else {
+      kec.style.display = "none"; kec.disabled = true;
+      kman.style.display = "block"; kman.value = "";
+    }
     val.kecamatan = ""; val.desa = "";
+    desa.innerHTML = '<option value="">-- Pilih Kecamatan dulu --</option>'; desa.disabled = true;
+    if (dman) { dman.style.display = "none"; dman.value = ""; }
   }
   function populateDesa(el, kotakab, kec) {
-    const desa = el.querySelector("#saha-desa");
-    const list = (((D.wilayahData[kotakab] || {})[kec]) || []).slice().sort();
-    desa.innerHTML = '<option value="">-- Pilih Desa/Kelurahan --</option>' +
-      list.map(d => `<option value="${d}">${d}</option>`).join("") +
-      '<option value="__LAINNYA__">➕ Lainnya (ketik manual)</option>';
-    desa.disabled = false;
+    const desa = el.querySelector("#saha-desa"), dman = el.querySelector("#saha-desa-manual");
+    const wkey = KAB_ALIAS[kotakab] || kotakab;
+    const list = (((D.wilayahData[wkey] || {})[kec]) || []).slice().sort();
+    if (list.length) {
+      desa.style.display = ""; desa.disabled = false; if (dman) dman.style.display = "none";
+      desa.innerHTML = '<option value="">-- Pilih Desa/Kelurahan --</option>' +
+        list.map(d => `<option value="${d}">${d}</option>`).join("") +
+        '<option value="__LAINNYA__">➕ Lainnya (ketik manual)</option>';
+    } else {
+      desa.style.display = "none"; desa.disabled = true;
+      if (dman) { dman.style.display = "block"; dman.value = ""; val.desa = ""; val.desa_manual = true; }
+    }
+  }
+
+  /* ---------- pre-fill from roster ---------- */
+  function _fillDatalistImpl() {
+    if (!_el) return;
+    const dl = _el.querySelector("#saha-roster-dl"); if (!dl) return;
+    const R = window.SAHA_ROSTER || [];
+    if (!R.length || dl.dataset.filled) return;
+    dl.innerHTML = R.map(r => `<option value="${String(r.n).replace(/"/g,'&quot;')}">${(r.j || "")}${r.k ? " · " + r.k : ""}</option>`).join("");
+    dl.dataset.filled = "1";
+  }
+  _fillDatalist = _fillDatalistImpl;
+
+  function selChip(el, group, value) {
+    if (!value) return false;
+    const cont = el.querySelector('.saha-chips[data-g="' + group + '"]'); if (!cont) return false;
+    let btn = [...cont.querySelectorAll(".saha-chip")].find(b => b.dataset.v === value);
+    if (!btn) {
+      btn = document.createElement("button"); btn.type = "button"; btn.className = "saha-chip";
+      btn.dataset.f = group; btn.dataset.v = value; btn.textContent = value; cont.appendChild(btn);
+    }
+    cont.querySelectorAll(".saha-chip").forEach(x => x.classList.remove("sel"));
+    btn.classList.add("sel"); val[group] = value;
+    return true;
+  }
+
+  function tryPrefill(el, name) {
+    const R = window.SAHA_ROSTER || [];
+    const e = R.find(r => r.n === name); if (!e) return;
+    el.querySelector("#saha-nama").value = e.n; val.nama = e.n;
+    el.querySelector("#saha-julukan").value = e.j || ""; val.julukan = e.j || "";
+    const h4 = el.querySelector("#saha-huruf4");
+    h4.value = (e.n || "").replace(/[^A-Za-z]/g, "").slice(0, 4).toUpperCase();
+    el.querySelector("#saha-tgllahir").value = e.d || "";
+    idkd();
+    if (e.d && /^\d{4}-\d{2}-\d{2}$/.test(e.d)) {
+      const y = new Date().getFullYear() - parseInt(e.d.slice(0, 4));
+      if (y > 0 && y < 120) { el.querySelector("#saha-usia").value = y; val.usia = String(y); }
+    }
+    selChip(el, "jk", e.s);
+    selChip(el, "pl", e.p);
+    if (selChip(el, "kotakab", e.k)) populateKec(el, e.k);
+    const ok = el.querySelector("#saha-cari-ok");
+    if (ok) { ok.style.display = "block"; ok.textContent = "✓ Terisi dari roster: " + e.n + " · PL " + (e.p || "-") + " · " + (e.k || "-") + ". Lengkapi Kecamatan/Desa & cek datanya."; }
   }
 
   /* ---------- API ---------- */
@@ -177,8 +273,6 @@
   function missing() { return REQ.filter(k => !(val[k] != null && String(val[k]).trim() !== "")); }
   function push(rec) { return _push ? _push(rec) : Promise.reject(new Error("Firebase belum siap")); }
 
-  // Back/Home context-aware: di dalam dashboard (iframe) -> postMessage ke parent (balik ke Master List);
-  // standalone (HP PL) -> ke daftar form (index.html).
   window.sahaBack = function (e) { if (window.self !== window.top) { if (e) e.preventDefault(); window.parent.postMessage({ saha: 'nav', to: 'l3-master' }, '*'); return false; } return true; };
   window.sahaHome = function () { if (window.self !== window.top) { window.parent.postMessage({ saha: 'nav', to: 'l3-master' }, '*'); return; } window.location.href = 'index.html'; };
 
