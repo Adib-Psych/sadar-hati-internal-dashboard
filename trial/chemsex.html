@@ -483,31 +483,35 @@
         <span class="hint">Pilih nama Anda dari daftar 19 PL Malang-Surabaya</span>
       </span>
       <div class="pl-grid" data-req="pl">
+        <button type="button" class="radio-item" data-val="Nuri">⭐ Nuri</button>
+        <button type="button" class="radio-item" data-val="David">⭐ David</button>
+        <button type="button" class="radio-item" data-val="Dodik">⭐ Dodik</button>
+        <button type="button" class="radio-item" data-val="Ibi">⭐ Ibi</button>
+        <button type="button" class="radio-item" data-val="Hanim">⭐ Hanim</button>
+        <button type="button" class="radio-item" data-val="Dedi">⭐ Dedi</button>
+        <button type="button" class="radio-item" data-val="Karyanto">⭐ Karyanto</button>
+        <button type="button" class="radio-item" data-val="Sotong Hariyono">⭐ Sotong Hariyono</button>
+        <div style="grid-column:1/-1; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--slate); padding:4px 2px 0; border-top:1px dashed #d0d7de; margin-top:4px;">PL lain / historis</div>
         <button type="button" class="radio-item" data-val="Aris">Aris</button>
         <button type="button" class="radio-item" data-val="Bayu Lesmana">Bayu Lesmana</button>
-        <button type="button" class="radio-item" data-val="David">David</button>
-        <button type="button" class="radio-item" data-val="Dedi">Dedi</button>
         <button type="button" class="radio-item" data-val="Deni">Deni</button>
-        <button type="button" class="radio-item" data-val="Dodik">Dodik</button>
         <button type="button" class="radio-item" data-val="Eko">Eko</button>
-        <button type="button" class="radio-item" data-val="Hanim">Hanim</button>
         <button type="button" class="radio-item" data-val="Hendra (KL-MLG)">Hendra (KL-MLG)</button>
         <button type="button" class="radio-item" data-val="Husen">Husen</button>
-        <button type="button" class="radio-item" data-val="Ibi">Ibi</button>
         <button type="button" class="radio-item" data-val="Imam-Konselor">Imam-Konselor</button>
-        <button type="button" class="radio-item" data-val="Karyanto">Karyanto</button>
         <button type="button" class="radio-item" data-val="Maradona">Maradona</button>
-        <button type="button" class="radio-item" data-val="Nuri">Nuri</button>
         <button type="button" class="radio-item" data-val="Paldi">Paldi</button>
         <button type="button" class="radio-item" data-val="Reno">Reno</button>
         <button type="button" class="radio-item" data-val="Siswanto (KL-SBY)">Siswanto (KL-SBY)</button>
-        <button type="button" class="radio-item" data-val="Sotong Hariyono">Sotong Hariyono</button>
       </div>
     </label>
 
     <label class="field">
-      <span class="lbl">Tanggal Laporan <span class="req">*</span></span>
-      <input type="date" id="f-tanggal" data-req="tanggal">
+      <span class="lbl">Tanggal Laporan <span class="req">*</span>
+        <span class="hint">✍️ Ketik angka saja — otomatis jadi tgl/bln/tahun. Atau <a href="#" onclick="return SAHA_TOGGLE_CAL('f-tanggal')" style="color:var(--wine);font-weight:700;">📅 pakai kalender</a></span>
+      </span>
+      <input type="text" id="f-tanggal-txt" inputmode="numeric" autocomplete="off" placeholder="tt/bb/tttt — contoh: 16/07/2026" style="letter-spacing:1px;">
+      <input type="date" id="f-tanggal" data-req="tanggal" style="display:none; margin-top:8px;">
     </label>
   </div>
 
@@ -600,7 +604,9 @@
       <span class="lbl">Tanggal Lahir Klien
         <span class="hint">💡 Boleh kosong dulu di pertemuan pertama. Nanti bisa di-backfill di database.</span>
       </span>
-      <input type="date" id="f-tgllahir">
+      <input type="text" id="f-tgllahir-txt" inputmode="numeric" autocomplete="off" placeholder="tt/bb/tttt — contoh: 31/05/1999" style="letter-spacing:1px;">
+      <input type="date" id="f-tgllahir" style="display:none; margin-top:8px;">
+      <div class="hint" style="margin-top:5px;">✍️ Ketik angka saja (misal 31051999) — otomatis rapi. Atau <a href="#" onclick="return SAHA_TOGGLE_CAL('f-tgllahir')" style="color:var(--wine);font-weight:700;">📅 pakai kalender</a></div>
     </label>
 
     <label class="field">
@@ -810,6 +816,43 @@
         <button type="button" class="radio-item" data-val="Tidak">❌ Tidak</button>
       </div>
     </label>
+
+    <div id="hasil-container" style="display:none;">
+      <div style="padding:10px 12px; background:linear-gradient(135deg,#f0f5f1 0%,#fef7f2 100%); border-left:3px solid var(--sage); border-radius:6px; font-size:11.5px; color:var(--sage-deep); margin-bottom:12px; line-height:1.5;">
+        🧪 <strong>Hasil tes layanan yang diakses</strong> — isi yang relevan saja, sisanya kosongkan. (Rahasia — M&amp;E internal.)</div>
+      <label class="field">
+        <span class="lbl">Hasil Tes HIV</span>
+        <div class="radio-group horizontal" data-req="hasil_hiv">
+          <button type="button" class="radio-item" data-val="Reaktif">🔴 Reaktif</button>
+          <button type="button" class="radio-item" data-val="Non Reaktif">🟢 Non Reaktif</button>
+          <button type="button" class="radio-item" data-val="Belum Ambil Hasil">⏳ Belum Ambil Hasil</button>
+        </div>
+      </label>
+      <label class="field">
+        <span class="lbl">Hasil Tes IMS</span>
+        <div class="radio-group horizontal" data-req="hasil_ims">
+          <button type="button" class="radio-item" data-val="Reaktif">🔴 Reaktif</button>
+          <button type="button" class="radio-item" data-val="Non Reaktif">🟢 Non Reaktif</button>
+          <button type="button" class="radio-item" data-val="Belum Ambil Hasil">⏳ Belum Ambil Hasil</button>
+        </div>
+      </label>
+      <label class="field">
+        <span class="lbl">Hasil Tes TB</span>
+        <div class="radio-group horizontal" data-req="hasil_tb">
+          <button type="button" class="radio-item" data-val="Reaktif">🔴 Reaktif</button>
+          <button type="button" class="radio-item" data-val="Non Reaktif">🟢 Non Reaktif</button>
+          <button type="button" class="radio-item" data-val="Belum Ambil Hasil">⏳ Belum Ambil Hasil</button>
+        </div>
+      </label>
+      <label class="field">
+        <span class="lbl">Hasil Tes Hepatitis B/C</span>
+        <div class="radio-group horizontal" data-req="hasil_hep">
+          <button type="button" class="radio-item" data-val="Reaktif">🔴 Reaktif</button>
+          <button type="button" class="radio-item" data-val="Non Reaktif">🟢 Non Reaktif</button>
+          <button type="button" class="radio-item" data-val="Belum Ambil Hasil">⏳ Belum Ambil Hasil</button>
+        </div>
+      </label>
+    </div>
   </div>
 
   <!-- SECTION 6: Logistik Distribusi -->
@@ -889,6 +932,59 @@
   // Default date + Provinsi (static Jawa Timur — Rule 4)
   document.getElementById('f-tanggal').value = new Date().toISOString().slice(0,10);
   answers.tanggal = document.getElementById('f-tanggal').value;
+
+  // Hasil-tes fields = OPSIONAL (jangan blokir progress/submit)
+  ['hasil_hiv','hasil_ims','hasil_tb','hasil_hep'].forEach(k => requiredKeys.delete(k));
+  document.getElementById('req-count').textContent = requiredKeys.size;
+
+  // ========== TANGGAL BISA DIKETIK (feedback PL via M&E, Jul 2026) ==========
+  window.SAHA_TOGGLE_CAL = function(natId){
+    const n = document.getElementById(natId);
+    n.style.display = (n.style.display === 'none') ? 'block' : 'none';
+    return false;
+  };
+  function wireDateTxt(txtId, natId, yMin, yMax){
+    const t = document.getElementById(txtId), n = document.getElementById(natId);
+    if (!t || !n) return;
+    let guard = false;
+    function iso2disp(v){ if(!/^\d{4}-\d{2}-\d{2}$/.test(v||'')) return ''; const p=v.split('-'); return p[2]+'/'+p[1]+'/'+p[0]; }
+    function push(v){ guard = true; n.value = v; n.dispatchEvent(new Event('input',{bubbles:true})); n.dispatchEvent(new Event('change',{bubbles:true})); guard = false; }
+    t.addEventListener('input', () => {
+      let d = t.value.replace(/\D/g,'').slice(0,8);
+      let out = d;
+      if (d.length > 4) out = d.slice(0,2)+'/'+d.slice(2,4)+'/'+d.slice(4);
+      else if (d.length > 2) out = d.slice(0,2)+'/'+d.slice(2);
+      t.value = out;
+      if (d.length === 8) {
+        const dd=+d.slice(0,2), mm=+d.slice(2,4), yy=+d.slice(4);
+        const ok = dd>=1 && dd<=31 && mm>=1 && mm<=12 && yy>=yMin && yy<=yMax;
+        if (ok) { t.style.borderColor=''; t.style.background=''; push(yy+'-'+String(mm).padStart(2,'0')+'-'+String(dd).padStart(2,'0')); return; }
+        t.style.borderColor='#c0392b'; t.style.background='#fdf0ee';
+      } else { t.style.borderColor=''; t.style.background=''; }
+      if (n.value) push('');
+    });
+    n.addEventListener('change', () => { if (!guard) { t.value = iso2disp(n.value); t.style.borderColor=''; t.style.background=''; } });
+    t.value = iso2disp(n.value);
+  }
+  const NOWY = new Date().getFullYear();
+  wireDateTxt('f-tanggal-txt','f-tanggal', 2024, NOWY+1);
+  wireDateTxt('f-tgllahir-txt','f-tgllahir', 1940, NOWY-10);
+
+  // ========== HASIL TES muncul saat Akses = Ya ==========
+  (function(){
+    const hc = document.getElementById('hasil-container');
+    document.querySelectorAll('[data-req="akses"] .radio-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const ya = btn.dataset.val === 'Ya';
+        hc.style.display = ya ? 'block' : 'none';
+        if (!ya) {
+          ['hasil_hiv','hasil_ims','hasil_tb','hasil_hep'].forEach(k => delete answers[k]);
+          hc.querySelectorAll('.radio-item').forEach(b => b.classList.remove('selected'));
+        }
+      });
+    });
+  })();
+
   answers.provinsi = 'Jawa Timur';
 
   // Radio item click handler

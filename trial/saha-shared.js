@@ -67,6 +67,8 @@
     border-radius:6px; font-size:11px; color:#8a4d1f; line-height:1.5; }
   .saha-quick{ background:linear-gradient(135deg,#f0f5f1,#eef5ff); border:1.5px solid var(--sage,#5b7553);
     border-radius:12px; padding:12px 13px; margin-bottom:6px; }
+  .saha-dhint{ font-size:10.5px; color:#64748b; margin:4px 0 0; }
+  .saha-dhint a{ color:#a83244; font-weight:700; text-decoration:none; }
   .saha-quick .saha-lbl{ margin-top:0; color:var(--sage-deep,#3e5538); }
   .saha-quick .qok{ margin-top:7px; font-size:11.5px; color:var(--sage-deep,#3e5538); font-weight:600; display:none; }
   `;
@@ -101,7 +103,9 @@
         <div class="saha-lbl">Nama PL <span class="rq">*</span></div>
         <div class="saha-chips saha-pl" data-g="pl">${chips("pl", D.PL_LIST)}</div>
         <div class="saha-lbl">Tanggal Laporan <span class="rq">*</span></div>
-        <input type="date" class="saha-in" id="saha-tanggal">
+        <input type="text" class="saha-in" id="saha-tanggal-txt" inputmode="numeric" autocomplete="off" placeholder="tt/bb/tttt — ketik angka saja" style="letter-spacing:1px;">
+        <input type="date" class="saha-in" id="saha-tanggal" style="display:none;margin-top:6px;">
+        <div class="saha-dhint">&#9997;&#65039; Ketik angka (misal 16072026) — otomatis rapi &#183; <a href="#" data-cal="saha-tanggal" class="saha-callink">&#128197; kalender</a></div>
 
         <div class="saha-h">2 · Area Jangkauan</div>
         <div class="saha-lbl">Provinsi</div>
@@ -123,7 +127,9 @@
         <div class="saha-lbl">4 Huruf Pertama Nama <span class="rq">*</span></div>
         <input type="text" class="saha-in" id="saha-huruf4" maxlength="4" placeholder="misal: BUDI" style="text-transform:uppercase;letter-spacing:2px;font-weight:700;">
         <div class="saha-lbl">Tanggal Lahir Klien</div>
-        <input type="date" class="saha-in" id="saha-tgllahir">
+        <input type="text" class="saha-in" id="saha-tgllahir-txt" inputmode="numeric" autocomplete="off" placeholder="tt/bb/tttt — ketik angka saja" style="letter-spacing:1px;">
+        <input type="date" class="saha-in" id="saha-tgllahir" style="display:none;margin-top:6px;">
+        <div class="saha-dhint">&#9997;&#65039; Ketik angka (misal 31051999) &#183; <a href="#" data-cal="saha-tgllahir" class="saha-callink">&#128197; kalender</a></div>
         <div class="saha-lbl">ID KD (Kode Dampingan) — otomatis</div>
         <input type="text" class="saha-in" id="saha-idkd" readonly placeholder="terisi otomatis" style="background:#f0f5f1;font-weight:700;letter-spacing:1.5px;color:var(--sage-deep,#3e5538);font-family:'Courier New',monospace;">
         <div class="saha-flag" id="saha-idkd-flag" style="display:none;">⚠️ <strong>Placeholder tgl lahir (123456)</strong> — flag untuk backfill saat data lengkap.</div>
@@ -142,6 +148,41 @@
     const tglLap = el.querySelector("#saha-tanggal");
     tglLap.value = today; val.tanggal = today;
     tglLap.addEventListener("change", e => { val.tanggal = e.target.value; });
+
+    /* tanggal bisa DIKETIK (feedback PL Jul 2026) */
+    function wireDateTxt(txtSel, natSel, yMin, yMax) {
+      const t = el.querySelector(txtSel), n = el.querySelector(natSel);
+      if (!t || !n) return;
+      let guard = false;
+      const disp = v => (/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(v || "")) ? v.split("-").reverse().join("/") : "";
+      t.addEventListener("input", () => {
+        let d = t.value.replace(/[^0-9]/g, "").slice(0, 8), out = d;
+        if (d.length > 4) out = d.slice(0, 2) + "/" + d.slice(2, 4) + "/" + d.slice(4);
+        else if (d.length > 2) out = d.slice(0, 2) + "/" + d.slice(2);
+        t.value = out;
+        if (d.length === 8) {
+          const dd = +d.slice(0, 2), mm = +d.slice(2, 4), yy = +d.slice(4);
+          if (dd >= 1 && dd <= 31 && mm >= 1 && mm <= 12 && yy >= yMin && yy <= yMax) {
+            t.style.borderColor = ""; t.style.background = "";
+            guard = true; n.value = yy + "-" + String(mm).padStart(2, "0") + "-" + String(dd).padStart(2, "0");
+            n.dispatchEvent(new Event("change", { bubbles: true })); guard = false;
+            return;
+          }
+          t.style.borderColor = "#c0392b"; t.style.background = "#fdf0ee";
+        } else { t.style.borderColor = ""; t.style.background = ""; }
+        if (n.value) { guard = true; n.value = ""; n.dispatchEvent(new Event("change", { bubbles: true })); guard = false; }
+      });
+      n.addEventListener("change", () => { if (!guard) { t.value = disp(n.value); t.style.borderColor = ""; t.style.background = ""; } });
+      t.value = disp(n.value);
+    }
+    const NOWY = new Date().getFullYear();
+    wireDateTxt("#saha-tanggal-txt", "#saha-tanggal", 2024, NOWY + 1);
+    wireDateTxt("#saha-tgllahir-txt", "#saha-tgllahir", 1940, NOWY - 10);
+    el.querySelectorAll(".saha-callink").forEach(a => a.addEventListener("click", ev => {
+      ev.preventDefault();
+      const n2 = el.querySelector("#" + a.dataset.cal);
+      n2.style.display = (n2.style.display === "none") ? "block" : "none";
+    }));
 
     el.querySelectorAll(".saha-chips").forEach(g => {
       g.addEventListener("click", e => {
@@ -254,6 +295,8 @@
     const h4 = el.querySelector("#saha-huruf4");
     h4.value = (e.n || "").replace(/[^A-Za-z]/g, "").slice(0, 4).toUpperCase();
     el.querySelector("#saha-tgllahir").value = e.d || "";
+    const _tt = el.querySelector("#saha-tgllahir-txt");
+    if (_tt) _tt.value = (e.d && /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(e.d)) ? e.d.split("-").reverse().join("/") : "";
     idkd();
     if (e.d && /^\d{4}-\d{2}-\d{2}$/.test(e.d)) {
       const y = new Date().getFullYear() - parseInt(e.d.slice(0, 4));
