@@ -104,8 +104,8 @@
         <div class="saha-chips saha-pl" data-g="pl">${chips("pl", D.PL_LIST)}</div>
         <div class="saha-lbl">Tanggal Laporan <span class="rq">*</span></div>
         <input type="text" class="saha-in" id="saha-tanggal-txt" inputmode="numeric" autocomplete="off" placeholder="tt/bb/tttt — ketik angka saja" style="letter-spacing:1px;">
-        <input type="date" class="saha-in" id="saha-tanggal" style="display:none;margin-top:6px;">
-        <div class="saha-dhint">&#9997;&#65039; Ketik angka (misal 16072026) — otomatis rapi &#183; <a href="#" data-cal="saha-tanggal" class="saha-callink">&#128197; kalender</a></div>
+        <input type="date" class="saha-in" id="saha-tanggal" style="margin-top:6px;">
+        <div class="saha-dhint">&#9997;&#65039; Cara cepat: ketik angka saja di kotak pertama — kalender di bawah otomatis ikut untuk cek/pilih</div>
 
         <div class="saha-h">2 · Area Jangkauan</div>
         <div class="saha-lbl">Provinsi</div>
@@ -128,8 +128,8 @@
         <input type="text" class="saha-in" id="saha-huruf4" maxlength="4" placeholder="misal: BUDI" style="text-transform:uppercase;letter-spacing:2px;font-weight:700;">
         <div class="saha-lbl">Tanggal Lahir Klien</div>
         <input type="text" class="saha-in" id="saha-tgllahir-txt" inputmode="numeric" autocomplete="off" placeholder="tt/bb/tttt — ketik angka saja" style="letter-spacing:1px;">
-        <input type="date" class="saha-in" id="saha-tgllahir" style="display:none;margin-top:6px;">
-        <div class="saha-dhint">&#9997;&#65039; Ketik angka (misal 31051999) &#183; <a href="#" data-cal="saha-tgllahir" class="saha-callink">&#128197; kalender</a></div>
+        <input type="date" class="saha-in" id="saha-tgllahir" style="margin-top:6px;">
+        <div class="saha-dhint">&#9997;&#65039; Cara cepat: ketik angka saja (misal 31051999) — tidak perlu scroll kalender jauh</div>
         <div class="saha-lbl">ID KD (Kode Dampingan) — otomatis</div>
         <input type="text" class="saha-in" id="saha-idkd" readonly placeholder="terisi otomatis" style="background:#f0f5f1;font-weight:700;letter-spacing:1.5px;color:var(--sage-deep,#3e5538);font-family:'Courier New',monospace;">
         <div class="saha-flag" id="saha-idkd-flag" style="display:none;">⚠️ <strong>Placeholder tgl lahir (123456)</strong> — flag untuk backfill saat data lengkap.</div>

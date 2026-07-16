@@ -508,10 +508,10 @@
 
     <label class="field">
       <span class="lbl">Tanggal Laporan <span class="req">*</span>
-        <span class="hint">✍️ Ketik angka saja — otomatis jadi tgl/bln/tahun. Atau <a href="#" onclick="return SAHA_TOGGLE_CAL('f-tanggal')" style="color:var(--wine);font-weight:700;">📅 pakai kalender</a></span>
+        <span class="hint">✍️ Cara cepat: ketik angka saja di kotak pertama (misal 16072026) — kalender di bawahnya otomatis ikut &amp; bisa dipakai untuk cek/pilih</span>
       </span>
       <input type="text" id="f-tanggal-txt" inputmode="numeric" autocomplete="off" placeholder="tt/bb/tttt — contoh: 16/07/2026" style="letter-spacing:1px;">
-      <input type="date" id="f-tanggal" data-req="tanggal" style="display:none; margin-top:8px;">
+      <input type="date" id="f-tanggal" data-req="tanggal" style="margin-top:8px;">
     </label>
   </div>
 
@@ -605,8 +605,8 @@
         <span class="hint">💡 Boleh kosong dulu di pertemuan pertama. Nanti bisa di-backfill di database.</span>
       </span>
       <input type="text" id="f-tgllahir-txt" inputmode="numeric" autocomplete="off" placeholder="tt/bb/tttt — contoh: 31/05/1999" style="letter-spacing:1px;">
-      <input type="date" id="f-tgllahir" style="display:none; margin-top:8px;">
-      <div class="hint" style="margin-top:5px;">✍️ Ketik angka saja (misal 31051999) — otomatis rapi. Atau <a href="#" onclick="return SAHA_TOGGLE_CAL('f-tgllahir')" style="color:var(--wine);font-weight:700;">📅 pakai kalender</a></div>
+      <input type="date" id="f-tgllahir" style="margin-top:8px;">
+      <div class="hint" style="margin-top:5px;">✍️ Cara cepat: ketik angka saja (misal 31051999) — tidak perlu scroll kalender jauh; kalender di bawah otomatis ikut untuk pengecekan</div>
     </label>
 
     <label class="field">
@@ -774,9 +774,26 @@
 
     <label class="field">
       <span class="lbl">Pernah tes HIV sebelumnya? <span class="req">*</span></span>
-      <div class="radio-group horizontal" data-req="tes-hiv">
+      <div class="radio-group horizontal" data-req="tes-hiv" id="teshiv-group">
         <button type="button" class="radio-item" data-val="Ya">Ya</button>
         <button type="button" class="radio-item" data-val="Tidak">Tidak</button>
+      </div>
+    </label>
+
+    <label class="field" id="hasil-lama-container" style="display:none;">
+      <span class="lbl">Jika Ya, Apa hasilnya? <span class="req">*</span></span>
+      <div class="radio-group grid-3" data-req="tes-hiv-hasil" id="teshiv-hasil-group">
+        <button type="button" class="radio-item" data-val="Reaktif">🔴 Reaktif</button>
+        <button type="button" class="radio-item" data-val="Non Reaktif">🟢 Non Reaktif</button>
+        <button type="button" class="radio-item" data-val="Tidak tau karena tidak ambil hasil">❔ Tidak tau (tidak ambil hasil)</button>
+      </div>
+    </label>
+
+    <label class="field" id="arv-container" style="display:none;">
+      <span class="lbl">Jika Hasil Tes HIV Reaktif — Apakah sudah minum ARV sampai sekarang? <span class="req">*</span></span>
+      <div class="radio-group horizontal" data-req="arv-lanjut">
+        <button type="button" class="radio-item" data-val="Ya">💊 Ya</button>
+        <button type="button" class="radio-item" data-val="Tidak">❌ Tidak</button>
       </div>
     </label>
   </div>
@@ -969,6 +986,36 @@
   const NOWY = new Date().getFullYear();
   wireDateTxt('f-tanggal-txt','f-tanggal', 2024, NOWY+1);
   wireDateTxt('f-tgllahir-txt','f-tgllahir', 1940, NOWY-10);
+
+  // ========== KASKADE RIWAYAT TES HIV (persis KoBo — feedback Adib/Shela) ==========
+  (function(){
+    const hl = document.getElementById('hasil-lama-container');
+    const av = document.getElementById('arv-container');
+    // required hanya saat tampil
+    requiredKeys.delete('tes-hiv-hasil'); requiredKeys.delete('arv-lanjut');
+    document.getElementById('req-count').textContent = requiredKeys.size;
+    function clearGroup(sel, key){
+      document.querySelectorAll(sel + ' .radio-item').forEach(b => b.classList.remove('selected'));
+      delete answers[key];
+    }
+    function hideArv(){ av.style.display='none'; requiredKeys.delete('arv-lanjut'); clearGroup('[data-req="arv-lanjut"]','arv-lanjut'); }
+    document.querySelectorAll('#teshiv-group .radio-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.dataset.val === 'Ya') { hl.style.display='block'; requiredKeys.add('tes-hiv-hasil'); }
+        else { hl.style.display='none'; requiredKeys.delete('tes-hiv-hasil'); clearGroup('#teshiv-hasil-group','tes-hiv-hasil'); hideArv(); }
+        document.getElementById('req-count').textContent = requiredKeys.size;
+        updateProgress();
+      });
+    });
+    document.querySelectorAll('#teshiv-hasil-group .radio-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.dataset.val === 'Reaktif') { av.style.display='block'; requiredKeys.add('arv-lanjut'); }
+        else { hideArv(); }
+        document.getElementById('req-count').textContent = requiredKeys.size;
+        updateProgress();
+      });
+    });
+  })();
 
   // ========== HASIL TES muncul saat Akses = Ya ==========
   (function(){
