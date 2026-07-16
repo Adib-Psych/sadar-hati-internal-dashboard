@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="id"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>Laporan Bulanan KL · Sadar Hati Foundation</title>
+<title>Laporan Bulanan Korlap · Sadar Hati Foundation</title>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{--wine:#a83244;--wine-deep:#7a1f30;--sage:#5b7553;--sage-deep:#3e5538;--gold:#d4a017;--cream:#fef7f2;--navy:#1f2937;--slate:#64748b;}
@@ -40,15 +40,15 @@
 <body><div class="container">
   <div class="top-bar"><a href="index.html" onclick="return sahaBack(event)">← Kembali</a><span style="color:var(--slate);">Sadar Hati Foundation</span></div>
 
-  <div class="hero"><div class="eyebrow">📆 Laporan Bulanan · Koordinator Lapangan</div><h1>Laporan Bulanan KL</h1><p>Laporan naratif bulanan Koordinator Lapangan per PL — hasil diskusi KL &amp; PL: analisa lapangan, kegiatan kelompok, dan strategi. Tersimpan ke database.</p></div>
+  <div class="hero"><div class="eyebrow">📆 Laporan Bulanan · Korlap (Koordinator Lapangan)</div><h1>Laporan Bulanan Korlap</h1><p>Laporan naratif bulanan Korlap per PL — hasil diskusi KL &amp; PL: analisa lapangan, kegiatan kelompok, dan strategi. Tersimpan ke database.</p></div>
 
   <div class="section"><div class="section-title">1 · Identitas Laporan</div>
     <div class="qb"><div class="qlbl">Tanggal Laporan <span class="rq">*</span></div>
       <input type="text" class="in" id="tgl-txt" inputmode="numeric" autocomplete="off" placeholder="tt/bb/tttt — ketik angka saja" style="letter-spacing:1px;">
       <input type="date" class="in" id="tgl-nat" data-in="tanggal" style="margin-top:8px;">
       <div class="dhint">✍️ Cara cepat: ketik angka saja — kalender di bawah otomatis ikut</div></div>
-    <div class="qb"><div class="qlbl">Nama KL (Koordinator Lapangan) <span class="rq">*</span></div>
-      <div class="chips" data-single="kl"><div class="chip" data-v="Hendra (KL-MLG)">Hendra (KL-MLG)</div><div class="chip" data-v="Siswanto (KL-SBY)">Siswanto (KL-SBY)</div></div></div>
+    <div class="qb"><div class="qlbl">Nama Korlap (Koordinator Lapangan) <span class="rq">*</span></div>
+      <div class="chips" data-single="kl"><div class="chip" data-v="Hendra (KL-MLG)">Hendra (Korlap MLG)</div><div class="chip" data-v="Siswanto (KL-SBY)">Siswanto (Korlap SBY)</div></div></div>
     <div class="qb"><div class="qlbl">Nama PL yang dilaporkan <span class="rq">*</span></div>
       <select class="in" data-in="pl"><option value="">-- Pilih PL --</option>
         <optgroup label="⭐ PL Aktif"><option>Nuri</option><option>David</option><option>Dodik</option><option>Ibi</option><option>Hanim</option><option>Dedi</option><option>Karyanto</option><option value="Sotong Hariyono">Sotong Hariyono</option></optgroup>
@@ -73,7 +73,7 @@
 <script src="saha-data.js"></script>
 <script src="saha-shared.js"></script>
 <script>
-const FORM="bulanan-kl", INSTRUMEN="Laporan Bulanan KL", SCHEMA="bulanan-kl-1.0";
+const FORM="bulanan-kl", INSTRUMEN="Laporan Bulanan Korlap", SCHEMA="bulanan-kl-1.0";
 const data={};
 document.querySelectorAll('.chips[data-single]').forEach(g=>{
   const key=g.dataset.single;
@@ -111,7 +111,7 @@ wireDateTxt('tgl-txt','tgl-nat',2024,new Date().getFullYear()+1);
 
 function submitForm(){
   const REQ=['tanggal','kl','pl','analisa','fgd','strategi'];
-  const miss=REQ.filter(k=>!data[k]||!String(data[k]).trim());
+  const miss=REQ.filter(k=>!data[k]||!String(data[k]).trim()).map(k=>k==='kl'?'korlap':k);
   if(miss.length){alert('Lengkapi dulu: '+miss.join(', '));return;}
   const rec={form:FORM,instrumen:INSTRUMEN,pl:String(data.pl),created_at:new Date().toISOString(),schema_version:SCHEMA,
     tahun:String(data.tanggal).slice(0,4),tanggal:String(data.tanggal),kl:String(data.kl),
