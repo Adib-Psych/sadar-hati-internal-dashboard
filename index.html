@@ -6713,6 +6713,8 @@
         <div class="saha-tblbox" id="cf-panel" style="display:none;">
           <div class="saha-tbar">
             <input id="cf-q" class="saha-tsearch" placeholder="🔍 nama / julukan / ID KD / wilayah...">
+            <span id="cf-age" style="font-size:10.5px;color:var(--slate,#64748b);white-space:nowrap;"></span>
+            <button id="cf-refresh" class="lh-btn-sm" title="Tarik ulang dari database (pakai kuota baca)">🔄</button>
             <select id="cf-thn" class="lh-fin"><option value="">Semua tahun</option></select>
             <select id="cf-bln" class="lh-fin"><option value="">Semua bulan</option></select>
             <select id="cf-loc" class="lh-fin"><option value="">Semua wilayah</option></select>
@@ -7114,13 +7116,29 @@ function render(){
   if($('cf-count')) $('cf-count').textContent=rows.length;
   if($('cf-tbody')) $('cf-tbody').innerHTML = rows.slice(0,1000).map(x=>'<tr><td style="font-weight:600;">'+esc(x.PL_Utama)+'</td><td>'+esc(x.Nama_Lengkap)+'</td><td>'+esc(x.Nama_Panggilan)+'</td><td>'+esc(x.ID_KD)+'</td><td>'+esc(x.Jenis_Kelamin)+'</td><td>'+esc(x.Usia)+'</td><td>'+esc(x.Kab_Kota)+'</td><td>'+esc(x.Tahun_Aktif)+'</td><td>'+esc(x.Hasil_HIV)+'</td></tr>').join('');
 }
-async function load(){
-  try { const snap=await getDocs(collection(db,'clients')); ALL=[]; snap.forEach(d=>ALL.push(d.data())); loaded=true; fillFilters(); render(); }
-  catch(e){ const l=$('cf-locked'); if(l){ l.style.display='block'; l.innerHTML='<span class="icon">⚠️</span><div>Gagal memuat data klien: '+esc(e.code||e.message)+'. Cek rule Firestore (baca clients = login).</div>'; } }
+/* ===== HEMAT KUOTA (v0.24): cache lokal 24 jam — baca DB max 1x/hari/perangkat ===== */
+const CF_CK='cf-cache-v2', CF_TTL=24*60*60*1000;
+const CF_KEYS=['PL_Utama','Nama_Lengkap','Nama_Panggilan','ID_KD','Jenis_Kelamin','Usia','Kab_Kota','Tahun_Aktif','Hasil_HIV','Kontak_Pertama','Kontak_Terakhir','_search','_thn','_bln'];
+function cfKeep(x){ const r={}; CF_KEYS.forEach(k=>{ if(x[k]!=null) r[k]=x[k]; }); return r; }
+function cfAge(t){ const el=$('cf-age'); if(el){ const j=(Date.now()-t)/3600000; el.textContent='💾 data lokal '+(j<1?Math.round(j*60)+' mnt':j.toFixed(1)+' jam')+' lalu'; } }
+function cfFromCache(){
+  try{ const c=JSON.parse(localStorage.getItem(CF_CK)||'null');
+    if(c && c.t && (Date.now()-c.t)<CF_TTL && Array.isArray(c.rows) && c.rows.length){
+      ALL=c.rows; loaded=true; fillFilters(); render(); cfAge(c.t); return true; } }catch(e){}
+  return false;
 }
+async function load(force){
+  if(loaded && !force) return;
+  try { const snap=await getDocs(collection(db,'clients')); ALL=[]; snap.forEach(d=>ALL.push(d.data())); loaded=true; fillFilters(); render();
+    try{ localStorage.setItem(CF_CK, JSON.stringify({t:Date.now(), rows:ALL.map(cfKeep)})); }catch(e){}
+    cfAge(Date.now()); }
+  catch(e){ const l=$('cf-locked'); if(l){ l.style.display='block'; l.innerHTML='<span class="icon">⚠️</span><div>Gagal memuat data klien: '+esc(e.code||e.message)+'. Bisa jadi kuota baca harian gratis habis — coba lagi setelah ~jam 14-15 WIB, atau pakai data lokal (💾) bila ada.</div>'; } }
+}
+const cfR=$('cf-refresh');
+if(cfR) cfR.addEventListener('click', ()=>{ cfR.disabled=true; cfR.textContent='…'; load(true).finally(()=>{ cfR.disabled=false; cfR.textContent='🔄'; }); });
 onAuthStateChanged(auth, u=>{
   if(!$('cf-panel')) return;
-  if(u){ if($('cf-locked'))$('cf-locked').style.display='none'; $('cf-panel').style.display='block'; if(!loaded) load(); }
+  if(u){ if($('cf-locked'))$('cf-locked').style.display='none'; $('cf-panel').style.display='block'; if(!loaded){ if(!cfFromCache()) load(); } }
   else { if($('cf-locked'))$('cf-locked').style.display='block'; $('cf-panel').style.display='none'; }
 });
 ['cf-q','cf-thn','cf-bln','cf-loc','cf-pl'].forEach(id=>{ const el=$(id); if(el){ el.addEventListener('input',render); el.addEventListener('change',render); } });
