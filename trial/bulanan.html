@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Laporan Bulanan Korlap · Sadar Hati Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--wine:#a83244;--wine-deep:#7a1f30;--sage:#5b7553;--sage-deep:#3e5538;--gold:#d4a017;--cream:#fef7f2;--navy:#1f2937;--slate:#64748b;}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{margin:0;padding:16px 14px 70px;font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;background:linear-gradient(180deg,#fef7f2 0%,#f4efea 100%);color:var(--navy);min-height:100vh;}
+  .container{max-width:480px;margin:0 auto;}
+  .top-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:12px;}
+  .top-bar a{color:var(--slate);text-decoration:none;padding:6px 10px;border-radius:12px;background:#fff;}
+  .hero{background:linear-gradient(135deg,var(--wine) 0%,var(--wine-deep) 100%);color:#fff;border-radius:16px;padding:20px 18px;margin-bottom:16px;}
+  .hero .eyebrow{font-size:10px;letter-spacing:1.8px;text-transform:uppercase;opacity:.9;font-weight:700;}
+  .hero h1{font-family:'Lora',Georgia,serif;font-size:22px;font-weight:700;margin:6px 0 4px;}
+  .hero p{font-size:12.5px;opacity:.92;line-height:1.5;margin:6px 0 0;}
+  .section{background:#fff;border-radius:14px;padding:18px 16px;margin-bottom:14px;box-shadow:0 3px 10px rgba(0,0,0,.05);}
+  .section-title{font-family:'Lora',Georgia,serif;font-size:15px;font-weight:700;color:var(--wine-deep);margin:0 0 12px;padding-bottom:10px;border-bottom:1px solid #f0e7d8;}
+  .qb{padding:13px 0;border-bottom:1px solid #f5eee2;}
+  .qb:last-child{border-bottom:none;}
+  .qlbl{font-size:13.5px;font-weight:600;color:var(--navy);line-height:1.5;margin-bottom:9px;}
+  .qlbl .rq{color:var(--wine);}
+  .in{width:100%;padding:11px 13px;font-size:15px;border:1.5px solid #e5e7eb;border-radius:10px;background:#fafafa;font-family:inherit;color:var(--navy);-webkit-appearance:none;appearance:none;}
+  .in:focus{outline:none;border-color:var(--wine);background:#fff;}
+  textarea.in{min-height:95px;resize:vertical;line-height:1.5;}
+  select.in{background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3e%3cpath d='M6 9l6 6 6-6'/%3e%3c/svg%3e");background-repeat:no-repeat;background-position:right 12px center;background-size:18px;padding-right:38px;}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;}
+  .chip{flex:1 1 auto;text-align:center;min-width:70px;padding:10px 12px;font-size:13.5px;font-weight:600;border:1.6px solid #e5e7eb;border-radius:10px;background:#fff;color:var(--slate);cursor:pointer;font-family:inherit;}
+  .chip.sel{border-color:var(--wine);background:var(--wine);color:#fff;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .note{margin-top:6px;padding:9px 12px;background:#fef5ed;border-left:3px solid var(--gold);border-radius:6px;font-size:11.5px;color:#8a4d1f;line-height:1.5;}
+  .dhint{font-size:10.5px;color:var(--slate);margin-top:5px;}
+  .submit-bar{background:#fff;border-radius:14px;padding:18px 16px;margin-top:10px;text-align:center;}
+  .btn-submit{background:linear-gradient(135deg,var(--wine),var(--wine-deep));color:#fff;border:none;padding:16px 24px;border-radius:30px;font-size:15px;font-weight:700;width:100%;cursor:pointer;font-family:inherit;box-shadow:0 6px 16px rgba(168,50,68,.3);}
+  .btn-submit:disabled{background:#d1d5db;box-shadow:none;cursor:not-allowed;}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--sage-deep);color:#fff;padding:13px 20px;border-radius:30px;font-size:13px;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,.25);display:none;z-index:200;}
+  .toast.show{display:block;}
+  .totbox{margin-top:10px;padding:12px 14px;background:linear-gradient(135deg,#f0f5f1,#fef7f2);border-radius:10px;font-size:13px;font-weight:700;color:var(--sage-deep);text-align:center;}
+</style></head>
+<body><div class="container">
+  <div class="top-bar"><a href="index.html" onclick="return sahaBack(event)">← Kembali</a><span style="color:var(--slate);">Sadar Hati Foundation</span></div>
+
+  <div class="hero"><div class="eyebrow">📆 Laporan Bulanan · Korlap (Koordinator Lapangan)</div><h1>Laporan Bulanan Korlap</h1><p>Laporan naratif bulanan Korlap per PL — hasil diskusi KL &amp; PL: analisa lapangan, kegiatan kelompok, dan strategi. Tersimpan ke database.</p></div>
+
+  <div class="section"><div class="section-title">1 · Identitas Laporan</div>
+    <div class="qb"><div class="qlbl">Tanggal Laporan <span class="rq">*</span></div>
+      <input type="text" class="in" id="tgl-txt" inputmode="numeric" autocomplete="off" placeholder="tt/bb/tttt — ketik angka saja" style="letter-spacing:1px;">
+      <input type="date" class="in" id="tgl-nat" data-in="tanggal" style="margin-top:8px;">
+      <div class="dhint">✍️ Cara cepat: ketik angka saja — kalender di bawah otomatis ikut</div></div>
+    <div class="qb"><div class="qlbl">Nama Korlap (Koordinator Lapangan) <span class="rq">*</span></div>
+      <div class="chips" data-single="kl"><div class="chip" data-v="Hendra (KL-MLG)">Hendra (Korlap MLG)</div><div class="chip" data-v="Siswanto (KL-SBY)">Siswanto (Korlap SBY)</div></div></div>
+    <div class="qb"><div class="qlbl">Nama PL yang dilaporkan <span class="rq">*</span></div>
+      <select class="in" data-in="pl"><option value="">-- Pilih PL --</option>
+        <optgroup label="⭐ PL Aktif"><option>Nuri</option><option>David</option><option>Dodik</option><option>Ibi</option><option>Hanim</option><option>Dedi</option><option>Karyanto</option><option value="Sotong Hariyono">Sotong Hariyono</option></optgroup>
+        <optgroup label="Lainnya"><option>Eko</option></optgroup></select></div>
+  </div>
+
+  <div class="section"><div class="section-title">2 · Laporan Naratif</div>
+    <div class="qb"><div class="qlbl">Analisa Deskripsi Lapangan <span class="rq">*</span></div>
+      <div class="dhint" style="margin:0 0 8px;">Jelaskan analisa dari hasil penjangkauan, rujukan, dan temuan kasus di kabupaten/kota — dari hasil diskusi dengan PL.</div>
+      <textarea class="in" data-in="analisa" placeholder="Tulis analisa lapangan bulan ini..."></textarea></div>
+    <div class="qb"><div class="qlbl">Deskripsi FGD, Support Group &amp; pertemuan lainnya <span class="rq">*</span></div>
+      <div class="dhint" style="margin:0 0 8px;">Jumlah peserta, tema pertemuan, hasil, dan rencana tindak lanjut.</div>
+      <textarea class="in" data-in="fgd" placeholder="Tulis kegiatan kelompok bulan ini..."></textarea></div>
+    <div class="qb"><div class="qlbl">Strategi Lapangan <span class="rq">*</span></div>
+      <div class="dhint" style="margin:0 0 8px;">Strategi untuk PL (hasil diskusi) untuk peningkatan kuantitas &amp; kualitas capaian.</div>
+      <textarea class="in" data-in="strategi" placeholder="Tulis strategi bulan depan..."></textarea></div>
+  </div>
+
+  <div class="submit-bar"><button class="btn-submit" id="btn-submit" onclick="submitForm()">💾 Simpan Laporan</button></div>
+</div>
+<div class="toast" id="toast">✅ Tersimpan</div>
+<script src="saha-data.js"></script>
+<script src="saha-shared.js"></script>
+<script>
+const FORM="bulanan-kl", INSTRUMEN="Laporan Bulanan Korlap", SCHEMA="bulanan-kl-1.0";
+const data={};
+document.querySelectorAll('.chips[data-single]').forEach(g=>{
+  const key=g.dataset.single;
+  g.addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;
+    g.querySelectorAll('.chip').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');data[key]=c.dataset.v;});
+});
+document.querySelectorAll('[data-in]').forEach(el=>{
+  el.addEventListener('input',()=>data[el.dataset.in]=el.value);el.addEventListener('change',()=>data[el.dataset.in]=el.value);
+});
+
+// tanggal: ketik cepat + kalender (pola v0.18)
+function wireDateTxt(txtId,natId,yMin,yMax,onSet){
+  const t=document.getElementById(txtId),n=document.getElementById(natId);
+  if(!t||!n)return; let guard=false;
+  const disp=v=>(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(v||''))?v.split('-').reverse().join('/'):'';
+  t.addEventListener('input',()=>{
+    let d=t.value.replace(/[^0-9]/g,'').slice(0,8),out=d;
+    if(d.length>4)out=d.slice(0,2)+'/'+d.slice(2,4)+'/'+d.slice(4);
+    else if(d.length>2)out=d.slice(0,2)+'/'+d.slice(2);
+    t.value=out;
+    if(d.length===8){const dd=+d.slice(0,2),mm=+d.slice(2,4),yy=+d.slice(4);
+      if(dd>=1&&dd<=31&&mm>=1&&mm<=12&&yy>=yMin&&yy<=yMax){t.style.borderColor='';t.style.background='';
+        guard=true;n.value=yy+'-'+String(mm).padStart(2,'0')+'-'+String(dd).padStart(2,'0');
+        n.dispatchEvent(new Event('change',{bubbles:true}));guard=false;if(onSet)onSet(n.value);return;}
+      t.style.borderColor='#c0392b';t.style.background='#fdf0ee';}
+    else{t.style.borderColor='';t.style.background='';}
+    if(n.value){guard=true;n.value='';n.dispatchEvent(new Event('change',{bubbles:true}));guard=false;if(onSet)onSet('');}
+  });
+  n.addEventListener('change',()=>{if(!guard){t.value=disp(n.value);t.style.borderColor='';t.style.background='';}});
+  t.value=disp(n.value);
+}
+
+const t0=document.getElementById('tgl-nat'); t0.value=new Date().toISOString().slice(0,10); data.tanggal=t0.value;
+wireDateTxt('tgl-txt','tgl-nat',2024,new Date().getFullYear()+1);
+
+function submitForm(){
+  const REQ=['tanggal','kl','pl','analisa','fgd','strategi'];
+  const miss=REQ.filter(k=>!data[k]||!String(data[k]).trim()).map(k=>k==='kl'?'korlap':k);
+  if(miss.length){alert('Lengkapi dulu: '+miss.join(', '));return;}
+  const rec={form:FORM,instrumen:INSTRUMEN,pl:String(data.pl),created_at:new Date().toISOString(),schema_version:SCHEMA,
+    tahun:String(data.tanggal).slice(0,4),tanggal:String(data.tanggal),kl:String(data.kl),
+    data:{analisa:data.analisa,fgd:data.fgd,strategi:data.strategi}};
+  const key='sh-'+FORM+'-'+Date.now();
+  try{localStorage.setItem(key,JSON.stringify(rec));}catch(e){}
+  const btn=document.getElementById('btn-submit');btn.disabled=true;btn.textContent='Menyimpan…';
+  const done=ok=>{const t=document.getElementById('toast');t.textContent=ok?'✅ Laporan tersimpan (cloud + HP ini)':'✅ Tersimpan di HP (cloud menyusul saat online)';t.classList.add('show');
+    setTimeout(()=>{t.classList.remove('show');if(confirm('Isi laporan untuk PL lain?'))location.reload();else sahaHome();},1200);};
+  if(window.SAHA&&SAHA.ready())SAHA.push(rec).then(cid=>{try{localStorage.setItem(key+'__cloud',cid);}catch(e){};done(true);}).catch(()=>done(false));
+  else done(false);
+}
+</script></body></html>

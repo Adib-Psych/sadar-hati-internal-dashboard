@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>SRQ-29 · Sadar Hati Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --wine: #a83244;
+    --wine-deep: #7a1f30;
+    --sage: #5b7553;
+    --sage-deep: #3e5538;
+    --gold: #d4a017;
+    --cream: #fef7f2;
+    --navy: #1f2937;
+    --slate: #64748b;
+    --blue: #4f7ba8;
+    --purple: #6b4d7a;
+    --orange: #c47c2a;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0;
+    padding: 16px 14px 60px 14px;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(180deg, #f0f5f1 0%, #e5eeda 100%);
+    color: var(--navy);
+    min-height: 100vh;
+  }
+  .container { max-width: 480px; margin: 0 auto; }
+
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    font-size: 12px;
+  }
+  .top-bar a {
+    color: var(--slate);
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 12px;
+    background: white;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--sage) 0%, var(--sage-deep) 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 20px 18px;
+    margin-bottom: 16px;
+  }
+  .hero .eyebrow {
+    font-size: 10px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    opacity: 0.9;
+    font-weight: 700;
+  }
+  .hero h1 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 6px 0 4px 0;
+  }
+  .hero p {
+    font-size: 12.5px;
+    opacity: 0.92;
+    line-height: 1.55;
+    margin: 6px 0 0 0;
+  }
+
+  .section {
+    background: white;
+    border-radius: 14px;
+    padding: 18px 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  }
+  .section-title {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--sage-deep);
+    margin: 0 0 12px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5eeda;
+  }
+  .subdomain-tag {
+    display: inline-block;
+    background: rgba(91, 117, 83, 0.14);
+    color: var(--sage-deep);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 10.5px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .subdomain-tag.zat { background: rgba(196, 124, 42, 0.14); color: #8a4d1f; }
+  .subdomain-tag.psikotik { background: rgba(107, 77, 122, 0.15); color: var(--purple); }
+  .subdomain-tag.ptsd { background: rgba(79, 123, 168, 0.14); color: var(--blue); }
+
+  label.field {
+    display: block;
+    margin-bottom: 12px;
+  }
+  label.field .lbl {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--slate);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  label.field input, label.field select {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 15px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    background: #fafafa;
+    font-family: inherit;
+    color: var(--navy);
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  label.field input:focus, label.field select:focus {
+    outline: none;
+    border-color: var(--sage);
+    background: white;
+  }
+  label.field select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3e%3cpath d='M6 9l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 20px;
+    padding-right: 40px;
+  }
+
+  .subdomain-header {
+    background: #f0f5f1;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin: 14px 0 6px 0;
+    font-size: 12px;
+    color: var(--sage-deep);
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    border-left: 3px solid var(--sage);
+  }
+  .subdomain-header.zat { background: #fef5ed; color: #8a4d1f; border-left-color: var(--orange); }
+  .subdomain-header.psikotik { background: #f5f0f8; color: var(--purple); border-left-color: var(--purple); }
+  .subdomain-header.ptsd { background: #eef4fa; color: var(--blue); border-left-color: var(--blue); }
+
+  .question-block {
+    padding: 12px 0;
+    border-bottom: 1px solid #f0e7d8;
+  }
+  .question-block:last-child { border-bottom: none; }
+  .question-num {
+    display: inline-block;
+    background: var(--sage);
+    color: white;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 26px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-right: 8px;
+    vertical-align: top;
+  }
+  .question-block.zat .question-num { background: var(--orange); }
+  .question-block.psikotik .question-num { background: var(--purple); }
+  .question-block.ptsd .question-num { background: var(--blue); }
+  .question-text {
+    display: inline-block;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--navy);
+    width: calc(100% - 40px);
+    vertical-align: top;
+  }
+  .yesno-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    margin-left: 34px;
+  }
+  .yesno-row button {
+    flex: 1;
+    padding: 12px 8px;
+    font-size: 14px;
+    font-weight: 700;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    background: white;
+    color: var(--slate);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.1s;
+  }
+  .yesno-row button.selected-ya {
+    border-color: var(--sage);
+    background: var(--sage);
+    color: white;
+  }
+  .yesno-row button.selected-tidak {
+    border-color: #d1d5db;
+    background: #f3f4f6;
+    color: var(--navy);
+  }
+  .question-block.zat .yesno-row button.selected-ya { border-color: var(--orange); background: var(--orange); }
+  .question-block.psikotik .yesno-row button.selected-ya { border-color: var(--purple); background: var(--purple); }
+  .question-block.ptsd .yesno-row button.selected-ya { border-color: var(--blue); background: var(--blue); }
+
+  .submit-bar {
+    background: white;
+    border-radius: 14px;
+    padding: 18px 16px;
+    margin-top: 10px;
+    text-align: center;
+    position: sticky;
+    bottom: 10px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+  }
+  .btn-submit {
+    background: linear-gradient(135deg, var(--sage) 0%, var(--sage-deep) 100%);
+    color: white;
+    border: none;
+    padding: 16px 24px;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 700;
+    width: 100%;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: 0 6px 16px rgba(91, 117, 83, 0.30);
+  }
+  .btn-submit:disabled {
+    background: #d1d5db;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+  .progress-text {
+    font-size: 12px;
+    color: var(--slate);
+    margin-bottom: 12px;
+  }
+  .progress-text strong { color: var(--sage-deep); font-size: 15px; }
+
+  /* Result modal */
+  .result-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 100;
+    padding: 20px 14px;
+    overflow-y: auto;
+    align-items: center;
+    justify-content: center;
+  }
+  .result-overlay.show { display: flex; }
+  .result-card {
+    background: white;
+    border-radius: 20px;
+    max-width: 460px;
+    width: 100%;
+    padding: 22px 18px;
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+  .result-card h2 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 20px;
+    margin: 0 0 12px 0;
+    color: var(--sage-deep);
+  }
+  .subscore-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 10px 0 14px 0;
+  }
+  .subscore {
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  .subscore .lbl {
+    font-size: 9.5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+    opacity: 0.85;
+  }
+  .subscore .num {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1;
+    margin: 4px 0;
+  }
+  .subscore .desc {
+    font-size: 10.5px;
+    opacity: 0.85;
+    line-height: 1.3;
+  }
+  .ss-neurosis { background: #f0f5f1; color: var(--sage-deep); }
+  .ss-zat { background: #fef5ed; color: #8a4d1f; }
+  .ss-psikotik { background: #f5f0f8; color: var(--purple); }
+  .ss-ptsd { background: #eef4fa; color: var(--blue); }
+
+  .flag-box {
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin: 8px 0;
+    font-size: 12.5px;
+    line-height: 1.55;
+  }
+  .flag-box.normal { background: #f0f5f1; color: var(--sage-deep); border-left: 3px solid var(--sage); }
+  .flag-box.alert { background: #fef5ed; color: #8a4d1f; border-left: 3px solid var(--orange); }
+  .flag-box.urgent { background: #fde4e4; color: #7a1f30; border-left: 3px solid var(--wine); font-weight: 600; }
+  .flag-box strong { display: block; margin-bottom: 4px; }
+
+  .rec-box {
+    background: #eef4fa;
+    border-left: 4px solid var(--blue);
+    padding: 14px 16px;
+    border-radius: 8px;
+    margin: 12px 0;
+    font-size: 12.5px;
+    color: var(--navy);
+    line-height: 1.6;
+  }
+  .rec-box strong { color: var(--blue); }
+  .result-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .result-actions button {
+    flex: 1;
+    padding: 12px;
+    font-size: 12.5px;
+    font-weight: 700;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .btn-save { background: var(--sage); color: white; }
+  .btn-close { background: #e5e7eb; color: var(--navy); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="top-bar">
+    <a href="index.html" onclick="return sahaBack(event)">← Kembali</a>
+    <span style="color:var(--slate);">Sadar Hati Foundation</span>
+  </div>
+
+  <div class="hero">
+    <div class="eyebrow">🧠 Skrining Mental Health · WHO Instrument</div>
+    <h1>SRQ-29</h1>
+    <p>Self-Reporting Questionnaire. Pertanyaan tentang masalah yang mungkin mengganggu Anda selama <strong>30 hari terakhir</strong>. Jawaban bersifat rahasia.</p>
+  </div>
+
+  <!-- Shared Identity/Area block (SAHA) -->
+  <div class="section"><div id="saha-identity"></div></div>
+
+  <!-- Konteks Layanan (SRQ-specific) -->
+  <div class="section">
+    <div class="section-title">🩺 Konteks Layanan</div>
+    <label class="field">
+      <span class="lbl">Konteks Layanan</span>
+      <select id="f-kelompoksasaran">
+        <option value="">-- Pilih --</option>
+        <option value="IPWL">IPWL · Drug Rehab</option>
+        <option value="LAPAS">WBP · LAPAS Rehab</option>
+        <option value="ODHA">ODHA</option>
+        <option value="Outreach">HR Outreach PWID</option>
+        <option value="Umum">Komunitas Umum</option>
+        <option value="Bencana">Post-Disaster / PTSD</option>
+        <option value="Lainnya">Lainnya</option>
+      </select>
+    </label>
+  </div>
+
+  <!-- SRQ-29 Questions -->
+  <div class="section">
+    <div class="section-title">SRQ-29 · 29 Pertanyaan</div>
+    <div id="questions-container"></div>
+  </div>
+
+  <div class="submit-bar">
+    <div class="progress-text">Terjawab: <strong id="answered-count">0</strong> dari <strong>29</strong> pertanyaan</div>
+    <button class="btn-submit" id="btn-submit" disabled onclick="calculateScore()">📊 Hitung Skor &amp; Interpretasi</button>
+  </div>
+
+</div>
+
+<!-- Result Modal -->
+<div class="result-overlay" id="result-overlay">
+  <div class="result-card">
+    <h2>📊 Hasil Assessment SRQ-29</h2>
+
+    <div class="subscore-grid">
+      <div class="subscore ss-neurosis">
+        <div class="lbl">Gejala Neurosis</div>
+        <div class="num" id="ss-neurosis">0/20</div>
+        <div class="desc">Q1–20 (masalah psikologis)</div>
+      </div>
+      <div class="subscore ss-zat">
+        <div class="lbl">Zat Psikoaktif</div>
+        <div class="num" id="ss-zat">-</div>
+        <div class="desc">Q21 (alkohol / narkoba)</div>
+      </div>
+      <div class="subscore ss-psikotik">
+        <div class="lbl">Gejala Psikotik</div>
+        <div class="num" id="ss-psikotik">0/3</div>
+        <div class="desc">Q22–24 (paranoia · pikiran · halusinasi)</div>
+      </div>
+      <div class="subscore ss-ptsd">
+        <div class="lbl">Gejala PTSD</div>
+        <div class="num" id="ss-ptsd">0/5</div>
+        <div class="desc">Q25–29 (post-trauma / bencana)</div>
+      </div>
+    </div>
+
+    <div id="flags-container"></div>
+    <div class="rec-box" id="rec-box"></div>
+
+    <div class="result-actions">
+      <button class="btn-save" onclick="saveResult()">💾 Simpan Hasil</button>
+      <button class="btn-close" onclick="closeModal()">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<script src="saha-data.js"></script>
+<script src="saha-shared.js"></script>
+<script>
+  const questions = [
+    // 1-20: Neurosis / masalah psikologis
+    { q: "Apakah Anda sering menderita sakit kepala?", d: "neurosis" },
+    { q: "Apakah Anda kehilangan nafsu makan?", d: "neurosis" },
+    { q: "Apakah tidur Anda tidak lelap?", d: "neurosis" },
+    { q: "Apakah Anda mudah menjadi takut?", d: "neurosis" },
+    { q: "Apakah Anda merasa cemas, tegang dan khawatir?", d: "neurosis" },
+    { q: "Apakah tangan Anda gemetar?", d: "neurosis" },
+    { q: "Apakah Anda mengalami gangguan pencernaan?", d: "neurosis" },
+    { q: "Apakah Anda merasa sulit berpikir jernih?", d: "neurosis" },
+    { q: "Apakah Anda merasa tidak bahagia?", d: "neurosis" },
+    { q: "Apakah Anda lebih sering menangis?", d: "neurosis" },
+    { q: "Apakah Anda merasa sulit untuk menikmati aktivitas sehari-hari?", d: "neurosis" },
+    { q: "Apakah Anda mengalami kesulitan untuk mengambil keputusan?", d: "neurosis" },
+    { q: "Apakah aktivitas/tugas sehari-hari Anda terbengkalai?", d: "neurosis" },
+    { q: "Apakah Anda merasa tidak mampu berperan dalam kehidupan ini?", d: "neurosis" },
+    { q: "Apakah Anda kehilangan minat terhadap banyak hal?", d: "neurosis" },
+    { q: "Apakah Anda merasa tidak berharga?", d: "neurosis" },
+    { q: "Apakah Anda mempunyai pikiran untuk mengakhiri hidup Anda?", d: "neurosis", flag: "suicide" },
+    { q: "Apakah Anda merasa lelah sepanjang waktu?", d: "neurosis" },
+    { q: "Apakah Anda merasa tidak enak di perut?", d: "neurosis" },
+    { q: "Apakah Anda mudah lelah?", d: "neurosis" },
+    // 21: Zat psikoaktif
+    { q: "Apakah Anda minum alkohol lebih banyak dari biasanya atau Apakah Anda menggunakan narkoba?", d: "zat" },
+    // 22-24: Psikotik
+    { q: "Apakah Anda yakin bahwa seseorang mencoba mencelakai Anda dengan cara tertentu?", d: "psikotik" },
+    { q: "Apakah ada yang mengganggu atau hal yang tidak biasa dalam pikiran Anda?", d: "psikotik" },
+    { q: "Apakah Anda pernah mendengar suara tanpa tahu sumbernya atau yang orang lain tidak dapat mendengar?", d: "psikotik" },
+    // 25-29: PTSD
+    { q: "Apakah Anda mengalami mimpi yang mengganggu tentang suatu bencana/musibah atau adakah saat-saat Anda seolah mengalami kembali kejadian bencana itu?", d: "ptsd" },
+    { q: "Apakah Anda menghindari kegiatan, tempat, orang atau pikiran yang mengingatkan Anda akan bencana tersebut?", d: "ptsd" },
+    { q: "Apakah minat Anda terhadap teman dan kegiatan yang biasa Anda lakukan berkurang?", d: "ptsd" },
+    { q: "Apakah Anda merasa sangat terganggu jika berada dalam situasi yang mengingatkan Anda akan bencana atau jika Anda berpikir tentang bencana itu?", d: "ptsd" },
+    { q: "Apakah Anda kesulitan memahami atau mengekspresikan perasaan Anda?", d: "ptsd" }
+  ];
+
+  const subdomainLabels = {
+    neurosis: { title: "🧠 Bagian A · Gejala Neurosis (Q1–20)", cls: "" },
+    zat: { title: "🍷 Bagian B · Penggunaan Zat Psikoaktif (Q21)", cls: "zat" },
+    psikotik: { title: "💭 Bagian C · Gejala Psikotik (Q22–24)", cls: "psikotik" },
+    ptsd: { title: "🌪 Bagian D · Gejala PTSD (Q25–29)", cls: "ptsd" }
+  };
+
+  const answers = {};
+  const container = document.getElementById('questions-container');
+
+  let lastDomain = null;
+  questions.forEach((qObj, i) => {
+    const idx = i + 1;
+    if (qObj.d !== lastDomain) {
+      const header = document.createElement('div');
+      const info = subdomainLabels[qObj.d];
+      header.className = 'subdomain-header ' + info.cls;
+      header.textContent = info.title;
+      container.appendChild(header);
+      lastDomain = qObj.d;
+    }
+    const div = document.createElement('div');
+    div.className = 'question-block ' + qObj.d;
+    div.innerHTML = `
+      <div><span class="question-num">${idx}</span><span class="question-text">${qObj.q}</span></div>
+      <div class="yesno-row">
+        <button data-q="${idx}" data-a="Ya" onclick="answerQ(${idx}, 'Ya', this)">Ya</button>
+        <button data-q="${idx}" data-a="Tidak" onclick="answerQ(${idx}, 'Tidak', this)">Tidak</button>
+      </div>`;
+    container.appendChild(div);
+  });
+
+  // Set default date
+  SAHA.buildIdentity('saha-identity');
+
+  function answerQ(qn, ans, btn) {
+    answers[qn] = ans;
+    const parent = btn.parentElement;
+    parent.querySelectorAll('button').forEach(b => {
+      b.classList.remove('selected-ya', 'selected-tidak');
+    });
+    if (ans === 'Ya') btn.classList.add('selected-ya');
+    else btn.classList.add('selected-tidak');
+
+    const count = Object.keys(answers).length;
+    document.getElementById('answered-count').textContent = count;
+    document.getElementById('btn-submit').disabled = (count !== 29);
+  }
+
+  function calculateScore() {
+    let neurosis = 0, zat = 'Tidak', psikotik = 0, ptsd = 0;
+    for (let i = 1; i <= 20; i++) if (answers[i] === 'Ya') neurosis++;
+    zat = answers[21] === 'Ya' ? 'Ya' : 'Tidak';
+    for (let i = 22; i <= 24; i++) if (answers[i] === 'Ya') psikotik++;
+    for (let i = 25; i <= 29; i++) if (answers[i] === 'Ya') ptsd++;
+
+    const suicideFlag = answers[17] === 'Ya';
+
+    // Render subscores
+    document.getElementById('ss-neurosis').textContent = neurosis + '/20';
+    document.getElementById('ss-zat').textContent = zat;
+    document.getElementById('ss-psikotik').textContent = psikotik + '/3';
+    document.getElementById('ss-ptsd').textContent = ptsd + '/5';
+
+    // Build flags
+    const flagsBox = document.getElementById('flags-container');
+    flagsBox.innerHTML = '';
+
+    // Suicide flag (CRITICAL)
+    if (suicideFlag) {
+      flagsBox.innerHTML += `<div class="flag-box urgent"><strong>🚨 URGENT · Ide Bunuh Diri Terdeteksi</strong>Q17 dijawab "Ya" — pikiran untuk mengakhiri hidup. <strong>Wajib safety assessment segera</strong> + rujukan ke psikolog/psikiater. JANGAN meninggalkan dampingan sendirian sebelum ada support person atau hotline crisis dihubungi (119 ext. 8).</div>`;
+    }
+
+    // Neurosis flag (cutoff 5-7)
+    if (neurosis >= 8) {
+      flagsBox.innerHTML += `<div class="flag-box alert"><strong>⚠️ Neurosis Tinggi</strong>Skor ${neurosis}/20 melampaui cutoff (5-7). Mengindikasikan masalah psikologis signifikan — kemungkinan depresi/ansietas moderat sampai berat. Rekomendasi asesmen klinis lanjutan.</div>`;
+    } else if (neurosis >= 5) {
+      flagsBox.innerHTML += `<div class="flag-box alert"><strong>⚠️ Neurosis di Threshold</strong>Skor ${neurosis}/20 berada di zona cutoff (5-7). Mengindikasikan adanya masalah psikologis — perlu konseling dan monitoring.</div>`;
+    } else {
+      flagsBox.innerHTML += `<div class="flag-box normal"><strong>✅ Neurosis dalam batas normal</strong>Skor ${neurosis}/20 di bawah cutoff (5-7). Tidak ada indikasi masalah psikologis mayor saat ini.</div>`;
+    }
+
+    // Zat flag
+    if (zat === 'Ya') {
+      flagsBox.innerHTML += `<div class="flag-box alert"><strong>⚠️ Penggunaan Zat Psikoaktif Terindikasi</strong>Q21 dijawab "Ya". Rekomendasi lanjut ke <strong>DAST-10</strong> untuk asesmen mendalam penyalahgunaan Napza. Jika PWID → linkage ke layanan Harm Reduction/IPWL Sadar Hati.</div>`;
+    }
+
+    // Psikotik flag
+    if (psikotik >= 1) {
+      flagsBox.innerHTML += `<div class="flag-box urgent"><strong>🚨 Gejala Psikotik Terdeteksi (${psikotik}/3)</strong>Satu jawaban Ya di Q22-24 mengindikasikan <strong>masalah serius</strong>. Rujukan urgent ke psikiater/RSJ. Bisa jadi indikasi paranoia, gangguan pikiran, atau halusinasi auditory.</div>`;
+    }
+
+    // PTSD flag
+    if (ptsd >= 1) {
+      flagsBox.innerHTML += `<div class="flag-box alert"><strong>⚠️ Gejala PTSD Terdeteksi (${ptsd}/5)</strong>Satu jawaban Ya di Q25-29 mengindikasikan gejala <strong>Post-Traumatic Stress Disorder</strong>. Eksplorasi sejarah trauma (kekerasan, bencana, kehilangan). Rujukan ke psikolog trauma-informed.</div>`;
+    }
+
+    // Build recommendation
+    const recs = [];
+    if (suicideFlag) recs.push('Safety planning segera + rujukan psikiater');
+    if (neurosis >= 5) recs.push('Konseling reguler + monitoring gejala mingguan');
+    if (zat === 'Ya') recs.push('Lanjut DAST-10 + integrasi ke layanan IPWL');
+    if (psikotik >= 1) recs.push('Rujukan urgent ke psikiater/RSJ');
+    if (ptsd >= 1) recs.push('Rujukan ke psikolog trauma-informed / EMDR');
+    if (recs.length === 0) recs.push('Follow-up 3-6 bulan sebagai monitoring rutin');
+
+    document.getElementById('rec-box').innerHTML = `<strong>💡 Rekomendasi Tindak Lanjut:</strong><ul style="margin:8px 0 0 20px; padding:0;">${recs.map(r => `<li style="margin-bottom:4px;">${r}</li>`).join('')}</ul>`;
+
+    document.getElementById('result-overlay').classList.add('show');
+
+    window._lastResult = { neurosis, zat, psikotik, ptsd, suicideFlag, recs };
+  }
+
+  function saveResult() {
+    if (!window._lastResult) return;
+    const r = window._lastResult;
+    const key = 'sh-srq-' + Date.now();
+    let interpret = [];
+    if (r.suicideFlag) interpret.push('URGENT-Suicide');
+    if (r.neurosis >= 5) interpret.push('Neurosis+');
+    if (r.zat === 'Ya') interpret.push('Zat+');
+    if (r.psikotik >= 1) interpret.push('Psikotik+');
+    if (r.ptsd >= 1) interpret.push('PTSD+');
+    if (interpret.length === 0) interpret = ['Normal'];
+
+    if (!window.SAHA || !SAHA.isValid()) {
+      alert('Lengkapi dulu Identitas & Area (bagian atas) sebelum simpan.\nBelum lengkap: ' + (window.SAHA ? SAHA.missing().join(', ') : 'modul belum siap'));
+      return;
+    }
+    const id = SAHA.getIdentity();
+    const record = {
+      form: 'srq29',
+      instrumen: 'SRQ-29',
+      pl: id.pl || '',
+      created_at: new Date().toISOString(),
+      schema_version: 'srq-1.0',
+      tahun: id.tahun || '',
+      tanggal: id.tanggal || '',
+      wilayah: { provinsi: 'Jawa Timur', kotakab: id.kotakab || '', kecamatan: id.kecamatan || '', desa: id.desa || '', desa_manual: !!id.desa_manual },
+      klien: { nama: id.nama || '', julukan: id.julukan || '', idkd: id.idkd || '', idkd_placeholder: !!id.idkd_placeholder, jk: id.jk || '', usia: id.usia || '', tgllahir: id.tgllahir || '' },
+      konteks: { konteks_layanan: document.getElementById('f-kelompoksasaran').value },
+      answers: answers,
+      skor: `N${r.neurosis}/Z${r.zat}/P${r.psikotik}/T${r.ptsd}`,
+      subdomain: { neurosis: r.neurosis, zat: r.zat, psikotik: r.psikotik, ptsd: r.ptsd, suicide_flag: !!r.suicideFlag },
+      interpretasi: interpret.join(' · '),
+      catatan_klinis: 'Neurosis=' + r.neurosis + '/20 · Zat=' + r.zat + ' · Psikotik=' + r.psikotik + '/3 · PTSD=' + r.ptsd + '/5' + (r.suicideFlag ? ' · SUICIDE FLAG (Q17)' : ''),
+      rekomendasi: r.recs.join('; ')
+    };
+    localStorage.setItem(key, JSON.stringify(record));
+    if (window.SAHA) {
+      SAHA.push(record).then(cid => { try { localStorage.setItem(key + '__cloud', cid); } catch (e) {} })
+        .catch(err => console.warn('[Firestore] push gagal, tersimpan lokal:', err && err.message));
+    }
+    alert('✅ Hasil tersimpan (cloud + HP ini).');
+    closeModal();
+    if (confirm('Isi lagi untuk dampingan lain?')) window.location.reload();
+    else sahaHome();
+  }
+
+  function closeModal() {
+    document.getElementById('result-overlay').classList.remove('show');
+  }
+</script>
+</body>
+</html>

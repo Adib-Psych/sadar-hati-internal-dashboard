@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Import Klien → Firestore · Sadar Hati (M&E only)</title>
+<style>
+  body{font-family:-apple-system,system-ui,'Manrope',sans-serif;background:#faf6f1;color:#2b2b2b;max-width:640px;margin:0 auto;padding:28px 20px 60px;line-height:1.5;}
+  h1{font-size:22px;color:#a83244;margin-bottom:4px;}
+  .sub{font-size:13px;color:#64748b;margin-bottom:20px;}
+  code{background:#f0e9e0;padding:1px 6px;border-radius:5px;font-size:12.5px;color:#a83244;}
+  .card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .step{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#a83244;margin-bottom:10px;}
+  input,button{font-family:inherit;font-size:14px;}
+  input[type=email],input[type=password]{width:100%;padding:11px 13px;border:1.5px solid #e5e7eb;border-radius:9px;margin-bottom:10px;box-sizing:border-box;}
+  input[type=file]{margin:8px 0;}
+  button{background:#a83244;color:#fff;border:none;border-radius:9px;padding:12px 18px;font-weight:700;cursor:pointer;}
+  button:disabled{background:#cbd5e1;cursor:not-allowed;}
+  .ok{color:#3f5439;font-weight:700;}
+  .err{color:#a83244;font-weight:600;font-size:13px;margin-top:8px;}
+  .muted{color:#64748b;font-size:12.5px;}
+  #log{font-family:'SF Mono',Menlo,monospace;font-size:12px;background:#2b2b2b;color:#e8efe6;border-radius:10px;padding:14px;margin-top:12px;max-height:240px;overflow:auto;white-space:pre-wrap;display:none;}
+  .prog{height:10px;background:#e5e7eb;border-radius:6px;overflow:hidden;margin-top:12px;display:none;}
+  .prog > div{height:100%;width:0;background:linear-gradient(90deg,#5b7553,#3f5439);transition:width .2s;}
+  .warn{background:#fdf3f5;border-left:4px solid #a83244;border-radius:8px;padding:10px 14px;font-size:12.5px;margin-top:12px;}
+  ol{font-size:12.5px;color:#334155;padding-left:20px;} ol li{margin:4px 0;}
+</style>
+</head>
+<body>
+  <h1>🔐 Import Klien → Firestore</h1>
+  <div class="sub">Alat sekali-pakai memasukkan roster Master DB ke Firestore (collection <code>clients</code>). File dibaca <b>lokal di browser</b> — tidak diunggah ke mana pun kecuali Firestore-mu. Khusus M&amp;E.</div>
+
+  <div class="card">
+    <div class="step">Langkah 1 · Siapkan CSV</div>
+    <ol>
+      <li>Buka Google Sheet <b>Master_DB_Klien_Chemsex_YSH_v1</b>.</li>
+      <li>Klik tab sheet <b>"Master Roster"</b> (biar itu yang aktif).</li>
+      <li>Menu <b>File → Download → Comma-separated values (.csv)</b>.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <div class="step">Langkah 2 · Login staf</div>
+    <input type="email" id="email" placeholder="Email staf (akun Firebase)" autocomplete="username">
+    <input type="password" id="pass" placeholder="Password" autocomplete="current-password">
+    <button id="loginBtn">Masuk</button>
+    <div class="err" id="loginErr"></div>
+    <div class="ok" id="who" style="display:none;"></div>
+  </div>
+
+  <div class="card" id="importCard" style="opacity:.5;pointer-events:none;">
+    <div class="step">Langkah 3 · Pilih CSV & import</div>
+    <input type="file" id="file" accept=".csv,text/csv">
+    <button id="importBtn" disabled>Import ke Firestore</button>
+    <div class="prog" id="prog"><div></div></div>
+    <div id="log"></div>
+    <div class="warn">⚠️ Import ulang <b>menimpa</b> dokumen ber-ID_KD sama (idempoten — aman diulang). Setelah selesai, minta Claude hapus file ini dari server.</div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+    import { getFirestore, doc, writeBatch } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+    const firebaseConfig = {
+      apiKey: "AIzaSyC7127G5fsZprEGfeiqLrRqevTg6Qs2fko",
+      authDomain: "sadar-hati-hub.firebaseapp.com",
+      projectId: "sadar-hati-hub",
+      storageBucket: "sadar-hati-hub.firebasestorage.app",
+      messagingSenderId: "576423718259",
+      appId: "1:576423718259:web:76600bbdf4f06892b36906"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app), auth = getAuth(app);
+    const $ = id => document.getElementById(id);
+    let records = null;
+
+    // robust CSV parser (handles quotes, commas & newlines inside quotes)
+    function parseCSV(text){
+      if(text.charCodeAt(0)===0xFEFF) text=text.slice(1);
+      const rows=[]; let row=[], cur='', inq=false;
+      for(let i=0;i<text.length;i++){
+        const c=text[i];
+        if(inq){ if(c==='"'){ if(text[i+1]==='"'){cur+='"';i++;} else inq=false; } else cur+=c; }
+        else { if(c==='"') inq=true;
+          else if(c===','){ row.push(cur); cur=''; }
+          else if(c==='\n'){ row.push(cur); rows.push(row); row=[]; cur=''; }
+          else if(c!=='\r') cur+=c; }
+      }
+      if(cur!=='' || row.length){ row.push(cur); rows.push(row); }
+      return rows;
+    }
+
+    $('loginBtn').addEventListener('click', async () => {
+      $('loginErr').textContent='';
+      try { await signInWithEmailAndPassword(auth, $('email').value.trim(), $('pass').value); }
+      catch(e){ $('loginErr').textContent='Login gagal: '+(e.code||e.message); }
+    });
+    onAuthStateChanged(auth, u => {
+      if(u){ $('who').style.display='block'; $('who').textContent='✓ Login sebagai '+(u.email||''); $('importCard').style.opacity='1'; $('importCard').style.pointerEvents='auto'; }
+    });
+
+    $('file').addEventListener('change', e => {
+      const f=e.target.files[0]; if(!f) return;
+      const r=new FileReader();
+      r.onload = ev => {
+        const arr = parseCSV(ev.target.result);
+        if(arr.length<2){ alert('CSV kosong / tidak terbaca.'); return; }
+        const hdr = arr[0].map(h=>h.trim());
+        records = arr.slice(1).filter(r=>r.some(c=>c!=='')).map(r=>{ const o={}; hdr.forEach((h,i)=>o[h]=r[i]!=null?r[i]:''); return o; });
+        $('importBtn').disabled=false; $('log').style.display='block';
+        $('log').textContent='CSV terbaca: '+records.length+' baris, '+hdr.length+' kolom.\nKolom: '+hdr.slice(0,6).join(', ')+'...\nKlik "Import ke Firestore".';
+      };
+      r.readAsText(f);
+    });
+
+    const norm = s => String(s==null?'':s).trim();
+    const yearOf = s => { const m=String(s).match(/(20\d\d)/); return m?m[1]:''; };
+    const monthOf = s => { const m=String(s).match(/20\d\d[-/](\d\d)/); return m?m[1]:''; };
+
+    $('importBtn').addEventListener('click', async () => {
+      if(!records) return;
+      $('importBtn').disabled=true; $('prog').style.display='block';
+      const log = m => { $('log').textContent+='\n'+m; $('log').scrollTop=$('log').scrollHeight; };
+      let done=0;
+      try {
+        for(let i=0;i<records.length;i+=400){
+          const chunk=records.slice(i,i+400), batch=writeBatch(db);
+          chunk.forEach((row,j)=>{
+            const idkd=norm(row.ID_KD);
+            const id=((idkd?idkd.replace(/[\/#\?\[\]\.\*\s]/g,'_'):('row_'+(i+j))).slice(0,120))||('row_'+(i+j));
+            const kp=norm(row.Kontak_Pertama);
+            const rec=Object.assign({},row,{
+              _search:[row.Nama_Lengkap,row.Nama_Panggilan,row.ID_KD,row.Kab_Kota,row.PL_Utama].map(norm).join(' ').toLowerCase(),
+              _thn:norm(row.Tahun_Aktif)||yearOf(kp), _bln:monthOf(kp), _imported_at:new Date().toISOString()
+            });
+            batch.set(doc(db,'clients',id),rec,{merge:true});
+          });
+          await batch.commit(); done+=chunk.length;
+          $('prog').firstElementChild.style.width=Math.round(done/records.length*100)+'%';
+          log('Terkirim '+done+' / '+records.length);
+        }
+        log('\n✅ SELESAI. '+done+' klien masuk Firestore (collection "clients").\nTutup halaman ini & kabari Claude buat lanjut bangun Client Finder.');
+      } catch(e){
+        log('\n❌ ERROR: '+(e.code||e.message)+'\n(Cek rule Firestore: write untuk user login harus diizinkan — lihat instruksi Claude.)');
+        $('importBtn').disabled=false;
+      }
+    });
+  </script>
+</body>
+</html>
