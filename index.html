@@ -919,7 +919,7 @@
           <a class="nav-item" data-section="l2-pipeline-matrix" data-donor="Pipeline Pendanaan"><span class="icon">🎯</span> Pipeline Pendanaan</a>
           <a class="nav-item" data-section="l2-grant-tracker" data-donor="Pipeline Pendanaan"><span class="icon">🌍</span> Grant Opportunities Tracker</a>
           <div class="nav-divider-label">Laporan Lapangan · Output</div>
-          <a class="nav-item" data-section="l1-loghari"><span class="icon">🗂️</span> Log Harian (Absensi + Jangkauan)</a>
+          <a class="nav-item role-me-up" data-section="l1-loghari"><span class="icon">🗂️</span> Log Harian (Absensi + Jangkauan)</a>
           <a class="nav-item" data-section="l2-out-chemsex"><span class="icon">🔥</span> 3 · Chemsex Outreach</a>
           <a class="nav-item" data-section="l2-out-dast10"><span class="icon">💊</span> 4 · DAST-10 Napza</a>
           <a class="nav-item" data-section="l2-out-srq29"><span class="icon">🧠</span> 5 · SRQ-29 Mental Health</a>
@@ -931,7 +931,7 @@
           <div class="nav-divider-label">Analitik &amp; Data</div>
           <a class="nav-item" data-section="l2-me-dashboard"><span class="icon">📊</span> M&amp;E Dashboard</a>
           <a class="nav-item" data-section="l2-clients"><span class="icon">👥</span> Clients Database</a>
-          <a class="nav-item" data-section="l2-admin"><span class="icon">🛡️</span> Panel Admin</a>
+          <a class="nav-item role-admin-only" data-section="l2-admin"><span class="icon">🛡️</span> Panel Admin</a>
         </div>
       </div>
 
@@ -4975,6 +4975,16 @@
         .l1-form-linkbar button:hover { background:rgba(255,255,255,.34); }
         .l1-embed { border:1px solid var(--border); border-top:none; border-radius:0 0 14px 14px; overflow:hidden; background:var(--cream); box-shadow:0 10px 30px rgba(168,50,68,0.10); }
         .l1-embed iframe { display:block; width:100%; height:78vh; min-height:620px; border:0; }
+        /* ===== ROLE GATING (v0.22) ===== */
+        body:not(.role-admin) .role-admin-only { display:none !important; }
+        body.role-staff .role-me-up { display:none !important; }
+        body.role-staff #lh-data { display:none !important; }
+        body.role-staff #cf-panel { display:none !important; }
+        body.role-staff #cf-locked { display:none !important; }
+        body.role-staff .saha-tbar button { display:none !important; }
+        body:not(.role-admin) #l2-admin .adm-grids { display:none !important; }
+        #adm-denied { display:none; }
+        body:not(.role-admin) #adm-denied { display:block; }
         .ml-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(255px,1fr)); gap:16px; margin-top:20px; }
         .ml-card { background:#fff; border:1px solid var(--border); border-left:5px solid var(--clay); border-radius:14px; padding:18px 16px; box-shadow:0 4px 14px rgba(0,0,0,0.05); display:flex; flex-direction:column; text-align:left; }
         .ml-card.chemsex { border-left-color:var(--coral); }
@@ -5690,7 +5700,9 @@
       </section>
 
       <section class="section" id="l2-admin">
-        <div class="hero"><div class="eyebrow">Layer 2B · Analitik &amp; Data · Kontrol</div><h1>🛡️ Panel Admin</h1><p class="lede">Pusat pemantauan aktivitas dashboard: siapa entry apa &amp; kapan, rekap per form dan per petugas, plus identitas akun login. Tahap 1 — role &amp; kontrol akses menyusul bertahap.</p></div>
+        <div class="hero"><div class="eyebrow">Layer 2B · Analitik &amp; Data · Kontrol</div><h1>🛡️ Panel Admin</h1><p class="lede">Pusat pemantauan aktivitas dashboard: siapa entry apa &amp; kapan, rekap per form dan per petugas, plus identitas akun login.</p></div>
+        <div id="adm-denied" class="placeholder-banner archival"><span class="icon">🔒</span><div><strong>Halaman ini khusus akun Admin.</strong> Akun Anda tidak memiliki role admin — hubungi Adib bila perlu akses.</div></div>
+        <div class="adm-grids">
 
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:16px;">
           <div style="background:#fff;border:1px solid var(--border,#ece2d8);border-radius:14px;padding:18px 20px;">
@@ -5730,8 +5742,8 @@
           </div>
         </div>
 
-        <div style="background:var(--gold-tint,#fbf3dd);border:1px solid #e8cf8a;border-left:5px solid var(--gold,#d4a017);border-radius:12px;padding:16px 20px;font-size:12.5px;line-height:1.65;color:#5f4a1a;">
-          <strong>ℹ️ Tahap berikutnya (role &amp; akses):</strong> role akun dibaca dari koleksi <code>roles</code> di Firestore — <strong>[FIREBASE console · tangan Adib]</strong> buat dokumen <code>roles/&lt;UID di atas&gt;</code> berisi <code>{ role: "admin", nama: "Adib" }</code> lalu apply rule tambahan (file <code>firestore_rules_FULL_v3.txt</code> sudah disiapkan + tersalin di clipboard). Setelah itu badge di kartu Akun otomatis jadi ADMIN. Akun lain: buat <code>roles/&lt;uid&gt;</code> dgn role <code>manager</code> / <code>staff</code> / <code>me</code>. Pembatasan fitur per-role menyusul di tahap 2 setelah role hidup.
+        </div><div style="background:var(--gold-tint,#fbf3dd);border:1px solid #e8cf8a;border-left:5px solid var(--gold,#d4a017);border-radius:12px;padding:16px 20px;font-size:12.5px;line-height:1.65;color:#5f4a1a;">
+          <strong>ℹ️ Role &amp; akses (AKTIF sejak v0.22):</strong> role akun dibaca dari koleksi <code>roles</code> di Firestore — <strong>[FIREBASE console · tangan Adib]</strong> buat dokumen <code>roles/&lt;UID di atas&gt;</code> berisi <code>{ role: "admin", nama: "Adib" }</code> lalu apply rule tambahan (file <code>firestore_rules_FULL_v3.txt</code> sudah disiapkan + tersalin di clipboard). Setelah itu badge di kartu Akun otomatis jadi ADMIN. Akun lain: buat <code>roles/&lt;uid&gt;</code> dgn role <code>manager</code> / <code>staff</code> / <code>me</code>. Pembatasan fitur per-role menyusul di tahap 2 setelah role hidup.
         </div>
       </section>
 
@@ -6908,6 +6920,7 @@ function updateBreadcrumb(item) {
   if($('lh-export')) $('lh-export').addEventListener('click', doExport);
   function sahaLock(){
     window.SAHA_AUTH=false;
+    window.SAHA_ROLE='staff'; document.body.classList.remove('role-admin','role-me','role-staff');
     const chip=document.getElementById('saha-rolechip'); if(chip){ chip.textContent='Staf'; chip.style.color=''; }
     document.body.classList.remove('saha-authed');
     document.querySelectorAll('[data-zone="2B"]').forEach(z=>z.classList.add('zone-locked'));
@@ -6968,6 +6981,17 @@ function updateBreadcrumb(item) {
 
   // ===== PANEL ADMIN (tahap 1) =====
   window.SAHA_FORM_LABELS={chemsex:'🔥 Chemsex',dast10:'💊 DAST-10',srq29:'🧠 SRQ-29',ira:'⚕️ IRA',gra:'👥 GRA',konseling:'💬 Konseling','bulanan-kl':'📆 Bulanan Korlap',prevkit:'🎒 Prev-Kit',checkin:'📍 Check-In',master:'📋 Master List'};
+  window.SAHA_ROLE='staff';
+  function applyRoleUI(){
+    const r=window.SAHA_ROLE;
+    document.body.classList.remove('role-admin','role-me','role-staff');
+    document.body.classList.add(r==='admin'?'role-admin':(r==='me'||r==='manager')?'role-me':'role-staff');
+    const active=document.querySelector('.section.active');
+    if(active && ((active.id==='l2-admin'&&r!=='admin')||(active.id==='l1-loghari'&&!(r==='admin'||r==='me'||r==='manager')))){
+      const home=document.querySelector('.nav-item[data-section="l2-overview-program"]'); if(home) home.click();
+    }
+    renderAdmin();
+  }
   async function loadRole(user){
     const badge=$('adm-role'); if(!badge) return;
     try{
@@ -6977,14 +7001,16 @@ function updateBreadcrumb(item) {
         const M={admin:['ADMIN','#7a1f30','#f7e9ec'],manager:['MANAGER','#3f5749','#e8efea'],me:['M&E','#2f6d9e','#e7f0f7'],staff:['STAF','#7a746e','#f1ede8']};
         const m=M[r]||M.staff; badge.textContent=m[0]+(snap.data().nama?' · '+snap.data().nama:''); badge.style.color=m[1]; badge.style.background=m[2];
         const chip=document.getElementById('saha-rolechip'); if(chip){ chip.textContent=m[0].charAt(0)+m[0].slice(1).toLowerCase(); chip.style.fontWeight='800'; chip.style.color=m[1]; }
-      } else { badge.textContent='Staf (default — dok roles belum dibuat)'; const chip=document.getElementById('saha-rolechip'); if(chip){ chip.textContent='Staf'; chip.style.color=''; } }
-    }catch(e){ badge.textContent='Staf (default — rule roles belum di-apply)'; }
+        window.SAHA_ROLE=r; applyRoleUI();
+      } else { badge.textContent='Staf (default — dok roles belum dibuat)'; const chip=document.getElementById('saha-rolechip'); if(chip){ chip.textContent='Staf'; chip.style.color=''; } window.SAHA_ROLE='staff'; applyRoleUI(); }
+    }catch(e){ badge.textContent='Staf (default — rule roles belum di-apply)'; window.SAHA_ROLE='staff'; applyRoleUI(); }
   }
   const copyBtn=document.getElementById('adm-uid-copy');
   if(copyBtn) copyBtn.addEventListener('click',()=>{ const t=$('adm-uid').textContent; if(navigator.clipboard) navigator.clipboard.writeText(t); copyBtn.textContent='✓'; setTimeout(()=>copyBtn.textContent='salin',1200); });
   function admRef(x){ const k=x.klien||{}; if(k.idkd) return k.idkd; if(x.form==='prevkit') return 'total '+((x.data||{}).total!=null?(x.data||{}).total:'-')+' item'; if(x.form==='bulanan-kl') return 'Korlap: '+(x.kl||'-'); if(x.form==='gra') return 'kelompok'; return '-'; }
   function renderAdmin(){
     if(!$('adm-feed')) return;
+    if(window.SAHA_ROLE!=='admin'){ $('adm-feed').innerHTML='<tr><td colspan="4" style="padding:14px 10px;color:#64748b;">Khusus admin.</td></tr>'; return; }
     $('adm-total').textContent=ALL.length;
     $('adm-total-note').textContent='semua form · live dari database';
     if(ALL.length){ const t=ALL[0]; $('adm-last').textContent=fmt(t.created_at); $('adm-last-who').textContent=(((window.SAHA_FORM_LABELS||{})[t.form])||t.form)+' · '+(t.pl||'-'); }
