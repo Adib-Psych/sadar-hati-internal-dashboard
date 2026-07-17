@@ -5730,6 +5730,18 @@
         <div class="hero"><div class="eyebrow">Layer 2B · Analitik &amp; Data · Kontrol</div><h1>🛡️ Panel Admin</h1><p class="lede">Pusat pemantauan aktivitas dashboard: siapa entry apa &amp; kapan, rekap per form dan per petugas, plus identitas akun login.</p></div>
         <div id="adm-denied" class="placeholder-banner archival"><span class="icon">🔒</span><div><strong>Halaman ini khusus akun Admin.</strong> Akun Anda tidak memiliki role admin — hubungi Adib bila perlu akses.</div></div>
         <div class="adm-grids">
+         <div id="adm-kelola" style="background:#fff;border:1px solid var(--border,#e7ddd3);border-radius:14px;padding:18px 20px;margin-bottom:16px;">
+           <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;">
+             <div><div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate,#6f6660);font-weight:700;">Kelola Entry</div>
+             <div style="font-family:'Lora',Georgia,serif;font-size:16.5px;color:#2c2724;">🛠️ Edit · Arsip · Hapus data masuk</div></div>
+             <input id="adm-k-q" placeholder="🔍 cari nama / PL / form..." style="padding:8px 12px;border:1.5px solid #e7ddd3;border-radius:9px;font-size:12.5px;background:#fbf7f2;min-width:220px;font-family:inherit;">
+           </div>
+           <div style="max-height:440px;overflow:auto;border:1px solid #f0eaf4;border-radius:10px;">
+             <table class="saha-rawtable"><thead><tr><th>Waktu</th><th>Form</th><th>PL</th><th>Klien</th><th>Ringkas</th><th>Aksi</th></tr></thead>
+             <tbody id="adm-k-body"><tr><td colspan="6" class="saha-rawempty">Login sebagai admin untuk memuat.</td></tr></tbody></table>
+           </div>
+           <div style="font-size:10px;color:#a89f97;margin-top:8px;">🗄️ <strong>Arsip</strong> = pindah ke lemari arsip (bisa dipulihkan) · 🗑️ <strong>Hapus</strong> = salinan otomatis masuk arsip dulu, baru dihapus · setiap aksi tercatat (oleh siapa &amp; kapan).</div>
+         </div>
 
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:16px;">
           <div style="background:#fff;border:1px solid var(--border,#e7ddd3);border-radius:14px;padding:18px 20px;">
@@ -6921,7 +6933,7 @@ function updateBreadcrumb(item) {
 <!-- Log Harian: Firebase Auth + Firestore live read -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
-  import { getFirestore, collection, onSnapshot, query, orderBy, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+  import { getFirestore, collection, onSnapshot, query, orderBy, doc, getDoc, updateDoc, deleteDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
   import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
   const firebaseConfig = {
     apiKey: "AIzaSyC7127G5fsZprEGfeiqLrRqevTg6Qs2fko",
@@ -6981,7 +6993,7 @@ function updateBreadcrumb(item) {
   function listen(){
     if(unsub) return;
     const qy = query(collection(db,'submissions'), orderBy('created_at','desc'));
-    unsub = onSnapshot(qy, snap=>{ ALL=[]; snap.forEach(d=>{ const x=d.data(); x.__id=d.id; if(!String(x.form||'').startsWith('__')) ALL.push(x); }); fillPL(); render(); renderAdmin(); window.__SAHA_ALL=ALL; if(window.SAHA_RENDER_RAW) window.SAHA_RENDER_RAW(); },
+    unsub = onSnapshot(qy, snap=>{ ALL=[]; snap.forEach(d=>{ const x=d.data(); x.__id=d.id; if(!String(x.form||'').startsWith('__')) ALL.push(x); }); fillPL(); render(); renderAdmin(); try{renderKelola();}catch(e){} window.__SAHA_ALL=ALL; if(window.SAHA_RENDER_RAW) window.SAHA_RENDER_RAW(); },
       err=>{ if($('saha-login-err')) $('saha-login-err').textContent='Gagal baca data: '+(err.code||err.message); console.error('[LogHarian]',err); });
   }
   function fillPL(){ const sel=$('lh-f-pl'), cur=sel.value; const pls=[...new Set(ALL.map(x=>x.pl).filter(Boolean))].sort(); sel.innerHTML='<option value="">Semua PL</option>'+pls.map(p=>'<option>'+esc(p)+'</option>').join(''); sel.value=cur; }
@@ -7037,6 +7049,86 @@ function updateBreadcrumb(item) {
   const copyBtn=document.getElementById('adm-uid-copy');
   if(copyBtn) copyBtn.addEventListener('click',()=>{ const t=$('adm-uid').textContent; if(navigator.clipboard) navigator.clipboard.writeText(t); copyBtn.textContent='✓'; setTimeout(()=>copyBtn.textContent='salin',1200); });
   function admRef(x){ const k=x.klien||{}; if(k.idkd) return k.idkd; if(x.form==='prevkit') return 'total '+((x.data||{}).total!=null?(x.data||{}).total:'-')+' item'; if(x.form==='bulanan-kl') return 'Korlap: '+(x.kl||'-'); if(x.form==='gra') return 'kelompok'; return '-'; }
+  /* ===== KELOLA ENTRY (v0.37) — admin edit/arsip/hapus ===== */
+  const K_PATHS = [["pl","Nama PL"],["kl","Korlap"],["klien.nama","Nama Klien"],["klien.julukan","Julukan"],["klien.idkd","ID KD"],["klien.jk","Jenis Kelamin"],["klien.usia","Usia"],["wilayah.kotakab","Kota/Kab"],["wilayah.kecamatan","Kecamatan"],["wilayah.desa","Desa"],["skor","Skor"],["interpretasi","Interpretasi"]];
+  function kGet(o, path){ return path.split('.').reduce((a,k)=> (a==null?undefined:a[k]), o); }
+  function renderKelola(){
+    const tb = document.getElementById('adm-k-body'); if(!tb) return;
+    if(window.SAHA_ROLE !== 'admin'){ tb.innerHTML = '<tr><td colspan="6" class="saha-rawempty">Khusus akun admin.</td></tr>'; return; }
+    const inp = document.getElementById('adm-k-q');
+    if(inp && !inp.dataset.wired){ inp.dataset.wired = '1'; inp.addEventListener('input', renderKelola); }
+    const qv = (inp && inp.value || '').toLowerCase();
+    const rows = ALL.filter(x => { if(!qv) return true; const k = x.klien || {}; return ((x.form||'')+' '+(x.pl||'')+' '+(x.kl||'')+' '+(k.nama||'')+' '+(k.julukan||'')).toLowerCase().indexOf(qv) >= 0; }).slice(0, 100);
+    window.__ADM_K = rows;
+    tb.innerHTML = rows.map((x, i) => {
+      const k = x.klien || {};
+      const lbl = ((window.SAHA_FORM_LABELS||{})[x.form]) || esc(x.form || '-');
+      return '<tr><td style="white-space:nowrap;">'+fmt(x.created_at)+'</td><td>'+lbl+'</td><td>'+esc(x.pl||x.kl||'-')+'</td><td style="font-weight:600;">'+esc(k.julukan||k.nama||'-')+(x.koreksi?' <span class="lh-flag" style="background:#f3eef7;color:#4e3859;">↻</span>':'')+(x._edited_at?' <span class="lh-flag">✏️ diedit</span>':'')+'</td><td>'+esc(ringkas(x))+'</td>'+
+        '<td><div style="display:flex;gap:5px;white-space:nowrap;"><button class="lh-btn-sm" onclick="SAHA_K_EDIT('+i+')">✏️</button><button class="lh-btn-sm" onclick="SAHA_K_ARSIP('+i+')">🗄️</button><button class="lh-btn-sm" style="color:#a83244;" onclick="SAHA_K_DEL('+i+')">🗑️</button></div></td></tr>';
+    }).join('') || '<tr><td colspan="6" class="saha-rawempty">Tidak ada entry yang cocok.</td></tr>';
+  }
+  let _kEdit = null;
+  window.SAHA_K_EDIT = function(i){
+    const x = (window.__ADM_K||[])[i]; if(!x) return;
+    _kEdit = { id: x.__id, snap: x, fields: [] };
+    const wrap = document.getElementById('adm-e-fields'); wrap.innerHTML = '';
+    K_PATHS.forEach(([path, label]) => {
+      const v = kGet(x, path);
+      if (v === undefined || v === null) return;
+      _kEdit.fields.push({ path, orig: v, isNum: typeof v === 'number' });
+      wrap.insertAdjacentHTML('beforeend',
+        '<div style="margin-bottom:9px;"><label style="display:block;font-size:9.5px;font-weight:700;color:#6f6660;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;">'+label+'</label>'+
+        '<input data-kpath="'+path+'" value="'+esc(String(v))+'" style="width:100%;padding:8px 10px;border:1.4px solid #e7ddd3;border-radius:8px;font-size:13px;background:#fbf7f2;font-family:inherit;"></div>');
+    });
+    document.getElementById('adm-e-title').textContent = '✏️ Edit — ' + (((window.SAHA_FORM_LABELS||{})[x.form])||x.form) + ' · ' + ((x.klien||{}).julukan || (x.klien||{}).nama || '-');
+    document.getElementById('adm-e-meta').textContent = 'id: ' + (x.__id||'').slice(0,10) + '… · dibuat ' + fmt(x.created_at) + ' · PL ' + (x.pl||x.kl||'-');
+    document.getElementById('adm-e-msg').textContent = '';
+    document.getElementById('adm-edit-modal').style.display = 'flex';
+  };
+  window.SAHA_K_SAVE = async function(){
+    if(!_kEdit) return;
+    const msg = document.getElementById('adm-e-msg');
+    const upd = {};
+    document.querySelectorAll('#adm-e-fields input[data-kpath]').forEach(inp => {
+      const f = _kEdit.fields.find(z => z.path === inp.dataset.kpath); if(!f) return;
+      let nv = inp.value;
+      if (f.isNum) { const n = Number(nv); nv = isNaN(n) ? f.orig : n; }
+      if (String(nv) !== String(f.orig)) upd[f.path] = nv;
+    });
+    if (!Object.keys(upd).length){ msg.textContent = 'Tidak ada perubahan.'; return; }
+    upd['_edited_by'] = (auth.currentUser && auth.currentUser.email) || 'admin';
+    upd['_edited_at'] = new Date().toISOString();
+    msg.textContent = 'Menyimpan…';
+    try {
+      await updateDoc(doc(db, 'submissions', _kEdit.id), upd);
+      msg.style.color = '#5f6e52'; msg.textContent = '✓ Tersimpan — tabel menyegarkan sendiri.';
+      setTimeout(() => { document.getElementById('adm-edit-modal').style.display = 'none'; }, 900);
+    } catch (e) { msg.style.color = '#7d2433'; msg.textContent = 'Gagal: ' + (e.code || e.message); }
+  };
+  async function kArsipkan(x, tandaHapus){
+    const salinan = Object.assign({}, x);
+    delete salinan.__id;
+    salinan._asal = 'submissions';
+    salinan._arsip_oleh = (auth.currentUser && auth.currentUser.email) || 'admin';
+    salinan._arsip_pada = new Date().toISOString();
+    if (tandaHapus) salinan._dihapus = true;
+    await setDoc(doc(db, 'arsip', x.__id), salinan);
+    await deleteDoc(doc(db, 'submissions', x.__id));
+  }
+  window.SAHA_K_ARSIP = async function(i){
+    const x = (window.__ADM_K||[])[i]; if(!x) return;
+    const nm = ((x.klien||{}).julukan || (x.klien||{}).nama || x.form);
+    if(!confirm('🗄️ Arsipkan entry "'+nm+'" ('+x.form+')?\n\nEntry pindah ke lemari arsip — hilang dari laporan, tapi bisa dipulihkan kapan pun.')) return;
+    try { await kArsipkan(x, false); alert('✓ Terarsip.'); }
+    catch(e){ alert('Gagal arsip: ' + (e.code||e.message) + '\n(Bila permission-denied: rules v4 belum dipasang.)'); }
+  };
+  window.SAHA_K_DEL = async function(i){
+    const x = (window.__ADM_K||[])[i]; if(!x) return;
+    const nm = ((x.klien||{}).julukan || (x.klien||{}).nama || x.form);
+    if(!confirm('🗑️ HAPUS entry "'+nm+'" ('+x.form+') dari laporan?\n\nSalinannya otomatis disimpan di arsip dulu (bertanda: dihapus), baru entry dihapus. Lanjut?')) return;
+    try { await kArsipkan(x, true); alert('✓ Dihapus (salinan aman di arsip).'); }
+    catch(e){ alert('Gagal hapus: ' + (e.code||e.message) + '\n(Bila permission-denied: rules v4 belum dipasang.)'); }
+  };
   function renderAdmin(){
     if(!$('adm-feed')) return;
     if(window.SAHA_ROLE!=='admin'){ $('adm-feed').innerHTML='<tr><td colspan="4" style="padding:14px 10px;color:#6f6660;">Khusus admin.</td></tr>'; return; }
@@ -7285,5 +7377,18 @@ window.SAHA_QR_DL = function(){
   a.href = big.toDataURL('image/png'); a.click();
 };
 </script>
+
+<div id="adm-edit-modal" style="position:fixed;inset:0;background:rgba(44,39,36,.55);z-index:10001;display:none;align-items:center;justify-content:center;padding:18px;">
+  <div style="background:#fff;border-radius:16px;border-top:4px solid #6b4d7a;max-width:420px;width:100%;max-height:86vh;overflow:auto;padding:20px 22px;">
+    <div style="font-family:'Lora',Georgia,serif;font-size:15.5px;color:#2c2724;" id="adm-e-title">✏️ Edit Entry</div>
+    <div style="font-size:10px;color:#a89f97;margin:2px 0 12px;" id="adm-e-meta"></div>
+    <div id="adm-e-fields"></div>
+    <div style="display:flex;gap:9px;margin-top:14px;">
+      <button class="lh-btn-sm" style="flex:1;background:#6b4d7a;color:#fff;border:none;padding:11px;font-size:13px;border-radius:10px;" onclick="SAHA_K_SAVE()">💾 Simpan Perubahan</button>
+      <button class="lh-btn-sm" style="flex:1;padding:11px;font-size:13px;border-radius:10px;" onclick="document.getElementById('adm-edit-modal').style.display='none'">Batal</button>
+    </div>
+    <div id="adm-e-msg" style="font-size:11px;margin-top:9px;color:#7d2433;"></div>
+  </div>
+</div>
 </body>
 </html>

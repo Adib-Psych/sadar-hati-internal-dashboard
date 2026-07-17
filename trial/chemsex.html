@@ -1561,7 +1561,7 @@
 <!-- Firebase (Firestore) — Sadar Hati Hub · push submission ke cloud -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
-  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
   const firebaseConfig = {
     apiKey: "AIzaSyC7127G5fsZprEGfeiqLrRqevTg6Qs2fko",
     authDomain: "sadar-hati-hub.firebaseapp.com",
@@ -1573,7 +1573,19 @@
   try {
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-    window.__pushSubmission = (record) => addDoc(collection(db, 'submissions'), record).then(r => r.id);
+    window.__pushSubmission = (record) => addDoc(collection(db, 'submissions'), record).then(r => {
+      try {
+        const kl = record.klien || {};
+        const nmx = String(kl.julukan || kl.nama || "").trim();
+        addDoc(collection(db, 'entry_log'), {
+          form: String(record.form || '-'), pl: String(record.pl || '-'),
+          ini: nmx ? (nmx.charAt(0).toUpperCase() + '***') : '-',
+          jam: String(record.created_at || ''), ts: serverTimestamp(),
+          krx: record.koreksi === true
+        }).catch(() => {});
+      } catch (e) {}
+      return r.id;
+    });
     /* OUTBOX AUTO-RESEND (v0.33) */
     try {
       let _sent = 0;

@@ -21,10 +21,25 @@
   (async () => {
     try {
       const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js");
-      const { getFirestore, collection, addDoc } = await import("https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js");
+      const { getFirestore, collection, addDoc, serverTimestamp } = await import("https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js");
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
-      _push = (rec) => addDoc(collection(db, "submissions"), rec).then(r => r.id);
+      _push = (rec) => addDoc(collection(db, "submissions"), rec).then(r => {
+        /* STRUK entry_log (v0.37) — bukti-entry mini non-sensitif utk Papan Entry; gagal pun tidak mengganggu */
+        try {
+          const kl = rec.klien || {};
+          const nmx = String(kl.julukan || kl.nama || (rec.data && rec.data.pengambil) || "").trim();
+          addDoc(collection(db, "entry_log"), {
+            form: String(rec.form || "-"),
+            pl: String(rec.pl || rec.kl || "-"),
+            ini: nmx ? (nmx.charAt(0).toUpperCase() + "***") : "-",
+            jam: String(rec.created_at || ""),
+            ts: serverTimestamp(),
+            krx: rec.koreksi === true
+          }).catch(() => {});
+        } catch (e) {}
+        return r.id;
+      });
       _ready = true;
       try { retryOutbox(); } catch (e) {}
       console.log("[SAHA] Firebase siap (sadar-hati-hub)");
