@@ -118,6 +118,7 @@
         <div class="saha-lbl">Desa / Kelurahan <span class="rq">*</span></div>
         <select class="saha-in" id="saha-desa" disabled><option value="">-- pilih Kecamatan dulu --</option></select>
         <input type="text" class="saha-in" id="saha-desa-manual" placeholder="Ketik desa/kelurahan..." style="display:none;margin-top:6px;">
+        <div class="saha-dhint" id="saha-domisili-hint" style="display:none;"></div>
 
         <div class="saha-h">3 · Identitas Klien</div>
         <div class="saha-lbl">Status Kontak <span class="rq">*</span></div>
@@ -317,15 +318,32 @@
     const plSudah = !!val.pl;
     const plAktif = (D.PL_LIST || []).includes(e.p);
     if (!plSudah && plAktif) selChip(el, "pl", e.p);
-    let areaNote = "";
-    if (KOTAKAB.includes(e.k)) { if (selChip(el, "kotakab", e.k)) populateKec(el, e.k); }
+    let areaNote = "", kecNote = "";
+    if (KOTAKAB.includes(e.k)) {
+      if (selChip(el, "kotakab", e.k)) {
+        populateKec(el, e.k);
+        /* KECAMATAN AUTO dari roster (v0.31) */
+        if (e.c) {
+          const ks = el.querySelector("#saha-kec");
+          if (ks && [...ks.options].some(o => o.value === e.c)) {
+            ks.value = e.c; ks.dispatchEvent(new Event("change", { bubbles: true }));
+            kecNote = " · Kec. <strong>" + e.c + "</strong> ikut terisi — tinggal pilih Desa.";
+          }
+        }
+      }
+    }
     else if (e.k) { areaNote = " · 📁 Wilayah asal: " + e.k + " (arsip) — pilih area jangkauan saat ini (Malang Raya)."; }
     let plNote = "";
     if (e.p && !plAktif) plNote = " · ⚠️ PL asal: " + e.p + " (nonaktif) — pilih PL aktif yang menangani.";
     else if (e.p && plSudah) plNote = " · PL asal klien: " + e.p + " (pilihan PL Anda tidak diubah).";
     else if (e.p && plAktif) plNote = " · PL: " + e.p + ".";
+    const dh = el.querySelector("#saha-domisili-hint");
+    if (dh) {
+      if (e.a) { dh.style.display = "block"; dh.innerHTML = "\ud83d\udcac Domisili di catatan M&amp;E: <strong>" + String(e.a).replace(/</g, "&lt;") + "</strong> — bantu pilih desa/kelurahan yang cocok."; }
+      else { dh.style.display = "none"; dh.innerHTML = ""; }
+    }
     const ok = el.querySelector("#saha-cari-ok");
-    if (ok) { ok.style.display = "block"; ok.innerHTML = "✓ Terisi dari roster: <strong>" + e.n + "</strong> (KD Lama)" + plNote + areaNote + " Lengkapi Kecamatan/Desa & cek datanya."; }
+    if (ok) { ok.style.display = "block"; ok.innerHTML = "✓ Terisi dari roster: <strong>" + e.n + "</strong> (KD Lama)" + kecNote + plNote + areaNote + (kecNote ? "" : " Lengkapi Kecamatan/Desa & cek datanya."); }
   }
 
   /* ---------- API ---------- */
