@@ -43,34 +43,34 @@
   /* ---------- Scoped CSS ---------- */
   const CSS = `
   .saha-block{ }
-  .saha-h{ font-family:'Lora',Georgia,serif; font-size:14px; font-weight:700; color:var(--wine-deep,#7a1f30);
+  .saha-h{ font-family:'Lora',Georgia,serif; font-size:14px; font-weight:700; color:var(--wine-deep,#7d2433);
     margin:18px 0 10px; padding-bottom:8px; border-bottom:1px solid #f0e7d8; }
   .saha-h:first-child{ margin-top:0; }
-  .saha-lbl{ font-size:11.5px; font-weight:600; color:var(--slate,#64748b); text-transform:uppercase;
+  .saha-lbl{ font-size:11.5px; font-weight:600; color:var(--slate,#6f6660); text-transform:uppercase;
     letter-spacing:.3px; margin:12px 0 5px; }
   .saha-lbl .rq{ color:var(--wine,#a83244); }
-  .saha-in{ width:100%; padding:11px 13px; font-size:15px; border:1.5px solid #e5e7eb; border-radius:10px;
-    background:#fafafa; font-family:inherit; color:var(--navy,#1f2937); -webkit-appearance:none; appearance:none; }
+  .saha-in{ width:100%; padding:11px 13px; font-size:15px; border:1.5px solid #e7ddd3; border-radius:10px;
+    background:#fbf7f2; font-family:inherit; color:var(--navy,#2c2724); -webkit-appearance:none; appearance:none; }
   .saha-in:focus{ outline:none; border-color:var(--wine,#a83244); background:#fff; }
   select.saha-in{ background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3e%3cpath d='M6 9l6 6 6-6'/%3e%3c/svg%3e");
     background-repeat:no-repeat; background-position:right 12px center; background-size:18px; padding-right:38px; }
-  .saha-in:disabled{ background:#f1f1f1; color:#9aa0a6; }
-  .saha-static{ padding:11px 12px; background:linear-gradient(135deg,#f0f5f1,#fef7f2); border-radius:10px;
-    font-weight:700; color:var(--sage-deep,#3e5538); font-size:14px; border:1.5px solid var(--sage,#5b7553); }
+  .saha-in:disabled{ background:#f2ece4; color:#a89f97; }
+  .saha-static{ padding:11px 12px; background:linear-gradient(135deg,#f2f2ea,#fbf7f2); border-radius:10px;
+    font-weight:700; color:var(--sage-deep,#5f6e52); font-size:14px; border:1.5px solid var(--sage,#8a9a7b); }
   .saha-chips{ display:flex; flex-wrap:wrap; gap:7px; }
   .saha-chips.saha-pl{ display:grid; grid-template-columns:repeat(3,1fr); }
-  .saha-chip{ flex:0 0 auto; padding:9px 12px; font-size:13px; font-weight:600; border:1.6px solid #e5e7eb;
-    border-radius:10px; background:#fff; color:var(--slate,#64748b); cursor:pointer; font-family:inherit; }
+  .saha-chip{ flex:0 0 auto; padding:9px 12px; font-size:13px; font-weight:600; border:1.6px solid #e7ddd3;
+    border-radius:10px; background:#fff; color:var(--slate,#6f6660); cursor:pointer; font-family:inherit; }
   .saha-chips:not(.saha-pl) .saha-chip{ flex:1 1 auto; text-align:center; }
   .saha-chip.sel{ border-color:var(--wine,#a83244); background:var(--wine,#a83244); color:#fff; }
-  .saha-flag{ margin-top:6px; padding:8px 10px; background:#fef5ed; border-left:3px solid var(--gold,#d4a017);
-    border-radius:6px; font-size:11px; color:#8a4d1f; line-height:1.5; }
-  .saha-quick{ background:linear-gradient(135deg,#f0f5f1,#eef5ff); border:1.5px solid var(--sage,#5b7553);
+  .saha-flag{ margin-top:6px; padding:8px 10px; background:#f3eef7; border-left:3px solid var(--gold,#6b4d7a);
+    border-radius:6px; font-size:11px; color:#4e3859; line-height:1.5; }
+  .saha-quick{ background:linear-gradient(135deg,#f2f2ea,#eef5ff); border:1.5px solid var(--sage,#8a9a7b);
     border-radius:12px; padding:12px 13px; margin-bottom:6px; }
-  .saha-dhint{ font-size:10.5px; color:#64748b; margin:4px 0 0; }
+  .saha-dhint{ font-size:10.5px; color:#6f6660; margin:4px 0 0; }
   .saha-dhint a{ color:#a83244; font-weight:700; text-decoration:none; }
-  .saha-quick .saha-lbl{ margin-top:0; color:var(--sage-deep,#3e5538); }
-  .saha-quick .qok{ margin-top:7px; font-size:11.5px; color:var(--sage-deep,#3e5538); font-weight:600; display:none; }
+  .saha-quick .saha-lbl{ margin-top:0; color:var(--sage-deep,#5f6e52); }
+  .saha-quick .qok{ margin-top:7px; font-size:11.5px; color:var(--sage-deep,#5f6e52); font-weight:600; display:none; }
   `;
   const st = document.createElement("style"); st.textContent = CSS; document.head.appendChild(st);
 
@@ -131,7 +131,7 @@
         <input type="date" class="saha-in" id="saha-tgllahir" style="margin-top:6px;">
         <div class="saha-dhint">&#9997;&#65039; Cara cepat: ketik angka saja (misal 31051999) — tidak perlu scroll kalender jauh</div>
         <div class="saha-lbl">ID KD (Kode Dampingan) — otomatis</div>
-        <input type="text" class="saha-in" id="saha-idkd" readonly placeholder="terisi otomatis" style="background:#f0f5f1;font-weight:700;letter-spacing:1.5px;color:var(--sage-deep,#3e5538);font-family:'Courier New',monospace;">
+        <input type="text" class="saha-in" id="saha-idkd" readonly placeholder="terisi otomatis" style="background:#f2f2ea;font-weight:700;letter-spacing:1.5px;color:var(--sage-deep,#5f6e52);font-family:'Courier New',monospace;">
         <div class="saha-flag" id="saha-idkd-flag" style="display:none;">⚠️ <strong>Placeholder tgl lahir (123456)</strong> — flag untuk backfill saat data lengkap.</div>
         <div class="saha-lbl">Jenis Kelamin <span class="rq">*</span></div>
         <div class="saha-chips" data-g="jk">${chips("jk", ["Laki-laki", "Perempuan", "Transgender"])}</div>

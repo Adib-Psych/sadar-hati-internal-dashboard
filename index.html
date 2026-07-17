@@ -813,6 +813,21 @@
 .xrow .xfill{height:100%;border-radius:7px;display:flex;align-items:center;justify-content:flex-end;padding-right:9px;color:#fff;font-weight:800;font-size:11.5px;min-width:0;transition:width .6s ease;}
 .xrow .xval{font-weight:700;color:var(--navy-soft);font-size:12.5px;white-space:nowrap;}
 @media(max-width:680px){.xrow{grid-template-columns:112px 1fr auto;gap:7px;font-size:11.5px;}.xrow .xlab{font-size:11px;}.xrow .xval{font-size:11px;}}
+
+        /* === DATA MENTAH (v0.28) === */
+        .saha-rawbox{border:1.5px solid #6b4d7a; border-radius:12px; background:#f3eef7; padding:14px 16px;}
+        .saha-rawhead{display:flex; justify-content:space-between; align-items:center; gap:10px; font-weight:800; color:#4e3859; font-size:13.5px; flex-wrap:wrap;}
+        .saha-rawtag{font-size:9.5px; letter-spacing:.8px; background:#6b4d7a; color:#fff; padding:3px 9px; border-radius:10px; font-weight:700; white-space:nowrap;}
+        .saha-rawnote{font-size:11.5px; color:#6f6660; line-height:1.55; margin:6px 0 10px;}
+        .saha-rawbody{background:#fff; border:1px solid #e7ddd3; border-radius:8px; max-height:440px; overflow:auto;}
+        .saha-rawempty{padding:14px; font-size:12.5px; color:#6f6660; text-align:center;}
+        .saha-rawmeta{display:flex; gap:10px; align-items:center; justify-content:space-between; padding:8px 12px; font-size:11.5px; color:#4a4340; border-bottom:1px solid #e7ddd3; background:#faf8fb; flex-wrap:wrap;}
+        .saha-rawtable{width:100%; border-collapse:collapse; font-size:12px;}
+        .saha-rawtable th{position:sticky; top:0; background:#4e3859; color:#fff; padding:7px 10px; text-align:left; font-size:10.5px; letter-spacing:.4px; white-space:nowrap; z-index:1;}
+        .saha-rawtable td{padding:6px 10px; border-bottom:1px solid #f0eaf4; vertical-align:top;}
+        .saha-rawtable tr:hover td{background:#f8f5fa;}
+        .saha-rawdet{font-size:11px; color:#4a4340; background:#faf7fc; border-radius:6px; padding:8px 10px; white-space:pre-wrap; line-height:1.6;}
+        body.role-staff .saha-rawbox{display:none !important;}
 </style>
 </head>
 <body>
@@ -5427,7 +5442,7 @@
           </div>
         </div>
 
-        <div class="placeholder-banner archival" style="margin-top:20px;"><span class="icon">🔐</span><div><strong>Data mentah level-klien (bernama) tidak ditanam di sini.</strong> Halaman ini menampilkan agregat + ringkasan staf. Baris per-klien (nama, tgl lahir, hasil tes) tetap di sumber terlindungi (KoBo / Master DB), diakses M&amp;E langsung. Kalau perlu ditarik ke dashboard, dibangun via Firestore (login).</div></div>
+        <div class="saha-rawbox role-me-up" data-form="chemsex" style="margin-top:20px;"><div class="saha-rawhead"><span>🔓 Data Mentah — Level Klien (bernama)</span><span class="saha-rawtag">AKSES: ADMIN · M&amp;E · DIREKTUR</span></div><div class="saha-rawnote">Baris per-klien dari entry form dashboard (live Firestore) — muncul otomatis begitu tim submit. Peran Staf tidak melihat blok ini; agregat di atas tetap tampil untuk semua. Arsip historis KoBo / Master DB tetap di sumber terlindungi.</div><div class="saha-rawbody" data-rawbody="chemsex"><div class="saha-rawempty">Login untuk memuat data.</div></div></div>
 
         <div class="source-attr" style="margin-top:22px;">📄 <strong>Sumber:</strong> Penjangkauan Pengguna ATS-Chemsex Malang–Surabaya (KoboToolbox) · 9.623 kontak · Feb 2024–Jun 2026. Agregat, nol identitas. Snapshot Jul 2026.</div>
 
@@ -5482,7 +5497,7 @@
   </div>
 </div>
 <p style="font-size:12px;color:var(--slate);margin:8px 2px 0;">10 item skrining · skor 1 tiap jawaban memberi poin (Q3 dibalik, sesuai instrumen DAST-10 tervalidasi).</p>
-        <div class="placeholder-banner archival" style="margin-top:20px;"><span class="icon">🔐</span><div><strong>Data mentah level-klien (bernama) tidak ditanam di halaman ini.</strong> Yang tampil = agregat & indikator silang de-identifikasi. Baris per-klien (nama, tgl lahir, hasil) tetap di sumber terlindungi (KoBo / Master DB). Untuk telusur per-nama pakai <strong>Client Finder</strong> di menu Clients Database (butuh login).</div></div>
+        <div class="saha-rawbox role-me-up" data-form="dast10" style="margin-top:20px;"><div class="saha-rawhead"><span>🔓 Data Mentah — Level Klien (bernama)</span><span class="saha-rawtag">AKSES: ADMIN · M&amp;E · DIREKTUR</span></div><div class="saha-rawnote">Baris per-klien dari entry form dashboard (live Firestore) — muncul otomatis begitu tim submit. Peran Staf tidak melihat blok ini; agregat di atas tetap tampil untuk semua. Arsip historis KoBo / Master DB tetap di sumber terlindungi.</div><div class="saha-rawbody" data-rawbody="dast10"><div class="saha-rawempty">Login untuk memuat data.</div></div></div>
         <div class="source-attr" style="margin-top:22px;">📄 <strong>Sumber:</strong> Assessment Mental Health Klien Pengguna Methamphetamine (KoboToolbox) · Bagian I DAST-10 · n=1.911 · snapshot Jul 2026.</div>
 
       </section>
@@ -5550,7 +5565,7 @@
   </div>
 </div>
 <p style="font-size:12px;color:var(--slate);margin:8px 2px 0;">SRQ-20 (item 1–20) skor ambang ≥6 = kemungkinan gangguan mental umum. Item 21 napza, 22–24 psikotik, 25–29 trauma/PTSD.</p>
-        <div class="placeholder-banner archival" style="margin-top:20px;"><span class="icon">🔐</span><div><strong>Data mentah level-klien (bernama) tidak ditanam di halaman ini.</strong> Yang tampil = agregat & indikator silang de-identifikasi. Baris per-klien (nama, tgl lahir, hasil) tetap di sumber terlindungi (KoBo / Master DB). Item 17 (pikiran bunuh diri) & kasus reaktif ditindaklanjuti konselor secara langsung, di luar dashboard. Untuk telusur per-nama pakai <strong>Client Finder</strong> di menu Clients Database (butuh login).</div></div>
+        <div class="saha-rawbox role-me-up" data-form="srq29" style="margin-top:20px;"><div class="saha-rawhead"><span>🔓 Data Mentah — Level Klien (bernama)</span><span class="saha-rawtag">AKSES: ADMIN · M&amp;E · DIREKTUR</span></div><div class="saha-rawnote">Baris per-klien dari entry form dashboard (live Firestore) — muncul otomatis begitu tim submit. Peran Staf tidak melihat blok ini; agregat di atas tetap tampil untuk semua. Arsip historis KoBo / Master DB tetap di sumber terlindungi.</div><div class="saha-rawbody" data-rawbody="srq29"><div class="saha-rawempty">Login untuk memuat data.</div></div></div>
         <div class="source-attr" style="margin-top:22px;">📄 <strong>Sumber:</strong> Assessment Mental Health Klien Pengguna Methamphetamine (KoboToolbox) · Bagian II SRQ-29 · n=1.423 · snapshot Jul 2026.</div>
 
       </section>
@@ -5574,7 +5589,7 @@
         <div class="xtab"><div class="xrow"><div class="xlab">≥2 pasangan/bln</div><div class="xtrack"><div class="xfill" style="width:49.9%;background:#c96b2f;">50%</div></div><div class="xval">49,9% · n=1.000</div></div><div class="xrow"><div class="xlab">1 pasangan/bln</div><div class="xtrack"><div class="xfill" style="width:72.0%;background:#a83244;">72%</div></div><div class="xval">72,0% · n=744</div></div></div>
 
         <h2 class="section-h2" style="margin-top:30px;">💞 Jenis Pasangan Seks (1 bln terakhir)</h2>
-        <div class="xtab"><div class="xrow"><div class="xlab">Pacar</div><div class="xtrack"><div class="xfill" style="width:100.0%;background:#8a9a7b;">44%</div></div><div class="xval">790</div></div><div class="xrow"><div class="xlab">Suami/Isteri</div><div class="xtrack"><div class="xfill" style="width:50.0%;background:#8a9a7b;">22%</div></div><div class="xval">395</div></div><div class="xrow"><div class="xlab">PSP</div><div class="xtrack"><div class="xfill" style="width:36.3%;background:#8a9a7b;">16%</div></div><div class="xval">287</div></div><div class="xrow"><div class="xlab">WPS</div><div class="xtrack"><div class="xfill" style="width:23.2%;background:#8a9a7b;">10%</div></div><div class="xval">183</div></div><div class="xrow"><div class="xlab">Lainnya</div><div class="xtrack"><div class="xfill" style="width:18.7%;background:#8a9a7b;">8%</div></div><div class="xval">148</div></div></div>
+        <div class="xtab"><div class="xrow"><div class="xlab">Pacar</div><div class="xtrack"><div class="xfill" style="width:100.0%;background:#a83244;">44%</div></div><div class="xval">790</div></div><div class="xrow"><div class="xlab">Suami/Isteri</div><div class="xtrack"><div class="xfill" style="width:50.0%;background:#94395c;">22%</div></div><div class="xval">395</div></div><div class="xrow"><div class="xlab">PSP</div><div class="xtrack"><div class="xfill" style="width:36.3%;background:#6b4d7a;">16%</div></div><div class="xval">287</div></div><div class="xrow"><div class="xlab">WPS</div><div class="xtrack"><div class="xfill" style="width:23.2%;background:#c47a3b;">10%</div></div><div class="xval">183</div></div><div class="xrow"><div class="xlab">Lainnya</div><div class="xtrack"><div class="xfill" style="width:18.7%;background:#5f6e52;">8%</div></div><div class="xval">148</div></div></div>
 
         <h2 class="section-h2" style="margin-top:30px;">🧾 Rincian Indikator Risiko (data tabel · bisa di-export)</h2>
         <p style="font-size:13px;color:var(--slate);line-height:1.6;margin:4px 0 10px;"><strong>Klik judul kolom</strong> buat sortir; ketik buat cari; <strong>Export CSV</strong> ikut hasil.</p>
@@ -5597,7 +5612,7 @@
   </div>
 </div>
 <p style="font-size:12px;color:var(--slate);margin:8px 2px 0;">Perilaku berisiko individual dalam 1 bulan terakhir. Persentase dihitung dari baris yang mengisi item tsb.</p>
-        <div class="placeholder-banner archival" style="margin-top:20px;"><span class="icon">🔐</span><div><strong>Data mentah level-klien (bernama) tidak ditanam di halaman ini.</strong> Yang tampil = agregat & indikator silang de-identifikasi. Baris per-klien (nama, tgl lahir, hasil) tetap di sumber terlindungi (KoBo / Master DB). Untuk telusur per-nama pakai <strong>Client Finder</strong> di menu Clients Database (butuh login).</div></div>
+        <div class="saha-rawbox role-me-up" data-form="ira" style="margin-top:20px;"><div class="saha-rawhead"><span>🔓 Data Mentah — Level Klien (bernama)</span><span class="saha-rawtag">AKSES: ADMIN · M&amp;E · DIREKTUR</span></div><div class="saha-rawnote">Baris per-klien dari entry form dashboard (live Firestore) — muncul otomatis begitu tim submit. Peran Staf tidak melihat blok ini; agregat di atas tetap tampil untuk semua. Arsip historis KoBo / Master DB tetap di sumber terlindungi.</div><div class="saha-rawbody" data-rawbody="ira"><div class="saha-rawempty">Login untuk memuat data.</div></div></div>
         <div class="source-attr" style="margin-top:22px;">📄 <strong>Sumber:</strong> Lembar Penilaian Risiko Pribadi IRA (KoboToolbox) · n=1.819 · Malang–Surabaya–Sidoarjo–Jakarta · snapshot Jul 2026.</div>
 
       </section>
@@ -5639,7 +5654,7 @@
   </div>
 </div>
 <p style="font-size:12px;color:var(--slate);margin:8px 2px 0;">Data staf (bukan identitas klien). Isi/hasil konseling bersifat sangat sensitif → tidak ditampilkan.</p>
-        <div class="placeholder-banner archival" style="margin-top:20px;"><span class="icon">🔐</span><div><strong>Data mentah level-klien (bernama) tidak ditanam di halaman ini.</strong> Yang tampil = agregat & indikator silang de-identifikasi. Baris per-klien (nama, tgl lahir, hasil) tetap di sumber terlindungi (KoBo / Master DB). Deskripsi kondisi, hasil, & rencana tindak lanjut klien TIDAK ditanam — sangat sensitif. Untuk telusur per-nama pakai <strong>Client Finder</strong> di menu Clients Database (butuh login).</div></div>
+        <div class="saha-rawbox role-me-up" data-form="konseling" style="margin-top:20px;"><div class="saha-rawhead"><span>🔓 Data Mentah — Level Klien (bernama)</span><span class="saha-rawtag">AKSES: ADMIN · M&amp;E · DIREKTUR</span></div><div class="saha-rawnote">Baris per-klien dari entry form dashboard (live Firestore) — muncul otomatis begitu tim submit. Peran Staf tidak melihat blok ini; agregat di atas tetap tampil untuk semua. Arsip historis KoBo / Master DB tetap di sumber terlindungi.</div><div class="saha-rawbody" data-rawbody="konseling"><div class="saha-rawempty">Login untuk memuat data.</div></div></div>
         <div class="source-attr" style="margin-top:22px;">📄 <strong>Sumber:</strong> Laporan Konseling oleh Konselor (KoboToolbox) · 461 sesi · 427 klien · 2024-04-28–2026-06-30 · snapshot Jul 2026.</div>
 
       </section>
@@ -5681,23 +5696,23 @@
   </div>
 </div>
 <p style="font-size:12px;color:var(--slate);margin:8px 2px 0;">Sesi penilaian risiko tingkat kelompok. Peserta dicatat agregat (jumlah + gender), tanpa identitas individual.</p>
-        <div class="placeholder-banner archival" style="margin-top:20px;"><span class="icon">🔐</span><div><strong>Data mentah level-klien (bernama) tidak ditanam di halaman ini.</strong> Yang tampil = agregat & indikator silang de-identifikasi. Baris per-klien (nama, tgl lahir, hasil) tetap di sumber terlindungi (KoBo / Master DB). Nama peserta grup dicatat di KoBo untuk verifikasi, TIDAK ditarik ke dashboard. Untuk telusur per-nama pakai <strong>Client Finder</strong> di menu Clients Database (butuh login).</div></div>
+        <div class="saha-rawbox role-me-up" data-form="gra" style="margin-top:20px;"><div class="saha-rawhead"><span>🔓 Data Mentah — Level Klien (bernama)</span><span class="saha-rawtag">AKSES: ADMIN · M&amp;E · DIREKTUR</span></div><div class="saha-rawnote">Baris per-klien dari entry form dashboard (live Firestore) — muncul otomatis begitu tim submit. Peran Staf tidak melihat blok ini; agregat di atas tetap tampil untuk semua. Arsip historis KoBo / Master DB tetap di sumber terlindungi.</div><div class="saha-rawbody" data-rawbody="gra"><div class="saha-rawempty">Login untuk memuat data.</div></div></div>
         <div class="source-attr" style="margin-top:22px;">📄 <strong>Sumber:</strong> Penilaian Risiko Kelompok GRA (KoboToolbox) · 804 sesi · 1.717 peserta · snapshot Jul 2026.</div>
 
       </section>
 
       <section class="section" id="l2-out-bulanan">
-        <div class="hero"><div class="eyebrow">Layer 2B · Laporan Lapangan · Output #9</div><h1>📆 Laporan Bulanan Korlap</h1><p class="lede">Rumah output untuk laporan naratif bulanan Koordinator Lapangan (analisa lapangan · FGD/support group · strategi per PL).</p></div>
+        <div class="hero"><div class="eyebrow">Layer 2B · Laporan Lapangan · Output #9</div><h1>📆 Laporan Bulanan Korlap</h1><p class="lede">Halaman output untuk laporan naratif bulanan Koordinator Lapangan (analisa lapangan · FGD/support group · strategi per PL).</p></div>
         <div style="background:#fff;border:1px solid var(--border,#e7ddd3);border-radius:14px;padding:26px 24px;text-align:center;color:var(--slate,#6f6660);font-size:13.5px;line-height:1.6;">
-          🏗️ <strong>Rumah ini aktif otomatis setelah entry pertama masuk.</strong><br>Form entry #9 baru dirilis 16 Jul 2026 — begitu Korlap mulai mengisi, ringkasan &amp; tabel laporan muncul di sini.
-        </div>
+          🏗️ <strong>Halaman laporan ini aktif otomatis setelah entry pertama masuk.</strong><br>Form entry #9 baru dirilis 16 Jul 2026 — begitu Korlap mulai mengisi, ringkasan &amp; tabel laporan muncul di sini.
+        </div><div class="saha-rawbox role-me-up" data-form="bulanan-kl" style="margin-top:20px;"><div class="saha-rawhead"><span>🔓 Data Mentah — Level Klien (bernama)</span><span class="saha-rawtag">AKSES: ADMIN · M&amp;E · DIREKTUR</span></div><div class="saha-rawnote">Baris per-klien dari entry form dashboard (live Firestore) — muncul otomatis begitu tim submit. Peran Staf tidak melihat blok ini; agregat di atas tetap tampil untuk semua. Arsip historis KoBo / Master DB tetap di sumber terlindungi.</div><div class="saha-rawbody" data-rawbody="bulanan-kl"><div class="saha-rawempty">Login untuk memuat data.</div></div></div>
       </section>
 
       <section class="section" id="l2-out-prevkit">
-        <div class="hero"><div class="eyebrow">Layer 2B · Laporan Lapangan · Output #10</div><h1>🎒 Prevention Kit</h1><p class="lede">Rumah output logistik alat pencegahan — rekap pengambilan per petugas &amp; per item (kondom, jarum, oral quick, pipet, pyrex, lip balm, sedotan, amplop, masker).</p></div>
+        <div class="hero"><div class="eyebrow">Layer 2B · Laporan Lapangan · Output #10</div><h1>🎒 Prevention Kit</h1><p class="lede">Halaman output logistik alat pencegahan — rekap pengambilan per petugas &amp; per item (kondom, jarum, oral quick, pipet, pyrex, lip balm, sedotan, amplop, masker).</p></div>
         <div style="background:#fff;border:1px solid var(--border,#e7ddd3);border-radius:14px;padding:26px 24px;text-align:center;color:var(--slate,#6f6660);font-size:13.5px;line-height:1.6;">
-          🏗️ <strong>Rumah ini aktif otomatis setelah entry pertama masuk.</strong><br>Form entry #10 baru dirilis 16 Jul 2026 — begitu pengambilan kit dicatat, rekap total per item &amp; per petugas muncul di sini.
-        </div>
+          🏗️ <strong>Halaman laporan ini aktif otomatis setelah entry pertama masuk.</strong><br>Form entry #10 baru dirilis 16 Jul 2026 — begitu pengambilan kit dicatat, rekap total per item &amp; per petugas muncul di sini.
+        </div><div class="saha-rawbox role-me-up" data-form="prevkit" style="margin-top:20px;"><div class="saha-rawhead"><span>🔓 Data Mentah — Level Klien (bernama)</span><span class="saha-rawtag">AKSES: ADMIN · M&amp;E · DIREKTUR</span></div><div class="saha-rawnote">Baris per-klien dari entry form dashboard (live Firestore) — muncul otomatis begitu tim submit. Peran Staf tidak melihat blok ini; agregat di atas tetap tampil untuk semua. Arsip historis KoBo / Master DB tetap di sumber terlindungi.</div><div class="saha-rawbody" data-rawbody="prevkit"><div class="saha-rawempty">Login untuk memuat data.</div></div></div>
       </section>
 
       <section class="section" id="l2-admin">
@@ -6761,10 +6776,10 @@
 
         <h2 class="section-h2" style="margin-top:30px;">🗺️ Sebaran per Wilayah</h2>
         <div class="budget-row"><div class="item-name">Kota Malang</div><div class="bar-track"><div class="bar-fill" style="width:100%; background:#a83244;"></div></div><div class="bar-percent">1.530</div></div>
-        <div class="budget-row"><div class="item-name">Kab. Sidoarjo</div><div class="bar-track"><div class="bar-fill" style="width:36%; background:#a83244;"></div></div><div class="bar-percent">554</div></div>
-        <div class="budget-row"><div class="item-name">Jakarta Barat</div><div class="bar-track"><div class="bar-fill" style="width:30%; background:#a83244;"></div></div><div class="bar-percent">457</div></div>
-        <div class="budget-row"><div class="item-name">Surabaya</div><div class="bar-track"><div class="bar-fill" style="width:25%; background:#a83244;"></div></div><div class="bar-percent">387</div></div>
-        <div class="budget-row"><div class="item-name">Kab. Malang</div><div class="bar-track"><div class="bar-fill" style="width:15%; background:#a83244;"></div></div><div class="bar-percent">227</div></div>
+        <div class="budget-row"><div class="item-name">Kab. Sidoarjo</div><div class="bar-track"><div class="bar-fill" style="width:36%; background:#94395c;"></div></div><div class="bar-percent">554</div></div>
+        <div class="budget-row"><div class="item-name">Jakarta Barat</div><div class="bar-track"><div class="bar-fill" style="width:30%; background:#6b4d7a;"></div></div><div class="bar-percent">457</div></div>
+        <div class="budget-row"><div class="item-name">Surabaya</div><div class="bar-track"><div class="bar-fill" style="width:25%; background:#c47a3b;"></div></div><div class="bar-percent">387</div></div>
+        <div class="budget-row"><div class="item-name">Kab. Malang</div><div class="bar-track"><div class="bar-fill" style="width:15%; background:#5f6e52;"></div></div><div class="bar-percent">227</div></div>
 
         <h2 class="section-h2" style="margin-top:30px;">🧑‍🤝‍🧑 Demografi &amp; Populasi Kunci</h2>
         <div class="cards">
@@ -6776,14 +6791,14 @@
 
         <h2 class="section-h2" style="margin-top:30px;">🩺 Cakupan Layanan</h2>
         <p style="font-size:13px; color:var(--slate); line-height:1.6; margin:4px 0 14px 0;">Proporsi klien yang mengakses tiap layanan (dari 3.155 total). Menunjukkan model layanan terintegrasi — tes, IMS, keswa, hingga PrEP/ARV.</p>
-        <div class="budget-row"><div class="item-name">Tes HIV</div><div class="bar-track"><div class="bar-fill" style="width:60%; background:#8a9a7b;"></div></div><div class="bar-percent">1.889</div></div>
-        <div class="budget-row"><div class="item-name">Akses VCT</div><div class="bar-track"><div class="bar-fill" style="width:57%; background:#8a9a7b;"></div></div><div class="bar-percent">1.783</div></div>
-        <div class="budget-row"><div class="item-name">Screening IMS</div><div class="bar-track"><div class="bar-fill" style="width:53%; background:#8a9a7b;"></div></div><div class="bar-percent">1.675</div></div>
-        <div class="budget-row"><div class="item-name">Asesmen Risiko (IRA)</div><div class="bar-track"><div class="bar-fill" style="width:41%; background:#8a9a7b;"></div></div><div class="bar-percent">1.284</div></div>
-        <div class="budget-row"><div class="item-name">Kesehatan Mental</div><div class="bar-track"><div class="bar-fill" style="width:32%; background:#8a9a7b;"></div></div><div class="bar-percent">1.023</div></div>
-        <div class="budget-row"><div class="item-name">Dukungan Keswa</div><div class="bar-track"><div class="bar-fill" style="width:26%; background:#8a9a7b;"></div></div><div class="bar-percent">824</div></div>
-        <div class="budget-row"><div class="item-name">PrEP</div><div class="bar-track"><div class="bar-fill" style="width:9%; background:#6e8f6a;"></div></div><div class="bar-percent">292</div></div>
-        <div class="budget-row"><div class="item-name">ARV</div><div class="bar-track"><div class="bar-fill" style="width:4%; background:#6e8f6a;"></div></div><div class="bar-percent">110</div></div>
+        <div class="budget-row"><div class="item-name">Tes HIV</div><div class="bar-track"><div class="bar-fill" style="width:60%; background:#a83244;"></div></div><div class="bar-percent">1.889</div></div>
+        <div class="budget-row"><div class="item-name">Akses VCT</div><div class="bar-track"><div class="bar-fill" style="width:57%; background:#94395c;"></div></div><div class="bar-percent">1.783</div></div>
+        <div class="budget-row"><div class="item-name">Screening IMS</div><div class="bar-track"><div class="bar-fill" style="width:53%; background:#7f4468;"></div></div><div class="bar-percent">1.675</div></div>
+        <div class="budget-row"><div class="item-name">Asesmen Risiko (IRA)</div><div class="bar-track"><div class="bar-fill" style="width:41%; background:#6b4d7a;"></div></div><div class="bar-percent">1.284</div></div>
+        <div class="budget-row"><div class="item-name">Kesehatan Mental</div><div class="bar-track"><div class="bar-fill" style="width:32%; background:#c47a3b;"></div></div><div class="bar-percent">1.023</div></div>
+        <div class="budget-row"><div class="item-name">Dukungan Keswa</div><div class="bar-track"><div class="bar-fill" style="width:26%; background:#9a5c26;"></div></div><div class="bar-percent">824</div></div>
+        <div class="budget-row"><div class="item-name">PrEP</div><div class="bar-track"><div class="bar-fill" style="width:9%; background:#5f6e52;"></div></div><div class="bar-percent">292</div></div>
+        <div class="budget-row"><div class="item-name">ARV</div><div class="bar-track"><div class="bar-fill" style="width:4%; background:#543c60;"></div></div><div class="bar-percent">110</div></div>
 
         <h2 class="section-h2" style="margin-top:30px;">🧬 Kaskade HIV · Agregat</h2>
         <div class="hero-stat sage" style="margin-top:8px;">
@@ -6955,7 +6970,7 @@ function updateBreadcrumb(item) {
   function listen(){
     if(unsub) return;
     const qy = query(collection(db,'submissions'), orderBy('created_at','desc'));
-    unsub = onSnapshot(qy, snap=>{ ALL=[]; snap.forEach(d=>{ const x=d.data(); x.__id=d.id; if(!String(x.form||'').startsWith('__')) ALL.push(x); }); fillPL(); render(); renderAdmin(); },
+    unsub = onSnapshot(qy, snap=>{ ALL=[]; snap.forEach(d=>{ const x=d.data(); x.__id=d.id; if(!String(x.form||'').startsWith('__')) ALL.push(x); }); fillPL(); render(); renderAdmin(); window.__SAHA_ALL=ALL; if(window.SAHA_RENDER_RAW) window.SAHA_RENDER_RAW(); },
       err=>{ if($('saha-login-err')) $('saha-login-err').textContent='Gagal baca data: '+(err.code||err.message); console.error('[LogHarian]',err); });
   }
   function fillPL(){ const sel=$('lh-f-pl'), cur=sel.value; const pls=[...new Set(ALL.map(x=>x.pl).filter(Boolean))].sort(); sel.innerHTML='<option value="">Semua PL</option>'+pls.map(p=>'<option>'+esc(p)+'</option>').join(''); sel.value=cur; }
@@ -7153,6 +7168,66 @@ if(exp) exp.addEventListener('click',()=>{
   const a=document.createElement('a'); a.href=u; a.download='ClientFinder_hasil.csv'; a.click(); URL.revokeObjectURL(u);
 });
 window.CF_MOCK = function(arr){ ALL=arr; loaded=true; fillFilters(); render(); if($('cf-locked'))$('cf-locked').style.display='none'; if($('cf-panel'))$('cf-panel').style.display='block'; };
+</script>
+
+<script>
+/* === DATA MENTAH v0.28 (role-gated raw rows, reuses Log Harian live cache — 0 extra reads) === */
+window.SAHA_RENDER_RAW = function(){
+  var role = window.SAHA_ROLE;
+  var can = (role==='admin'||role==='me'||role==='manager');
+  var ALLR = window.__SAHA_ALL || [];
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]; }); }
+  function fmtT(t){ try{ var d=new Date(t); return isNaN(d)?esc(t):d.toLocaleString('id-ID',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}); }catch(e){ return esc(t); } }
+  document.querySelectorAll('.saha-rawbox').forEach(function(box){
+    var f = box.getAttribute('data-form');
+    var body = box.querySelector('[data-rawbody]');
+    if(!body) return;
+    if(!can){ body.innerHTML = '<div class="saha-rawempty">\ud83d\udd12 Login sebagai Admin / M&amp;E / Direktur untuk melihat data mentah.</div>'; body.__rows=null; return; }
+    var rows = ALLR.filter(function(x){ return x.form === f; });
+    if(!rows.length){ body.innerHTML = '<div class="saha-rawempty">Belum ada entry <strong>'+esc(f)+'</strong> dari form dashboard. Begitu tim submit, baris muncul otomatis di sini (live).</div>'; body.__rows=null; return; }
+    var shown = rows.slice(0, 300);
+    var h = '<div class="saha-rawmeta"><span><strong>'+rows.length+'</strong> entry'+(rows.length>300?' \u00b7 menampilkan 300 terbaru':'')+'</span><button class="lh-btn-sm" onclick="SAHA_RAW_CSV(\''+f+'\')">\ud83d\udce5 Export CSV</button></div>';
+    h += '<table class="saha-rawtable"><thead><tr><th>Waktu</th><th>PL</th><th>Nama Klien</th><th>ID KD</th><th>Wilayah</th><th>Ringkas</th><th></th></tr></thead><tbody>';
+    shown.forEach(function(x, i){
+      var k = x.klien||{}, w = x.wilayah||{};
+      var nm = k.nama || k.julukan || (x.data&&(x.data.pengambil||x.data.nama)) || '-';
+      var area = [w.kotakab,w.kecamatan].filter(Boolean).join(' \u00b7 ')||'-';
+      var ring = '-';
+      try{
+        if(f==='dast10'||f==='srq29') ring = (x.skor==null?'-':('Skor '+x.skor))+(x.interpretasi?(' \u00b7 '+x.interpretasi):'');
+        else if(f==='chemsex'){ var a=x.answers||{}; ring='Napza: '+(Array.isArray(a.napza)?a.napza.join(', '):(a.napza||'-')); }
+        else if(f==='prevkit'){ var d=x.data||{}; ring='Total '+(d.total!=null?d.total:'-')+' item'; }
+        else if(f==='bulanan-kl'){ ring = esc(x.kl||'-'); }
+      }catch(e){}
+      h += '<tr><td style="white-space:nowrap;">'+fmtT(x.created_at)+'</td><td>'+esc(x.pl||'-')+'</td><td style="font-weight:600;">'+esc(nm)+'</td><td>'+esc(k.idkd||'-')+'</td><td>'+esc(area)+'</td><td>'+esc(ring)+'</td><td><span style="cursor:pointer;color:#6b4d7a;font-weight:700;" onclick="SAHA_RAW_DET(this,'+i+')">Detail</span></td></tr>';
+    });
+    h += '</tbody></table>';
+    body.innerHTML = h;
+    body.__rows = shown;
+  });
+};
+window.SAHA_RAW_DET = function(el, i){
+  var body = el.closest('[data-rawbody]');
+  var x = (body && body.__rows||[])[i]; if(!x) return;
+  var tr = el.closest('tr');
+  if(tr.nextElementSibling && tr.nextElementSibling.className==='saha-rawdetrow'){ tr.parentNode.removeChild(tr.nextElementSibling); return; }
+  function flat(o, pre){ var out=[]; Object.keys(o||{}).forEach(function(k){ if(k==='__id') return; var v=o[k]; if(v&&typeof v==='object'&&!Array.isArray(v)){ out=out.concat(flat(v,(pre?pre+'.':'')+k)); } else { out.push((pre?pre+'.':'')+k+': '+(Array.isArray(v)?v.join(', '):v)); } }); return out; }
+  var nd = document.createElement('tr'); nd.className='saha-rawdetrow';
+  var td = document.createElement('td'); td.colSpan = 7;
+  var dv = document.createElement('div'); dv.className='saha-rawdet'; dv.textContent = flat(x,'').join('\n');
+  td.appendChild(dv); nd.appendChild(td); tr.parentNode.insertBefore(nd, tr.nextSibling);
+};
+window.SAHA_RAW_CSV = function(f){
+  var role = window.SAHA_ROLE;
+  if(!(role==='admin'||role==='me'||role==='manager')) return;
+  var rows = (window.__SAHA_ALL||[]).filter(function(x){ return x.form===f; });
+  if(!rows.length) return;
+  var keys = [];
+  var flatrows = rows.map(function(x){ var o={}; (function fl(v,pre){ Object.keys(v||{}).forEach(function(k){ if(k==='__id')return; var val=v[k]; if(val&&typeof val==='object'&&!Array.isArray(val)){ fl(val,(pre?pre+'.':'')+k); } else { var kk=(pre?pre+'.':'')+k; o[kk]=Array.isArray(val)?val.join('; '):val; if(keys.indexOf(kk)<0) keys.push(kk); } }); })(x,''); return o; });
+  var csv=[keys.join(',')].concat(flatrows.map(function(r){ return keys.map(function(c){ var v=r[c]==null?'':String(r[c]); v=v.replace(/"/g,'""'); return /[",\n]/.test(v)?'"'+v+'"':v; }).join(','); })).join('\n');
+  var b=new Blob(["\ufeff"+csv],{type:'text/csv'}); var a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='data_mentah_'+f+'_'+new Date().toISOString().slice(0,10)+'.csv'; a.click();
+};
+(function(){ var _aru = window.applyRoleUI; if(typeof _aru==='function'){ window.applyRoleUI = function(){ _aru(); try{ window.SAHA_RENDER_RAW(); }catch(e){} }; } })();
 </script>
 </body>
 </html>
