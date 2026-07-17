@@ -6993,8 +6993,8 @@ function updateBreadcrumb(item) {
     tb.innerHTML=rows.map((x,i)=>{ const k=x.klien||{},w=x.wilayah||{};
       const klien=esc(k.julukan||k.nama||'-')+(k.idkd?' <span class="lh-flag">('+esc(k.idkd)+(k.idkd_placeholder?' ⚠️':'')+')</span>':'');
       const area=esc([w.kotakab,w.kecamatan,w.desa].filter(Boolean).join(' · ')||'-');
-      const label=(window.SAHA_FORM_LABELS||{})[x.form]||('📄 '+esc(x.form||'-'));
-      return '<tr><td>'+fmt(x.created_at)+'</td><td><span class="lh-badge '+esc(x.form)+'">'+label+'</span></td><td>'+esc(x.pl||'-')+'</td><td>'+klien+'</td><td>'+area+'</td><td>'+esc(ringkas(x))+'</td><td><span class="lh-detail" data-i="'+i+'">Detail</span></td></tr>';
+      const label=(window.SAHA_FORM_LABELS||{})[x.form]||('📄 '+esc(x.form||'-'));       const krx=x.koreksi?' <span class=\"lh-flag\" style=\"background:#f3eef7;color:#4e3859;\">↻ koreksi</span>':'';
+      return '<tr><td>'+fmt(x.created_at)+'</td><td><span class="lh-badge '+esc(x.form)+'">'+label+'</span></td><td>'+esc(x.pl||'-')+'</td><td>'+klien+'</td><td>'+area+'</td><td>'+esc(ringkas(x))+krx+'</td><td><span class="lh-detail" data-i="'+i+'">Detail</span></td></tr>';
     }).join('');
     tb.querySelectorAll('.lh-detail').forEach(el=>el.addEventListener('click',()=>detail(rows[+el.dataset.i])));
   }
@@ -7210,7 +7210,8 @@ window.SAHA_RENDER_RAW = function(){
         else if(f==='prevkit'){ var d=x.data||{}; ring='Total '+(d.total!=null?d.total:'-')+' item'; }
         else if(f==='bulanan-kl'){ ring = esc(x.kl||'-'); }
       }catch(e){}
-      h += '<tr><td style="white-space:nowrap;">'+fmtT(x.created_at)+'</td><td>'+esc(x.pl||'-')+'</td><td style="font-weight:600;">'+esc(nm)+'</td><td>'+esc(k.idkd||'-')+'</td><td>'+esc(area)+'</td><td>'+esc(ring)+'</td><td><span style="cursor:pointer;color:#6b4d7a;font-weight:700;" onclick="SAHA_RAW_DET(this,'+i+')">Detail</span></td></tr>';
+      var krx = x.koreksi ? ' <span style="background:#f3eef7;color:#4e3859;border-radius:8px;padding:1px 7px;font-size:10px;font-weight:700;">\u21bb koreksi</span>' : '';
+      h += '<tr><td style="white-space:nowrap;">'+fmtT(x.created_at)+'</td><td>'+esc(x.pl||'-')+'</td><td style="font-weight:600;">'+esc(nm)+'</td><td>'+esc(k.idkd||'-')+'</td><td>'+esc(area)+'</td><td>'+esc(ring)+krx+'</td><td><span style="cursor:pointer;color:#6b4d7a;font-weight:700;" onclick="SAHA_RAW_DET(this,'+i+')">Detail</span></td></tr>';
     });
     h += '</tbody></table>';
     body.innerHTML = h;

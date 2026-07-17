@@ -399,7 +399,43 @@
     return items.length;
   }
   function hideMissing() { const b = document.getElementById("saha-missbox"); if (b) b.style.display = "none"; }
-  function push(rec) { return _push ? _push(rec) : Promise.reject(new Error("Firebase belum siap")); }
+  /* ANTI-DOBEL (v0.36): form sama + ID KD sama + hari sama dari HP ini -> konfirmasi koreksi */
+  function cekDobel(rec) {
+    if (!rec || !rec.form || !rec.klien || !rec.klien.idkd) return true;
+    const day = String(rec.tanggal || rec.created_at || "").slice(0, 10);
+    if (!day) return true;
+    let dupKey = null;
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (!k || k.indexOf("__cloud") >= 0) continue;
+      let v; try { v = JSON.parse(localStorage.getItem(k)); } catch (e) { continue; }
+      if (!v || v.form !== rec.form || !v.klien || v.klien.idkd !== rec.klien.idkd) continue;
+      if (String(v.tanggal || v.created_at || "").slice(0, 10) !== day) continue;
+      if (v.created_at === rec.created_at) { dupKey = dupKey; continue; }
+      dupKey = k; break;
+    }
+    if (!dupKey) return true;
+    const nm = rec.klien.julukan || rec.klien.nama || rec.klien.idkd;
+    const ok = confirm("\u26a0\ufe0f Anda SUDAH mengisi form ini untuk klien yang sama hari ini (" + nm + ").\n\nKirim lagi sebagai KOREKSI? Isian baru ini yang akan dipakai di laporan.\n\nOK = kirim sebagai koreksi\nBatal = TIDAK dikirim (isian lama tetap berlaku)");
+    if (!ok) return false;
+    rec.koreksi = true;
+    return true;
+  }
+  function push(rec) {
+    try {
+      if (!cekDobel(rec)) {
+        /* tombstone: cegah outbox mengirim isian yang dibatalkan */
+        for (let i = 0; i < localStorage.length; i++) {
+          const k = localStorage.key(i);
+          if (!k || k.indexOf("__cloud") >= 0) continue;
+          let v; try { v = JSON.parse(localStorage.getItem(k)); } catch (e) { continue; }
+          if (v && v.created_at === rec.created_at && v.form === rec.form) { try { localStorage.setItem(k + "__cloud", "DIBATALKAN"); } catch (e) {} break; }
+        }
+        return Promise.reject(new Error("DIBATALKAN_PENGGUNA"));
+      }
+    } catch (e) {}
+    return _push ? _push(rec) : Promise.reject(new Error("Firebase belum siap"));
+  }
 
   window.sahaBack = function (e) { if (window.self !== window.top) { if (e) e.preventDefault(); window.parent.postMessage({ saha: 'nav', to: 'l3-master' }, '*'); return false; } return true; };
   window.sahaHome = function () { if (window.self !== window.top) { window.parent.postMessage({ saha: 'nav', to: 'l3-master' }, '*'); return; } window.location.href = 'index.html'; };

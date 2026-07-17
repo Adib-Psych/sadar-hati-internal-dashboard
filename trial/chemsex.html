@@ -1405,9 +1405,29 @@
     localStorage.setItem(key, JSON.stringify(data));
 
     // Push ke Firestore (cloud) — online-first; localStorage di atas = fallback offline
-    if (window.__pushSubmission) {
+    // ANTI-DOBEL (v0.36): form sama + ID KD sama + hari sama -> konfirmasi koreksi
+    var __koreksi = false;
+    try {
+      var __day = String(data.timestamp || '').slice(0, 10);
+      var __idkd = (data.klien || {}).idkd || '';
+      if (__idkd && __day) {
+        for (var __i = 0; __i < localStorage.length; __i++) {
+          var __k = localStorage.key(__i);
+          if (!__k || __k.indexOf('__cloud') >= 0 || __k === key) continue;
+          var __v; try { __v = JSON.parse(localStorage.getItem(__k)); } catch (e) { continue; }
+          if (!__v || !__v.klien || __v.klien.idkd !== __idkd) continue;
+          if (String(__v.timestamp || __v.created_at || '').slice(0, 10) !== __day) continue;
+          var __nm = data.klien.julukan || data.klien.nama || __idkd;
+          if (confirm('\u26a0\ufe0f Anda SUDAH mengisi Form Penjangkauan untuk klien yang sama hari ini (' + __nm + ').\n\nKirim lagi sebagai KOREKSI? Isian baru ini yang akan dipakai di laporan.\n\nOK = kirim sebagai koreksi\nBatal = TIDAK dikirim (isian lama tetap berlaku)')) { __koreksi = true; }
+          else { try { localStorage.setItem(key + '__cloud', 'DIBATALKAN'); } catch (e) {} }
+          break;
+        }
+      }
+    } catch (e) {}
+    if (window.__pushSubmission && localStorage.getItem(key + '__cloud') !== 'DIBATALKAN') {
       window.__pushSubmission({
         form: 'chemsex',
+        koreksi: __koreksi,
         pl: answers.pl || '',
         created_at: data.timestamp,
         schema_version: 'chemsex-1.0',
