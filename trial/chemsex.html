@@ -1514,12 +1514,16 @@
         if(u>=10&&u<=99){ setVal('f-usia',u); usiaTxt=', usia '+u; }
       }
       var jkOK=clickBtn('[data-req="jk"]',r.s);
-      var plOK=clickBtn('.pl-grid',r.p,{'Hendra':'Hendra (KL-MLG)'});
+      var plSudah=!!document.querySelector('.pl-grid .radio-item.selected');
+      var plOK=false;
+      if(!plSudah){ plOK=clickBtn('.pl-grid',r.p,{'Hendra':'Hendra (KL-MLG)'}); }
       var kkOK=clickBtn('#kotakab-group',r.k,{'Kabupaten Malang':'Kab Malang'});
       if(st){
-        var parts='✅ <strong>Terisi otomatis:</strong> nama, panggilan, ID KD'+(r.d?', tgl lahir'+usiaTxt:'')+(jkOK?', JK':'')+(plOK?', PL <strong>'+r.p+'</strong>':'');
+        var plInfo = plOK ? ', PL <strong>'+r.p+'</strong> <em>(PL asal klien — ganti ke nama Anda bila Anda yang menangani)</em>' : '';
+        var parts='✅ <strong>Terisi otomatis:</strong> nama, panggilan, ID KD'+(r.d?', tgl lahir'+usiaTxt:'')+(jkOK?', JK':'')+plInfo;
         if(kkOK){ parts+=', wilayah <strong>'+r.k+'</strong> — lanjut pilih kecamatan & desa.'; }
         else { parts+='. ⚠️ Wilayah roster: <strong>'+(r.k||'?')+'</strong> — tidak ada di pilihan form ini, pilih kota/kab manual.'; }
+        if(plSudah) parts+=' ℹ️ PL asal klien: <strong>'+(r.p||'-')+'</strong> (pilihan PL Anda tidak diubah).';
         st.innerHTML=parts; st.style.display='block';
       }
     });

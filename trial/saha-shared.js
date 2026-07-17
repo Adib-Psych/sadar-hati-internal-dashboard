@@ -303,10 +303,11 @@
       if (y > 0 && y < 120) { el.querySelector("#saha-usia").value = y; val.usia = String(y); }
     }
     selChip(el, "jk", e.s);
-    selChip(el, "pl", e.p);
+    const plSudah = !!val.pl;
+    if (!plSudah) selChip(el, "pl", e.p);
     if (selChip(el, "kotakab", e.k)) populateKec(el, e.k);
     const ok = el.querySelector("#saha-cari-ok");
-    if (ok) { ok.style.display = "block"; ok.textContent = "✓ Terisi dari roster: " + e.n + " · PL " + (e.p || "-") + " · " + (e.k || "-") + ". Lengkapi Kecamatan/Desa & cek datanya."; }
+    if (ok) { ok.style.display = "block"; ok.textContent = "✓ Terisi dari roster: " + e.n + " · " + (e.k || "-") + ". PL asal klien: " + (e.p || "-") + (plSudah ? " (pilihan PL Anda tidak diubah)" : " — ganti ke nama Anda bila Anda yang menangani") + ". Lengkapi Kecamatan/Desa & cek datanya."; }
   }
 
   /* ---------- API ---------- */
