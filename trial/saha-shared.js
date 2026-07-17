@@ -26,9 +26,34 @@
       const db = getFirestore(app);
       _push = (rec) => addDoc(collection(db, "submissions"), rec).then(r => r.id);
       _ready = true;
+      try { retryOutbox(); } catch (e) {}
       console.log("[SAHA] Firebase siap (sadar-hati-hub)");
     } catch (e) { console.error("[SAHA] Firebase init gagal:", e); }
   })();
+
+
+  /* ===== OUTBOX AUTO-RESEND (v0.33) — entri yang tertahan di HP dikirim ulang otomatis ===== */
+  function retryOutbox() {
+    if (!_push) return;
+    let sent = 0;
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (!k || k.indexOf('__cloud') >= 0) continue;
+      if (localStorage.getItem(k + '__cloud')) continue;
+      let v; try { v = JSON.parse(localStorage.getItem(k)); } catch (e) { continue; }
+      if (!v || typeof v !== 'object' || !v.form || !v.pl || !v.created_at || !v.schema_version) continue;
+      const t = new Date(v.created_at);
+      if (isNaN(t) || (Date.now() - t.getTime()) > 7 * 24 * 3600 * 1000) continue;
+      (function (kk, rec) {
+        _push(rec).then(function (id) {
+          try { localStorage.setItem(kk + '__cloud', id); } catch (e) {}
+          console.log('[SAHA] outbox terkirim ulang:', kk);
+        }).catch(function () {});
+      })(k, v);
+      sent++;
+    }
+    if (sent) console.log('[SAHA] outbox retry: mencoba kirim', sent, 'entri tertunda');
+  }
 
   /* ---------- Roster pre-fill (load saha-roster.js) ---------- */
   let _fillDatalist = () => {};

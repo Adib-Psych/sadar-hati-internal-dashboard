@@ -910,7 +910,7 @@
   <div class="result-card">
     <div class="check-icon">✓</div>
     <h2>Laporan Tersimpan!</h2>
-    <p style="font-size:13px; color:var(--slate); margin:0;">Data penjangkauan berhasil disimpan di HP Anda.</p>
+    <p style="font-size:13px; color:var(--slate); margin:0;">Data tersimpan di HP &amp; dikirim ke cloud otomatis. Bila sinyal putus, akan dikirim ulang sendiri saat form dibuka lagi.</p>
     <div class="summary-box" id="summary-box"></div>
     <div class="result-actions">
       <button class="btn-new" onclick="startNew()">➕ Isi Klien Baru</button>
@@ -1554,6 +1554,22 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     window.__pushSubmission = (record) => addDoc(collection(db, 'submissions'), record).then(r => r.id);
+    /* OUTBOX AUTO-RESEND (v0.33) */
+    try {
+      let _sent = 0;
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (!k || k.indexOf('__cloud') >= 0) continue;
+        if (localStorage.getItem(k + '__cloud')) continue;
+        let v; try { v = JSON.parse(localStorage.getItem(k)); } catch (e) { continue; }
+        if (!v || typeof v !== 'object' || !v.form || !v.pl || !v.created_at || !v.schema_version) continue;
+        const t = new Date(v.created_at);
+        if (isNaN(t) || (Date.now() - t.getTime()) > 7 * 24 * 3600 * 1000) continue;
+        (function (kk, rec) { window.__pushSubmission(rec).then(function (id) { try { localStorage.setItem(kk + '__cloud', id); } catch (e) {} console.log('[SAHA] outbox terkirim ulang:', kk); }).catch(function () {}); })(k, v);
+        _sent++;
+      }
+      if (_sent) console.log('[SAHA] outbox retry:', _sent, 'entri tertunda');
+    } catch (e) {}
     window.__firebaseReady = true;
     console.log('[Firebase] siap (sadar-hati-hub) — Chemsex');
   } catch (e) {

@@ -639,7 +639,7 @@
       SAHA.push(record).then(cid => { try { localStorage.setItem(key + '__cloud', cid); } catch (e) {} })
         .catch(err => console.warn('[Firestore] push gagal, tersimpan lokal:', err && err.message));
     }
-    alert('✅ Hasil tersimpan (cloud + HP ini).');
+    alert('✅ Tersimpan di HP ini — pengiriman ke cloud berjalan otomatis (dikirim ulang sendiri bila sinyal putus).');
     closeModal();
     if (confirm('Isi lagi untuk dampingan lain?')) window.location.reload();
     else sahaHome();
