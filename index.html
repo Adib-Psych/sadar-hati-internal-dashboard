@@ -959,7 +959,7 @@
         <span class="current">Overview Overall Program</span>
       </div>
       <div class="topbar-actions">
-        <span class="saha-authbar saha-authed-only">🔓 Staf <span class="saha-user"></span></span>
+        <span class="saha-authbar saha-authed-only">🔓 <span id="saha-rolechip">Staf</span> <span class="saha-user"></span></span>
         <button class="btn saha-logout saha-authed-only">Logout</button>
       </div>
     </div>
@@ -6908,6 +6908,7 @@ function updateBreadcrumb(item) {
   if($('lh-export')) $('lh-export').addEventListener('click', doExport);
   function sahaLock(){
     window.SAHA_AUTH=false;
+    const chip=document.getElementById('saha-rolechip'); if(chip){ chip.textContent='Staf'; chip.style.color=''; }
     document.body.classList.remove('saha-authed');
     document.querySelectorAll('[data-zone="2B"]').forEach(z=>z.classList.add('zone-locked'));
     if($('lh-data')) $('lh-data').style.display='none';
@@ -6975,7 +6976,8 @@ function updateBreadcrumb(item) {
         const r=(snap.data().role||'staff').toLowerCase();
         const M={admin:['ADMIN','#7a1f30','#f7e9ec'],manager:['MANAGER','#3f5749','#e8efea'],me:['M&E','#2f6d9e','#e7f0f7'],staff:['STAF','#7a746e','#f1ede8']};
         const m=M[r]||M.staff; badge.textContent=m[0]+(snap.data().nama?' · '+snap.data().nama:''); badge.style.color=m[1]; badge.style.background=m[2];
-      } else { badge.textContent='Staf (default — dok roles belum dibuat)'; }
+        const chip=document.getElementById('saha-rolechip'); if(chip){ chip.textContent=m[0].charAt(0)+m[0].slice(1).toLowerCase(); chip.style.fontWeight='800'; chip.style.color=m[1]; }
+      } else { badge.textContent='Staf (default — dok roles belum dibuat)'; const chip=document.getElementById('saha-rolechip'); if(chip){ chip.textContent='Staf'; chip.style.color=''; } }
     }catch(e){ badge.textContent='Staf (default — rule roles belum di-apply)'; }
   }
   const copyBtn=document.getElementById('adm-uid-copy');
