@@ -140,7 +140,7 @@
         <div class="saha-lbl">Kecamatan <span class="rq">*</span></div>
         <select class="saha-in" id="saha-kec" disabled><option value="">-- pilih Kota/Kab dulu --</option></select>
         <input type="text" class="saha-in" id="saha-kec-manual" placeholder="Ketik kecamatan..." style="display:none;margin-top:6px;">
-        <div class="saha-lbl">Desa / Kelurahan <span class="rq">*</span></div>
+        <div class="saha-lbl">Desa / Kelurahan <span style="font-size:9.5px;color:#8a9a7b;">(opsional)</span></div>
         <select class="saha-in" id="saha-desa" disabled><option value="">-- pilih Kecamatan dulu --</option></select>
         <input type="text" class="saha-in" id="saha-desa-manual" placeholder="Ketik desa/kelurahan..." style="display:none;margin-top:6px;">
         <div class="saha-dhint" id="saha-domisili-hint" style="display:none;"></div>
@@ -373,7 +373,7 @@
 
   /* ---------- API ---------- */
   function getIdentity() { return { ...val }; }
-  const REQ = ["tahun", "pl", "tanggal", "kotakab", "kecamatan", "desa", "status", "nama", "julukan", "idkd", "jk", "tgllahir"];
+  const REQ = ["tahun", "pl", "tanggal", "kotakab", "kecamatan", "status", "nama", "julukan", "idkd", "jk", "tgllahir"]; /* desa OPSIONAL (feedback PL 17 Jul) */
   function isValid() { return REQ.every(k => val[k] != null && String(val[k]).trim() !== ""); }
   function missing() { return REQ.filter(k => !(val[k] != null && String(val[k]).trim() !== "")); }
   const LBL = { tahun: "Tahun", pl: "Nama PL", tanggal: "Tanggal Laporan", kotakab: "Kota/Kabupaten", kecamatan: "Kecamatan", desa: "Desa/Kelurahan", status: "Status Kontak (Baru/Lama)", nama: "Nama Lengkap Klien", julukan: "Nama Panggilan", idkd: "ID KD (isi 4 Huruf Pertama)", jk: "Jenis Kelamin", tgllahir: "Tanggal Lahir (usia otomatis)" };
