@@ -612,7 +612,7 @@
     if (interpret.length === 0) interpret = ['Normal'];
 
     if (!window.SAHA || !SAHA.isValid()) {
-      alert('Lengkapi dulu Identitas & Area (bagian atas) sebelum simpan.\nBelum lengkap: ' + (window.SAHA ? SAHA.missing().join(', ') : 'modul belum siap'));
+      if (window.SAHA && SAHA.showMissing) SAHA.showMissing(); else alert('Lengkapi dulu Identitas & Area di bagian atas.');
       return;
     }
     const id = SAHA.getIdentity();

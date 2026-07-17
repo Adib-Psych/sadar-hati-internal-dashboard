@@ -83,7 +83,7 @@
   function chips(field, arr) {
     return arr.map(v => `<button type="button" class="saha-chip" data-f="${field}" data-v="${String(v).replace(/"/g,'&quot;')}">${v}</button>`).join("");
   }
-  const KOTAKAB = ["Kota Malang", "Kabupaten Malang", "Surabaya", "Kabupaten Sidoarjo", "Jakarta Barat"];
+  const KOTAKAB = ["Kota Malang", "Kabupaten Malang", "Kota Batu"]; /* Malang Raya saja — arsip: lihat SAHA_DATA.KOTAKAB_ARSIP */
   function buildIdentity(containerId) {
     const el = document.getElementById(containerId);
     if (!el) { console.warn("[SAHA] container tidak ada:", containerId); return; }
@@ -120,13 +120,16 @@
         <input type="text" class="saha-in" id="saha-desa-manual" placeholder="Ketik desa/kelurahan..." style="display:none;margin-top:6px;">
 
         <div class="saha-h">3 · Identitas Klien</div>
+        <div class="saha-lbl">Status Kontak <span class="rq">*</span></div>
+        <div class="saha-chips" data-g="status">${chips("status", ["Baru", "Lama"])}</div>
+        <div class="saha-dhint">🆕 <strong>Baru</strong> = KD baru (isi identitas lengkap) · 🔁 <strong>Lama</strong> = pakai ⚡ Isi Cepat di atas</div>
         <div class="saha-lbl">Nama Lengkap Klien <span class="rq">*</span></div>
         <input type="text" class="saha-in" id="saha-nama" placeholder="Nama lengkap sesuai KTP/kartu">
         <div class="saha-lbl">Nama Panggilan / Julukan <span class="rq">*</span></div>
         <input type="text" class="saha-in" id="saha-julukan" placeholder="Nickname atau alias">
         <div class="saha-lbl">4 Huruf Pertama Nama <span class="rq">*</span></div>
         <input type="text" class="saha-in" id="saha-huruf4" maxlength="4" placeholder="misal: BUDI" style="text-transform:uppercase;letter-spacing:2px;font-weight:700;">
-        <div class="saha-lbl">Tanggal Lahir Klien</div>
+        <div class="saha-lbl">Tanggal Lahir Klien <span class="rq">*</span></div>
         <input type="text" class="saha-in" id="saha-tgllahir-txt" inputmode="numeric" autocomplete="off" placeholder="tt/bb/tttt — ketik angka saja" style="letter-spacing:1px;">
         <input type="date" class="saha-in" id="saha-tgllahir" style="margin-top:6px;">
         <div class="saha-dhint">&#9997;&#65039; Cara cepat: ketik angka saja (misal 31051999) — tidak perlu scroll kalender jauh</div>
@@ -135,8 +138,8 @@
         <div class="saha-flag" id="saha-idkd-flag" style="display:none;">⚠️ <strong>Placeholder tgl lahir (123456)</strong> — flag untuk backfill saat data lengkap.</div>
         <div class="saha-lbl">Jenis Kelamin <span class="rq">*</span></div>
         <div class="saha-chips" data-g="jk">${chips("jk", ["Laki-laki", "Perempuan", "Transgender"])}</div>
-        <div class="saha-lbl">Usia <span class="rq">*</span></div>
-        <input type="number" class="saha-in" id="saha-usia" min="10" max="99" placeholder="umur klien (tahun)">
+        <div class="saha-lbl">Usia <span style="font-size:9.5px;color:#8a9a7b;">(OTOMATIS — terkunci)</span></div>
+        <input type="text" class="saha-in" id="saha-usia" readonly placeholder="⚙️ otomatis dari tanggal lahir" style="background:#f2f2ea;font-weight:700;color:var(--sage-deep,#5f6e52);">
       </div>`;
     wire(el);
     _fillDatalist();
@@ -208,7 +211,7 @@
     h4.addEventListener("input", () => { h4.value = h4.value.toUpperCase(); idkd(); });
     tgl.addEventListener("change", idkd);
 
-    ["nama", "julukan", "usia"].forEach(f => {
+    ["nama", "julukan"].forEach(f => {
       const inp = el.querySelector("#saha-" + f);
       inp.addEventListener("input", () => { val[f] = inp.value.trim(); });
     });
@@ -230,6 +233,17 @@
     const id = a ? (a + dd) : "";
     idkdEl.value = id; val.idkd = id; val.idkd_placeholder = ph && !!a; val.tgllahir = d || "";
     flag.style.display = (ph && !!a) ? "block" : "none";
+    /* USIA OTOMATIS dari tanggal lahir (terkunci) */
+    const uEl = _el.querySelector("#saha-usia");
+    if (uEl) {
+      if (d) {
+        const now = new Date(), b = new Date(d + "T00:00:00");
+        let age = now.getFullYear() - b.getFullYear();
+        if (now.getMonth() < b.getMonth() || (now.getMonth() === b.getMonth() && now.getDate() < b.getDate())) age--;
+        if (age > 0 && age < 120) { uEl.value = age + " tahun"; val.usia = String(age); }
+        else { uEl.value = ""; val.usia = ""; }
+      } else { uEl.value = ""; val.usia = ""; }
+    }
   }
 
   function populateKec(el, kotakab) {
@@ -297,28 +311,55 @@
     el.querySelector("#saha-tgllahir").value = e.d || "";
     const _tt = el.querySelector("#saha-tgllahir-txt");
     if (_tt) _tt.value = (e.d && /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(e.d)) ? e.d.split("-").reverse().join("/") : "";
-    idkd();
-    if (e.d && /^\d{4}-\d{2}-\d{2}$/.test(e.d)) {
-      const y = new Date().getFullYear() - parseInt(e.d.slice(0, 4));
-      if (y > 0 && y < 120) { el.querySelector("#saha-usia").value = y; val.usia = String(y); }
-    }
+    idkd(); /* usia otomatis ikut terhitung di idkd() */
     selChip(el, "jk", e.s);
+    selChip(el, "status", "Lama"); /* dari roster = KD Lama */
     const plSudah = !!val.pl;
-    if (!plSudah) selChip(el, "pl", e.p);
-    if (selChip(el, "kotakab", e.k)) populateKec(el, e.k);
+    const plAktif = (D.PL_LIST || []).includes(e.p);
+    if (!plSudah && plAktif) selChip(el, "pl", e.p);
+    let areaNote = "";
+    if (KOTAKAB.includes(e.k)) { if (selChip(el, "kotakab", e.k)) populateKec(el, e.k); }
+    else if (e.k) { areaNote = " · 📁 Wilayah asal: " + e.k + " (arsip) — pilih area jangkauan saat ini (Malang Raya)."; }
+    let plNote = "";
+    if (e.p && !plAktif) plNote = " · ⚠️ PL asal: " + e.p + " (nonaktif) — pilih PL aktif yang menangani.";
+    else if (e.p && plSudah) plNote = " · PL asal klien: " + e.p + " (pilihan PL Anda tidak diubah).";
+    else if (e.p && plAktif) plNote = " · PL: " + e.p + ".";
     const ok = el.querySelector("#saha-cari-ok");
-    if (ok) { ok.style.display = "block"; ok.textContent = "✓ Terisi dari roster: " + e.n + " · " + (e.k || "-") + ". PL asal klien: " + (e.p || "-") + (plSudah ? " (pilihan PL Anda tidak diubah)" : " — ganti ke nama Anda bila Anda yang menangani") + ". Lengkapi Kecamatan/Desa & cek datanya."; }
+    if (ok) { ok.style.display = "block"; ok.innerHTML = "✓ Terisi dari roster: <strong>" + e.n + "</strong> (KD Lama)" + plNote + areaNote + " Lengkapi Kecamatan/Desa & cek datanya."; }
   }
 
   /* ---------- API ---------- */
   function getIdentity() { return { ...val }; }
-  const REQ = ["tahun", "pl", "tanggal", "kotakab", "kecamatan", "desa", "nama", "julukan", "idkd", "jk", "usia"];
+  const REQ = ["tahun", "pl", "tanggal", "kotakab", "kecamatan", "desa", "status", "nama", "julukan", "idkd", "jk", "tgllahir"];
   function isValid() { return REQ.every(k => val[k] != null && String(val[k]).trim() !== ""); }
   function missing() { return REQ.filter(k => !(val[k] != null && String(val[k]).trim() !== "")); }
+  const LBL = { tahun: "Tahun", pl: "Nama PL", tanggal: "Tanggal Laporan", kotakab: "Kota/Kabupaten", kecamatan: "Kecamatan", desa: "Desa/Kelurahan", status: "Status Kontak (Baru/Lama)", nama: "Nama Lengkap Klien", julukan: "Nama Panggilan", idkd: "ID KD (isi 4 Huruf Pertama)", jk: "Jenis Kelamin", tgllahir: "Tanggal Lahir (usia otomatis)" };
+  function showMissing(extraLabels) {
+    const items = missing().map(k => LBL[k] || k).concat(extraLabels || []);
+    let box = document.getElementById("saha-missbox");
+    if (!box) {
+      box = document.createElement("div"); box.id = "saha-missbox";
+      box.style.cssText = "position:fixed;left:12px;right:12px;bottom:86px;z-index:9999;background:#fdf0ee;border:2px solid #c0392b;border-radius:14px;padding:14px 16px;box-shadow:0 10px 30px rgba(0,0,0,.18);font-size:13px;color:#7d2433;line-height:1.6;max-height:46vh;overflow:auto;";
+      document.body.appendChild(box);
+    }
+    box.innerHTML = "<div style=\"display:flex;justify-content:space-between;align-items:center;gap:10px;\"><strong>⚠️ Belum bisa disimpan — " + items.length + " item wajib belum terisi:</strong><button type=\"button\" style=\"border:none;background:#c0392b;color:#fff;border-radius:8px;padding:4px 10px;font-weight:700;cursor:pointer;\" onclick=\"this.closest('#saha-missbox').style.display='none'\">Tutup</button></div><div style=\"margin-top:6px;\">" + items.map(x => "• " + x).join("<br>") + "</div>";
+    box.style.display = "block";
+    /* tandai merah field identitas yang kosong + scroll ke yang pertama */
+    if (_el) {
+      let first = null;
+      missing().forEach(k => {
+        let t = _el.querySelector("#saha-" + (k === "tgllahir" ? "tgllahir-txt" : k)) || _el.querySelector('.saha-chips[data-g="' + k + '"]');
+        if (t) { t.style.outline = "2px solid #c0392b"; t.style.outlineOffset = "2px"; setTimeout(() => { t.style.outline = ""; }, 6000); if (!first) first = t; }
+      });
+      if (first) first.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    return items.length;
+  }
+  function hideMissing() { const b = document.getElementById("saha-missbox"); if (b) b.style.display = "none"; }
   function push(rec) { return _push ? _push(rec) : Promise.reject(new Error("Firebase belum siap")); }
 
   window.sahaBack = function (e) { if (window.self !== window.top) { if (e) e.preventDefault(); window.parent.postMessage({ saha: 'nav', to: 'l3-master' }, '*'); return false; } return true; };
   window.sahaHome = function () { if (window.self !== window.top) { window.parent.postMessage({ saha: 'nav', to: 'l3-master' }, '*'); return; } window.location.href = 'index.html'; };
 
-  window.SAHA = { buildIdentity, getIdentity, isValid, missing, push, ready: () => _ready };
+  window.SAHA = { buildIdentity, getIdentity, isValid, missing, showMissing, hideMissing, push, ready: () => _ready };
 })();

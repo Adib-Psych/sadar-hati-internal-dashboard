@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>Penjangkauan ATS-Chemsex · Sadar Hati Foundation</title>
+<title>Form Penjangkauan · Sadar Hati Foundation</title>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -455,14 +455,14 @@
   </div>
 
   <div class="hero">
-    <div class="eyebrow">🔥 ViiV Healthcare · Chemsex Malang-Surabaya</div>
-    <h1>Penjangkauan Pengguna ATS-Chemsex</h1>
+    <div class="eyebrow">🔥 ViiV Healthcare · ATS-Chemsex · Malang Raya</div>
+    <h1>Form Penjangkauan</h1>
     <p>Formulir laporan harian PL untuk penjangkauan komunitas <strong>chemsex (ATS/Methamphetamin)</strong>. Isi setiap kontak individual dengan klien.</p>
   </div>
 
   <div class="progress-sticky">
     <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
-    <div class="progress-label"><strong id="filled-count">0</strong>/<span id="req-count">21</span> wajib</div>
+    <div class="progress-label"><strong id="filled-count">0</strong>/<span id="req-count">21</span> wajib</div><div id="missing-live" style="display:none;font-size:10.5px;color:#7d2433;line-height:1.5;margin-top:4px;"></div>
   </div>
 
   <!-- SECTION 1: Identitas Laporan -->
@@ -480,31 +480,15 @@
 
     <label class="field">
       <span class="lbl">Nama PL <span class="req">*</span>
-        <span class="hint">Pilih nama Anda dari daftar 19 PL Malang-Surabaya</span>
+        <span class="hint">Pilih nama Anda — 3 PL aktif Malang Raya</span>
       </span>
       <div class="pl-grid" data-req="pl">
-        <button type="button" class="radio-item" data-val="Nuri">⭐ Nuri</button>
-        <button type="button" class="radio-item" data-val="David">⭐ David</button>
-        <button type="button" class="radio-item" data-val="Dodik">⭐ Dodik</button>
-        <button type="button" class="radio-item" data-val="Ibi">⭐ Ibi</button>
-        <button type="button" class="radio-item" data-val="Hanim">⭐ Hanim</button>
-        <button type="button" class="radio-item" data-val="Dedi">⭐ Dedi</button>
-        <button type="button" class="radio-item" data-val="Karyanto">⭐ Karyanto</button>
-        <button type="button" class="radio-item" data-val="Sotong Hariyono">⭐ Sotong Hariyono</button>
-        <div style="grid-column:1/-1; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--slate); padding:4px 2px 0; border-top:1px dashed #ddd3c8; margin-top:4px;">PL lain / historis</div>
-        <button type="button" class="radio-item" data-val="Aris">Aris</button>
-        <button type="button" class="radio-item" data-val="Bayu Lesmana">Bayu Lesmana</button>
-        <button type="button" class="radio-item" data-val="Deni">Deni</button>
-        <button type="button" class="radio-item" data-val="Eko">Eko</button>
-        <button type="button" class="radio-item" data-val="Hendra (KL-MLG)">Hendra (Korlap MLG)</button>
-        <button type="button" class="radio-item" data-val="Husen">Husen</button>
-        <button type="button" class="radio-item" data-val="Imam-Konselor">Imam-Konselor</button>
-        <button type="button" class="radio-item" data-val="Maradona">Maradona</button>
-        <button type="button" class="radio-item" data-val="Paldi">Paldi</button>
-        <button type="button" class="radio-item" data-val="Reno">Reno</button>
-        <button type="button" class="radio-item" data-val="Siswanto (KL-SBY)">Siswanto (Korlap SBY)</button>
+        <button type="button" class="radio-item" data-val="Nuri">Nuri</button>
+        <button type="button" class="radio-item" data-val="David">David</button>
+        <button type="button" class="radio-item" data-val="Ibi">Ibi</button>
       </div>
-    </label>
+      <!-- ARSIP PL nonaktif (tarik lagi bila dibutuhkan): Dodik, Hanim, Dedi, Karyanto, Sotong Hariyono, Aris, Bayu Lesmana, Deni, Eko, Hendra (KL-MLG), Husen, Imam-Konselor, Maradona, Paldi, Reno, Siswanto (KL-SBY) -->
+      </label>
 
     <label class="field">
       <span class="lbl">Tanggal Laporan <span class="req">*</span>
@@ -522,7 +506,7 @@
     <label class="field">
       <span class="lbl">Provinsi</span>
       <div style="padding:11px 12px; background:linear-gradient(135deg, #f2f2ea 0%, #fbf7f2 100%); border-radius:10px; font-weight:700; color:var(--sage-deep); font-size:14px; border:1.5px solid var(--sage);">
-        🌾 Jawa Timur <span style="font-weight:400; font-size:11px; color:var(--slate); float:right;">(default · scope Malang-Surabaya)</span>
+        🌾 Jawa Timur <span style="font-weight:400; font-size:11px; color:var(--slate); float:right;">(default · scope Malang Raya)</span>
       </div>
     </label>
 
@@ -534,7 +518,7 @@
         <button type="button" class="radio-item" data-val="Kota Malang">🏙 Kota Malang</button>
         <button type="button" class="radio-item" data-val="Kab Malang">🌾 Kab Malang</button>
         <button type="button" class="radio-item" data-val="Kota Batu">🏔 Kota Batu</button>
-        <button type="button" class="radio-item" data-val="Kab Pasuruan">🌴 Kab Pasuruan</button>
+        <!-- ARSIP wilayah: Kab Pasuruan (tarik lagi bila dibutuhkan) -->
       </div>
     </label>
 
@@ -601,7 +585,7 @@
     </label>
 
     <label class="field">
-      <span class="lbl">Tanggal Lahir Klien
+      <span class="lbl">Tanggal Lahir <span class="req">*</span>  Klien
         <span class="hint">💡 Boleh kosong dulu di pertemuan pertama. Nanti bisa di-backfill di database.</span>
       </span>
       <input type="text" id="f-tgllahir-txt" inputmode="numeric" autocomplete="off" placeholder="tt/bb/tttt — contoh: 31/05/1999" style="letter-spacing:1px;">
@@ -629,8 +613,8 @@
     </label>
 
     <label class="field">
-      <span class="lbl">Usia <span class="req">*</span></span>
-      <input type="number" id="f-usia" placeholder="Umur klien (tahun)" min="10" max="99" data-req="usia">
+      <span class="lbl">Usia <span style="font-size:10px;color:#8a9a7b;font-weight:600;">(OTOMATIS — terkunci)</span> <span class="req">*</span></span>
+      <input type="text" id="f-usia" readonly placeholder="⚙️ otomatis dari tanggal lahir" data-req="usia" style="background:#f2f2ea;font-weight:700;color:#5f6e52;">
     </label>
 
   </div>
@@ -986,6 +970,17 @@
   const NOWY = new Date().getFullYear();
   wireDateTxt('f-tanggal-txt','f-tanggal', 2024, NOWY+1);
   wireDateTxt('f-tgllahir-txt','f-tgllahir', 1940, NOWY-10);
+  /* USIA OTOMATIS (terkunci) dari tanggal lahir */
+  function autoUsia(){
+    var d=document.getElementById('f-tgllahir').value, u=document.getElementById('f-usia');
+    if(d){ var now=new Date(), b=new Date(d+'T00:00:00');
+      var age=now.getFullYear()-b.getFullYear();
+      if(now.getMonth()<b.getMonth()||(now.getMonth()===b.getMonth()&&now.getDate()<b.getDate())) age--;
+      if(age>0&&age<120){ u.value=age+' tahun'; answers.usia=String(age); } else { u.value=''; delete answers.usia; }
+    } else { u.value=''; delete answers.usia; }
+    updateProgress();
+  }
+  document.getElementById('f-tgllahir').addEventListener('change', autoUsia);
 
   // ========== KASKADE RIWAYAT TES HIV (persis KoBo — feedback Adib/Shela) ==========
   (function(){
@@ -1161,6 +1156,11 @@
     const pct = requiredKeys.size ? (filled / requiredKeys.size) * 100 : 0;
     document.getElementById('progress-fill').style.width = pct + '%';
     document.getElementById('btn-submit').disabled = (filled !== requiredKeys.size);
+    /* daftar item wajib yang belum terisi — biar PL/KD tahu persis apa yg kurang */
+    var _LBL={tahun:'Tahun',pl:'Nama PL','tanggal':'Tanggal Laporan',kotakab:'Kota/Kab',kecamatan:'Kecamatan',desa:'Desa/Kelurahan',hotspot:'Hotspot','metode-jangkau':'Metode Jangkauan',status:'Status Kontak',nama:'Nama Klien',julukan:'Nama Panggilan',huruf4:'4 Huruf Nama',idkd:'ID KD',jk:'Jenis Kelamin',usia:'Usia (isi Tgl Lahir)',napza:'Jenis Napza',metode:'Metode Pakai',jarum:'Berbagi Jarum',kaca:'Berbagi Kaca/Bong','sabu-sex':'Seks saat Sabu','other-sex':'Pasangan Seks Lain',kondom:'Kondom',lipbalm:'Lipbalm/Pelicin',kie:'KIE',informasi:'Info Layanan',kegiatan:'Jenis Kegiatan',akses:'Akses Layanan','tes-hiv':'Riwayat Tes HIV','tes-hiv-hasil':'Hasil Tes Terakhir','arv-lanjut':'Lanjut ARV',hasil_hiv:'Hasil HIV',hasil_ims:'Hasil IMS',hasil_tb:'Hasil TB',hasil_hep:'Hasil Hep'};
+    var _miss=Array.from(requiredKeys).filter(function(k){ var v=answers[k]; return !(Array.isArray(v)?v.length:(v!=null&&String(v).trim()!=='')); });
+    var ml=document.getElementById('missing-live');
+    if(ml){ if(_miss.length&&_miss.length<requiredKeys.size){ ml.style.display='block'; ml.innerHTML='✏️ <strong>Belum terisi:</strong> '+_miss.map(function(k){return _LBL[k]||k;}).join(' · '); } else { ml.style.display='none'; } }
   }
   updateProgress();
 
@@ -1511,18 +1511,19 @@
         var u=now.getFullYear()-b.getFullYear();
         var m=now.getMonth()-b.getMonth();
         if(m<0||(m===0&&now.getDate()<b.getDate())) u--;
-        if(u>=10&&u<=99){ setVal('f-usia',u); usiaTxt=', usia '+u; }
+        if(u>=10&&u<=99){ (function(){ try{ autoUsia(); }catch(e){} })(), (usiaTxt=', usia '+u), (0); usiaTxt=', usia '+u; }
       }
       var jkOK=clickBtn('[data-req="jk"]',r.s);
+      clickBtn('#status-kontak-group','Lama'); /* dari roster = KD Lama */
       var plSudah=!!document.querySelector('.pl-grid .radio-item.selected');
       var plOK=false;
       if(!plSudah){ plOK=clickBtn('.pl-grid',r.p,{'Hendra':'Hendra (KL-MLG)'}); }
       var kkOK=clickBtn('#kotakab-group',r.k,{'Kabupaten Malang':'Kab Malang'});
       if(st){
-        var plInfo = plOK ? ', PL <strong>'+r.p+'</strong> <em>(PL asal klien — ganti ke nama Anda bila Anda yang menangani)</em>' : '';
+        var plInfo = plOK ? ', PL <strong>'+r.p+'</strong> <em>(PL asal klien — ganti ke nama Anda bila Anda yang menangani)</em>' : (r.p ? '. ⚠️ PL asal: <strong>'+r.p+'</strong> <em>(nonaktif/arsip — pilih PL aktif yang menangani)</em>' : '');
         var parts='✅ <strong>Terisi otomatis:</strong> nama, panggilan, ID KD'+(r.d?', tgl lahir'+usiaTxt:'')+(jkOK?', JK':'')+plInfo;
         if(kkOK){ parts+=', wilayah <strong>'+r.k+'</strong> — lanjut pilih kecamatan & desa.'; }
-        else { parts+='. ⚠️ Wilayah roster: <strong>'+(r.k||'?')+'</strong> — tidak ada di pilihan form ini, pilih kota/kab manual.'; }
+        else { parts+='. \ud83d\udcc1 Wilayah asal: <strong>'+(r.k||'?')+'</strong> (arsip) — pilih area jangkauan saat ini (Malang Raya).'; }
         if(plSudah) parts+=' ℹ️ PL asal klien: <strong>'+(r.p||'-')+'</strong> (pilihan PL Anda tidak diubah).';
         st.innerHTML=parts; st.style.display='block';
       }

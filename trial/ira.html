@@ -81,15 +81,15 @@ if(MODE==='group'){const t=document.querySelector('[data-in="tanggal"]'); if(t){
 function submitForm(){
   let id={};
   if(MODE==='client'){
-    if(!window.SAHA||!SAHA.isValid()){alert('Lengkapi dulu Identitas & Area di atas.\nBelum lengkap: '+(window.SAHA?SAHA.missing().join(', '):'modul belum siap'));return;}
+    if(!window.SAHA||!SAHA.isValid()){if (window.SAHA && SAHA.showMissing) SAHA.showMissing(); else alert('Lengkapi dulu Identitas & Area di bagian atas.');return;}
     id=SAHA.getIdentity();
   } else {
     const miss=GROUP_IDS.filter(k=>!data[k]||!String(data[k]).trim());
-    if(miss.length){alert('Lengkapi dulu: '+miss.join(', '));return;}
+    if(miss.length){ if(window.SAHA&&SAHA.showMissing) SAHA.showMissing(miss); else alert('Lengkapi dulu: '+miss.join(', ')); return;}
     id={tahun:data.tahun,pl:data.pl,tanggal:data.tanggal,hotspot:data.hotspot};
   }
   const missReq=REQ.filter(k=>{const v=data[k];return v==null||(Array.isArray(v)?v.length===0:String(v).trim()==='');});
-  if(missReq.length){alert('Pertanyaan wajib belum diisi ('+missReq.length+'). Lengkapi dulu ya.');return;}
+  if(missReq.length){ if(window.SAHA&&SAHA.showMissing) SAHA.showMissing(missReq.map(function(m){return 'Pertanyaan: '+m;})); else alert('Pertanyaan wajib belum diisi ('+missReq.length+').'); return;}
   const rec={form:FORM,instrumen:INSTRUMEN,pl:String(id.pl||''),created_at:new Date().toISOString(),schema_version:SCHEMA,
     tahun:String(id.tahun||''),tanggal:String(id.tanggal||'')};
   if(MODE==='client'){

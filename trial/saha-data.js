@@ -1,6 +1,8 @@
 // Auto-extracted from chemsex.html — Sadar Hati shared area + PL data
 window.SAHA_DATA = {
-  PL_LIST: ["Aris", "Bayu Lesmana", "David", "Dedi", "Deni", "Dodik", "Eko", "Hanim", "Hendra (KL-MLG)", "Husen", "Ibi", "Imam-Konselor", "Karyanto", "Maradona", "Nuri", "Paldi", "Reno", "Siswanto (KL-SBY)", "Sotong Hariyono"],
+  PL_LIST: ["Nuri", "David", "Ibi"], /* PL AKTIF (Jul 2026, keputusan Adib) */
+  PL_ARSIP: ["Aris", "Bayu Lesmana", "Dedi", "Deni", "Dodik", "Eko", "Hanim", "Hendra (KL-MLG)", "Husen", "Imam-Konselor", "Karyanto", "Maradona", "Paldi", "Reno", "Siswanto (KL-SBY)", "Sotong Hariyono"], /* arsip — tarik lagi bila dibutuhkan */
+  KOTAKAB_ARSIP: ["Surabaya", "Kabupaten Sidoarjo", "Jakarta Barat", "Kab Pasuruan"], /* arsip wilayah */
   wilayahData: {
     "Kota Malang": {
       "Blimbing": ["Arjosari", "Balearjosari", "Blimbing", "Bunulrejo", "Jodipan", "Kesatrian", "Pandanwangi", "Polehan", "Polowijen", "Purwantoro", "Purwodadi"],
