@@ -7000,7 +7000,7 @@ function updateBreadcrumb(item) {
         const r=(snap.data().role||'staff').toLowerCase();
         const M={admin:['ADMIN','#7a1f30','#f7e9ec'],manager:['MANAGER','#3f5749','#e8efea'],me:['M&E','#2f6d9e','#e7f0f7'],staff:['STAF','#7a746e','#f1ede8']};
         const m=M[r]||M.staff; badge.textContent=m[0]+(snap.data().nama?' · '+snap.data().nama:''); badge.style.color=m[1]; badge.style.background=m[2];
-        const chip=document.getElementById('saha-rolechip'); if(chip){ chip.textContent=m[0].charAt(0)+m[0].slice(1).toLowerCase(); chip.style.fontWeight='800'; chip.style.color=m[1]; }
+        const chip=document.getElementById('saha-rolechip'); if(chip){ chip.textContent=(r==='me')?'M&E':(m[0].charAt(0)+m[0].slice(1).toLowerCase()); chip.style.fontWeight='800'; chip.style.color=m[1]; }
         window.SAHA_ROLE=r; applyRoleUI();
       } else { badge.textContent='Staf (default — dok roles belum dibuat)'; const chip=document.getElementById('saha-rolechip'); if(chip){ chip.textContent='Staf'; chip.style.color=''; } window.SAHA_ROLE='staff'; applyRoleUI(); }
     }catch(e){ badge.textContent='Staf (default — rule roles belum di-apply)'; window.SAHA_ROLE='staff'; applyRoleUI(); }
