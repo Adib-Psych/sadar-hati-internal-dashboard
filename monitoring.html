@@ -871,7 +871,7 @@
     <div class="brand">
       <div class="logo">Sadar Hati Foundation</div>
       <div class="est">est. 2002 · Malang</div>
-      <div class="system-tag">Integrated Hub v0.56 · Yayasan Sadar Hati</div>
+      <div class="system-tag">Integrated Hub v0.57 · Yayasan Sadar Hati</div>
     </div>
 
         <nav class="nav">
@@ -890,6 +890,7 @@
               <span class="donor-badge">8 FORM</span><span class="chevron">▶</span>
             </div>
             <div class="donor-sub-items">
+              <a class="nav-item" data-section="l2-out-checkin"><span class="icon">📍</span> 2 · Pemetaan Hotspot</a>
               <a class="nav-item" data-section="l2-out-chemsex"><span class="icon">🔥</span> 3 · Penjangkauan</a>
               <a class="nav-item" data-section="l2-out-dast10"><span class="icon">💊</span> 4 · DAST-10 Napza</a>
               <a class="nav-item" data-section="l2-out-srq29"><span class="icon">🧠</span> 5 · SRQ-29 Mental Health</a>
@@ -898,6 +899,7 @@
               <a class="nav-item" data-section="l2-out-konseling"><span class="icon">💬</span> 8 · Konseling</a>
               <a class="nav-item" data-section="l2-out-bulanan"><span class="icon">📆</span> 9 · Laporan Bulanan Korlap</a>
               <a class="nav-item" data-section="l2-out-prevkit"><span class="icon">🎒</span> 10 · Prevention Kit</a>
+              <a class="nav-item" data-section="l2-out-vct"><span class="icon">🪪</span> 12 · Registrasi VCT</a>
             </div>
           </div>
               <a class="nav-item" data-section="l2-clients"><span class="icon">👥</span> Clients Database</a>
@@ -915,7 +917,7 @@
           akses sesuai role akun
         </div>
       </div>
-      <div>v0.56 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
+      <div>v0.57 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
     <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#2f6d9e,#1f4a6e);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
@@ -1323,7 +1325,7 @@
         <div id="lh-data" style="display:none;">
           <div class="lh-toolbar">
             <div class="lh-stat">Total: <strong id="lh-count">0</strong> laporan</div>
-            <select id="lh-f-form" class="lh-fin"><option value="">Semua form</option><option value="chemsex">🔥 Chemsex</option><option value="dast10">💊 DAST-10</option><option value="srq29">🧠 SRQ-29</option></select>
+            <select id="lh-f-form" class="lh-fin"><option value="">Semua form</option><option value="chemsex">🔥 Chemsex</option><option value="dast10">💊 DAST-10</option><option value="srq29">🧠 SRQ-29</option><option value="ira">⚕️ IRA</option><option value="gra">👥 GRA</option><option value="konseling">💬 Konseling</option><option value="bulanan-kl">📆 Bulanan Korlap</option><option value="prevkit">🎒 Prevention Kit</option><option value="checkin">📍 Pemetaan Hotspot</option><option value="vct">🪪 Registrasi VCT</option></select>
             <select id="lh-f-pl" class="lh-fin"><option value="">Semua PL</option></select>
             <input type="text" id="lh-f-q" class="lh-fin" placeholder="Cari nama/kode/area...">
             <button class="lh-btn-sm" id="lh-export">📥 CSV</button>
@@ -1338,6 +1340,72 @@
 
 
       <!-- ====== 2B LOGIN GATE ====== -->
+            <!-- ====== 2B · RUMAH OUTPUT: PEMETAAN HOTSPOT ====== -->
+      <section class="section" id="l2-out-checkin">
+        <style>
+          .hs-chips{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:2px 0 14px;}
+          .hs-chip{background:#fff;border:1px solid var(--slate-lighter);border-left:4px solid #2f6d9e;border-radius:11px;padding:11px 13px;}
+          .hs-chip b{display:block;font-size:22px;color:#1f4a6e;font-family:'Lora',Georgia,serif;}
+          .hs-chip span{font-size:10.5px;color:#6f6660;letter-spacing:.3px;}
+          .hs-tbl th{background:#2f6d9e;color:#fff;padding:8px 10px;text-align:left;font-size:10.5px;letter-spacing:.4px;white-space:nowrap;position:sticky;top:0;}
+          .hs-tbl td{padding:7px 10px;border-top:1px solid #eef2f5;vertical-align:top;}
+          .hs-tbl tr:hover td{background:#f6f9fb;}
+          .hs-note{font-size:11px;color:#6f6660;background:#f2f6f9;border:1px dashed #b9cddd;border-radius:9px;padding:8px 12px;margin-top:10px;line-height:1.55;}
+          .hs-maplink{color:#2f6d9e;font-weight:700;text-decoration:none;white-space:nowrap;}
+        </style>
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output · #2</div><h1>Pemetaan Hotspot — Peta &amp; Direktori</h1><p class="lede">Rumah output form <strong>Pemetaan Hotspot</strong>: semua titik dari lapangan tampil sebagai <strong>pin di peta</strong> + direktori lengkap (tipe · jam aktif · contact person · perkiraan KD) — bahan merencanakan rute penjangkauan, cakupan wilayah, dan prioritas alokasi PL.</p></div>
+        <div class="hs-chips">
+          <div class="hs-chip"><b id="hs-c-total">0</b><span>hotspot terpetakan</span></div>
+          <div class="hs-chip"><b id="hs-c-kd">0</b><span>perkiraan total KD</span></div>
+          <div class="hs-chip"><b id="hs-c-gps">0</b><span>ber-pin GPS</span></div>
+          <div class="hs-chip"><b id="hs-c-entri">0</b><span>total entri</span></div>
+        </div>
+        <div id="hs-map" style="height:420px;border:1px solid var(--slate-lighter);border-radius:14px;background:#eef2f5;display:flex;align-items:center;justify-content:center;color:#6f6660;font-size:13px;z-index:0;">Peta dimuat otomatis saat rumah ini dibuka…</div>
+        <div style="overflow:auto;margin-top:14px;background:#fff;border:1px solid var(--slate-lighter);border-radius:12px;max-height:430px;">
+          <table class="hs-tbl" style="width:100%;border-collapse:collapse;font-size:12.5px;min-width:820px;">
+            <thead><tr><th>HOTSPOT</th><th>TIPE</th><th>JAM AKTIF</th><th>CP</th><th>± KD</th><th>PL</th><th>UPDATE TERAKHIR</th><th>PETA</th></tr></thead>
+            <tbody id="hs-body"><tr><td colspan="8" style="padding:14px;color:#6f6660;">Login staf untuk memuat data hotspot…</td></tr></tbody>
+          </table>
+        </div>
+        <div class="hs-note">📌 Satu baris = satu hotspot unik (entri terbaru yang dipakai; jumlah entri tercatat di kolom update). Nama CP &amp; detail lokasi bersifat <strong>internal</strong> — jangan dibagikan keluar tim.</div>
+      </section>
+
+      <!-- ====== 2B · RUMAH OUTPUT: REGISTRASI VCT ====== -->
+      <section class="section" id="l2-out-vct">
+        <style>
+          .vct-chips{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:2px 0 14px;}
+          .vct-chip{background:#fff;border:1px solid var(--slate-lighter);border-left:4px solid #94395c;border-radius:11px;padding:11px 13px;}
+          .vct-chip b{display:block;font-size:22px;color:#6b2a44;font-family:'Lora',Georgia,serif;}
+          .vct-chip span{font-size:10.5px;color:#6f6660;letter-spacing:.3px;}
+          .vct-plbar{display:flex;align-items:center;gap:9px;margin:5px 0;font-size:12px;}
+          .vct-plbar .nm{width:70px;font-weight:700;color:#2c2724;}
+          .vct-plbar .bar{flex:1;background:#f3edf0;border-radius:6px;height:16px;overflow:hidden;}
+          .vct-plbar .fill{height:100%;background:linear-gradient(90deg,#94395c,#6b2a44);border-radius:6px;min-width:2px;}
+          .vct-plbar .n{width:34px;text-align:right;font-weight:800;color:#6b2a44;}
+          .vct-tbl th{background:#94395c;color:#fff;padding:8px 10px;text-align:left;font-size:10.5px;letter-spacing:.4px;white-space:nowrap;position:sticky;top:0;}
+          .vct-tbl td{padding:7px 10px;border-top:1px solid #f5edf1;}
+          .vct-tbl tr:hover td{background:#faf5f8;}
+        </style>
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output · #12</div><h1>Registrasi VCT — Rekap &amp; Monitoring</h1><p class="lede">Rumah output form <strong>Registrasi VCT · Kartu Identitas</strong>: berapa KD sudah teregistrasi, ke puskesmas mana dirujuk, rencana tanggal VCT, dan sebaran per PL. <strong>Identitas lengkap (NIK &amp; foto KTP) tidak tampil di sini</strong> — hanya bisa dibuka per-PL lewat Portal PL dan tiap akses tercatat.</p></div>
+        <div class="vct-chips">
+          <div class="vct-chip"><b id="vct-c-total">0</b><span>total registrasi VCT</span></div>
+          <div class="vct-chip"><b id="vct-c-7">0</b><span>7 hari terakhir</span></div>
+          <div class="vct-chip"><b id="vct-c-baru">0</b><span>KD baru</span></div>
+          <div class="vct-chip"><b id="vct-c-pkm">0</b><span>puskesmas tujuan</span></div>
+        </div>
+        <div style="background:#fff;border:1px solid var(--slate-lighter);border-radius:12px;padding:14px 16px;margin-bottom:14px;">
+          <div style="font-size:11px;font-weight:800;letter-spacing:.6px;color:#6b2a44;margin-bottom:6px;">REGISTRASI PER PL</div>
+          <div id="vct-pl"><div style="font-size:12px;color:#6f6660;">Login staf untuk memuat…</div></div>
+        </div>
+        <div style="overflow:auto;background:#fff;border:1px solid var(--slate-lighter);border-radius:12px;max-height:430px;">
+          <table class="vct-tbl" style="width:100%;border-collapse:collapse;font-size:12.5px;min-width:680px;">
+            <thead><tr><th>TANGGAL</th><th>ID KD</th><th>PL</th><th>PUSKESMAS TUJUAN</th><th>RENCANA VCT</th><th>STATUS</th></tr></thead>
+            <tbody id="vct-body"><tr><td colspan="6" style="padding:14px;color:#6f6660;">Login staf untuk memuat data…</td></tr></tbody>
+          </table>
+        </div>
+        <div class="hs-note" style="background:#faf3f6;border-color:#dcbecb;">🔐 Halaman ini sengaja hanya menampilkan ID KD (tanpa nama/NIK/foto). Kartu identitas lengkap: Portal PL → Search ID KD (per-PL, ber-watermark, akses tercatat).</div>
+      </section>
+
       <section class="section" id="l2-admin">
         <div class="hero"><div class="eyebrow">Layer 2B · Analitik &amp; Data · Kontrol</div><h1>🛡️ Panel Admin</h1><p class="lede">Pusat pemantauan aktivitas dashboard: siapa entry apa &amp; kapan, rekap per form dan per petugas, plus identitas akun login.</p></div>
         <div id="adm-denied" class="placeholder-banner archival"><span class="icon">🔒</span><div><strong>Halaman ini khusus akun Admin.</strong> Akun Anda tidak memiliki role admin — hubungi Adib bila perlu akses.</div></div>
@@ -2986,7 +3054,7 @@ function updateBreadcrumb(item) {
     if(unsub) return;
     if(!($('lh-tbody')||$('adm-k-body')||$('adm-feed'))) return; /* halaman tanpa konsumen data */
     const qy = query(collection(db,'submissions'), orderBy('created_at','desc'));
-    unsub = onSnapshot(qy, snap=>{ ALL=[]; snap.forEach(d=>{ const x=d.data(); x.__id=d.id; if(!String(x.form||'').startsWith('__')) ALL.push(x); }); fillPL(); render(); renderAdmin(); try{renderKelola();}catch(e){} window.__SAHA_ALL=ALL; if(window.SAHA_RENDER_RAW) window.SAHA_RENDER_RAW(); },
+    unsub = onSnapshot(qy, snap=>{ ALL=[]; snap.forEach(d=>{ const x=d.data(); x.__id=d.id; if(!String(x.form||'').startsWith('__')) ALL.push(x); }); fillPL(); render(); renderAdmin(); try{renderKelola();}catch(e){} window.__SAHA_ALL=ALL; if(window.SAHA_RENDER_RAW) window.SAHA_RENDER_RAW(); if(window.SAHA_RENDER_HOUSES) try{window.SAHA_RENDER_HOUSES();}catch(e){} },
       err=>{ if($('saha-login-err')) $('saha-login-err').textContent='Gagal baca data: '+(err.code||err.message); console.error('[LogHarian]',err); });
   }
   function fillPL(){ const sel=$('lh-f-pl'); if(!sel) return; const cur=sel.value; const pls=[...new Set(ALL.map(x=>x.pl).filter(Boolean))].sort(); sel.innerHTML='<option value="">Semua PL</option>'+pls.map(p=>'<option>'+esc(p)+'</option>').join(''); sel.value=cur; }
@@ -3383,5 +3451,113 @@ window.SAHA_QR_DL = function(){
     <div id="adm-e-msg" style="font-size:11px;margin-top:9px;color:#7d2433;"></div>
   </div>
 </div>
+
+<script>
+/* ===== RUMAH OUTPUT: Pemetaan Hotspot + Registrasi VCT (v0.57) ===== */
+(function(){
+  var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];});};
+  function fdate(s){ if(!s) return '-'; try{ var d=new Date(String(s).length===10?s+'T00:00:00':s); if(isNaN(d)) return String(s); return d.toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'});}catch(e){ return String(s); } }
+  function setTxt(id,v){ var el=document.getElementById(id); if(el) el.textContent=String(v); }
+
+  /* ---------- PEMETAAN HOTSPOT ---------- */
+  var HS=[], hsMap=null, hsLayer=null, hsLibReq=false;
+  function hsGroup(all){
+    var g={}, cnt={};
+    all.filter(function(x){return x.form==='checkin';}).forEach(function(x){
+      var d=x.data||{}; var k=String(d.hotspot||'').trim().toLowerCase(); if(!k) return;
+      cnt[k]=(cnt[k]||0)+1;
+      if(!g[k] || String(x.created_at||'')>String(g[k].created_at||'')){
+        g[k]={hotspot:d.hotspot||'-',tipe:(d.tipe==='Lainnya'?(d.tipe_lain||'Lainnya'):(d.tipe||'-')),jam:d.jam_aktif||'-',cp:d.cp||'-',
+              kd:parseInt(d.jumlah_kd||0,10)||0,lat:(d.lat==null?null:d.lat),lng:(d.lng==null?null:d.lng),gmaps:d.gmaps||'',
+              patokan:d.patokan||'',pl:x.pl||'-',tanggal:x.tanggal||'',created_at:x.created_at||''};
+      }
+    });
+    return Object.keys(g).map(function(k){ var r=g[k]; r.n=cnt[k]; return r; })
+      .sort(function(a,b){ return String(b.created_at).localeCompare(String(a.created_at)); });
+  }
+  function hsRender(){
+    var tb=document.getElementById('hs-body'); if(!tb) return;
+    var all=window.__SAHA_ALL||[];
+    HS=hsGroup(all);
+    setTxt('hs-c-total',HS.length);
+    setTxt('hs-c-kd',HS.reduce(function(s,r){return s+r.kd;},0));
+    setTxt('hs-c-gps',HS.filter(function(r){return r.lat!=null&&r.lng!=null;}).length);
+    setTxt('hs-c-entri',all.filter(function(x){return x.form==='checkin';}).length);
+    tb.innerHTML = HS.length ? HS.map(function(r){
+      var link = (r.lat!=null&&r.lng!=null) ? 'https://www.google.com/maps?q='+r.lat+','+r.lng : (r.gmaps||'');
+      return '<tr><td><b>'+esc(r.hotspot)+'</b>'+(r.patokan?'<br><span style="font-size:10.5px;color:#6f6660;">📍 '+esc(r.patokan)+'</span>':'')+'</td>'+
+        '<td>'+esc(r.tipe)+'</td><td>'+esc(r.jam)+'</td><td>'+esc(r.cp)+'</td>'+
+        '<td style="font-weight:800;color:#1f4a6e;">'+(r.kd||'-')+'</td><td>'+esc(r.pl)+'</td>'+
+        '<td>'+fdate(r.tanggal||r.created_at)+'<br><span style="font-size:10px;color:#a89f97;">'+r.n+' entri</span></td>'+
+        '<td>'+(link?'<a class="hs-maplink" href="'+esc(link)+'" target="_blank" rel="noopener">buka ↗</a>':'<span style="color:#a89f97;">—</span>')+'</td></tr>';
+    }).join('') : '<tr><td colspan="8" style="padding:14px;color:#6f6660;">Belum ada entri Pemetaan Hotspot — begitu PL check-in, titik muncul di sini otomatis.</td></tr>';
+    hsMarkers(false);
+  }
+  function hsLoadLib(cb){
+    if(window.L){ cb(); return; }
+    if(hsLibReq) return; hsLibReq=true;
+    var l=document.createElement('link'); l.rel='stylesheet';
+    l.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css'; document.head.appendChild(l);
+    var s=document.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+    s.onload=cb;
+    s.onerror=function(){ hsLibReq=false; var mp=document.getElementById('hs-map');
+      if(mp) mp.innerHTML='<div style="padding:20px;text-align:center;">🗺️ Peta tidak bisa dimuat (cek koneksi).<br>Direktori tabel di bawah tetap lengkap — kolom "buka ↗" membuka Google Maps.</div>'; };
+    document.head.appendChild(s);
+  }
+  function hsInitMap(){
+    var mp=document.getElementById('hs-map'); if(!mp) return;
+    hsLoadLib(function(){
+      if(!hsMap){
+        mp.innerHTML=''; mp.style.display='block';
+        hsMap=L.map('hs-map').setView([-7.9702,112.6304],12);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap'}).addTo(hsMap);
+        hsLayer=L.layerGroup().addTo(hsMap);
+      }
+      setTimeout(function(){ try{ hsMap.invalidateSize(); }catch(e){} },90);
+      hsMarkers(true);
+    });
+  }
+  function hsMarkers(fit){
+    if(!hsMap||!window.L||!hsLayer) return;
+    hsLayer.clearLayers(); var pts=[];
+    HS.forEach(function(r){
+      if(r.lat==null||r.lng==null) return; pts.push([r.lat,r.lng]);
+      L.marker([r.lat,r.lng]).addTo(hsLayer).bindPopup('<b>'+esc(r.hotspot)+'</b><br>'+esc(r.tipe)+' · jam '+esc(r.jam)+'<br>± '+r.kd+' KD · PL '+esc(r.pl));
+    });
+    if(fit&&pts.length){ try{ hsMap.fitBounds(pts,{padding:[34,34],maxZoom:15}); }catch(e){} }
+  }
+  document.querySelectorAll('.nav-item[data-section="l2-out-checkin"]').forEach(function(n){
+    n.addEventListener('click',function(){ setTimeout(hsInitMap,140); });
+  });
+
+  /* ---------- REGISTRASI VCT ---------- */
+  function vctRender(){
+    var tb=document.getElementById('vct-body'); if(!tb) return;
+    var rows=(window.__SAHA_ALL||[]).filter(function(x){return x.form==='vct';})
+      .sort(function(a,b){ return String(b.created_at||'').localeCompare(String(a.created_at||'')); });
+    setTxt('vct-c-total',rows.length);
+    var t7=Date.now()-7*86400000;
+    setTxt('vct-c-7',rows.filter(function(x){ var d=new Date(x.created_at||0); return d.getTime()>=t7; }).length);
+    setTxt('vct-c-baru',rows.filter(function(x){ return String(x.status||'').toLowerCase()==='baru'; }).length);
+    var pkm={}; rows.forEach(function(x){ var p=((x.data||{}).puskesmas||'').trim(); if(p) pkm[p.toLowerCase()]=p; });
+    setTxt('vct-c-pkm',Object.keys(pkm).length);
+    var per={}; rows.forEach(function(x){ var p=x.pl||'?'; per[p]=(per[p]||0)+1; });
+    var mx=1; Object.keys(per).forEach(function(k){ if(per[k]>mx) mx=per[k]; });
+    var pl=document.getElementById('vct-pl');
+    if(pl) pl.innerHTML = rows.length ? Object.keys(per).sort(function(a,b){return per[b]-per[a];}).map(function(k){
+      return '<div class="vct-plbar"><span class="nm">'+esc(k)+'</span><span class="bar"><span class="fill" style="width:'+Math.round(per[k]/mx*100)+'%"></span></span><span class="n">'+per[k]+'</span></div>';
+    }).join('') : '<div style="font-size:12px;color:#6f6660;">Belum ada registrasi VCT masuk.</div>';
+    tb.innerHTML = rows.length ? rows.slice(0,120).map(function(x){
+      var d=x.data||{}, kl=x.klien||{};
+      return '<tr><td>'+fdate(x.tanggal||x.created_at)+'</td><td style="font-weight:800;color:#6b2a44;">'+esc(kl.idkd||'-')+'</td>'+
+        '<td>'+esc(x.pl||'-')+'</td><td>'+esc(d.puskesmas||'-')+'</td><td>'+(d.rencana_vct?fdate(d.rencana_vct):'<span style="color:#a89f97;">belum dijadwalkan</span>')+'</td>'+
+        '<td>'+esc(x.status||'-')+'</td></tr>';
+    }).join('') : '<tr><td colspan="6" style="padding:14px;color:#6f6660;">Belum ada registrasi VCT — entri PL dari Portal/Form No. 12 muncul di sini otomatis.</td></tr>';
+  }
+
+  window.SAHA_RENDER_HOUSES = function(){ try{ hsRender(); }catch(e){} try{ vctRender(); }catch(e){} };
+})();
+</script>
 </body>
 </html>

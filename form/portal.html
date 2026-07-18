@@ -156,6 +156,14 @@
   function show(v) {
     ['v-loading','v-login','v-menu','v-ktp','v-vct'].forEach(function (x) { $(x).classList.remove('on'); });
     $(v).classList.add('on');
+    /* header ikut view — Registrasi VCT adalah form tersendiri */
+    var h1 = document.querySelector('header h1'), sub = document.querySelector('header .sub');
+    var GO = ''; try { GO = new URLSearchParams(location.search).get('go') || ''; } catch (e) {}
+    if (h1 && sub) {
+      if (v === 'v-vct' || (v === 'v-login' && GO === 'vct')) { h1.textContent = 'Registrasi VCT · Kartu Identitas'; sub.textContent = 'form tersendiri untuk PL · identitas dikunci di server · tiap akses tercatat'; document.title = 'Registrasi VCT · Sadar Hati'; }
+      else if (v === 'v-ktp' || (v === 'v-login' && GO === 'ktp')) { h1.textContent = 'Search ID KD'; sub.textContent = 'kartu identitas dampingan · preview ber-watermark · tiap akses tercatat'; document.title = 'Search ID KD · Sadar Hati'; }
+      else { h1.textContent = 'Portal PL'; sub.textContent = 'khusus petugas lapangan · akses tercatat · bukan dashboard internal'; document.title = 'Portal PL · Sadar Hati'; }
+    }
   }
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]; }); };
 

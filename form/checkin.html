@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="id"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>Field Check-In · Sadar Hati Foundation</title>
+<title>Pemetaan Hotspot · Sadar Hati Foundation</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#a83244">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
@@ -47,7 +47,7 @@
 
   <div class="top-bar"><a href="index.html" onclick="return sahaBack(event)">← Kembali</a><span style="color:var(--slate);">Sadar Hati Foundation</span></div>
 
-  <div class="hero"><div class="eyebrow">📍 Pemetaan Lapangan · Hotspot</div><h1>Field Check-In</h1><p>Pencatatan hotspot untuk pemetaan: info dasar + <strong>pin lokasi GPS</strong>. Aktifkan GPS HP, lalu tekan tombol ambil lokasi saat berada di titik hotspot.</p></div>
+  <div class="hero"><div class="eyebrow">📍 Pemetaan Lapangan · Hotspot</div><h1>Pemetaan Hotspot</h1><p>Pencatatan hotspot untuk pemetaan: info dasar + <strong>pin lokasi GPS</strong>. Aktifkan GPS HP, lalu tekan tombol ambil lokasi saat berada di titik hotspot.</p></div>
 
   <div class="section"><div class="section-title">1 · Identitas</div>
     <div class="qb"><div class="qlbl">Tanggal <span class="rq">*</span></div>
@@ -97,7 +97,7 @@
 <script src="saha-data.js"></script>
 <script src="saha-shared.js"></script>
 <script>
-const FORM="checkin", INSTRUMEN="Field Check-In", SCHEMA="checkin-1.0";
+const FORM="checkin", INSTRUMEN="Pemetaan Hotspot", SCHEMA="checkin-1.0";
 const data={}; let GPS=null;
 document.querySelectorAll('[data-in]').forEach(el=>{
   el.addEventListener('input',()=>{data[el.dataset.in]=el.value;});
