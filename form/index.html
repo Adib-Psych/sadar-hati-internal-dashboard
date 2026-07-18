@@ -295,14 +295,14 @@
   </a>
 
   <div class="info-box">
-    <strong>🔒 Privasi & Etika:</strong> Data assessment tersimpan lokal di HP pekerja lapangan (localStorage). Bisa di-export sebagai CSV/PDF untuk arsip resmi. Jangan lupa <strong>informed consent</strong> dari dampingan sebelum mengisi. Jawaban bersifat rahasia — hanya digunakan untuk membantu pemecahan masalah.
+    <strong>🔒 Privasi & Etika:</strong> Setiap entry terkirim ke <strong>database aman Sadar Hati</strong>; HP hanya menyimpan salinan &amp; antrian offline (terkirim sendiri saat ada sinyal). Jangan lupa <strong>informed consent</strong> dari dampingan sebelum mengisi. Jawaban bersifat rahasia — hanya untuk membantu pemecahan masalah.
   </div>
 
   <div id="storage-info">
     <div>Riwayat pengisian tersimpan: <strong id="save-count">0 entri</strong></div>
     <button class="btn-export" onclick="exportAll()">📥 Export Semua ke CSV</button>
     <br>
-    <button class="btn-clear" onclick="clearAll()">🗑 Hapus semua riwayat</button>
+    <button class="btn-clear" onclick="clearAll()">🧹 Bersihkan salinan yang sudah tersinkron</button>
   </div>
 
   <div class="footer">
@@ -314,16 +314,28 @@
 </div>
 
 <script>
-  // Count all saved entries
-  function updateCount() {
-    let count = 0;
+  // Hitung entri lokal + status sinkron (era cloud/PWA)
+  function scanLocal() {
+    const synced = [], pending = [];
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      if (key.startsWith('sh-') && !key.endsWith('__cloud')) count++;
+      if (!key || !key.startsWith('sh-') || key.endsWith('__cloud')) continue;
+      (localStorage.getItem(key + '__cloud') ? synced : pending).push(key);
     }
-    document.getElementById('save-count').textContent = count + ' entri';
+    return { synced, pending };
+  }
+  function updateCount() {
+    const st = scanLocal();
+    const tot = st.synced.length + st.pending.length;
+    const el = document.getElementById('save-count');
+    if (st.pending.length) {
+      el.innerHTML = tot + ' entri lokal · <span style="color:#9a5c26;">🕐 ' + st.pending.length + ' menunggu sinyal</span>';
+    } else {
+      el.innerHTML = tot + ' entri lokal · <span style="color:#5f3b50;">semua tersinkron ✓</span>';
+    }
   }
   updateCount();
+  window.addEventListener('online', function () { setTimeout(updateCount, 4000); });
 
   function exportAll() {
     const rows = [['Instrumen', 'Tanggal', 'Kab/Kota', 'Nama PL', 'Kode Dampingan', 'Tgl Lahir', 'Tipe Pengguna', 'Kelompok Sasaran', 'Skor Total', 'Interpretasi', 'Detail JSON']];
@@ -364,15 +376,19 @@
   }
 
   function clearAll() {
-    if (!confirm('Hapus SEMUA riwayat assessment yang tersimpan di HP ini?')) return;
-    const keys = [];
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      if (key.startsWith('sh-dast-') || key.startsWith('sh-srq-')) keys.push(key);
+    const st = scanLocal();
+    if (!st.synced.length) {
+      alert(st.pending.length
+        ? '⚠️ Tidak ada yang bisa dibersihkan: ' + st.pending.length + ' entri masih MENUNGGU SINYAL (belum sampai database). Entri ini dilindungi dan tidak akan pernah dihapus dari sini.'
+        : 'Tidak ada salinan lokal untuk dibersihkan.');
+      return;
     }
-    keys.forEach(k => localStorage.removeItem(k));
+    if (!confirm('🧹 Bersihkan ' + st.synced.length + ' salinan yang SUDAH TERSINKRON ke database?\n\n'
+      + (st.pending.length ? '🛡️ ' + st.pending.length + ' entri yang masih menunggu sinyal TIDAK akan disentuh.\n\n' : '')
+      + 'Data asli tetap aman di database — ini hanya menghapus salinan di HP ini.')) return;
+    st.synced.forEach(function (k) { localStorage.removeItem(k); localStorage.removeItem(k + '__cloud'); });
     updateCount();
-    alert('Riwayat sudah dihapus.');
+    alert('✓ ' + st.synced.length + ' salinan tersinkron dibersihkan.' + (st.pending.length ? ' ' + st.pending.length + ' entri menunggu sinyal tetap aman.' : ''));
   }
 </script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}</script>
