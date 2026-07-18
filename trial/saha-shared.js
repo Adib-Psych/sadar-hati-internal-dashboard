@@ -28,11 +28,11 @@
         /* STRUK entry_log (v0.37) — bukti-entry mini non-sensitif utk Papan Entry; gagal pun tidak mengganggu */
         try {
           const kl = rec.klien || {};
-          const nmx = String(kl.julukan || kl.nama || (rec.data && rec.data.pengambil) || "").trim();
+          const nmx = String(kl.julukan || kl.nama || (rec.data && rec.data.pengambil) || "").trim().slice(0, 50);
           addDoc(collection(db, "entry_log"), {
             form: String(rec.form || "-"),
             pl: String(rec.pl || rec.kl || "-"),
-            ini: nmx ? (nmx.charAt(0).toUpperCase() + "***") : "-",
+            nm: nmx || "-",
             jam: String(rec.created_at || ""),
             ts: serverTimestamp(),
             krx: rec.koreksi === true

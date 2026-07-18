@@ -1576,10 +1576,10 @@
     window.__pushSubmission = (record) => addDoc(collection(db, 'submissions'), record).then(r => {
       try {
         const kl = record.klien || {};
-        const nmx = String(kl.julukan || kl.nama || "").trim();
+        const nmx = String(kl.julukan || kl.nama || "").trim().slice(0, 50);
         addDoc(collection(db, 'entry_log'), {
           form: String(record.form || '-'), pl: String(record.pl || '-'),
-          ini: nmx ? (nmx.charAt(0).toUpperCase() + '***') : '-',
+          nm: nmx || '-',
           jam: String(record.created_at || ''), ts: serverTimestamp(),
           krx: record.koreksi === true
         }).catch(() => {});

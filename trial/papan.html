@@ -55,7 +55,7 @@
     </div>
   </header>
   <main>
-    <div class="note24">🔒 Papan ini hanya menampilkan <strong>24 jam terakhir</strong>, tanpa nama lengkap &amp; tanpa hasil tes — cukup bukti bahwa entry sudah masuk ke database.</div>
+    <div class="note24">🔒 Papan ini hanya menampilkan <strong>24 jam terakhir</strong>: nama/julukan &amp; jam masuk saja — tanpa hasil tes &amp; tanpa data pribadi lain.</div>
     <div id="board"><div class="state" id="loading"><div class="big">⏳</div>Memuat papan…</div></div>
   </main>
   <footer>Yayasan Sadar Hati · papan ini terkunci otomatis 24 jam di server<br>form: dashboard.sadarhati.org/trial</footer>
@@ -98,7 +98,7 @@
       const items = shown.map(r => {
         const d = new Date(r.jam);
         const t = isNaN(d) ? '' : d.toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' });
-        return '<div class="er"><span>' + (LBL[r.form] ? LBL[r.form].split(' ')[0] : '📄') + ' ' + esc(r.ini || '-') + (r.krx ? '<span class="krx">↻</span>' : '') + '</span><span class="t">' + t + '</span></div>';
+        return '<div class="er"><span>' + (LBL[r.form] ? LBL[r.form].split(' ')[0] : '📄') + ' ' + esc(r.nm || r.ini || '-') + (r.krx ? '<span class="krx">↻</span>' : '') + '</span><span class="t">' + t + '</span></div>';
       }).join('');
       const more = list.length > 8 ? '<div class="more">+ ' + (list.length - 8) + ' entry lain…</div>' : '';
       html += '<div class="plcard' + (gi === 0 ? ' top1' : '') + '">'
