@@ -1,7 +1,7 @@
 // Auto-extracted from chemsex.html — Sadar Hati shared area + PL data
 window.SAHA_DATA = {
-  PL_LIST: ["Nuri", "David", "Ibi"], /* PL AKTIF (Jul 2026, keputusan Adib) */
-  PL_ARSIP: ["Aris", "Bayu Lesmana", "Dedi", "Deni", "Dodik", "Eko", "Hanim", "Hendra (KL-MLG)", "Husen", "Imam-Konselor", "Karyanto", "Maradona", "Paldi", "Reno", "Siswanto (KL-SBY)", "Sotong Hariyono"], /* arsip — tarik lagi bila dibutuhkan */
+  PL_LIST: ["Nuri", "David", "Ibi", "Dodik"], /* PL AKTIF (Jul 2026; Dodik reaktivasi 18 Jul atas permintaan PM) */
+  PL_ARSIP: ["Aris", "Bayu Lesmana", "Dedi", "Deni", "Eko", "Hanim", "Hendra (KL-MLG)", "Husen", "Imam-Konselor", "Karyanto", "Maradona", "Paldi", "Reno", "Siswanto (KL-SBY)", "Sotong Hariyono"], /* arsip — tarik lagi bila dibutuhkan */
   KOTAKAB_ARSIP: ["Surabaya", "Kabupaten Sidoarjo", "Jakarta Barat", "Kab Pasuruan"], /* arsip wilayah */
   /* ARSIP DATA KECAMATAN wilayah nonaktif (v0.40, sumber: BPS/pemda via verifikasi Jul 2026).
      REAKTIVASI AREA: (1) pindahkan nama kota dari KOTAKAB_ARSIP ke daftar aktif form,

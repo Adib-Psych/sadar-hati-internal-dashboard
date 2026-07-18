@@ -28,7 +28,7 @@
         /* STRUK entry_log (v0.37) — bukti-entry mini non-sensitif utk Papan Entry; gagal pun tidak mengganggu */
         try {
           const kl = rec.klien || {};
-          const nmx = String(kl.julukan || kl.nama || (rec.data && rec.data.pengambil) || "").trim().slice(0, 50);
+          const nmx = String(kl.julukan || kl.nama || (rec.data && (rec.data.pengambil || rec.data.hotspot)) || "").trim().slice(0, 50);
           addDoc(collection(db, "entry_log"), {
             form: String(rec.form || "-"),
             pl: String(rec.pl || rec.kl || "-"),

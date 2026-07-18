@@ -5244,7 +5244,7 @@
         <div class="hero"><div class="eyebrow">Layer 1 · Laporan Lapangan · Master List</div><h1>📋 Master List Form PL</h1><p class="lede"><strong>Isi di sini</strong> membuka form langsung di halaman ini (tanpa pindah halaman). <strong>Copy link</strong> untuk dibagikan ke HP petugas lewat chat/WhatsApp — mereka isi dari HP masing-masing. Semua submission otomatis masuk ke <strong>Log Harian</strong> (No. 5).</p></div>
         <div class="ml-grid">
           <div class="ml-card chemsex">
-            <div class="tag">ViiV · Kobo Replica</div><h3>🔥 Penjangkauan</h3>
+            <div class="tag">ViiV · Malang Raya</div><h3>🔥 Penjangkauan</h3>
             <p>Penjangkauan komunitas Chemsex Malang–Surabaya. 7 section · area cascading · ID KD otomatis.</p>
             <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l1-form-chemsex')">📝 Isi di sini</button><button class="ml-copy" data-url="trial/chemsex.html" onclick="SAHA_COPY(this)">🔗 Copy link</button><button class="ml-qr" data-url="trial/chemsex.html" onclick="SAHA_QR(this)">📱 QR</button></div>
           </div>
@@ -5282,6 +5282,16 @@
             <div class="tag">Logistik</div><h3>🎒 Prevention Kit</h3>
             <p>Pengambilan alat pencegahan: kondom, jarum, oral quick, pipet, pyrex, lip balm, sedotan, amplop, masker.</p>
             <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l1-form-prevkit')">📝 Isi di sini</button><button class="ml-copy" data-url="trial/prevkit.html" onclick="SAHA_COPY(this)">🔗 Copy link</button><button class="ml-qr" data-url="trial/prevkit.html" onclick="SAHA_QR(this)">📱 QR</button></div>
+          </div>
+          <div class="ml-card srq" style="border-left-color:#6b4d7a;">
+            <div class="tag">Skrining Gabungan · Baru</div><h3>💊+🧠 DAST + SRQ (Gabungan)</h3>
+            <p>Dua instrumen dalam satu sesi — identitas diisi sekali, hasil tersimpan sebagai 2 data terpisah (DAST &amp; SRQ), rekap tetap rapi per instrumen.</p>
+            <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l1-form-gabungan')">📝 Isi di sini</button><button class="ml-copy" data-url="trial/gabungan.html" onclick="SAHA_COPY(this)">🔗 Copy link</button><button class="ml-qr" data-url="trial/gabungan.html" onclick="SAHA_QR(this)">📱 QR</button></div>
+          </div>
+          <div class="ml-card dast" style="border-left-color:#c47a3b;">
+            <div class="tag">Pemetaan Lapangan · Baru</div><h3>📍 Field Check-In</h3>
+            <p>Pencatatan hotspot untuk pemetaan: nama &amp; tipe hotspot, jam aktif, contact person, perkiraan KD + pin lokasi GPS.</p>
+            <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l1-form-checkin')">📝 Isi di sini</button><button class="ml-copy" data-url="trial/checkin.html" onclick="SAHA_COPY(this)">🔗 Copy link</button><button class="ml-qr" data-url="trial/checkin.html" onclick="SAHA_QR(this)">📱 QR</button></div>
           </div>
         </div>
         <div class="ml-note">💡 <strong>Cara pakai:</strong> <strong>"Isi di sini"</strong> = mengisi langsung di halaman ini (staf/admin). <strong>"Copy link"</strong> = bagikan tautannya ke petugas lapangan lewat WA — mereka isi dari HP masing-masing. <strong>"QR"</strong> = tampilkan &amp; unduh kode scan per form (tinggal discan kamera HP, tanpa ketik link). Semua form juga tersedia dalam satu halaman di <a href="trial/" target="_blank" rel="noopener">dashboard.sadarhati.org/trial</a>.</div>
@@ -5391,9 +5401,20 @@
 
       <!-- ====== 2A · FORM FIELD CHECK-IN (placeholder) ====== -->
       <section class="section" id="l1-form-checkin">
-        <div class="hero"><div class="eyebrow">🟢 Layer 2A · Form Laporan Lapangan · #2</div><h1>📍 Form Field Check-In</h1><p class="lede">Check-in cepat petugas lapangan (PL) saat mulai penjangkauan: lokasi, waktu, dan status kehadiran. Ringkas — untuk memantau aktivitas harian tim sebelum mengisi form asesmen lengkap.</p></div>
-        <div class="placeholder-banner"><span class="icon">🚧</span><div><strong>Form dalam penyiapan.</strong> Struktur field check-in (nama PL · tanggal/jam · titik lokasi cascading · catatan singkat) akan dibangun mengikuti pola form Chemsex, lalu disimpan ke Firestore &amp; muncul di <em>Log Harian</em> (2B). Untuk sekarang PL memakai Master List &amp; form asesmen yang sudah aktif.</div></div>
-        <div class="ph-wrap"><div class="big">📍</div><h3>Field Check-In — Coming Soon</h3><p>Form absensi + titik jangkauan harian. Sama seperti form lain: "Isi di sini" untuk staf, "Copy link" untuk PL isi dari HP.</p><button class="ph-link" onclick="SAHA_GO('l1-master')">← Kembali ke Master List Form</button></div>
+        <div class="hero"><div class="eyebrow">🟢 Layer 2A · Form Laporan Lapangan · #2</div><h1>📍 Form Field Check-In</h1><p class="lede">Pencatatan hotspot untuk pemetaan lapangan: nama &amp; tipe hotspot, jam aktif, contact person, perkiraan jumlah KD, dan pin lokasi GPS — tersimpan ke database, tampil di Log Harian.</p></div>
+        <div class="l1-form-wrap">
+          <div class="l1-form-linkbar"><span class="u">…/trial/checkin.html</span><button data-url="trial/checkin.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          <div class="l1-embed"><iframe src="trial/checkin.html" title="Field Check-In Pemetaan Hotspot" loading="lazy"></iframe></div>
+        </div>
+      </section>
+
+      <!-- L3-FORM-GABUNGAN -->
+      <section class="section" id="l1-form-gabungan">
+        <div class="hero"><div class="eyebrow">🟢 Layer 2A · Form Laporan Lapangan · Gabungan</div><h1>💊+🧠 Skrining Gabungan DAST-10 + SRQ-29</h1><p class="lede">Dua instrumen dalam satu sesi: identitas cukup diisi sekali, hasil otomatis tersimpan sebagai dua data terpisah (DAST &amp; SRQ) — laporan &amp; rekap per instrumen tetap rapi.</p></div>
+        <div class="l1-form-wrap">
+          <div class="l1-form-linkbar"><span class="u">…/trial/gabungan.html</span><button data-url="trial/gabungan.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          <div class="l1-embed"><iframe src="trial/gabungan.html" title="Skrining Gabungan DAST dan SRQ" loading="lazy"></iframe></div>
+        </div>
       </section>
 
       <!-- ====== 2B · CHEMSEX OUTPUT HOUSE (placeholder) ====== -->
