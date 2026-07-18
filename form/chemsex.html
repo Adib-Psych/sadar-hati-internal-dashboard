@@ -1578,19 +1578,30 @@
   try {
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-    window.__pushSubmission = (record) => addDoc(collection(db, 'submissions'), record).then(r => {
-      try {
-        const kl = record.klien || {};
-        const nmx = String(kl.julukan || kl.nama || "").trim().slice(0, 50);
-        addDoc(collection(db, 'entry_log'), {
-          form: String(record.form || '-'), pl: String(record.pl || '-'),
-          nm: nmx || '-',
-          jam: String(record.created_at || ''), ts: serverTimestamp(),
-          krx: record.koreksi === true
-        }).catch(() => {});
-      } catch (e) {}
-      return r.id;
-    });
+    /* IDEMPOTEN (v0.59): cegah duplikat submissions+struk saat push-langsung & drain-outbox balapan (sinyal kedip) */
+    const __inflight = {};
+    const __sig = (r) => String(r.form || '') + '|' + String(r.created_at || '') + '|' + String(r.pl || '');
+    window.__pushSubmission = (record) => {
+      const sig = __sig(record);
+      if (__inflight[sig]) return __inflight[sig];
+      const p = addDoc(collection(db, 'submissions'), record).then(r => {
+        try {
+          const kl = record.klien || {};
+          const nmx = String(kl.julukan || kl.nama || "").trim().slice(0, 50);
+          addDoc(collection(db, 'entry_log'), {
+            form: String(record.form || '-'), pl: String(record.pl || '-'),
+            nm: nmx || '-',
+            jam: String(record.created_at || ''), ts: serverTimestamp(),
+            krx: record.koreksi === true
+          }).catch(() => {});
+        } catch (e) {}
+        return r.id;
+      });
+      __inflight[sig] = p;
+      const _clr = () => { delete __inflight[sig]; };
+      p.then(_clr, _clr);
+      return p;
+    };
     /* OUTBOX AUTO-RESEND (v0.33; drain saat online v0.45-PWA) */
     window.__sahaDrainOutbox = function () {
     try {

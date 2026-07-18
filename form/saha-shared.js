@@ -24,22 +24,34 @@
       const { getFirestore, collection, addDoc, serverTimestamp } = await import("https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js");
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
-      _push = (rec) => addDoc(collection(db, "submissions"), rec).then(r => {
-        /* STRUK entry_log (v0.37) — bukti-entry mini non-sensitif utk Papan Entry; gagal pun tidak mengganggu */
-        try {
-          const kl = rec.klien || {};
-          const nmx = String(kl.julukan || kl.nama || (rec.data && (rec.data.pengambil || rec.data.hotspot)) || "").trim().slice(0, 50);
-          addDoc(collection(db, "entry_log"), {
-            form: String(rec.form || "-"),
-            pl: String(rec.pl || rec.kl || "-"),
-            nm: nmx || "-",
-            jam: String(rec.created_at || ""),
-            ts: serverTimestamp(),
-            krx: rec.koreksi === true
-          }).catch(() => {});
-        } catch (e) {}
-        return r.id;
-      });
+      /* IDEMPOTEN (v0.59): satukan push-langsung + drain-outbox utk record yang SAMA saat sinyal kedip.
+         In-flight cache -> satu addDoc submissions + satu struk entry_log; cegah duplikat di dashboard & Papan. */
+      const _inflight = {};
+      const _sig = (rec) => String(rec.form || "") + "|" + String(rec.created_at || "") + "|" + String(rec.pl || "");
+      _push = (rec) => {
+        const sig = _sig(rec);
+        if (_inflight[sig]) return _inflight[sig];  /* sudah ada push berjalan utk record ini -> pakai promise yang sama */
+        const p = addDoc(collection(db, "submissions"), rec).then(r => {
+          /* STRUK entry_log (v0.37) — bukti-entry mini non-sensitif utk Papan Entry; gagal pun tidak mengganggu */
+          try {
+            const kl = rec.klien || {};
+            const nmx = String(kl.julukan || kl.nama || (rec.data && (rec.data.pengambil || rec.data.hotspot)) || "").trim().slice(0, 50);
+            addDoc(collection(db, "entry_log"), {
+              form: String(rec.form || "-"),
+              pl: String(rec.pl || rec.kl || "-"),
+              nm: nmx || "-",
+              jam: String(rec.created_at || ""),
+              ts: serverTimestamp(),
+              krx: rec.koreksi === true
+            }).catch(() => {});
+          } catch (e) {}
+          return r.id;
+        });
+        _inflight[sig] = p;
+        const _clr = () => { delete _inflight[sig]; };
+        p.then(_clr, _clr);  /* bersihkan cache saat selesai (sukses/gagal); caller tetap terima promise asli */
+        return p;
+      };
       _ready = true;
       try { retryOutbox(); } catch (e) {}
       window.addEventListener("online", function(){ try { retryOutbox(); } catch (e) {} });
