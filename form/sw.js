@@ -1,14 +1,14 @@
 /* ============================================================
    SAHA Form — Service Worker (PWA offline)
    ATURAN PIPELINE: SETIAP deploy yang menyentuh folder form/
-   WAJIB menaikkan CACHE_NAME di bawah (v45 -> v46 dst).
+   WAJIB menaikkan CACHE_NAME di bawah (v46 -> v47 dst).
    Strategi:
    - HTML / navigasi  : network-first (deploy langsung kebaca), fallback cache
    - Aset lokal (js/png/json) : cache-first + update diam-diam di belakang
    - gstatic/fonts    : cache-first (URL versi beku, aman)
    - firestore/API    : TIDAK disentuh SW (langsung network) — SDK punya antrian sendiri
    ============================================================ */
-var CACHE_NAME = 'saha-form-v46';
+var CACHE_NAME = 'saha-form-v47';
 var PRECACHE = [
   './', 'index.html',
   'chemsex.html', 'dast10.html', 'srq29.html', 'gabungan.html', 'ira.html',
