@@ -8,21 +8,30 @@
 <style>
   :root { --clay:#a83244; --clay-deep:#7d2433; --cream:#fbf7f2; --ink:#2c2724; --slate:#6f6660; --border:#e7ddd3; }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Segoe UI', system-ui, -apple-system, sans-serif; background:linear-gradient(180deg,#fbf7f2 0%,#f3ece2 100%); color:var(--ink); min-height:100vh; }
-  .wrap { max-width:880px; margin:0 auto; padding:34px 18px 50px; }
-  .logo { display:flex; justify-content:center; margin-bottom:14px; }
-  .logo img { height:64px; width:auto; }
-  h1 { font-family:Georgia,'Times New Roman',serif; text-align:center; font-size:28px; color:var(--clay-deep); }
-  .sub { text-align:center; font-size:13px; color:var(--slate); margin:6px 0 8px; line-height:1.6; }
-  .authchip { display:flex; justify-content:center; margin-bottom:24px; }
-  .authchip span { background:#fff; border:1.5px solid var(--border); border-radius:14px; padding:6px 14px; font-size:11.5px; font-weight:700; color:var(--slate); }
-  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; }
-  a.door { display:block; border-radius:16px; padding:18px 18px 16px; color:#fff; text-decoration:none; position:relative; min-height:112px; box-shadow:0 6px 18px rgba(44,39,36,.14); transition:transform .12s ease; }
-  a.door:active { transform:scale(.98); }
-  .door b { font-size:16px; display:block; margin-bottom:4px; font-family:Georgia,serif; }
-  .door span { font-size:11.5px; opacity:.93; line-height:1.5; display:block; }
-  .door .who { position:absolute; top:12px; right:12px; background:rgba(255,255,255,.22); border-radius:9px; font-size:9px; font-weight:800; padding:3px 8px; letter-spacing:.5px; }
-  footer { text-align:center; font-size:10.5px; color:#a89f97; margin-top:30px; line-height:1.7; }
+  body { font-family:'Segoe UI', system-ui, -apple-system, sans-serif; background:
+    radial-gradient(1100px 500px at 85% -10%, rgba(138,90,116,.10), transparent 60%),
+    radial-gradient(900px 480px at -10% 110%, rgba(47,109,158,.08), transparent 55%),
+    linear-gradient(180deg,#fbf7f2 0%,#f3ece2 100%);
+    color:var(--ink); min-height:100vh; }
+  .wrap { max-width:1280px; margin:0 auto; padding:52px 28px 60px; }
+  .logo { display:flex; justify-content:center; margin-bottom:18px; }
+  .logo img { height:86px; width:auto; filter:drop-shadow(0 6px 14px rgba(125,36,51,.18)); }
+  h1 { font-family:Georgia,'Times New Roman',serif; text-align:center; font-size:42px; color:var(--clay-deep); letter-spacing:.5px; }
+  .sub { text-align:center; font-size:15.5px; color:var(--slate); margin:10px 0 14px; line-height:1.7; }
+  .authchip { display:flex; justify-content:center; margin-bottom:38px; }
+  .authchip span { background:#fff; border:1.5px solid var(--border); border-radius:18px; padding:10px 22px; font-size:13px; font-weight:700; color:var(--slate); box-shadow:0 3px 12px rgba(44,39,36,.06); }
+  .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  @media (max-width:1020px){ .grid { grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:680px){ .grid { grid-template-columns:1fr; } .wrap{padding:34px 16px 44px;} h1{font-size:30px;} }
+  a.door { display:flex; flex-direction:column; border-radius:24px; padding:30px 30px 24px; color:#fff; text-decoration:none; position:relative; min-height:236px; box-shadow:0 10px 26px rgba(44,39,36,.16); transition:transform .16s ease, box-shadow .16s ease; overflow:hidden; }
+  a.door::after { content:''; position:absolute; inset:0; background:radial-gradient(420px 200px at 110% -20%, rgba(255,255,255,.14), transparent 60%); pointer-events:none; }
+  a.door:hover { transform:translateY(-5px); box-shadow:0 18px 38px rgba(44,39,36,.24); }
+  .door .ic { font-size:38px; line-height:1; margin-bottom:14px; }
+  .door b { font-size:23px; display:block; margin-bottom:9px; font-family:Georgia,serif; letter-spacing:.3px; }
+  .door span.desc { font-size:14.5px; opacity:.95; line-height:1.65; display:block; flex:1; }
+  .door .who { position:absolute; top:20px; right:20px; background:rgba(255,255,255,.24); border-radius:11px; font-size:11px; font-weight:800; padding:5px 12px; letter-spacing:.7px; }
+  .door .go { margin-top:16px; font-size:13.5px; font-weight:800; opacity:.95; }
+  footer { text-align:center; font-size:12.5px; color:#a89f97; margin-top:44px; line-height:1.8; }
   footer a { color:var(--clay); }
 </style>
 </head>
@@ -35,26 +44,32 @@
 
   <div class="grid">
     <a class="door" href="profil.html" style="background:linear-gradient(135deg,#8a5a74,#5f3b50);">
-      <span class="who">PUBLIK</span><b>🏛️ Profil Lembaga</b>
-      <span>Overview program, rekam jejak institusi & 8 donor historis — siap dibagikan ke calon donor.</span></a>
-    <a class="door" href="form/" style="background:linear-gradient(135deg,#a83244,#7d2433);">
-      <span class="who">PL & KD</span><b>📝 Form Lapangan</b>
-      <span>Semua form entry + Papan Entry — bisa offline (PWA), QR lama tetap berlaku.</span></a>
+      <span class="who">PUBLIK</span><span class="ic">🏛️</span><b>Profil Lembaga</b>
+      <span class="desc">Overview program, rekam jejak institusi 24 tahun & 8 donor historis — halaman yang siap dibagikan ke calon donor.</span>
+      <span class="go">Buka profil →</span></a>
+    <a class="door" href="lapangan.html" style="background:linear-gradient(135deg,#a83244,#7d2433);">
+      <span class="who">SEMUA TIM</span><span class="ic">📝</span><b>Form Lapangan</b>
+      <span class="desc">Direktori semua form (versi desktop): isi langsung, Copy Link &amp; Download QR per form. Versi HP/PWA tetap di /form/ — QR lama berlaku.</span>
+      <span class="go">Buka direktori form →</span></a>
     <a class="door" href="form/portal.html" style="background:linear-gradient(135deg,#6b4d7a,#4e3859);">
-      <span class="who">PL · LOGIN</span><b>🪪 Portal PL</b>
-      <span>Hub form + Papan + Search ID KD (kartu identitas & registrasi VCT). Wajib akun PL.</span></a>
+      <span class="who">PL · LOGIN</span><span class="ic">🪪</span><b>Portal PL</b>
+      <span class="desc">Hub form, Papan Entry, dan Search ID KD — kartu identitas & registrasi VCT dampingan. Wajib akun PL.</span>
+      <span class="go">Masuk portal →</span></a>
     <a class="door" href="monitoring.html" style="background:linear-gradient(135deg,#2f6d9e,#1f4a6e);">
-      <span class="who">STAF · LOGIN</span><b>📊 Monitoring & Data</b>
-      <span>Log Harian live, M&E Dashboard, 8 rumah output per instrumen, database klien.</span></a>
+      <span class="who">STAF · LOGIN</span><span class="ic">📊</span><b>Monitoring & Data</b>
+      <span class="desc">Log Harian live, M&E Dashboard, 8 rumah output per instrumen, Data Mentah & database klien.</span>
+      <span class="go">Masuk monitoring →</span></a>
     <a class="door" href="donor.html" style="background:linear-gradient(135deg,#48607b,#2f4256);">
-      <span class="who">STAF · LOGIN</span><b>💰 Donor & Pendanaan</b>
-      <span>ViiV aktif (proposal · budget · M&E · achievement), overview budget, pipeline & grant tracker.</span></a>
+      <span class="who">STAF · LOGIN</span><span class="ic">💰</span><b>Donor & Pendanaan</b>
+      <span class="desc">ViiV aktif (proposal · budget · M&E · achievement), overview budget, pipeline & grant tracker.</span>
+      <span class="go">Masuk halaman donor →</span></a>
     <a class="door" href="admin.html" style="background:linear-gradient(135deg,#94395c,#6b2a44);">
-      <span class="who">ADMIN</span><b>🛡️ Kelola & Sistem</b>
-      <span>Panel admin, Kelola Entry (edit·arsip·hapus), log akses KTP & status backup.</span></a>
+      <span class="who">ADMIN</span><span class="ic">🛡️</span><b>Kelola & Sistem</b>
+      <span class="desc">Panel admin & role, Kelola Entry (edit · arsip · hapus), log akses KTP, dan status backup.</span>
+      <span class="go">Masuk kelola →</span></a>
   </div>
 
-  <footer>Yayasan Sadar Hati · est. 2002 · Malang — Integrated Hub v0.50<br>
+  <footer>Yayasan Sadar Hati · est. 2002 · Malang — Integrated Hub v0.54<br>
   <a href="https://sadarhati.org" rel="noopener">sadarhati.org</a> · dashboard.sadarhati.org</footer>
 </div>
 
@@ -67,7 +82,7 @@
       'l1-loghari': 'monitoring.html', 'l2-me-dashboard': 'monitoring.html', 'l2-clients': 'monitoring.html',
       'l2-admin': 'admin.html', 'l2-overview-program': 'profil.html',
       'l2-overview-budget': 'donor.html', 'l2-pipeline-matrix': 'donor.html', 'l2-grant-tracker': 'donor.html', 'l2-add': 'donor.html',
-      'l1-master': 'form/', 'l1-portal': 'form/portal.html', 'l2b-login': 'monitoring.html'
+      'l1-master': 'lapangan.html', 'l1-portal': 'form/portal.html', 'l2b-login': 'monitoring.html'
     };
     var to = null;
     if (direct[h]) to = direct[h];

@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Donor & Pendanaan — Sadar Hati (Internal)</title>
+<title>Form Lapangan — Sadar Hati Foundation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Lora:wght@500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
@@ -840,6 +840,11 @@
         #saha-qr-modal .qract button{ flex:1; padding:10px; border-radius:10px; font-weight:700; font-size:13px; cursor:pointer; font-family:inherit; border:none; }
         .qr-dl{ background:#6b4d7a; color:#fff; } .qr-cl{ background:#f5efe7; color:#4a4340; border:1.5px solid #ddd3c8 !important; }
 </style>
+<style>/* tema halaman */
+  .sidebar .brand { background: linear-gradient(150deg, #a83244 0%, #7d2433 90%) !important; }
+  .nav-layer-header .zone-dot { background: #a83244 !important; }
+  .nav-item.active { background: #a83244 !important; }
+</style>
 <style>/* ===== responsive mobile (ala dual-preview Hostinger) ===== */
 @media (max-width:880px){
   html, body { height:auto; overflow:auto; }
@@ -855,12 +860,7 @@
   .ml-actions { flex-wrap:wrap; }
 }
 </style>
-<style>/* tema halaman */
-  .sidebar .brand { background: linear-gradient(150deg, #48607b 0%, #2f4256 90%) !important; }
-  .nav-layer-header .zone-dot { background: #48607b !important; }
-  .nav-item.active { background: #48607b !important; }
-</style>
-<script>window.SAHA_DEFAULT_SECTION='l2-A-proposal';</script>
+<script>window.SAHA_DEFAULT_SECTION='l1-master';</script>
 </head>
 <body>
 
@@ -875,37 +875,25 @@
     </div>
 
         <nav class="nav">
-      <div class="nav-layer expanded" data-zone="2B">
+      <div class="nav-layer expanded" data-zone="2A">
         <div class="nav-layer-header">
-          <span class="zone-dot z2b"></span>
-          <span class="nav-layer-title">DONOR & PENDANAAN</span>
-          <span class="lock-ind" title="Butuh login staf">🔒</span><span class="chevron">▶</span>
+          <span class="zone-dot z2a"></span>
+          <span class="nav-layer-title">FORM LAPANGAN</span>
+          <span class="zone-badge open">TERBUKA</span><span class="chevron">▶</span>
         </div>
         <div class="nav-layer-body">
-          <div class="donor-group expanded">
-            <div class="donor-header">
-              <span class="donor-name">💊 ViiV Healthcare</span>
-              <span class="donor-badge" style="background:var(--clay);color:#fff;">ACTIVE</span><span class="chevron">▶</span>
-            </div>
-            <div class="donor-sub-items">
-              <a class="nav-item" data-section="l2-A-proposal"><span class="icon">📝</span> Program Proposal</a>
-              <a class="nav-item" data-section="l2-A-budget"><span class="icon">💰</span> Budget</a>
-              <a class="nav-item" data-section="l2-A-kpi"><span class="icon">📈</span> M&E</a>
-              <a class="nav-item" data-section="l2-A-achievement"><span class="icon">✅</span> Achievement</a>
-            </div>
-          </div>
-              <a class="nav-item" data-section="l2-overview-budget"><span class="icon">💼</span> Overview Budget Status</a>
-          <div class="donor-group expanded">
-            <div class="donor-header">
-              <span class="donor-name">🎯 Pipeline Pendanaan</span>
-              <span class="donor-badge">LIVE</span><span class="chevron">▶</span>
-            </div>
-            <div class="donor-sub-items">
-              <a class="nav-item" data-section="l2-pipeline-matrix"><span class="icon">🎯</span> Pipeline Matrix</a>
-              <a class="nav-item" data-section="l2-grant-tracker"><span class="icon">🌍</span> Grant Opportunities Tracker</a>
-            </div>
-          </div>
-              <a class="nav-item" data-section="l2-add"><span class="icon">➕</span> Tambah donor aktif baru</a>
+              <a class="nav-item active" data-section="l1-master"><span class="icon">📋</span> 1 · Master List Form</a>
+              <a class="nav-item" data-section="l1-form-checkin"><span class="icon">📍</span> 2 · Field Check-In</a>
+              <a class="nav-item" data-section="l1-form-chemsex"><span class="icon">🔥</span> 3 · Penjangkauan</a>
+              <a class="nav-item" data-section="l1-form-dast10"><span class="icon">💊</span> 4 · DAST-10 Napza</a>
+              <a class="nav-item" data-section="l1-form-srq29"><span class="icon">🧠</span> 5 · SRQ-29 Mental Health</a>
+              <a class="nav-item" data-section="l1-form-ira"><span class="icon">⚕️</span> 6 · IRA Risiko Pribadi</a>
+              <a class="nav-item" data-section="l1-form-gra"><span class="icon">👥</span> 7 · GRA Risiko Kelompok</a>
+              <a class="nav-item" data-section="l1-form-konseling"><span class="icon">💬</span> 8 · Konseling</a>
+              <a class="nav-item" data-section="l1-form-bulanan"><span class="icon">📆</span> 9 · Laporan Bulanan Korlap</a>
+              <a class="nav-item" data-section="l1-form-prevkit"><span class="icon">🎒</span> 10 · Prevention Kit</a>
+              <a class="nav-item" data-section="l1-form-gabungan"><span class="icon">🧪</span> 11 · Gabungan DAST+SRQ</a>
+              <a class="nav-item" data-section="l1-portal"><span class="icon">🪪</span> 12 · Portal PL</a>
         </div>
       </div>
     </nav>
@@ -919,7 +907,7 @@
         </div>
       </div>
       <div>v0.54 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
-    <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#48607b,#2f4256);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
+    <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#a83244,#7d2433);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
 
@@ -928,9 +916,9 @@
 
     <div class="topbar">
       <div class="breadcrumb" id="breadcrumb">
-        <span class="layer-tag zone2b">🔴 Layer 2B · Internal</span>
+        <span class="layer-tag zone2a">🟢 Layer 2A · External</span>
         <span class="sep">/</span>
-        <span class="current">🔒 Login Staf diperlukan</span>
+        <span class="current">Master List Form</span>
       </div>
       <div class="topbar-actions">
         <span class="saha-authbar saha-authed-only">🔓 <span id="saha-rolechip">Staf</span> <span class="saha-user"></span></span>
@@ -961,834 +949,72 @@
       <!-- ====== LAYER 2 SECTIONS ====== -->
 
       <!-- 🎯 OVERVIEW OVERALL PROGRAM (aggregated across active donors) -->
-      
 
       <!-- 💼 OVERVIEW BUDGET STATUS -->
-      <section class="section" id="l2-overview-budget">
-        <div class="hero">
-          <div class="eyebrow">🔴 Layer 2B · Internal · Overview Budget Status</div>
-          <h1>Overview Budget Status</h1>
-          <p class="lede">Burning budget summary untuk semua program &amp; donor aktif tahun ini — <strong>realisasi vs proposed budget</strong>. Alert otomatis kalau penyerapan terlalu lambat atau terlalu cepat.</p>
-        </div>
-
-        <h2 class="section-h2">Total Budget Active vs Realisasi (dummy)</h2>
-        <div class="cards">
-          <div class="card"><div class="label">Total Proposed Budget</div><div class="value" style="font-size:20px;">Rp 2.4 M</div><div class="desc">Semua donor aktif 2026</div></div>
-          <div class="card"><div class="label">Realisasi YTD</div><div class="value" style="font-size:20px;">Rp 1.4 M</div><div class="desc">Per 18 Jul 2026</div></div>
-          <div class="card"><div class="label">Burn Rate</div><div class="value">58%</div><div class="desc">Healthy (target 50% mid-year)</div></div>
-          <div class="card"><div class="label">Remaining</div><div class="value" style="font-size:20px;">Rp 1.0 M</div><div class="desc">6 bulan tersisa</div></div>
-        </div>
-
-        <h2 class="section-h2">Burning per Program Activity (ViiV cycle 2022-2026)</h2>
-        <div class="budget-row"><div class="item-name">Outreach &amp; Penjangkauan</div><div class="bar-track"><div class="bar-fill bf-outreach" style="width:72%"></div></div><div class="bar-percent">72%</div></div>
-        <div class="budget-row"><div class="item-name">Testing HIV/IMS/Hepatitis</div><div class="bar-track"><div class="bar-fill bf-testing" style="width:58%"></div></div><div class="bar-percent">58%</div></div>
-        <div class="budget-row"><div class="item-name">Mental Health Counseling</div><div class="bar-track"><div class="bar-fill bf-mh" style="width:41%"></div></div><div class="bar-percent">41%</div></div>
-        <div class="budget-row"><div class="item-name">ADHA Support</div><div class="bar-track"><div class="bar-fill bf-adha" style="width:88%"></div></div><div class="bar-percent">88%</div></div>
-        <div class="budget-row"><div class="item-name">Operational &amp; Staff</div><div class="bar-track"><div class="bar-fill bf-ops" style="width:50%"></div></div><div class="bar-percent">50%</div></div>
-
-        <h2 class="section-h2">Alert Penyerapan</h2>
-        <div style="background:white; border:1px solid var(--border); border-radius:8px; padding:6px 0; margin-top:6px;">
-          <div style="display:flex; align-items:center; gap:14px; padding:10px 18px; border-bottom:1px solid var(--slate-lighter);">
-            <span style="background:var(--clay); color:white; font-size:9px; padding:3px 7px; border-radius:8px; letter-spacing:0.5px; font-weight:700;">⚠️ ALERT</span>
-            <div style="flex:1; font-size:12.5px; color:var(--navy);"><strong>ADHA Support 88%</strong> — penyerapan melebihi tracking target. Cek kalau perlu re-allocate ke kuartal terakhir.</div>
-          </div>
-          <div style="display:flex; align-items:center; gap:14px; padding:10px 18px; border-bottom:1px solid var(--slate-lighter);">
-            <span style="background:var(--coral-deep); color:white; font-size:9px; padding:3px 7px; border-radius:8px; letter-spacing:0.5px; font-weight:700;">📉 LAGGING</span>
-            <div style="flex:1; font-size:12.5px; color:var(--navy);"><strong>Mental Health Counseling 41%</strong> — penyerapan di bawah tracking (target 50% mid-year). Periksa kapasitas konselor.</div>
-          </div>
-          <div style="display:flex; align-items:center; gap:14px; padding:10px 18px;">
-            <span style="background:var(--sage); color:white; font-size:9px; padding:3px 7px; border-radius:8px; letter-spacing:0.5px; font-weight:700;">✓ OK</span>
-            <div style="flex:1; font-size:12.5px; color:var(--navy);">3 aktivitas lain dalam tracking range (50% ± 10%) — healthy burn rate.</div>
-          </div>
-        </div>
-
-        <div class="placeholder-banner" style="margin-top:18px;">
-          <span class="icon">💼</span>
-          <div><strong>Burning budget logic:</strong> Fetch realisasi budget dari masing-masing donor aktif di bawah (Donor A ViiV + future active donors), agregat, hitung % terhadap proposed budget per activity. Alert otomatis: &gt;90% (overspend risk), &lt;30% mid-year (underperform), 40-70% (healthy). Mba Watiek bisa drill-down ke setiap donor untuk detail.</div>
-        </div>
-      </section>
 
       <!-- Donor A — ViiV -->
-      <section class="section" id="l2-A-proposal">
-        <div class="hero"><div class="eyebrow">Layer 2 · Donor A · ViiV Healthcare</div><h1>Program Proposal</h1><p class="lede">Sadar Hati = 1 dari <strong>8 grantees regional ASEAN</strong> dalam proyek ViiV multi-negara: <em>"Evaluasi efektivitas intervensi pengurangan dampak buruk dan pencegahan HIV untuk kelompok chemsex di negara-negara Asia Tenggara"</em>. Periode 24 bulan (2024–2026). Lead M&amp;E partner: Hanoi Medical University (HMU).</p></div>
 
-        <div class="cards">
-          <div class="card"><div class="label">Periode Proyek</div><div class="value" style="font-size:20px;">24 Bulan</div><div class="desc">2024 – 2026</div></div>
-          <div class="card"><div class="label">Total Grantees</div><div class="value">8</div><div class="desc">Organisasi penerima dana</div></div>
-          <div class="card"><div class="label">Negara Cakupan</div><div class="value">5</div><div class="desc">ASEAN regional</div></div>
-          <div class="card" style="background:var(--gold-tint); border-color:var(--gold);"><div class="label">Posisi Sadar Hati</div><div class="value" style="font-size:18px;">Indonesia Lead</div><div class="desc">1 dari 8 grantees</div></div>
-        </div>
 
-        <h2 class="section-h2" style="margin-top:24px;">🎯 4 Bidang Fokus Utama Proyek</h2>
-        <p style="font-size:13px; color:var(--slate); line-height:1.6; margin:4px 0 14px 0;">4 pilar dengan semantic color coding — bukan random palette, tapi <strong>masing-masing pilar punya makna warna sendiri</strong>.</p>
-        <div class="cards">
-          <div class="card" style="background: linear-gradient(135deg, var(--clay) 0%, var(--clay-deep) 100%); color: white; border-color: var(--clay-deep);">
-            <div class="label" style="color: rgba(255,255,255,0.85);">🎗️ PILAR 1 · Urgent Core</div>
-            <div class="value" style="font-size:17px; color: white; font-family: 'Lora', Georgia, serif; margin: 8px 0 6px 0;">Pencegahan &amp; Pengobatan HIV</div>
-            <div class="desc" style="color: rgba(255,255,255,0.92);">HIV testing · PrEP · PEP · ARV linkage</div>
-          </div>
-          <div class="card" style="background: linear-gradient(135deg, #c47a3b 0%, #4e3859 100%); color: white; border-color: #4e3859;">
-            <div class="label" style="color: rgba(255,255,255,0.85);">💉 PILAR 2 · Sadar Hati Specialty</div>
-            <div class="value" style="font-size:17px; color: white; font-family: 'Lora', Georgia, serif; margin: 8px 0 6px 0;">Harm Reduction</div>
-            <div class="desc" style="color: rgba(255,255,255,0.92);">Pengurangan dampak buruk chemsex</div>
-          </div>
-          <div class="card" style="background: linear-gradient(135deg, var(--sage) 0%, var(--sage-deep) 100%); color: white; border-color: var(--sage-deep);">
-            <div class="label" style="color: rgba(255,255,255,0.85);">🧠 PILAR 3 · Healing</div>
-            <div class="value" style="font-size:17px; color: white; font-family: 'Lora', Georgia, serif; margin: 8px 0 6px 0;">Kesehatan Mental</div>
-            <div class="desc" style="color: rgba(255,255,255,0.92);">MH screening + counseling</div>
-          </div>
-          <div class="card" style="background: linear-gradient(135deg, #6b4d7a 0%, #543c60 100%); color: white; border-color: #543c60;">
-            <div class="label" style="color: rgba(255,255,255,0.85);">🏛️ PILAR 4 · Development</div>
-            <div class="value" style="font-size:17px; color: white; font-family: 'Lora', Georgia, serif; margin: 8px 0 6px 0;">Peningkatan Kapasitas Komunitas</div>
-            <div class="desc" style="color: rgba(255,255,255,0.92);">Training + TA + CBO development</div>
-          </div>
-        </div>
 
-        <h2 class="section-h2" style="margin-top:32px;">🌏 8 Grantees Regional — Sadar Hati dalam Network</h2>
-        <p style="font-size:13px; color:var(--slate); line-height:1.6; margin:4px 0 14px 0;">Ranking by Sadar Hati Top Performance Matrix — <strong>🥇 #1 Network leader</strong> (Sadar Hati) · <strong>🥈 multi-strength integrator</strong> (Glink Vietnam) · <strong>🥉 service breakthrough</strong> (Lighthouse Vietnam).</p>
-        <div style="overflow-x:auto;">
-        <table style="width:100%; border-collapse:collapse; margin:14px 0; font-size:12.5px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-          <thead>
-            <tr style="background:var(--clay); color:white;">
-              <th style="padding:12px 10px; text-align:left; font-weight: 700; letter-spacing: 0.3px;">Rank · Grantee</th>
-              <th style="padding:12px 10px; text-align:left; font-weight: 700; letter-spacing: 0.3px;">Negara</th>
-              <th style="padding:12px 10px; text-align:left; font-weight: 700; letter-spacing: 0.3px;">Specialization</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="background: linear-gradient(90deg, var(--gold-tint) 0%, white 100%); border-left: 4px solid #6b4d7a;">
-              <td style="padding:12px 10px; border-bottom:1px solid var(--border);"><strong style="color: #4e3859;">🥇 Sadar Hati 🏆</strong></td>
-              <td style="padding:12px 10px; border-bottom:1px solid var(--border);"><strong>🇮🇩 Indonesia</strong></td>
-              <td style="padding:12px 10px; border-bottom:1px solid var(--border);"><strong>Community-led HR · Network leader 18 MOU · Top-2 integrasi HIV+MH+HR</strong></td>
-            </tr>
-            <tr style="background: var(--cream-warm);">
-              <td style="padding:10px; border-bottom:1px solid var(--border);">🥈 Glink</td>
-              <td style="padding:10px; border-bottom:1px solid var(--border);">🇻🇳 Vietnam</td>
-              <td style="padding:10px; border-bottom:1px solid var(--border);">Model hibrida online+offline · 2.588 peserta · IMS diagnosis 90%</td>
-            </tr>
-            <tr style="background: var(--cream-warm);">
-              <td style="padding:10px; border-bottom:1px solid var(--border);">🥉 Lighthouse</td>
-              <td style="padding:10px; border-bottom:1px solid var(--border);">🇻🇳 Vietnam</td>
-              <td style="padding:10px; border-bottom:1px solid var(--border);">164 artikel online · Helpline eksklusif · PEP breakthrough 648 kasus</td>
-            </tr>
-            <tr>
-              <td style="padding:10px; border-bottom:1px solid var(--border);">SCDI</td>
-              <td style="padding:10px; border-bottom:1px solid var(--border);">🇻🇳 Vietnam</td>
-              <td style="padding:10px; border-bottom:1px solid var(--border);">113 kampanye online · Top-2 substance assessment</td>
-            </tr>
-            <tr>
-              <td style="padding:10px; border-bottom:1px solid var(--border);">AloBoy</td>
-              <td style="padding:10px; border-bottom:1px solid var(--border);">🇻🇳 Vietnam</td>
-              <td style="padding:10px; border-bottom:1px solid var(--border);">121 kampanye digital · research lead</td>
-            </tr>
-            <tr>
-              <td style="padding:10px; border-bottom:1px solid var(--border);">PT Foundation</td>
-              <td style="padding:10px; border-bottom:1px solid var(--border);">🇲🇾 Malaysia</td>
-              <td style="padding:10px; border-bottom:1px solid var(--border);">Kekuatan offline · 1.648 peserta komunitas langsung</td>
-            </tr>
-            <tr>
-              <td style="padding:10px; border-bottom:1px solid var(--border);">HASH</td>
-              <td style="padding:10px; border-bottom:1px solid var(--border);">⏱ TBC</td>
-              <td style="padding:10px; border-bottom:1px solid var(--border);">Pelopor Facebook page khusus chemsex</td>
-            </tr>
-            <tr>
-              <td style="padding:10px;">MHC</td>
-              <td style="padding:10px;">⏱ TBC</td>
-              <td style="padding:10px;">Top-4 cakupan service terbesar</td>
-            </tr>
-          </tbody>
-        </table>
-        </div>
-
-        <h2 class="section-h2" style="margin-top:24px;">🎯 Hasil Utama (Tujuan Evaluasi)</h2>
-        <div style="background:var(--cream-warm); border-left:4px solid var(--sage); padding:14px 20px; border-radius:6px; margin:14px 0; font-size:13px; line-height:1.6;">
-          <strong>1. Menilai tingkat pencapaian kegiatan</strong> dibandingkan dengan rencana yang telah ditetapkan.<br>
-          <strong>2. Mengukur hasil dan dampak nyata</strong> dari model-model intervensi.
-        </div>
-
-        <div class="source-attr" style="margin-top:18px;">📄 <strong>Source:</strong> HMU Presentation 3-4 Juni 2026 · Companion files: <em>ViiV_HMU_Sadar_Hati_Position_Synthesis_28062026.docx</em> + <em>ViiV_Regional_KPI_HMU_Report_28062026.xlsx</em> di Knowledge Assets SAHA / 03_Donor_and_Partnership_Archive / ViiV_Healthcare /</div>
-      </section>
-
-      <section class="section" id="l2-A-budget">
-        <div class="hero"><div class="eyebrow">Layer 2 · Donor A · ViiV Healthcare</div><h1>Budget &amp; Kemitraan Track Record</h1><p class="lede">Tiga grant cycle ViiV Healthcare dari <strong>2021 hingga 2026</strong> — total cumulative <strong>GBP 274.301 ≈ Rp 6,64 Miliar</strong>. Plus <strong>🏆 Akreditasi B Kemensos RI 2024-2027</strong> — institutional capacity recognition. Data shared Mba Watiek 28 Juni 2026.</p></div>
-
-        <!-- Dual Hero: Total Cumulative + Akreditasi Badge -->
-        <div style="display:grid; grid-template-columns: 1.4fr 1fr; gap:18px; margin:18px 0;">
-          <div style="background:linear-gradient(135deg, var(--clay) 0%, var(--clay-deep) 100%); color:white; border-radius:12px; padding:26px;">
-            <div style="font-size:11px; letter-spacing:1.6px; text-transform:uppercase; opacity:0.85; font-weight:700;">ViiV Healthcare · Cumulative Investment</div>
-            <div style="font-family:'Lora', Georgia, serif; font-size:42px; font-weight:700; line-height:1; margin:10px 0;">GBP 274.301</div>
-            <div style="font-size:15px; line-height:1.5; opacity:0.95;"><strong>≈ Rp 6,64 Miliar</strong> across <strong>3 grant cycles</strong> 2021-2026 · sustained partnership 6 tahun · multi-program continuity</div>
-          </div>
-
-          <div style="background:linear-gradient(135deg, #6b4d7a 0%, #543c60 100%); color:white; border-radius:12px; padding:26px; position:relative; overflow:hidden;">
-            <div style="position:absolute; top:-20px; right:-20px; width:100px; height:100px; background:radial-gradient(circle, rgba(255,255,255,0.18) 0%, transparent 70%); border-radius:50%;"></div>
-            <div style="position:relative;">
-              <div style="font-size:11px; letter-spacing:1.6px; text-transform:uppercase; opacity:0.9; font-weight:700;">🏆 Akreditasi Kemensos RI</div>
-              <div style="font-family:'Lora', Georgia, serif; font-size:62px; font-weight:700; line-height:1; margin:10px 0;">B</div>
-              <div style="font-size:13px; line-height:1.5; opacity:0.97;">Periode <strong>2024-2027</strong> · Kementerian Sosial Republik Indonesia · institutional capacity + tata kelola + standar nasional</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3 Grants Timeline · Multi-Year Visual -->
-        <h2 class="section-h2" style="margin-top:30px;">📅 Tiga Grant Cycle ViiV Healthcare 2021-2026</h2>
-        <p style="font-size:13px; color:var(--slate); line-height:1.6; margin:8px 0 18px 0; font-style:italic;">Setiap grant punya fokus berbeda tapi saling kontinu — dari community response (JARING), penguatan inisiatif (Amplify Impact), ke specialized Harm Reduction Chemsex (Innovator Program).</p>
-
-        <!-- Grant 1: Proyek JARING -->
-        <div style="background:linear-gradient(135deg, #ffffff 0%, #fbf7f2 100%); border:1.5px solid var(--clay); border-left:5px solid var(--clay); border-radius:12px; padding:22px; margin:14px 0;">
-          <div style="display:grid; grid-template-columns: auto 1fr auto; gap:20px; align-items:center;">
-            <div style="background:linear-gradient(135deg, var(--clay) 0%, var(--clay-deep) 100%); color:white; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; box-shadow:0 4px 12px rgba(168,50,68,0.32);">🌐</div>
-            <div>
-              <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
-                <span style="background:var(--clay); color:white; padding:3px 10px; border-radius:4px; font-size:11px; font-weight:800; letter-spacing:1px;">2021 – 2023</span>
-                <strong style="font-family:'Lora', Georgia, serif; font-size:20px; color:var(--clay-deep);">Proyek JARING</strong>
-              </div>
-              <div style="font-size:13px; color:var(--navy); line-height:1.6;">Memperkuat <strong>respons berbasis komunitas</strong> + pemberdayaan kelompok rentan via peningkatan literasi · kesadaran kesehatan · inklusi sosial · pengurangan stigma melalui pendidikan + pengorganisasian masyarakat.</div>
-            </div>
-            <div style="text-align:right; min-width:130px;">
-              <div style="font-family:'Lora', Georgia, serif; font-size:24px; font-weight:700; color:var(--clay-deep); line-height:1;">GBP 158.634</div>
-              <div style="font-size:12px; color:var(--slate); margin-top:3px; font-weight:600;">≈ Rp 3,83 Miliar</div>
-              <div style="font-size:10px; color:var(--slate); margin-top:2px; font-style:italic;">~3 tahun · grant terbesar</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Grant 2: Amplify Impact -->
-        <div style="background:linear-gradient(135deg, #ffffff 0%, #f3eef7 100%); border:1.5px solid #6b4d7a; border-left:5px solid #6b4d7a; border-radius:12px; padding:22px; margin:14px 0;">
-          <div style="display:grid; grid-template-columns: auto 1fr auto; gap:20px; align-items:center;">
-            <div style="background:linear-gradient(135deg, #6b4d7a 0%, #543c60 100%); color:white; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; box-shadow:0 4px 12px rgba(107,77,122,0.36);">📣</div>
-            <div>
-              <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
-                <span style="background:#6b4d7a; color:white; padding:3px 10px; border-radius:4px; font-size:11px; font-weight:800; letter-spacing:1px;">2024</span>
-                <strong style="font-family:'Lora', Georgia, serif; font-size:20px; color:#4e3859;">Amplify Impact</strong>
-              </div>
-              <div style="font-size:13px; color:var(--navy); line-height:1.6;">Penguatan <strong>inisiatif yang dipimpin komunitas</strong> dalam meningkatkan kesadaran · advokasi · partisipasi masyarakat terhadap isu sosial &amp; kesehatan via penguatan kapasitas + pemberdayaan komunitas + komunikasi strategis.</div>
-            </div>
-            <div style="text-align:right; min-width:130px;">
-              <div style="font-family:'Lora', Georgia, serif; font-size:24px; font-weight:700; color:#4e3859; line-height:1;">GBP 9.748,96</div>
-              <div style="font-size:12px; color:var(--slate); margin-top:3px; font-weight:600;">≈ Rp 235 Juta</div>
-              <div style="font-size:10px; color:var(--slate); margin-top:2px; font-style:italic;">1 tahun · pilot &amp; bridge</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Grant 3: Innovator Program HR Chemsex (CURRENT) -->
-        <div style="background:linear-gradient(135deg, #ffffff 0%, #f9f5fc 100%); border:1.5px solid #6b4d7a; border-left:5px solid #6b4d7a; border-radius:12px; padding:22px; margin:14px 0; position:relative;">
-          <div style="position:absolute; top:14px; right:18px; background:#6b4d7a; color:white; padding:3px 10px; border-radius:4px; font-size:9.5px; font-weight:800; letter-spacing:1px;">🟢 ACTIVE</div>
-          <div style="display:grid; grid-template-columns: auto 1fr auto; gap:20px; align-items:center;">
-            <div style="background:linear-gradient(135deg, #6b4d7a 0%, #4d3858 100%); color:white; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; box-shadow:0 4px 12px rgba(107,77,122,0.36);">🛡️</div>
-            <div>
-              <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
-                <span style="background:#6b4d7a; color:white; padding:3px 10px; border-radius:4px; font-size:11px; font-weight:800; letter-spacing:1px;">2024 – 2026</span>
-                <strong style="font-family:'Lora', Georgia, serif; font-size:20px; color:#4d3858;">Innovator Program · Harm Reduction Chemsex</strong>
-              </div>
-              <div style="font-size:13px; color:var(--navy); line-height:1.6;">Memperkuat pendekatan <strong>pengurangan dampak buruk (harm reduction) berbasis komunitas</strong> terkait chemsex via penguatan kapasitas · dukungan sebaya · pelibatan komunitas — meningkatkan akses informasi, mengurangi risiko kesehatan &amp; sosial, mendorong intervensi <strong>inklusif &amp; bebas stigma</strong>.</div>
-            </div>
-            <div style="text-align:right; min-width:140px; padding-top:22px;">
-              <div style="font-family:'Lora', Georgia, serif; font-size:24px; font-weight:700; color:#4d3858; line-height:1;">GBP 105.918,51</div>
-              <div style="font-size:12px; color:var(--slate); margin-top:3px; font-weight:600;">≈ Rp 2,56 Miliar</div>
-              <div style="font-size:10px; color:var(--slate); margin-top:2px; font-style:italic;">~2 tahun · current focus</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Akreditasi B Kemensos Honor Box -->
-        <div style="background:linear-gradient(135deg, #f3eef7 0%, #fbf7f2 100%); border:2px solid #6b4d7a; border-radius:14px; padding:22px 26px; margin:24px 0; position:relative; overflow:hidden;">
-          <div style="position:absolute; top:-30px; right:-30px; width:140px; height:140px; background:radial-gradient(circle, rgba(107,77,122,0.16) 0%, transparent 70%); border-radius:50%;"></div>
-          <div style="position:relative; display:grid; grid-template-columns: auto 1fr; gap:22px; align-items:center;">
-            <div style="background:linear-gradient(135deg, #6b4d7a 0%, #543c60 100%); color:white; width:90px; height:90px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(107,77,122,0.36);">
-              <div style="text-align:center;">
-                <div style="font-size:14px; opacity:0.9;">🏛️</div>
-                <div style="font-family:'Lora', Georgia, serif; font-size:38px; font-weight:700; line-height:1;">B</div>
-              </div>
-            </div>
-            <div>
-              <div style="font-size:11px; letter-spacing:1.8px; text-transform:uppercase; color:#4e3859; font-weight:800; margin-bottom:4px;">🏆 Recognition Pemerintah</div>
-              <div style="font-family:'Lora', Georgia, serif; font-size:22px; font-weight:700; color:#4e3859; line-height:1.2; margin-bottom:8px;">Akreditasi B · Kementerian Sosial Republik Indonesia</div>
-              <div style="font-size:13px; color:var(--navy); line-height:1.6;">Periode <strong>2024-2027</strong> · pengakuan resmi atas <strong>kapasitas kelembagaan · tata kelola organisasi · komitmen penyelenggaraan program &amp; layanan kesejahteraan sosial</strong> yang memenuhi standar nasional. Strategic credential untuk donor outreach + government partnerships.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Activity-Level Budget — still pending granular data -->
-        <h2 class="section-h2" style="margin-top:30px;">💼 Per-Activity Budget Breakdown · Current Grant 2024-2026</h2>
-        <div style="background:var(--cream-warm); border:1px dashed #6b4d7a; border-radius:8px; padding:14px 18px; margin:14px 0; font-size:12.5px; color:var(--navy); line-height:1.55;">
-          <strong>⏳ Pending Mba Watiek:</strong> activity-level breakdown (Outreach · Testing · MH Counseling · ADHA Support · Operational) — bar visualization di bawah adalah <strong>placeholder UI demo</strong>. Akan di-populate real-time saat Mba Watiek share contract financial template.
-        </div>
-        <div class="budget-row"><div class="item-name">Outreach &amp; Penjangkauan Chemsex</div><div class="bar-track"><div class="bar-fill bf-outreach" style="width:72%"></div></div><div class="bar-percent">72%</div></div>
-        <div class="budget-row"><div class="item-name">Testing HIV/IMS/Hep</div><div class="bar-track"><div class="bar-fill bf-testing" style="width:58%"></div></div><div class="bar-percent">58%</div></div>
-        <div class="budget-row"><div class="item-name">Mental Health Counseling</div><div class="bar-track"><div class="bar-fill bf-mh" style="width:41%"></div></div><div class="bar-percent">41%</div></div>
-        <div class="budget-row"><div class="item-name">ADHA Support</div><div class="bar-track"><div class="bar-fill bf-adha" style="width:88%"></div></div><div class="bar-percent">88%</div></div>
-        <div class="budget-row"><div class="item-name">Operational &amp; Staff</div><div class="bar-track"><div class="bar-fill bf-ops" style="width:50%"></div></div><div class="bar-percent">50%</div></div>
-
-        <div class="source-attr" style="margin-top:18px;">📋 <strong>Source:</strong> Data 3 grants + Akreditasi B Kemensos = shared by Mba Watiek via WhatsApp 28 Juni 2026 (20:00 WIB). Companion file: <code>Knowledge Assets SAHA / 03_Donor_and_Partnership_Archive / ViiV_Healthcare / Feedback_Mba_Watiek_Round1_ViiV_Historical_28062026.docx</code>. Activity-level breakdown menunggu Mba Watiek share contract original + financial reporting template.</div>
-      </section>
-
-      <section class="section" id="l2-A-kpi">
-        <div class="hero"><div class="eyebrow">Layer 2 · Donor A · ViiV Healthcare · Data Aktual Program Chemsex (REDCap M&amp;E)</div><h1>Monitoring &amp; Evaluation (M&amp;E) — Data Aktual Sadar Hati</h1><p class="lede">Berbeda dari agregat regional 8-grantee, angka di halaman ini adalah <strong>data milik Sadar Hati sendiri</strong> — ditarik langsung dari sistem <strong>monitoring REDCap M&amp;E</strong> program Chemsex, bukan hasil penjumlahan lintas-grantee. Periode utama <strong>2025–2026 (Jul 2025–Jun 2026)</strong>, dengan pembanding tahun <strong>2024</strong>. Semua angka bersifat agregat (nol PII).</p></div>
-
-        <style>
-          /* Cascade flow visualization */
-          .cascade-flow { margin: 18px 0; padding: 24px; background: white; border: 1px solid var(--border); border-radius: 12px; }
-          .cascade-step { display: grid; grid-template-columns: 1fr 200px; gap: 24px; align-items: center; margin: 10px 0; }
-          .cascade-step .bar-wrap { background: rgba(0,0,0,0.04); border-radius: 8px; height: 56px; display: flex; align-items: center; justify-content: flex-start; position: relative; overflow: hidden; }
-          .cascade-step .bar-fill { height: 100%; background: linear-gradient(90deg, var(--clay) 0%, var(--clay-deep) 100%); display: flex; align-items: center; padding: 0 18px; color: white; font-family: 'Lora', Georgia, serif; font-weight: 700; font-size: 22px; letter-spacing: 0.3px; min-width: 80px; transition: width 0.4s; }
-          .cascade-step.peak .bar-fill { background: linear-gradient(90deg, #94395c 0%, #7e3050 100%); }
-          .cascade-step.success .bar-fill { background: linear-gradient(90deg, var(--sage) 0%, var(--sage-deep) 100%); }
-          .cascade-step .meta { font-size: 12.5px; color: var(--navy); line-height: 1.4; }
-          .cascade-step .meta strong { display: block; font-size: 13px; color: var(--clay-deep); margin-bottom: 3px; }
-          .cascade-arrow { display: flex; align-items: center; gap: 12px; padding-left: 18px; font-size: 11.5px; color: var(--slate); font-style: italic; margin: -2px 0 -2px 0; }
-          .cascade-arrow .pct { background: var(--cream-warm); padding: 3px 10px; border-radius: 12px; font-style: normal; font-weight: 700; color: var(--clay-deep); font-size: 12px; }
-          .cascade-arrow.hero .pct { background: var(--gold-tint); color: #4e3859; }
-          .cascade-arrow.success .pct { background: var(--sage-light); color: var(--sage-deep); }
-        </style>
-
-        <h2 class="section-h2">🩺 Kaskade HIV Sadar Hati — Dari Skrining ke ARV</h2>
-        <p style="font-size:13px; color:var(--slate); line-height:1.6; margin:4px 0 14px 0;">Alur nyata dari <strong>4.001 skrining Chemsex</strong> sampai <strong>22 orang mulai ARV</strong>. Setiap anak panah menampilkan proporsi terhadap langkah sebelumnya — dihitung langsung dari data REDCap <strong>Sadar Hati sendiri</strong> (bukan agregat regional).</p>
-
-        <div class="cascade-flow">
-
-          <div class="cascade-step">
-            <div class="bar-wrap"><div class="bar-fill" style="width:100%;">4.001</div></div>
-            <div class="meta"><strong>Screening Chemsex</strong>Total skrining Chemsex 2025–2026</div>
-          </div>
-          <div class="cascade-arrow"><span class="pct">↓ 30,8%</span> menjalani tes HIV (1.232 dari 4.001)</div>
-
-          <div class="cascade-step">
-            <div class="bar-wrap"><div class="bar-fill" style="width:30.8%;">1.232</div></div>
-            <div class="meta"><strong>Test HIV</strong>1.211 negatif · 21 reaktif</div>
-          </div>
-          <div class="cascade-arrow"><span class="pct">↓ 1,7%</span> hasil reaktif (21 dari 1.232)</div>
-
-          <div class="cascade-step">
-            <div class="bar-wrap"><div class="bar-fill" style="width:5%;">21</div></div>
-            <div class="meta"><strong>Reaktif = HIV+ dipastikan</strong>21 reaktif, 21 dikonfirmasi positif — konsisten (21 = 21)</div>
-          </div>
-          <div class="cascade-arrow success"><span class="pct">✓ linkage penuh</span> 23 dirujuk ARV → 22 mulai ARV</div>
-
-          <div class="cascade-step success">
-            <div class="bar-wrap"><div class="bar-fill" style="width:5.2%;">22</div></div>
-            <div class="meta"><strong>Mulai ARV ✓</strong>Seluruh kasus positif tertaut ke pengobatan</div>
-          </div>
-
-        </div>
-        <p style="font-size:11px; color:var(--slate); font-style:italic; margin:2px 4px 0;">Bar 21 &amp; 22 memakai lebar minimum agar angka tetap terbaca — proporsi sebenarnya sangat kecil (±0,5% dari skrining). Persentase anak panah dihitung akurat dari angka.</p>
-
-        <!-- Hero stat: Intervensi Chemsex 3.582 -->
-        <div class="hero-stat" style="margin-top:20px;">
-          <div>
-            <div class="big-label">Klien Menerima Intervensi Chemsex · 2025–2026</div>
-            <div class="big-num">3.582</div>
-          </div>
-          <div class="side">
-            <h3>3.582 klien menerima intervensi Chemsex — melonjak ~2,8× dari 2024</h3>
-            <p>Tahun 2024 tercatat <strong>1.260</strong> klien; di 2025–2026 naik ke <strong>3.582</strong> — pertumbuhan <strong>+184%</strong> (≈2,8× lipat) hanya dalam satu siklus program.</p>
-            <p>Ini murni angka <strong>Sadar Hati sendiri</strong>, bukan agregat regional — bukti perluasan jangkauan intervensi Chemsex yang nyata di Malang.</p>
-            <div class="citation">📊 Sumber: REDCap M&amp;E Monitoring Sadar Hati · Grand Total 2025–2026</div>
-          </div>
-        </div>
-
-        <!-- Pertumbuhan vs 2024 -->
-        <h2 class="section-h2" style="margin-top:32px;">📊 Lompatan vs 2024 — Tiga Indikator Kunci</h2>
-        <div style="background:white; border:1px solid var(--border); border-radius:12px; padding:8px 22px 12px; margin:14px 0;">
-          <div style="display:grid; grid-template-columns:170px 1fr auto; gap:14px; align-items:center; padding:12px 0; border-bottom:1px solid var(--slate-lighter);">
-            <div style="font-size:12.5px; font-weight:700; color:var(--navy);">🧪 Test HIV</div>
-            <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;"><span style="font-size:12px; color:var(--slate);">2024: <strong style="color:var(--navy-soft);">885</strong></span><span style="color:var(--clay); font-weight:700;">→</span><span style="font-size:16px; font-weight:700; color:var(--clay-deep); font-family:'Lora',Georgia,serif;">1.232</span></div>
-            <div style="background:var(--sage-light); color:var(--sage-deep); font-weight:700; font-size:12px; padding:4px 11px; border-radius:12px; white-space:nowrap;">+39%</div>
-          </div>
-          <div style="display:grid; grid-template-columns:170px 1fr auto; gap:14px; align-items:center; padding:12px 0; border-bottom:1px solid var(--slate-lighter);">
-            <div style="font-size:12.5px; font-weight:700; color:var(--navy);">💉 Intervensi Chemsex</div>
-            <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;"><span style="font-size:12px; color:var(--slate);">2024: <strong style="color:var(--navy-soft);">1.260</strong></span><span style="color:var(--clay); font-weight:700;">→</span><span style="font-size:16px; font-weight:700; color:var(--clay-deep); font-family:'Lora',Georgia,serif;">3.582</span></div>
-            <div style="background:var(--sage-light); color:var(--sage-deep); font-weight:700; font-size:12px; padding:4px 11px; border-radius:12px; white-space:nowrap;">+184%</div>
-          </div>
-          <div style="display:grid; grid-template-columns:170px 1fr auto; gap:14px; align-items:center; padding:12px 0;">
-            <div style="font-size:12.5px; font-weight:700; color:var(--navy);">🛡️ Kondom</div>
-            <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;"><span style="font-size:12px; color:var(--slate);">2024: <strong style="color:var(--navy-soft);">5.525</strong></span><span style="color:var(--clay); font-weight:700;">→</span><span style="font-size:16px; font-weight:700; color:var(--clay-deep); font-family:'Lora',Georgia,serif;">16.399</span></div>
-            <div style="background:var(--sage-light); color:var(--sage-deep); font-weight:700; font-size:12px; padding:4px 11px; border-radius:12px; white-space:nowrap;">+197%</div>
-          </div>
-        </div>
-
-        <!-- Tren bulanan -->
-        <h2 class="section-h2" style="margin-top:32px;">📈 Tren Bulanan — Dampingan Didampingi (Kontak-Bulan)</h2>
-        <p style="font-size:13px; color:var(--slate); line-height:1.6; margin:4px 0 14px 0;">Sebelas bulan berjalan (Jul 2025–Mei 2026). Total = <strong>3.983 kontak-bulan</strong> = Grand Total 2025–2026; <strong>Jun 2026 belum masuk</strong> sistem. Puncak di <strong>Apr 2026 (469)</strong>.</p>
-
-        <div style="background:white; border:1px solid var(--border); border-radius:12px; padding:24px 20px 16px; margin:14px 0;">
-          <div style="display:flex; align-items:flex-end; gap:8px; min-height:180px;">
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:700; color:var(--clay-deep); margin-bottom:5px;">230</div><div style="width:100%; max-width:42px; height:74px; background:linear-gradient(180deg,var(--clay) 0%,var(--clay-deep) 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:var(--slate); margin-top:6px; white-space:nowrap;">Jul'25</div></div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:700; color:var(--clay-deep); margin-bottom:5px;">339</div><div style="width:100%; max-width:42px; height:108px; background:linear-gradient(180deg,var(--clay) 0%,var(--clay-deep) 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:var(--slate); margin-top:6px; white-space:nowrap;">Agu'25</div></div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:700; color:var(--clay-deep); margin-bottom:5px;">331</div><div style="width:100%; max-width:42px; height:106px; background:linear-gradient(180deg,var(--clay) 0%,var(--clay-deep) 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:var(--slate); margin-top:6px; white-space:nowrap;">Sep'25</div></div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:700; color:var(--clay-deep); margin-bottom:5px;">385</div><div style="width:100%; max-width:42px; height:123px; background:linear-gradient(180deg,var(--clay) 0%,var(--clay-deep) 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:var(--slate); margin-top:6px; white-space:nowrap;">Okt'25</div></div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:700; color:var(--clay-deep); margin-bottom:5px;">293</div><div style="width:100%; max-width:42px; height:94px; background:linear-gradient(180deg,var(--clay) 0%,var(--clay-deep) 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:var(--slate); margin-top:6px; white-space:nowrap;">Nov'25</div></div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:700; color:var(--clay-deep); margin-bottom:5px;">358</div><div style="width:100%; max-width:42px; height:115px; background:linear-gradient(180deg,var(--clay) 0%,var(--clay-deep) 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:var(--slate); margin-top:6px; white-space:nowrap;">Des'25</div></div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:700; color:var(--clay-deep); margin-bottom:5px;">425</div><div style="width:100%; max-width:42px; height:136px; background:linear-gradient(180deg,var(--clay) 0%,var(--clay-deep) 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:var(--slate); margin-top:6px; white-space:nowrap;">Jan'26</div></div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:700; color:var(--clay-deep); margin-bottom:5px;">406</div><div style="width:100%; max-width:42px; height:130px; background:linear-gradient(180deg,var(--clay) 0%,var(--clay-deep) 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:var(--slate); margin-top:6px; white-space:nowrap;">Feb'26</div></div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:700; color:var(--clay-deep); margin-bottom:5px;">341</div><div style="width:100%; max-width:42px; height:109px; background:linear-gradient(180deg,var(--clay) 0%,var(--clay-deep) 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:var(--slate); margin-top:6px; white-space:nowrap;">Mar'26</div></div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:800; color:#543c60; margin-bottom:5px;">469 ★</div><div style="width:100%; max-width:42px; height:150px; background:linear-gradient(180deg,#6b4d7a 0%,#543c60 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:#543c60; font-weight:700; margin-top:6px; white-space:nowrap;">Apr'26</div></div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:700; color:var(--clay-deep); margin-bottom:5px;">406</div><div style="width:100%; max-width:42px; height:130px; background:linear-gradient(180deg,var(--clay) 0%,var(--clay-deep) 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:var(--slate); margin-top:6px; white-space:nowrap;">Mei'26</div></div>
-          </div>
-          <div style="border-top:1px dashed var(--slate-lighter); margin-top:14px; padding-top:12px; font-size:11.5px; color:var(--slate); font-style:italic;">Tinggi bar proporsional terhadap puncak Apr 2026 (469). Angka di atas tiap bar = nilai kontak-bulan aktual REDCap.</div>
-        </div>
-
-        <p style="font-size:13px; color:var(--slate); line-height:1.6; margin:18px 0 14px 0;">Tren <strong>Test HIV bulanan</strong> (Jul 2025–Mei 2026) — total = <strong>1.232 tes</strong>. Puncak di <strong>Mei 2026 (165)</strong>; sempat anjlok di <strong>Mar 2026 (35)</strong>.</p>
-
-        <div style="background:white; border:1px solid var(--border); border-radius:12px; padding:24px 20px 16px; margin:14px 0;">
-          <div style="display:flex; align-items:flex-end; gap:8px; min-height:160px;">
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:700; color:var(--sage-deep); margin-bottom:5px;">32</div><div style="width:100%; max-width:42px; height:25px; background:linear-gradient(180deg,var(--sage) 0%,var(--sage-deep) 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:var(--slate); margin-top:6px; white-space:nowrap;">Jul'25</div></div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:700; color:var(--sage-deep); margin-bottom:5px;">113</div><div style="width:100%; max-width:42px; height:89px; background:linear-gradient(180deg,var(--sage) 0%,var(--sage-deep) 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:var(--slate); margin-top:6px; white-space:nowrap;">Agu'25</div></div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:700; color:var(--sage-deep); margin-bottom:5px;">118</div><div style="width:100%; max-width:42px; height:93px; background:linear-gradient(180deg,var(--sage) 0%,var(--sage-deep) 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:var(--slate); margin-top:6px; white-space:nowrap;">Sep'25</div></div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:700; color:var(--sage-deep); margin-bottom:5px;">130</div><div style="width:100%; max-width:42px; height:102px; background:linear-gradient(180deg,var(--sage) 0%,var(--sage-deep) 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:var(--slate); margin-top:6px; white-space:nowrap;">Okt'25</div></div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:700; color:var(--sage-deep); margin-bottom:5px;">105</div><div style="width:100%; max-width:42px; height:83px; background:linear-gradient(180deg,var(--sage) 0%,var(--sage-deep) 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:var(--slate); margin-top:6px; white-space:nowrap;">Nov'25</div></div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:700; color:var(--sage-deep); margin-bottom:5px;">139</div><div style="width:100%; max-width:42px; height:110px; background:linear-gradient(180deg,var(--sage) 0%,var(--sage-deep) 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:var(--slate); margin-top:6px; white-space:nowrap;">Des'25</div></div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:700; color:var(--sage-deep); margin-bottom:5px;">140</div><div style="width:100%; max-width:42px; height:110px; background:linear-gradient(180deg,var(--sage) 0%,var(--sage-deep) 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:var(--slate); margin-top:6px; white-space:nowrap;">Jan'26</div></div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:700; color:var(--sage-deep); margin-bottom:5px;">158</div><div style="width:100%; max-width:42px; height:124px; background:linear-gradient(180deg,var(--sage) 0%,var(--sage-deep) 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:var(--slate); margin-top:6px; white-space:nowrap;">Feb'26</div></div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:700; color:var(--sage-deep); margin-bottom:5px;">35</div><div style="width:100%; max-width:42px; height:28px; background:linear-gradient(180deg,var(--sage) 0%,var(--sage-deep) 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:var(--slate); margin-top:6px; white-space:nowrap;">Mar'26</div></div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:700; color:var(--sage-deep); margin-bottom:5px;">97</div><div style="width:100%; max-width:42px; height:76px; background:linear-gradient(180deg,var(--sage) 0%,var(--sage-deep) 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:var(--slate); margin-top:6px; white-space:nowrap;">Apr'26</div></div>
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-size:11px; font-weight:800; color:#543c60; margin-bottom:5px;">165 ★</div><div style="width:100%; max-width:42px; height:130px; background:linear-gradient(180deg,#6b4d7a 0%,#543c60 100%); border-radius:5px 5px 0 0;"></div><div style="font-size:10px; color:#543c60; font-weight:700; margin-top:6px; white-space:nowrap;">Mei'26</div></div>
-          </div>
-          <div style="border-top:1px dashed var(--slate-lighter); margin-top:14px; padding-top:12px; font-size:11.5px; color:var(--slate); font-style:italic;">Tinggi bar proporsional terhadap puncak Mei 2026 (165). Semua nilai = jumlah tes HIV per bulan (REDCap).</div>
-        </div>
-
-        <!-- Reach cards -->
-        <h2 class="section-h2" style="margin-top:32px;">👥 Jangkauan (Reach) — Orang Unik vs Kontak-Bulan</h2>
-        <div class="cards" style="margin-top:14px;">
-          <div class="card"><div class="label">Dampingan Baru (Unik)</div><div class="value">1.648</div><div class="desc">Individu <strong>unik</strong> yang baru didampingi sepanjang 2025–2026</div></div>
-          <div class="card" style="background:var(--clay-tint); border-color:var(--clay);"><div class="label">Dampingan Didampingi</div><div class="value">3.983</div><div class="desc"><strong>Kontak-bulan</strong> — satu orang bisa dihitung berkali-kali; ≈2,4 kontak per orang unik</div></div>
-          <div class="card"><div class="label">Screening Chemsex</div><div class="value">4.001</div><div class="desc">Total skrining Chemsex — titik awal kaskade</div></div>
-          <div class="card"><div class="label">Dijangkau Melakukan Chemsex</div><div class="value">3.211</div><div class="desc">Teridentifikasi mempraktikkan chemsex</div></div>
-        </div>
-
-        <!-- Layanan HIV & PrEP cards -->
-        <h2 class="section-h2" style="margin-top:32px;">🧪 Layanan HIV &amp; PrEP</h2>
-        <div class="cards" style="margin-top:14px;">
-          <div class="card"><div class="label">Test HIV</div><div class="value">1.232</div><div class="desc">1.211 negatif · 21 reaktif</div></div>
-          <div class="card" style="background:var(--pink-tint); border-color:var(--clay);"><div class="label">HIV+ Dipastikan</div><div class="value">21</div><div class="desc">21 reaktif → 21 dikonfirmasi positif (konsisten)</div></div>
-          <div class="card" style="background:var(--sage-light); border-color:var(--sage);"><div class="label">Mulai ARV ✓</div><div class="value">22</div><div class="desc">23 dirujuk ARV → 22 memulai pengobatan (linkage penuh)</div></div>
-          <div class="card" style="background:var(--gold-tint); border-color:#6b4d7a;"><div class="label">PrEP Mulai</div><div class="value">131</div><div class="desc">131 dirujuk = 131 mulai (100% linkage) · PEP = 0</div></div>
-        </div>
-
-        <!-- IMS / Napza / Keswa cards -->
-        <h2 class="section-h2" style="margin-top:32px;">🩹 IMS · Napza · Kesehatan Mental</h2>
-        <div class="cards" style="margin-top:14px;">
-          <div class="card"><div class="label">Screening IMS</div><div class="value">1.221</div><div class="desc">21 butuh = 21 dirujuk = 21 menerima perawatan</div></div>
-          <div class="card"><div class="label">Assessment Napza (IRA)</div><div class="value">1.073</div><div class="desc">56 butuh perawatan · 12 dirujuk ke layanan</div></div>
-          <div class="card"><div class="label">Screening Keswa</div><div class="value">1.174</div><div class="desc">491 dukungan psikososial · 201 rujukan kesehatan jiwa</div></div>
-        </div>
-
-        <!-- Komoditas cards -->
-        <h2 class="section-h2" style="margin-top:32px;">📦 Distribusi Komoditas</h2>
-        <div class="cards" style="margin-top:14px;">
-          <div class="card" style="background:var(--clay-tint); border-color:var(--clay);"><div class="label">Kondom</div><div class="value">16.399</div><div class="desc">Komoditas dengan volume terbesar</div></div>
-          <div class="card"><div class="label">KIE (Materi Edukasi)</div><div class="value">3.069</div><div class="desc">Komunikasi, Informasi &amp; Edukasi</div></div>
-          <div class="card"><div class="label">Kaca Steril</div><div class="value">1.494</div><div class="desc">Alat pakai lebih aman (safer smoking)</div></div>
-          <div class="card"><div class="label">LipBalm</div><div class="value">1.188</div><div class="desc">Pelindung bibir — harm reduction chemsex</div></div>
-          <div class="card"><div class="label">Jarum Suntik</div><div class="value">886</div><div class="desc">Layanan alat suntik steril (LASS)</div></div>
-        </div>
-
-        <!-- Tes lain cards -->
-        <h2 class="section-h2" style="margin-top:32px;">🔬 Tes Kesehatan Lain</h2>
-        <div class="cards" style="margin-top:14px;">
-          <div class="card"><div class="label">Hepatitis C</div><div class="value">386</div><div class="desc">Skrining Hep-C</div></div>
-          <div class="card"><div class="label">TB</div><div class="value">188</div><div class="desc">Skrining tuberkulosis</div></div>
-          <div class="card"><div class="label">OraQuick</div><div class="value">77</div><div class="desc">Tes HIV mandiri berbasis oral</div></div>
-          <div class="card"><div class="label">KDS</div><div class="value">14</div><div class="desc">Kelompok Dukungan Sebaya</div></div>
-          <div class="card"><div class="label">Hepatitis B</div><div class="value">8</div><div class="desc">Skrining Hep-B</div></div>
-          <div class="card"><div class="label">PPIA</div><div class="value">3</div><div class="desc">Pencegahan Penularan Ibu ke Anak</div></div>
-        </div>
-
-        <!-- Catatan kualitas data -->
-        <div style="background:var(--gold-tint); border:1px solid #6b4d7a; border-left:5px solid #6b4d7a; border-radius:10px; padding:18px 22px; margin:26px 0 0;">
-          <div style="font-family:'Lora',Georgia,serif; font-weight:700; font-size:15px; color:var(--clay-deep); margin-bottom:10px;">⚠️ Catatan Kualitas Data — Transparansi Jujur</div>
-          <ul style="margin:0; padding-left:20px; font-size:12.5px; color:var(--navy-soft); line-height:1.75;">
-            <li><strong>Anomali input 2024:</strong> data 2024 mencatat <strong>HIV+ 59</strong> padahal <strong>reaktif hanya 23</strong> — secara logis mustahil (jumlah HIV+ tidak mungkin melebihi jumlah hasil reaktif). Ini indikasi kuat salah input di 2024. Sebagai pembanding, 2025–2026 konsisten: <strong>reaktif 21 = HIV+ 21</strong>.</li>
-            <li><strong>"Dampingan didampingi" bisa dobel-hitung:</strong> angka <strong>3.983</strong> adalah <strong>kontak-bulan</strong> (satu orang yang didampingi beberapa bulan dihitung berulang), berbeda dari <strong>1.648 orang unik</strong> baru. Rasio ≈ 2,4 kontak per orang unik — bukan 3.983 individu berbeda.</li>
-            <li><strong>Jun 2026 belum masuk:</strong> tren bulanan hanya mencakup Jul 2025–Mei 2026 (11 bulan); data Jun 2026 belum diinput saat laporan REDCap ditarik.</li>
-          </ul>
-        </div>
-
-        <div class="source-attr" style="margin-top:28px;">📄 <strong>Sumber:</strong> REDCap M&amp;E Monitoring Sadar Hati — periode <strong>2024</strong> &amp; <strong>2025–2026 (Jul 2025–Jun 2026)</strong>. 100% <strong>data Sadar Hati sendiri</strong> dari folder M&amp;E ViiV (bukan agregat regional / bukan data program lain). Seluruh angka bersifat agregat — nol PII, tidak ada nama/identitas individu ditampilkan.</div>
-      </section>
-
-      <section class="section" id="l2-A-achievement">
-        <div class="hero"><div class="eyebrow">Layer 2 · Donor A · ViiV Healthcare · Capaian Program Chemsex (REDCap)</div><h1>Capaian &amp; Highlight Program Chemsex</h1><p class="lede">Sorotan capaian <strong>nyata Sadar Hati</strong> dari REDCap M&amp;E program Chemsex — fokus pada <strong>lompatan skala</strong> &amp; <strong>kualitas layanan</strong>, periode <strong>2025–2026</strong> dengan pembanding <strong>2024</strong>. 100% data Sadar Hati sendiri (bukan agregat regional, bukan sumber lain).</p></div>
-
-        <h2 class="section-h2">🚀 Lompatan Skala — Dalam Satu Siklus Program</h2>
-        <p style="font-size:13px; color:var(--slate); line-height:1.6; margin:4px 0 16px 0;">Tiga indikator kunci naik tajam dari 2024 ke 2025–2026 — bukti perluasan jangkauan &amp; layanan Chemsex yang nyata di Malang.</p>
-
-        <div class="cards">
-          <div class="card" style="background:var(--clay-tint); border-color:var(--clay);">
-            <div class="label">🧠 Intervensi Chemsex</div>
-            <div class="value" style="color:var(--clay-deep);">3.582</div>
-            <div class="desc"><strong style="color:var(--clay-deep);">+184% (≈2,8×)</strong> · dari 1.260 (2024) → 3.582 (2025–2026)</div>
-          </div>
-          <div class="card" style="background:var(--sage-light); border-color:var(--sage);">
-            <div class="label">🧪 Test HIV</div>
-            <div class="value" style="color:var(--sage-deep);">1.232</div>
-            <div class="desc"><strong style="color:var(--sage-deep);">+39%</strong> · dari 885 (2024) → 1.232 (2025–2026)</div>
-          </div>
-          <div class="card" style="background:var(--gold-tint); border-color:#6b4d7a;">
-            <div class="label">🛡️ Kondom Terdistribusi</div>
-            <div class="value" style="color:#543c60;">16.399</div>
-            <div class="desc"><strong style="color:#543c60;">+197%</strong> · dari 5.525 (2024) → 16.399 (2025–2026)</div>
-          </div>
-        </div>
-
-        <h2 class="section-h2" style="margin-top:32px;">💯 Kualitas Kaskade — Linkage HIV ke Pengobatan</h2>
-
-        <div class="hero-stat sage" style="margin-top:8px;">
-          <div>
-            <div class="big-label">Temuan HIV+ tertaut ke ARV</div>
-            <div class="big-num">100%</div>
-          </div>
-          <div class="side">
-            <h3>Semua temuan positif masuk ke pengobatan</h3>
-            <p><strong>21 klien</strong> terkonfirmasi HIV+ (2025–2026) — <strong>seluruhnya dirujuk ke ARV</strong> (23 rujukan), dan <strong>22 klien telah memulai ARV</strong> (termasuk klien positif dari periode sebelumnya). Tidak ada temuan positif yang putus dari kaskade pengobatan.</p>
-            <div class="citation">📊 Sumber: REDCap M&amp;E Sadar Hati · Grand Total 2025–2026 — positif 21 · dirujuk ARV 23 · mulai ARV 22</div>
-          </div>
-        </div>
-
-        <h2 class="section-h2" style="margin-top:32px;">🧩 Model Layanan Terintegrasi — Bukan Sekadar Tes HIV</h2>
-        <p style="font-size:13px; color:var(--slate); line-height:1.6; margin:4px 0 16px 0;">Satu paket intervensi Chemsex mencakup HIV, IMS, Napza, dan Kesehatan Mental sekaligus — bukti pendekatan menyeluruh, bukan layanan medis dasar.</p>
-
-        <div class="cards">
-          <div class="card"><div class="label">Tes HIV</div><div class="value">1.232</div><div class="desc">skrining + tes HIV</div></div>
-          <div class="card"><div class="label">Screening IMS</div><div class="value">1.221</div><div class="desc">infeksi menular seksual</div></div>
-          <div class="card"><div class="label">Assessment Napza</div><div class="value">1.073</div><div class="desc">penilaian risiko (IRA)</div></div>
-          <div class="card" style="background:var(--pink-tint); border-color:var(--clay);"><div class="label">🧠 Screening Keswa</div><div class="value">1.174</div><div class="desc">491 dukungan psikososial · 201 rujukan jiwa</div></div>
-        </div>
-
-        <h2 class="section-h2" style="margin-top:32px;">🎯 Jangkauan Program</h2>
-
-        <div class="cards">
-          <div class="card"><div class="label">Dampingan Baru (Unik)</div><div class="value">1.648</div><div class="desc">individu baru didampingi sepanjang 2025–2026</div></div>
-          <div class="card"><div class="label">Screening Chemsex</div><div class="value">4.001</div><div class="desc">titik awal kaskade layanan</div></div>
-          <div class="card"><div class="label">Dijangkau Praktik Chemsex</div><div class="value">3.211</div><div class="desc">teridentifikasi mempraktikkan chemsex</div></div>
-          <div class="card"><div class="label">Klien Dapat Intervensi</div><div class="value">3.582</div><div class="desc">menerima paket intervensi Chemsex</div></div>
-        </div>
-
-        <div class="source-attr" style="margin-top:28px;">📄 <strong>Sumber:</strong> REDCap M&amp;E Monitoring Sadar Hati — periode <strong>2024</strong> &amp; <strong>2025–2026 (Jul 2025–Jun 2026)</strong>. 100% <strong>data Sadar Hati sendiri</strong> dari folder M&amp;E ViiV (bukan agregat regional 8-grantee / bukan data program lain). Seluruh angka agregat — nol PII. <em>Pengakuan eksternal (audit independen) diarsipkan terpisah di Rekam Jejak Institusi · Pengakuan Regional.</em></div>
-      </section>
 
       <!-- ============================================================== -->
       <!-- 📜 HISTORIKAL DONOR — Data Statis (Single Page per Donor)       -->
       <!-- ============================================================== -->
 
       <!-- HISTORIKAL: Global Fund R4 + R8 -->
-      
 
       <!-- HISTORIKAL: HCPI AusAID -->
-      
 
       <!-- HISTORIKAL: AIESEC LC UB -->
-      
 
       <!-- ============================================================== -->
       <!-- LAPAS Kemenkumham DIPA 2023 · Historikal Donor (Government)    -->
       <!-- PORTFOLIO-GRADE · Actual data dari REHAB LAPAS 2023 dossier    -->
       <!-- ============================================================== -->
-      
 
       <!-- ============================================================== -->
       <!-- IPWL · Kemensos ATENSI · Historikal Donor (Government Direct)  -->
       <!-- PORTFOLIO-GRADE · Kredensial Aktif · Aggregate-only (no PII)   -->
       <!-- ============================================================== -->
-      
 
       <!-- ============================================================== -->
       <!-- Riwayat Grant ViiV Healthcare · JARING → Amplify → CHEMSEX      -->
       <!-- ============================================================== -->
-      
 
       <!-- ============================================================== -->
       <!-- BNN PABM 2011–2012 · Pemulihan Adiksi Berbasis Masyarakat       -->
       <!-- ============================================================== -->
-      
 
       <!-- ============================================================== -->
       <!-- SUM · USAID 2011–2012 · Rekonstruksi Naratif (tanpa dok primer) -->
       <!-- ============================================================== -->
-      
 
       <!-- ============================================================== -->
       <!-- Pipeline Pendanaan · Matriks 13+ Donor Diversifikasi            -->
       <!-- ============================================================== -->
-      <section class="section" id="l2-pipeline-matrix">
-        <div class="hero">
-          <div class="eyebrow">Layer 2 · Pipeline Pendanaan · Strategic Diversification Intelligence · INTERNAL</div>
-          <h1>🎯 Matriks 13+ Donor Pipeline</h1>
-          <p class="lede">Konsolidasi <strong>13+ donor opportunity</strong> yang Sadar Hati eksplor atau aktif kerjakan lintas 2020-2026. Bukti <strong>multi-stream diversification strategy</strong> yang membuat institusi tidak tergantung single donor — pelajaran yang dipertahankan sejak <em>SUM cliff 2013</em>. Tier 🔒 INTERNAL — strategic intelligence untuk Mba Watiek + Pengurus.</p>
-        </div>
-
-        <!-- HERO: Pipeline Diversification -->
-        <div class="hero-stat" style="background: linear-gradient(135deg, #3a4553 0%, #232b36 100%);">
-          <div>
-            <div class="big-label">Pipeline Diversification</div>
-            <div class="big-num" style="font-size: 56px;">13+</div>
-            <div style="font-size: 14px; margin-top: 6px; opacity: 0.95;">Donor opportunity tracked 2020-2026</div>
-          </div>
-          <div class="side">
-            <h3>Anti Single-Donor Trap · Strategic Resilience</h3>
-            <p>Setelah lessons SUM cliff 2013 (USAID pull-out triggered multi-role staff strain), Sadar Hati membangun habit aktif <strong>track multiple funder opportunities</strong>. Walaupun tidak semua terealisasi, pipeline ini = <strong>strategic resilience asset</strong> yang ready aktif saat satu donor expire.</p>
-            <p>Mix 4 kategori: <strong>International Foundation · Domestic CSR · Government Direct · Embassy/Diplomatic Grant</strong>.</p>
-            <div class="citation">📊 Source: 6-agent deep-dive scan Files SAHA Mba Watiek Drive · CLAUDE.md institutional memory Round 2 (28 Jun 2026)</div>
-          </div>
-        </div>
-
-        <!-- 13+ Donor Matrix Table -->
-        <h2 class="section-h2" style="margin-top:32px;">📊 Pipeline Matrix · 13+ Donor Tracked</h2>
-        <p style="font-size:13px; color:var(--slate); line-height:1.6; margin:4px 0 14px 0;">Diurutkan berdasarkan urgensi tindak lanjut — dari yang sedang aktif sampai historis sebagai pijakan track record. Status: 🟢 <strong>aktif/ongoing</strong> · 🟠 <strong>applied/awaiting</strong> · 🔵 <strong>explored/relationship</strong> · ⚪ <strong>historical/closed</strong>.</p>
-
-        <!-- Status Distribution Bar (4-segment proportional) -->
-        <div style="display:flex; align-items:stretch; gap:0; margin:16px 0 20px 0; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.06); font-size:11.5px; font-weight:700;">
-          <div style="background:linear-gradient(135deg, #6b4d7a 0%, #4e3859 100%); color:white; padding:12px 14px; flex:3; text-align:center;">
-            🟢 <span style="font-size:13px;">ACTIVE · 3</span>
-          </div>
-          <div style="background:linear-gradient(135deg, #c47a3b 0%, #9a5c26 100%); color:white; padding:12px 14px; flex:2; text-align:center;">
-            🟠 <span style="font-size:13px;">APPLIED · 2</span>
-          </div>
-          <div style="background:linear-gradient(135deg, #4f7ba8 0%, #355a82 100%); color:white; padding:12px 14px; flex:6; text-align:center;">
-            🔵 <span style="font-size:13px;">EXPLORED · 6</span>
-          </div>
-          <div style="background:linear-gradient(135deg, #8a8a8a 0%, #5e5e5e 100%); color:white; padding:12px 14px; flex:3; text-align:center;">
-            ⚪ <span style="font-size:13px;">HISTORICAL · 3</span>
-          </div>
-        </div>
-
-        <div style="overflow-x: auto; margin: 14px 0;">
-          <table style="width:100%; border-collapse:collapse; font-size:12px; background:white; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
-            <thead>
-              <tr style="background:linear-gradient(135deg, #3a4553 0%, #232b36 100%); color:white;">
-                <th style="padding:10px 12px; text-align:left; font-weight:700; letter-spacing:0.3px;">#</th>
-                <th style="padding:10px 12px; text-align:left; font-weight:700; letter-spacing:0.3px;">Donor / Funder</th>
-                <th style="padding:10px 12px; text-align:left; font-weight:700; letter-spacing:0.3px;">Kategori</th>
-                <th style="padding:10px 12px; text-align:left; font-weight:700; letter-spacing:0.3px;">Periode/Year</th>
-                <th style="padding:10px 12px; text-align:left; font-weight:700; letter-spacing:0.3px;">Status</th>
-                <th style="padding:10px 12px; text-align:left; font-weight:700; letter-spacing:0.3px;">Strategic Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- ============== 🟢 ACTIVE SECTION ============== -->
-              <tr style="background:linear-gradient(90deg, #6b4d7a 0%, #a06b8a 100%); color:white;">
-                <td colspan="6" style="padding:8px 12px; font-weight:700; letter-spacing:1px; font-size:11px;">🟢 ACTIVE · Sedang berjalan / pendanaan aktif (3 donor)</td>
-              </tr>
-              <tr style="border-bottom:1px solid #e9ece1; background:#f4faf5;">
-                <td style="padding:10px 12px; font-weight:700; color:#6b4d7a;">1</td>
-                <td style="padding:10px 12px; font-weight:700;">ViiV Healthcare</td>
-                <td style="padding:10px 12px;">Int'l Pharma CSR</td>
-                <td style="padding:10px 12px;">2021–2026</td>
-                <td style="padding:10px 12px;">🟢 ACTIVE</td>
-                <td style="padding:10px 12px; color:var(--slate);">Current major · 3 grants cumulative GBP 274.301 ≈ Rp 6,64 M</td>
-              </tr>
-              <tr style="border-bottom:1px solid #e9ece1; background:#fbfdfc;">
-                <td style="padding:10px 12px; font-weight:700; color:#6b4d7a;">2</td>
-                <td style="padding:10px 12px; font-weight:700;">Kemensos ATENSI / IPWL</td>
-                <td style="padding:10px 12px;">Government Direct</td>
-                <td style="padding:10px 12px;">2021–sekarang</td>
-                <td style="padding:10px 12px;">🟢 ACTIVE</td>
-                <td style="padding:10px 12px; color:var(--slate);">Allocation per beneficiary register · 50+ klien NIK verified</td>
-              </tr>
-              <tr style="border-bottom:1px solid #e9ece1; background:#f4faf5;">
-                <td style="padding:10px 12px; font-weight:700; color:#6b4d7a;">3</td>
-                <td style="padding:10px 12px; font-weight:700;">PT. PPA + Jatim Fest <span style="font-size:10px; color:var(--slate);">(machinery+booth)</span></td>
-                <td style="padding:10px 12px;">Government BUMN</td>
-                <td style="padding:10px 12px;">2024</td>
-                <td style="padding:10px 12px;">🟢 ACTIVE</td>
-                <td style="padding:10px 12px; color:var(--slate);">Investasi alat 55,5 Jt + Jatim Fest 6,6 Jt = SAHAWOOD capacity boost</td>
-              </tr>
-
-              <!-- ============== 🟠 APPLIED SECTION ============== -->
-              <tr style="background:linear-gradient(90deg, #c47a3b 0%, #9a5c26 100%); color:white;">
-                <td colspan="6" style="padding:8px 12px; font-weight:700; letter-spacing:1px; font-size:11px;">🟠 APPLIED · Sudah submit aplikasi, menunggu hasil (2 donor)</td>
-              </tr>
-              <tr style="border-bottom:1px solid #f0e7d8; background:#faf3ec;">
-                <td style="padding:10px 12px; font-weight:700; color:#8a5220;">4</td>
-                <td style="padding:10px 12px; font-weight:700;">Global Fund JIP Re-Entry</td>
-                <td style="padding:10px 12px;">Int'l Foundation</td>
-                <td style="padding:10px 12px;">2024–2026 pursuit</td>
-                <td style="padding:10px 12px;">🟠 APPLIED</td>
-                <td style="padding:10px 12px; color:var(--slate);">Jangkar Indonesia Plus · Re-establish post R4 + R8 history</td>
-              </tr>
-              <tr style="border-bottom:1px solid #f0e7d8; background:#fbf7f2;">
-                <td style="padding:10px 12px; font-weight:700; color:#8a5220;">5</td>
-                <td style="padding:10px 12px; font-weight:700;">UNODC DAPC</td>
-                <td style="padding:10px 12px;">UN Agency</td>
-                <td style="padding:10px 12px;">2024</td>
-                <td style="padding:10px 12px;">🟠 APPLIED</td>
-                <td style="padding:10px 12px; color:var(--slate);">Drug Abuse Prevention &amp; Care · alignment dgn IPWL scope</td>
-              </tr>
-
-              <!-- ============== 🔵 EXPLORED SECTION ============== -->
-              <tr style="background:linear-gradient(90deg, #4f7ba8 0%, #7099c2 100%); color:white;">
-                <td colspan="6" style="padding:8px 12px; font-weight:700; letter-spacing:1px; font-size:11px;">🔵 EXPLORED · Sudah dijajaki / hubungan kerja terjalin (6 donor)</td>
-              </tr>
-              <tr style="border-bottom:1px solid #e3ecf5; background:#f5f8fb;">
-                <td style="padding:10px 12px; font-weight:700; color:#355a82;">6</td>
-                <td style="padding:10px 12px; font-weight:700;">YSE Singapore</td>
-                <td style="padding:10px 12px;">Int'l Foundation</td>
-                <td style="padding:10px 12px;">2022 pitch</td>
-                <td style="padding:10px 12px;">🔵 EXPLORED</td>
-                <td style="padding:10px 12px; color:var(--slate);">Young Social Entrepreneur · SAHAWOOD pitch · international showcase</td>
-              </tr>
-              <tr style="border-bottom:1px solid #e3ecf5; background:#fafcfd;">
-                <td style="padding:10px 12px; font-weight:700; color:#355a82;">7</td>
-                <td style="padding:10px 12px; font-weight:700;">IAS Youth Leader</td>
-                <td style="padding:10px 12px;">Int'l Conference</td>
-                <td style="padding:10px 12px;">2022–2024</td>
-                <td style="padding:10px 12px;">🔵 EXPLORED</td>
-                <td style="padding:10px 12px; color:var(--slate);">International AIDS Society · networking + reputation grant pathway</td>
-              </tr>
-              <tr style="border-bottom:1px solid #e3ecf5; background:#f5f8fb;">
-                <td style="padding:10px 12px; font-weight:700; color:#355a82;">8</td>
-                <td style="padding:10px 12px; font-weight:700;">Siap Siaga DFAT (Australia)</td>
-                <td style="padding:10px 12px;">Embassy/Diplomatic</td>
-                <td style="padding:10px 12px;">2023–2024</td>
-                <td style="padding:10px 12px;">🔵 EXPLORED</td>
-                <td style="padding:10px 12px; color:var(--slate);">Australian Aid disaster preparedness · revive HCPI relationship</td>
-              </tr>
-              <tr style="border-bottom:1px solid #e3ecf5; background:#fafcfd;">
-                <td style="padding:10px 12px; font-weight:700; color:#355a82;">9</td>
-                <td style="padding:10px 12px; font-weight:700;">ICMPS Irlandia</td>
-                <td style="padding:10px 12px;">Embassy/Diplomatic</td>
-                <td style="padding:10px 12px;">2023</td>
-                <td style="padding:10px 12px;">🔵 EXPLORED</td>
-                <td style="padding:10px 12px; color:var(--slate);">Irish Catholic Mission Partnership Scheme · international solidarity grant</td>
-              </tr>
-              <tr style="border-bottom:1px solid #e3ecf5; background:#f5f8fb;">
-                <td style="padding:10px 12px; font-weight:700; color:#355a82;">10</td>
-                <td style="padding:10px 12px; font-weight:700;">Indika Foundation</td>
-                <td style="padding:10px 12px;">Domestic CSR</td>
-                <td style="padding:10px 12px;">2023–2024</td>
-                <td style="padding:10px 12px;">🔵 EXPLORED</td>
-                <td style="padding:10px 12px; color:var(--slate);">Energy company foundation · sustainability + community development</td>
-              </tr>
-              <tr style="border-bottom:1px solid #e3ecf5; background:#fafcfd;">
-                <td style="padding:10px 12px; font-weight:700; color:#355a82;">11</td>
-                <td style="padding:10px 12px; font-weight:700;">Pegadaian Kanwil Jatim</td>
-                <td style="padding:10px 12px;">Domestic CSR</td>
-                <td style="padding:10px 12px;">2024</td>
-                <td style="padding:10px 12px;">🔵 EXPLORED</td>
-                <td style="padding:10px 12px; color:var(--slate);">BUMN regional CSR · pemberdayaan ekonomi + UMKM angle</td>
-              </tr>
-
-              <!-- ============== ⚪ HISTORICAL SECTION ============== -->
-              <tr style="background:linear-gradient(90deg, #6a6a6a 0%, #8a8a8a 100%); color:white;">
-                <td colspan="6" style="padding:8px 12px; font-weight:700; letter-spacing:1px; font-size:11px;">⚪ HISTORICAL · Sudah selesai / closed cycle · track record asset (3 donor)</td>
-              </tr>
-              <tr style="border-bottom:1px solid #ececec; background:#f8f8f8;">
-                <td style="padding:10px 12px; font-weight:700; color:#5e5e5e;">12</td>
-                <td style="padding:10px 12px; font-weight:700;">Kemenkumham DIPA LAPAS</td>
-                <td style="padding:10px 12px;">Government Direct</td>
-                <td style="padding:10px 12px;">2023 (156 hari)</td>
-                <td style="padding:10px 12px;">⚪ HISTORICAL</td>
-                <td style="padding:10px 12px; color:var(--slate);">Rp 185,46 Jt · Mas Theo's last MoU · re-entry pursuing 2026/2027</td>
-              </tr>
-              <tr style="border-bottom:1px solid #ececec; background:#fbfbfb;">
-                <td style="padding:10px 12px; font-weight:700; color:#5e5e5e;">13</td>
-                <td style="padding:10px 12px; font-weight:700;">Sisternet XL Axiata</td>
-                <td style="padding:10px 12px;">Domestic CSR</td>
-                <td style="padding:10px 12px;">2022–2023</td>
-                <td style="padding:10px 12px;">⚪ HISTORICAL</td>
-                <td style="padding:10px 12px; color:var(--slate);">Women business empowerment · spawned <strong>safleur</strong> sub-brand</td>
-              </tr>
-              <tr style="background:#f8f8f8;">
-                <td style="padding:10px 12px; font-weight:700; color:#5e5e5e;">14</td>
-                <td style="padding:10px 12px; font-weight:700;">AMPLIFY IMPACT (ViiV bridge)</td>
-                <td style="padding:10px 12px;">Int'l Pharma CSR</td>
-                <td style="padding:10px 12px;">2024 bridge</td>
-                <td style="padding:10px 12px;">⚪ HISTORICAL</td>
-                <td style="padding:10px 12px; color:var(--slate);">GBP 9.748,96 · Bridge year ViiV antar fase Chemsex</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Strategic Analysis · 3-bucket -->
-        <h2 class="section-h2" style="margin-top:32px;">🔍 Strategic Analysis · 3 Insights</h2>
-
-        <div class="cards">
-          <div class="card" style="background:#f3eef7; border-color:#6b4d7a;">
-            <div class="label">📊 Insight 1 · Channel Mix</div>
-            <div class="value" style="font-size:17px;">Balanced 4-Channel</div>
-            <div class="desc">Pipeline tidak depend pada 1 channel: Int'l Foundation (4), Domestic CSR (3), Government Direct (3), Embassy/Diplomatic (3). Setiap channel punya cycle + risk profile berbeda. <strong>Anti-concentration strategy</strong>.</div>
-          </div>
-          <div class="card" style="background:#f3eef7; border-color:#6b4d7a;">
-            <div class="label">🎯 Insight 2 · Conversion Rate</div>
-            <div class="value" style="font-size:17px;">~30% Active</div>
-            <div class="desc">Dari 13+ tracked, <strong>4 aktif/historical realized</strong> (ViiV, IPWL, Kemenkumham, Sisternet). Sisanya explored/applied. Realistic conversion sektor INGO/CSR 20-40%. Pipeline strategy = mengkompensasi conversion rate dengan volume.</div>
-          </div>
-          <div class="card" style="background:#f3eef7; border-color:#6b4d7a;">
-            <div class="label">🚀 Insight 3 · Next-Wave Target</div>
-            <div class="value" style="font-size:17px;">Government Direct</div>
-            <div class="desc">Pasca-Akreditasi B + IPWL designation, Sadar Hati lebih siap untuk <strong>government direct contract</strong> (Kemenkes ATENSI cycle, Kemensos DIPA renewal, Kemenkumham renewal LAPAS). Government direct = MOST stable + jangka panjang.</div>
-          </div>
-        </div>
-
-        <!-- Action Items -->
-        <div style="background: var(--cream-warm); border-left: 4px solid #6b4d7a; padding: 18px 22px; border-radius: 8px; margin: 18px 0;">
-          <strong style="font-family: 'Lora', Georgia, serif; font-size: 14px; color: #4e3859; display: block; margin-bottom: 10px;">📋 Pipeline Action Items (Strategic)</strong>
-          <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 10px; font-size: 12.5px; line-height: 1.55; color: var(--navy);">
-            <div><strong>1. Global Fund JIP follow-up</strong> — quarterly progress check, leverage R4+R8 track record</div>
-            <div><strong>2. UNODC DAPC engagement</strong> — submit progress report bulanan ke regional office</div>
-            <div><strong>3. Kemenkumham renewal</strong> — explore DIPA 2026 / 2027 cycle, leverage Akreditasi B 2024-2027</div>
-            <div><strong>4. Domestic CSR mapping</strong> — outreach BCA · Mandiri · Astra · Sinarmas foundations</div>
-            <div><strong>5. SAHAWOOD direct-to-donor</strong> — kemitraan international procurement (UN Goods, INGO Procurement Officers)</div>
-            <div><strong>6. Quarterly pipeline review</strong> — Mba Watiek + Pengurus = standing agenda</div>
-          </div>
-        </div>
-
-        <div class="source-attr">
-          📋 <strong>Source:</strong> 6-agent parallel deep-dive scan Files SAHA Mba Watiek Drive (28 Juni 2026) + KEUANGAN archive + CLAUDE.md institutional memory Round 2. Matriks ini tier 🔒 INTERNAL — strategic intelligence asset. Companion file: <code>Knowledge Assets SAHA / 03_Donor_and_Partnership_Archive / Foundation_Pipeline /</code>. Update quarterly setiap Mba Watiek + Pengurus review pipeline progress.
-        </div>
-      </section>
 
       <!-- ============================================================== -->
       <!-- Grant Opportunities Tracker · standalone page embed             -->
       <!-- ============================================================== -->
-      <section class="section" id="l2-grant-tracker">
-        <div class="hero">
-          <div class="eyebrow">Layer 2 · Keuangan &amp; Pipeline · Grant Intelligence · INTERNAL</div>
-          <h1>🌍 Grant Opportunities Tracker</h1>
-          <p class="lede">Radar peluang hibah aktif untuk Sadar Hati — deadline, fokus tematik, kisaran dana, dan status tindak lanjut per funder. Halaman berdiri sendiri: bisa dibuka / dibagikan via link langsung di bawah, tetap satu sumber data dengan dashboard. Pelengkap operasional dari <strong>Matriks Pipeline 13+ Donor</strong> di atas.</p>
-        </div>
-        <div class="l1-form-wrap" style="max-width:1660px;">
-          <div class="l1-form-linkbar"><span class="u">…/grant-tracker.html</span><button data-url="grant-tracker.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
-          <div class="l1-embed"><iframe src="grant-tracker.html" title="Grant Opportunities Tracker" loading="lazy" style="height:82vh;"></iframe></div>
-        </div>
-      </section>
 
       <!-- ============================================================== -->
       <!-- TEMPLATE: Tambah Donor Aktif Baru                              -->
       <!-- ============================================================== -->
 
-      <section class="section" id="l2-add">
-        <div class="hero"><div class="eyebrow">Layer 2 · Template Donor Aktif Baru</div><h1>Tambah Donor Aktif Baru</h1><p class="lede">Template kosong untuk donor aktif baru yang akan onboard di masa depan (post-Mba Watiek review). Setiap donor aktif baru auto-generate 4 sub-section untuk <strong>live tracking</strong>: Proposal · Budget · M&amp;E · Achievement. Berbeda dengan donor historikal yang cuma 1 page static reference.</p></div>
-        <div class="cards">
-          <div class="card"><div class="label">Sub 1</div><div class="value" style="font-size:18px;">Proposal</div><div class="desc">PDF upload + summary form</div></div>
-          <div class="card"><div class="label">Sub 2</div><div class="value" style="font-size:18px;">Budget</div><div class="desc">Line items + tracking % penyerapan</div></div>
-          <div class="card"><div class="label">Sub 3</div><div class="value" style="font-size:18px;">M&amp;E</div><div class="desc">Auto-fetched dari Laporan Lapangan</div></div>
-          <div class="card"><div class="label">Sub 4</div><div class="value" style="font-size:18px;">Achievement</div><div class="desc">Auto-scored annual</div></div>
-        </div>
-        <div class="placeholder-banner"><span class="icon">➕</span><div><strong>Pattern konsisten:</strong> Setiap donor baru akan punya 4 sub-section identik. Mba Watiek tinggal "+ Add Donor" → masukkan nama → 4 template kosong terbentuk otomatis. Indikator KPI bisa di-mapping ke PWA form fields existing atau request field baru kalau perlu.</div></div>
-      </section>
 
       <!-- ============================================================== -->
       <!-- REKAM JEJAK INSTITUSI · Knowledge Sections (batch 1 · 13 Jul 2026) -->
       <!-- ============================================================== -->
 
-      
 
-      
 
-      
 
       <!-- ============================================================== -->
       <!-- REKAM JEJAK INSTITUSI · Knowledge Sections (batch 2 · 13 Jul 2026) -->
       <!-- ============================================================== -->
 
-      
 
-      
 
-      
 
       <!-- ====== LAYER 3 SECTIONS · LIVE PL FORMS ====== -->
 
@@ -2038,78 +1264,180 @@
       </style>
 
       <!-- L3-MASTER · Master List Form PL -->
-      
+      <section class="section active" id="l1-master">
+        <div class="hero"><div class="eyebrow">Layer 1 · Laporan Lapangan · Master List</div><h1>📋 Master List Form PL</h1><p class="lede"><strong>Isi di sini</strong> membuka form langsung di halaman ini (tanpa pindah halaman). <strong>Copy link</strong> untuk dibagikan ke HP petugas lewat chat/WhatsApp, <strong>QR</strong> untuk unduh kode siap cetak. Semua submission otomatis masuk ke <strong>Log Harian</strong> di halaman Monitoring &amp; Data.</p><div style="margin-top:12px;display:flex;gap:9px;flex-wrap:wrap;align-items:center;"><a href="form/" style="background:#f5e9dc;border:1.5px solid #c47a3b;color:#9a5c26;border-radius:10px;padding:9px 14px;font-size:12.5px;font-weight:700;text-decoration:none;">📱 Buka versi HP / PWA</a><button data-url="form/" onclick="SAHA_COPY(this)" style="background:#fff;border:1.5px solid #c47a3b;color:#9a5c26;border-radius:10px;padding:9px 14px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;">🔗 Copy link versi HP</button><span style="font-size:11.5px;color:#6f6660;">versi HP bisa dipasang seperti aplikasi &amp; tetap jalan tanpa sinyal — QR lama tetap berlaku</span></div></div>
+        <div class="ml-grid">
+          <div class="ml-card chemsex">
+            <div class="tag">ViiV · Malang Raya</div><h3>🔥 Penjangkauan</h3>
+            <p>Penjangkauan komunitas Chemsex Malang–Surabaya. 7 section · area cascading · ID KD otomatis.</p>
+            <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l1-form-chemsex')">📝 Isi di sini</button><button class="ml-copy" data-url="form/chemsex.html" onclick="SAHA_COPY(this)">🔗 Copy link</button><button class="ml-qr" data-url="form/chemsex.html" onclick="SAHA_QR(this)">📱 QR</button></div>
+          </div>
+          <div class="ml-card dast">
+            <div class="tag">Skrining Napza</div><h3>💊 DAST-10</h3>
+            <p>10 pertanyaan Ya/Tidak penggunaan Napza 3 bulan terakhir. Skor + interpretasi 5 tingkat otomatis.</p>
+            <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l1-form-dast10')">📝 Isi di sini</button><button class="ml-copy" data-url="form/dast10.html" onclick="SAHA_COPY(this)">🔗 Copy link</button><button class="ml-qr" data-url="form/dast10.html" onclick="SAHA_QR(this)">📱 QR</button></div>
+          </div>
+          <div class="ml-card srq">
+            <div class="tag">Skrining Mental Health</div><h3>🧠 SRQ-29</h3>
+            <p>29 pertanyaan instrumen WHO. 4 sub-domain (neurosis · zat · psikotik · PTSD) + flag risiko.</p>
+            <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l1-form-srq29')">📝 Isi di sini</button><button class="ml-copy" data-url="form/srq29.html" onclick="SAHA_COPY(this)">🔗 Copy link</button><button class="ml-qr" data-url="form/srq29.html" onclick="SAHA_QR(this)">📱 QR</button></div>
+          </div>
+          <div class="ml-card dast">
+            <div class="tag">Risiko Pribadi</div><h3>⚕️ Risiko Pribadi</h3>
+            <p>Perilaku berisiko 1 bulan terakhir: berbagi alat, kondom, pasangan + rencana pengurangan risiko.</p>
+            <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l1-form-ira')">📝 Isi di sini</button><button class="ml-copy" data-url="form/ira.html" onclick="SAHA_COPY(this)">🔗 Copy link</button><button class="ml-qr" data-url="form/ira.html" onclick="SAHA_QR(this)">📱 QR</button></div>
+          </div>
+          <div class="ml-card srq">
+            <div class="tag">Risiko Kelompok</div><h3>👥 Risiko Kelompok</h3>
+            <p>Sesi kelompok: jumlah peserta (L/P/TG), daftar peserta, tindakan & rencana pengurangan risiko.</p>
+            <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l1-form-gra')">📝 Isi di sini</button><button class="ml-copy" data-url="form/gra.html" onclick="SAHA_COPY(this)">🔗 Copy link</button><button class="ml-qr" data-url="form/gra.html" onclick="SAHA_QR(this)">📱 QR</button></div>
+          </div>
+          <div class="ml-card dast">
+            <div class="tag">Konseling</div><h3>💬 Konseling</h3>
+            <p>Laporan sesi konseling: kondisi dampingan, hasil, rencana tindak lanjut + jadwal lanjutan. Rahasia.</p>
+            <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l1-form-konseling')">📝 Isi di sini</button><button class="ml-copy" data-url="form/konseling.html" onclick="SAHA_COPY(this)">🔗 Copy link</button><button class="ml-qr" data-url="form/konseling.html" onclick="SAHA_QR(this)">📱 QR</button></div>
+          </div>
+          <div class="ml-card srq">
+            <div class="tag">Laporan Korlap</div><h3>📆 Laporan Bulanan Korlap</h3>
+            <p>Laporan bulanan Korlap (Koordinator Lapangan) per PL: analisa penjangkauan-rujukan-temuan, kegiatan kelompok, strategi.</p>
+            <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l1-form-bulanan')">📝 Isi di sini</button><button class="ml-copy" data-url="form/bulanan.html" onclick="SAHA_COPY(this)">🔗 Copy link</button><button class="ml-qr" data-url="form/bulanan.html" onclick="SAHA_QR(this)">📱 QR</button></div>
+          </div>
+          <div class="ml-card dast">
+            <div class="tag">Logistik</div><h3>🎒 Prevention Kit</h3>
+            <p>Pengambilan alat pencegahan: kondom, jarum, oral quick, pipet, pyrex, lip balm, sedotan, amplop, masker.</p>
+            <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l1-form-prevkit')">📝 Isi di sini</button><button class="ml-copy" data-url="form/prevkit.html" onclick="SAHA_COPY(this)">🔗 Copy link</button><button class="ml-qr" data-url="form/prevkit.html" onclick="SAHA_QR(this)">📱 QR</button></div>
+          </div>
+          <div class="ml-card srq" style="border-left-color:#6b4d7a;">
+            <div class="tag">Skrining Gabungan · Baru</div><h3>💊+🧠 DAST + SRQ (Gabungan)</h3>
+            <p>Dua instrumen dalam satu sesi — identitas diisi sekali, hasil tersimpan sebagai 2 data terpisah (DAST &amp; SRQ), rekap tetap rapi per instrumen.</p>
+            <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l1-form-gabungan')">📝 Isi di sini</button><button class="ml-copy" data-url="form/gabungan.html" onclick="SAHA_COPY(this)">🔗 Copy link</button><button class="ml-qr" data-url="form/gabungan.html" onclick="SAHA_QR(this)">📱 QR</button></div>
+          </div>
+          <div class="ml-card dast" style="border-left-color:#c47a3b;">
+            <div class="tag">Pemetaan Lapangan · Baru</div><h3>📍 Field Check-In</h3>
+            <p>Pencatatan hotspot untuk pemetaan: nama &amp; tipe hotspot, jam aktif, contact person, perkiraan KD + pin lokasi GPS.</p>
+            <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l1-form-checkin')">📝 Isi di sini</button><button class="ml-copy" data-url="form/checkin.html" onclick="SAHA_COPY(this)">🔗 Copy link</button><button class="ml-qr" data-url="form/checkin.html" onclick="SAHA_QR(this)">📱 QR</button></div>
+          </div>
+          <div class="ml-card srq" style="border-left-color:#4e3859;">
+            <div class="tag">Khusus PL · Login</div><h3>🪪 Portal PL (VCT &amp; Kartu Identitas)</h3>
+            <p>Satu link untuk PL: Papan Entry, Registrasi VCT + simpan foto KTP klien (preview-only ber-watermark, per-PL, akses tercatat). Wajib login akun PL.</p>
+            <div class="ml-actions"><button class="ml-copy" data-url="form/portal.html" onclick="SAHA_COPY(this)">🔗 Copy link</button><button class="ml-qr" data-url="form/portal.html" onclick="SAHA_QR(this)">📱 QR</button></div>
+          </div>
+        </div>
+        <div class="ml-note">💡 <strong>Cara pakai:</strong> <strong>"Isi di sini"</strong> = mengisi langsung di halaman ini (staf/admin). <strong>"Copy link"</strong> = bagikan tautannya ke petugas lapangan lewat WA — mereka isi dari HP masing-masing. <strong>"QR"</strong> = tampilkan &amp; unduh kode scan per form (tinggal discan kamera HP, tanpa ketik link). Semua form juga tersedia dalam satu halaman di <a href="form/" target="_blank" rel="noopener">dashboard.sadarhati.org/trial</a>.</div>
+      </section>
 
       <!-- L3-FORM-CHEMSEX -->
-      
-
-      <!-- L3-FORM-DAST10 -->
-      
-
-      <!-- L3-FORM-SRQ29 -->
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      <!-- 2B-LOGHARI · Log Harian / Database (auth via global 2B gate) -->
-      
-
-
-      <!-- ====== 2B LOGIN GATE ====== -->
-      <section class="section active" id="l2b-login">
-        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Internal Dashboard</div><h1>🔒 Area Internal — Login Staf</h1><p class="lede">Bagian ini berisi data sensitif: donor aktif &amp; budget, output form lapangan, M&amp;E, dan database klien. Hanya staf Sadar Hati yang login yang bisa membuka. Form entry (Layer 2A) tetap terbuka tanpa login untuk PL.</p></div>
-        <div class="lh-login">
-          <div class="lh-login-card">
-            <div class="lh-login-title">🔒 Login Staf</div>
-            <div class="lh-login-sub">Masuk pakai akun Firebase (email + password) yang dibuat tim M&amp;E.</div>
-            <input type="email" id="saha-email" class="lh-in" placeholder="Email" autocomplete="username">
-            <input type="password" id="saha-pass" class="lh-in" placeholder="Password" autocomplete="current-password">
-            <button class="lh-btn" id="saha-login-btn">Masuk</button>
-            <div class="lh-err" id="saha-login-err"></div>
-          </div>
+      <section class="section" id="l1-form-chemsex">
+        <div class="hero"><div class="eyebrow">Layer 1 · Laporan Lapangan · Form PL #2</div><h1>🔥 Form Penjangkauan</h1><p class="lede">Form laporan harian PL untuk penjangkauan komunitas Chemsex Malang–Surabaya (proyek ViiV). 7 section · area jangkauan cascading · ID KD otomatis · tersimpan ke database.</p></div>
+        <div class="l1-form-wrap">
+          <div class="l1-form-linkbar"><span class="u">…/form/chemsex.html</span><button data-url="form/chemsex.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          <div class="l1-embed"><iframe src="form/chemsex.html" title="Penjangkauan ATS-Chemsex" loading="lazy"></iframe></div>
         </div>
       </section>
 
+      <!-- L3-FORM-DAST10 -->
+      <section class="section" id="l1-form-dast10">
+        <div class="hero"><div class="eyebrow">Layer 1 · Laporan Lapangan · Form PL #3</div><h1>💊 DAST-10 · Skrining Napza</h1><p class="lede">10 pertanyaan Ya/Tidak penggunaan Napza 3 bulan terakhir — asesmen awal IPWL + Harm Reduction. Identitas &amp; area sama dengan Chemsex (1 kesatuan) · tersimpan ke database.</p></div>
+        <div class="l1-form-wrap">
+          <div class="l1-form-linkbar"><span class="u">…/form/dast10.html</span><button data-url="form/dast10.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          <div class="l1-embed"><iframe src="form/dast10.html" title="DAST-10 Skrining Napza" loading="lazy"></iframe></div>
+        </div>
+      </section>
+
+      <!-- L3-FORM-SRQ29 -->
+      <section class="section" id="l1-form-srq29">
+        <div class="hero"><div class="eyebrow">Layer 1 · Laporan Lapangan · Form PL #4</div><h1>🧠 SRQ-29 · Skrining Kesehatan Mental</h1><p class="lede">29 pertanyaan instrumen WHO — 4 sub-domain + flag risiko. Identitas &amp; area sama dengan Chemsex (1 kesatuan) · tersimpan ke database.</p></div>
+        <div class="l1-form-wrap">
+          <div class="l1-form-linkbar"><span class="u">…/form/srq29.html</span><button data-url="form/srq29.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          <div class="l1-embed"><iframe src="form/srq29.html" title="SRQ-29 Skrining Kesehatan Mental" loading="lazy"></iframe></div>
+        </div>
+      </section>
+
+      <section class="section" id="l1-form-ira">
+        <div class="hero"><div class="eyebrow">Layer 1 · Laporan Lapangan · Form PL #6</div><h1>⚕️ IRA · Penilaian Risiko Pribadi</h1><p class="lede">Penilaian risiko HIV individual — berbagi alat, pola kondom, pasangan, rencana pengurangan risiko. Identitas & area sama (1 kesatuan) · tersimpan ke database.</p></div>
+        <div class="l1-form-wrap">
+          <div class="l1-form-linkbar"><span class="u">…/form/ira.html</span><button data-url="form/ira.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          <div class="l1-embed"><iframe src="form/ira.html" title="IRA · Penilaian Risiko Pribadi" loading="lazy"></iframe></div>
+        </div>
+      </section>
+
+      <section class="section" id="l1-form-gra">
+        <div class="hero"><div class="eyebrow">Layer 1 · Laporan Lapangan · Form PL #7</div><h1>👥 GRA · Penilaian Risiko Kelompok</h1><p class="lede">Penilaian risiko berbasis kelompok/komunitas — jumlah peserta, tindakan & rencana pengurangan risiko. Tersimpan ke database.</p></div>
+        <div class="l1-form-wrap">
+          <div class="l1-form-linkbar"><span class="u">…/form/gra.html</span><button data-url="form/gra.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          <div class="l1-embed"><iframe src="form/gra.html" title="GRA · Penilaian Risiko Kelompok" loading="lazy"></iframe></div>
+        </div>
+      </section>
+
+      <section class="section" id="l1-form-konseling">
+        <div class="hero"><div class="eyebrow">Layer 1 · Laporan Lapangan · Form PL #8</div><h1>💬 Konseling · Laporan Konselor</h1><p class="lede">Laporan sesi konseling oleh konselor. Isi bersifat rahasia (M&E internal). Identitas & area sama · tersimpan ke database.</p></div>
+        <div class="l1-form-wrap">
+          <div class="l1-form-linkbar"><span class="u">…/form/konseling.html</span><button data-url="form/konseling.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          <div class="l1-embed"><iframe src="form/konseling.html" title="Konseling · Laporan Konselor" loading="lazy"></iframe></div>
+        </div>
+      </section>
+
+      <section class="section" id="l1-form-bulanan">
+        <div class="hero"><div class="eyebrow">Layer 1 · Laporan Lapangan · Form #9</div><h1>📆 Laporan Bulanan Korlap</h1><p class="lede">Laporan naratif bulanan Korlap per PL — analisa lapangan, FGD/support group, strategi. Pindahan dari Google Form · tersimpan ke database.</p></div>
+        <div class="l1-form-wrap">
+          <div class="l1-form-linkbar"><span class="u">…/form/bulanan.html</span><button data-url="form/bulanan.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          <div class="l1-embed"><iframe src="form/bulanan.html" title="Laporan Bulanan KL · Koordinator Lapangan" loading="lazy"></iframe></div>
+        </div>
+      </section>
+
+      <section class="section" id="l1-form-prevkit">
+        <div class="hero"><div class="eyebrow">Layer 1 · Laporan Lapangan · Form #10</div><h1>🎒 Prevention Kit · Logistik Alat Pencegahan</h1><p class="lede">Pencatatan jumlah pengambilan prevention kit oleh petugas: 9 item + auto-total. Pindahan dari Google Form · tersimpan ke database.</p></div>
+        <div class="l1-form-wrap">
+          <div class="l1-form-linkbar"><span class="u">…/form/prevkit.html</span><button data-url="form/prevkit.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          <div class="l1-embed"><iframe src="form/prevkit.html" title="Prevention Kit · Logistik Alat Pencegahan" loading="lazy"></iframe></div>
+        </div>
+      </section>
+
+      <!-- 2B-LOGHARI · Log Harian / Database (auth via global 2B gate) -->
+
+
+      <!-- ====== 2B LOGIN GATE ====== -->
+
       <!-- ====== 2A · FORM FIELD CHECK-IN (placeholder) ====== -->
-      
+      <section class="section" id="l1-form-checkin">
+        <div class="hero"><div class="eyebrow">🟢 Layer 2A · Form Laporan Lapangan · #2</div><h1>📍 Form Field Check-In</h1><p class="lede">Pencatatan hotspot untuk pemetaan lapangan: nama &amp; tipe hotspot, jam aktif, contact person, perkiraan jumlah KD, dan pin lokasi GPS — tersimpan ke database, tampil di Log Harian.</p></div>
+        <div class="l1-form-wrap">
+          <div class="l1-form-linkbar"><span class="u">…/form/checkin.html</span><button data-url="form/checkin.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          <div class="l1-embed"><iframe src="form/checkin.html" title="Field Check-In Pemetaan Hotspot" loading="lazy"></iframe></div>
+        </div>
+      </section>
 
       <!-- L3-FORM-GABUNGAN -->
-      
+      <section class="section" id="l1-form-gabungan">
+        <div class="hero"><div class="eyebrow">🟢 Layer 2A · Form Laporan Lapangan · Gabungan</div><h1>💊+🧠 Skrining Gabungan DAST-10 + SRQ-29</h1><p class="lede">Dua instrumen dalam satu sesi: identitas cukup diisi sekali, hasil otomatis tersimpan sebagai dua data terpisah (DAST &amp; SRQ) — laporan &amp; rekap per instrumen tetap rapi.</p></div>
+        <div class="l1-form-wrap">
+          <div class="l1-form-linkbar"><span class="u">…/form/gabungan.html</span><button data-url="form/gabungan.html" onclick="SAHA_COPY(this)">🔗 Copy link</button></div>
+          <div class="l1-embed"><iframe src="form/gabungan.html" title="Skrining Gabungan DAST dan SRQ" loading="lazy"></iframe></div>
+        </div>
+      </section>
 
       <!-- L3-PORTAL-PL -->
-      
+      <section class="section" id="l1-portal">
+        <div class="hero"><div class="eyebrow">🟢 Layer 2A · Khusus Petugas Lapangan</div><h1>🪪 Portal PL — VCT &amp; Kartu Identitas KD</h1><p class="lede">Satu link khusus PL (wajib login akun PL): <strong>Papan Entry</strong>, <strong>Registrasi VCT</strong> + simpan foto KTP klien, dan <strong>Kartu Identitas KD</strong> (NIK + preview KTP ber-watermark, per-PL, tiap akses tercatat). Foto hanya preview — tanpa tombol unduh.</p></div>
+        <div class="l1-form-wrap">
+          <div class="l1-form-linkbar"><span class="u">…/form/portal.html</span><button data-url="form/portal.html" onclick="SAHA_COPY(this)">🔗 Copy link</button><button class="ml-qr" data-url="form/portal.html" onclick="SAHA_QR(this)" style="margin-left:6px;">📱 QR</button></div>
+          <div class="l1-embed"><iframe src="form/portal.html" title="Portal PL" loading="lazy"></iframe></div>
+        </div>
+        <div class="ml-note">🔑 Tiap PL punya akun sendiri — kredensial dibagikan <strong>pribadi (japri)</strong> oleh admin, jangan lewat grup. Tiap PL hanya bisa membuka data dampingannya sendiri — dikunci di server.</div>
+      </section>
 
       <!-- ====== 2B · CHEMSEX OUTPUT HOUSE (placeholder) ====== -->
-      
 
       <!-- ====== 2B · DAST-10 OUTPUT HOUSE (placeholder) ====== -->
-      
 
       <!-- ====== 2B · SRQ-29 OUTPUT HOUSE (placeholder) ====== -->
-      
-      
-      
-      
 
-      
 
-      
 
-      
 
       <!-- ====== 2B · M&E DASHBOARD (placeholder) ====== -->
-      
 
       <!-- ====== 2B · CLIENTS DATABASE (placeholder) ====== -->
-      
 
     </div>
 

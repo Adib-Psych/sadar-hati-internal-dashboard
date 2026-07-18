@@ -840,6 +840,21 @@
         #saha-qr-modal .qract button{ flex:1; padding:10px; border-radius:10px; font-weight:700; font-size:13px; cursor:pointer; font-family:inherit; border:none; }
         .qr-dl{ background:#6b4d7a; color:#fff; } .qr-cl{ background:#f5efe7; color:#4a4340; border:1.5px solid #ddd3c8 !important; }
 </style>
+<style>/* ===== responsive mobile (ala dual-preview Hostinger) ===== */
+@media (max-width:880px){
+  html, body { height:auto; overflow:auto; }
+  .app { display:block; height:auto; }
+  .sidebar { border-right:none; border-bottom:2px solid var(--slate-lighter); overflow:visible; }
+  .nav { max-height:46vh; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+  .main { overflow:visible; height:auto; }
+  .content { overflow:visible; height:auto; padding:18px 14px 46px; }
+  .topbar { flex-wrap:wrap; gap:8px; padding:10px 14px; position:sticky; top:0; z-index:60; }
+  .section { overflow-x:auto; }
+  .hero h1 { font-size:23px; }
+  .l1-embed iframe { height:74vh; min-height:480px; }
+  .ml-actions { flex-wrap:wrap; }
+}
+</style>
 <style>/* tema halaman */
   .sidebar .brand { background: linear-gradient(150deg, #8a5a74 0%, #5f3b50 90%) !important; }
   .nav-layer-header .zone-dot { background: #8a5a74 !important; }
@@ -856,7 +871,7 @@
     <div class="brand">
       <div class="logo">Sadar Hati Foundation</div>
       <div class="est">est. 2002 · Malang</div>
-      <div class="system-tag">Integrated Hub v0.50 · Yayasan Sadar Hati</div>
+      <div class="system-tag">Integrated Hub v0.54 · Yayasan Sadar Hati</div>
     </div>
 
         <nav class="nav">
@@ -868,7 +883,7 @@
         </div>
         <div class="nav-layer-body">
               <a class="nav-item" data-section="l2-overview-program"><span class="icon">🎯</span> Overview Overall Program</a>
-          <div class="donor-group">
+          <div class="donor-group expanded">
             <div class="donor-header">
               <span class="donor-name">🏆 Historikal Donor</span>
               <span class="donor-badge">8 DONOR</span><span class="chevron">▶</span>
@@ -884,7 +899,7 @@
               <a class="nav-item" data-section="l2-hist-aiesec"><span class="icon">🎓</span> AIESEC LC UB 2011</a>
             </div>
           </div>
-          <div class="donor-group">
+          <div class="donor-group expanded">
             <div class="donor-header">
               <span class="donor-name">🏛️ Rekam Jejak Institusi</span>
               <span class="donor-badge">6 BAB</span><span class="chevron">▶</span>
@@ -910,8 +925,8 @@
           akses sesuai role akun
         </div>
       </div>
-      <div>v0.50 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
-    <div style="margin-top:8px;"><a href="./" style="color:inherit;text-decoration:none;font-weight:700;">🏠 ← Beranda Hub</a></div>
+      <div>v0.54 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
+    <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#8a5a74,#5f3b50);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
 
