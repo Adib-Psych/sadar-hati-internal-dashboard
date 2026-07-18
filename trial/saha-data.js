@@ -3,6 +3,14 @@ window.SAHA_DATA = {
   PL_LIST: ["Nuri", "David", "Ibi"], /* PL AKTIF (Jul 2026, keputusan Adib) */
   PL_ARSIP: ["Aris", "Bayu Lesmana", "Dedi", "Deni", "Dodik", "Eko", "Hanim", "Hendra (KL-MLG)", "Husen", "Imam-Konselor", "Karyanto", "Maradona", "Paldi", "Reno", "Siswanto (KL-SBY)", "Sotong Hariyono"], /* arsip — tarik lagi bila dibutuhkan */
   KOTAKAB_ARSIP: ["Surabaya", "Kabupaten Sidoarjo", "Jakarta Barat", "Kab Pasuruan"], /* arsip wilayah */
+  /* ARSIP DATA KECAMATAN wilayah nonaktif (v0.40, sumber: BPS/pemda via verifikasi Jul 2026).
+     REAKTIVASI AREA: (1) pindahkan nama kota dari KOTAKAB_ARSIP ke daftar aktif form,
+     (2) pindahkan blok kota di bawah ini ke dalam wilayahData, (3) deploy. Desa/kelurahan = isian manual (list kosong -> fallback manual otomatis). */
+  WILAYAH_ARSIP_DATA: {
+    "Surabaya": { "Asemrowo": [], "Benowo": [], "Bubutan": [], "Bulak": [], "Dukuh Pakis": [], "Gayungan": [], "Genteng": [], "Gubeng": [], "Gunung Anyar": [], "Jambangan": [], "Karang Pilang": [], "Kenjeran": [], "Krembangan": [], "Lakarsantri": [], "Mulyorejo": [], "Pabean Cantian": [], "Pakal": [], "Rungkut": [], "Sambikerep": [], "Sawahan": [], "Semampir": [], "Simokerto": [], "Sukolilo": [], "Sukomanunggal": [], "Tambaksari": [], "Tandes": [], "Tegalsari": [], "Tenggilis Mejoyo": [], "Wiyung": [], "Wonocolo": [], "Wonokromo": [] },
+    "Kabupaten Sidoarjo": { "Balongbendo": [], "Buduran": [], "Candi": [], "Gedangan": [], "Jabon": [], "Krembung": [], "Krian": [], "Porong": [], "Prambon": [], "Sedati": [], "Sidoarjo": [], "Sukodono": [], "Taman": [], "Tanggulangin": [], "Tarik": [], "Tulangan": [], "Waru": [], "Wonoayu": [] },
+    "Jakarta Barat": { "Cengkareng": [], "Grogol Petamburan": [], "Kalideres": [], "Kebon Jeruk": [], "Kembangan": [], "Palmerah": [], "Taman Sari": [], "Tambora": [] }
+  },
   wilayahData: {
     "Kota Malang": {
       "Blimbing": ["Arjosari", "Balearjosari", "Blimbing", "Bunulrejo", "Jodipan", "Kesatrian", "Pandanwangi", "Polehan", "Polowijen", "Purwantoro", "Purwodadi"],
