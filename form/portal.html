@@ -101,6 +101,7 @@
         <div><b>Search ID KD</b><span>kartu identitas: NIK + preview KTP — <span id="mi-ktp-scope">dampingan Anda</span></span></div>
       </div>
       <div style="text-align:center;"><button class="back" id="mi-vct" style="margin:2px auto 0;">Registrasi VCT (entry) →</button></div>
+      <div id="adm-home" style="display:none;text-align:center;margin-top:14px;"><a href="../" style="display:inline-block;background:linear-gradient(135deg,#a83244,#7d2433);color:#fff;text-decoration:none;font-weight:800;font-size:12.5px;padding:10px 18px;border-radius:11px;letter-spacing:.3px;">🏠 ← Beranda Hub · khusus admin</a></div>
     </div>
 
     <!-- KTP LIST/DETAIL -->
@@ -138,7 +139,7 @@
           <button class="btn" style="margin-top:0;" onclick="document.getElementById('f-foto').click()">📷 Ambil / Pilih Foto KTP</button>
           <div class="prev" id="f-prev"><img id="f-prev-img" alt="preview KTP"><div class="pi" id="f-prev-info"></div></div>
           <div class="hint">Foto dikompres otomatis di HP (±150–250 KB) lalu tersimpan aman di database — <strong>hapus dari galeri HP setelah tersimpan</strong>.</div></div>
-        <div class="fld"><label class="fl">Puskesmas Tujuan</label><input class="fi" id="f-pkm" placeholder="mis. PKM Kendalkerep"></div>
+        <div class="fld"><label class="fl">Puskesmas Tujuan</label><input class="fi" id="f-pkm" list="pkm-list" placeholder="ketik / pilih — mis. PKM Kendalkerep"><datalist id="pkm-list"><option value="PKM Ampelgading"></option><option value="PKM Ardimulyo"></option><option value="PKM Arjowinangun"></option><option value="PKM Arjuno"></option><option value="PKM Bantur"></option><option value="PKM Bareng"></option><option value="PKM Batu"></option><option value="PKM Beji"></option><option value="PKM Bululawang"></option><option value="PKM Bumiaji"></option><option value="PKM Ciptomulyo"></option><option value="PKM Cisadea"></option><option value="PKM Dampit"></option><option value="PKM Dau"></option><option value="PKM Dinoyo"></option><option value="PKM Donomulyo"></option><option value="PKM Gedangan"></option><option value="PKM Gondanglegi"></option><option value="PKM Gribig"></option><option value="PKM Jabung"></option><option value="PKM Janti"></option><option value="PKM Junrejo"></option><option value="PKM Kalipare"></option><option value="PKM Karangploso"></option><option value="PKM Kasembon"></option><option value="PKM Kedungkandang"></option><option value="PKM Kendalkerep"></option><option value="PKM Kendalsari"></option><option value="PKM Kepanjen"></option><option value="PKM Ketawang"></option><option value="PKM Kromengan"></option><option value="PKM Lawang"></option><option value="PKM Mojolangu"></option><option value="PKM Mulyorejo"></option><option value="PKM Ngajum"></option><option value="PKM Ngantang"></option><option value="PKM Pagak"></option><option value="PKM Pagelaran"></option><option value="PKM Pakis"></option><option value="PKM Pakisaji"></option><option value="PKM Pamotan"></option><option value="PKM Pandanwangi"></option><option value="PKM Polowijen"></option><option value="PKM Poncokusumo"></option><option value="PKM Pujon"></option><option value="PKM Rampal Celaket"></option><option value="PKM Singosari"></option><option value="PKM Sisir"></option><option value="PKM Sitiarjo"></option><option value="PKM Sumbermanjing Kulon"></option><option value="PKM Sumbermanjing Wetan"></option><option value="PKM Sumberpucung"></option><option value="PKM Tajinan"></option><option value="PKM Tirtoyudo"></option><option value="PKM Tumpang"></option><option value="PKM Turen"></option><option value="PKM Wagir"></option><option value="PKM Wajak"></option><option value="PKM Wonokerto"></option><option value="PKM Wonosari"></option></datalist><div style="font-size:10px;color:#6f6660;margin-top:3px;">daftar resmi Malang Raya (Kota Malang · Kab Malang · Kota Batu) — wilayah lain ketik manual</div></div>
         <div class="fld"><label class="fl">Rencana Tanggal VCT</label><input class="fi" id="f-tglvct" type="date"></div>
         <button class="btn clay" id="btn-vct">💾 Simpan Registrasi</button>
         <div class="err" id="f-err"></div>
@@ -422,6 +423,7 @@
           $('mi-ktp-scope').textContent = 'dampingan ' + CTX.pl;
         } else if (['admin', 'me', 'manager'].indexOf(CTX.role) >= 0) {
           CTX.pl = null; $('mi-ktp-scope').textContent = 'semua PL (akses internal)';
+          if (CTX.role === 'admin') { var ah = document.getElementById('adm-home'); if (ah) ah.style.display = 'block'; }
         } else {
           show('v-login');
           var er = $('li-err'); er.style.display = 'block';
