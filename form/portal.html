@@ -61,6 +61,7 @@
 </style>
 </head>
 <body>
+<script>function sahaTC(s){return String(s==null?"":s).trim().replace(/\s+/g," ").toLowerCase().replace(/(^|[\s'.\-\/])([a-z\u00e0-\u00ff])/g,function(m,p,c){return p+c.toUpperCase();});}</script>
 <div class="wrap">
   <header>
     <div class="logochip"><img src="logo.png" alt="Yayasan Sadar Hati"></div>
@@ -514,7 +515,7 @@
     var now = new Date().toISOString();
     try {
       await fs.setDoc(fs.doc(fb.db, 'ktp', idkd), {
-        idkd: idkd, nama: $('f-nama').value.trim(), julukan: $('f-julukan').value.trim(),
+        idkd: idkd, nama: sahaTC($('f-nama').value), julukan: sahaTC($('f-julukan').value),
         nik: nik, foto: CTX.fotoData, pl: plVal,
         status: CTX.status || 'Baru', tgllahir: $('f-tgllahir').value || '', idkd_placeholder: !!CTX.idkdPlaceholder,
         puskesmas: $('f-pkm').value.trim(), rencana_vct: $('f-tglvct').value || '',
@@ -525,7 +526,7 @@
         await fs.addDoc(fs.collection(fb.db, 'submissions'), {
           form: 'vct', instrumen: 'Registrasi VCT', pl: plVal, created_at: now, schema_version: 'vct-1.0',
           tahun: now.slice(0, 4), tanggal: now.slice(0, 10),
-          klien: { nama: $('f-nama').value.trim(), julukan: $('f-julukan').value.trim(), idkd: idkd, tgllahir: $('f-tgllahir').value || '', idkd_placeholder: !!CTX.idkdPlaceholder },
+          klien: { nama: sahaTC($('f-nama').value), julukan: sahaTC($('f-julukan').value), idkd: idkd, tgllahir: $('f-tgllahir').value || '', idkd_placeholder: !!CTX.idkdPlaceholder },
           status: CTX.status || 'Baru',
           data: { puskesmas: $('f-pkm').value.trim(), rencana_vct: $('f-tglvct').value || '', ktp_tersimpan: true }
         });

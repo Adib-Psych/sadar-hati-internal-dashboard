@@ -268,6 +268,7 @@
     ["nama", "julukan"].forEach(f => {
       const inp = el.querySelector("#saha-" + f);
       inp.addEventListener("input", () => { val[f] = inp.value.trim(); });
+      inp.addEventListener("blur", () => { inp.value = titleCase(inp.value); val[f] = inp.value; }); /* konsistensi Title Case */
     });
 
     const cari = el.querySelector("#saha-cari");
@@ -399,8 +400,12 @@
     if (ok) { ok.style.display = "block"; ok.innerHTML = "✓ Terisi dari roster: <strong>" + e.n + "</strong> (KD Lama)" + kecNote + plNote + areaNote + (kecNote ? "" : " Lengkapi Kecamatan/Desa & cek datanya."); }
   }
 
+  /* ---------- konsistensi nama: Title Case (First Letter Kapital) ---------- */
+  function titleCase(s){ return String(s == null ? '' : s).trim().replace(/\s+/g, ' ').toLowerCase().replace(/(^|[\s'.\-\/])([a-zà-ÿ])/g, function(m,p,c){ return p + c.toUpperCase(); }); }
+  window.SAHA_TITLECASE = titleCase;
+
   /* ---------- API ---------- */
-  function getIdentity() { return { ...val }; }
+  function getIdentity() { return { ...val, nama: titleCase(val.nama), julukan: titleCase(val.julukan) }; }
   const REQ = ["tahun", "pl", "tanggal", "kotakab", "kecamatan", "status", "nama", "julukan", "idkd", "jk", "tgllahir"]; /* desa OPSIONAL (feedback PL 17 Jul) */
   function isValid() { return REQ.every(k => val[k] != null && String(val[k]).trim() !== ""); }
   function missing() { return REQ.filter(k => !(val[k] != null && String(val[k]).trim() !== "")); }

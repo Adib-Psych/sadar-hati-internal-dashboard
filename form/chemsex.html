@@ -449,6 +449,7 @@
 </style>
 </head>
 <body>
+<script>function sahaTC(s){return String(s==null?"":s).trim().replace(/\s+/g," ").toLowerCase().replace(/(^|[\s'.\-\/])([a-z\u00e0-\u00ff])/g,function(m,p,c){return p+c.toUpperCase();});}</script>
 <div class="container">
   <div class="saha-letterhead" style="display:flex;justify-content:center;padding:16px 0 6px;"><img src="logo.png" alt="Yayasan Sadar Hati" style="height:48px;width:auto;"></div>
 
@@ -1399,8 +1400,8 @@
         tanggal: answers.tanggal
       },
       klien: {
-        nama: answers.nama,
-        julukan: answers.julukan,
+        nama: sahaTC(answers.nama),
+        julukan: sahaTC(answers.julukan),
         idkd: answers.idkd,
         jk: answers.jk,
         usia: answers.usia,
