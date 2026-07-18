@@ -5293,6 +5293,11 @@
             <p>Pencatatan hotspot untuk pemetaan: nama &amp; tipe hotspot, jam aktif, contact person, perkiraan KD + pin lokasi GPS.</p>
             <div class="ml-actions"><button class="ml-fill" onclick="SAHA_GO('l1-form-checkin')">📝 Isi di sini</button><button class="ml-copy" data-url="trial/checkin.html" onclick="SAHA_COPY(this)">🔗 Copy link</button><button class="ml-qr" data-url="trial/checkin.html" onclick="SAHA_QR(this)">📱 QR</button></div>
           </div>
+          <div class="ml-card srq" style="border-left-color:#4e3859;">
+            <div class="tag">Khusus PL · Login</div><h3>🪪 Portal PL (VCT &amp; Kartu Identitas)</h3>
+            <p>Satu link untuk PL: Papan Entry, Registrasi VCT + simpan foto KTP klien (preview-only ber-watermark, per-PL, akses tercatat). Wajib login akun PL.</p>
+            <div class="ml-actions"><button class="ml-copy" data-url="trial/portal.html" onclick="SAHA_COPY(this)">🔗 Copy link</button><button class="ml-qr" data-url="trial/portal.html" onclick="SAHA_QR(this)">📱 QR</button></div>
+          </div>
         </div>
         <div class="ml-note">💡 <strong>Cara pakai:</strong> <strong>"Isi di sini"</strong> = mengisi langsung di halaman ini (staf/admin). <strong>"Copy link"</strong> = bagikan tautannya ke petugas lapangan lewat WA — mereka isi dari HP masing-masing. <strong>"QR"</strong> = tampilkan &amp; unduh kode scan per form (tinggal discan kamera HP, tanpa ketik link). Semua form juga tersedia dalam satu halaman di <a href="trial/" target="_blank" rel="noopener">dashboard.sadarhati.org/trial</a>.</div>
       </section>
@@ -7042,7 +7047,7 @@ function updateBreadcrumb(item) {
   }
 
   // ===== PANEL ADMIN (tahap 1) =====
-  window.SAHA_FORM_LABELS={chemsex:'🔥 Penjangkauan',dast10:'💊 DAST-10',srq29:'🧠 SRQ-29',ira:'⚕️ IRA',gra:'👥 GRA',konseling:'💬 Konseling','bulanan-kl':'📆 Bulanan Korlap',prevkit:'🎒 Prev-Kit',checkin:'📍 Check-In',master:'📋 Master List'};
+  window.SAHA_FORM_LABELS={chemsex:'🔥 Penjangkauan',dast10:'💊 DAST-10',srq29:'🧠 SRQ-29',ira:'⚕️ IRA',gra:'👥 GRA',konseling:'💬 Konseling','bulanan-kl':'📆 Bulanan Korlap',prevkit:'🎒 Prev-Kit',checkin:'📍 Check-In',vct:'🩺 Registrasi VCT',master:'📋 Master List'};
   window.SAHA_ROLE='staff';
   function applyRoleUI(){
     const r=window.SAHA_ROLE;
