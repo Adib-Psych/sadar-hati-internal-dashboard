@@ -871,7 +871,7 @@
     <div class="brand">
       <div class="logo">Sadar Hati Foundation</div>
       <div class="est">est. 2002 · Malang</div>
-      <div class="system-tag">Integrated Hub v0.54 · Yayasan Sadar Hati</div>
+      <div class="system-tag">Integrated Hub v0.56 · Yayasan Sadar Hati</div>
     </div>
 
         <nav class="nav">
@@ -901,6 +901,8 @@
             </div>
           </div>
               <a class="nav-item" data-section="l2-clients"><span class="icon">👥</span> Clients Database</a>
+          <div class="nav-divider-label role-admin-only">Kelola &amp; Sistem</div>
+          <a class="nav-item role-admin-only" data-section="l2-admin"><span class="icon">🛡️</span> Panel Admin · Kelola Entry · Sistem</a>
         </div>
       </div>
     </nav>
@@ -913,7 +915,7 @@
           akses sesuai role akun
         </div>
       </div>
-      <div>v0.54 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
+      <div>v0.56 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
     <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#2f6d9e,#1f4a6e);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
@@ -1336,6 +1338,78 @@
 
 
       <!-- ====== 2B LOGIN GATE ====== -->
+      <section class="section" id="l2-admin">
+        <div class="hero"><div class="eyebrow">Layer 2B · Analitik &amp; Data · Kontrol</div><h1>🛡️ Panel Admin</h1><p class="lede">Pusat pemantauan aktivitas dashboard: siapa entry apa &amp; kapan, rekap per form dan per petugas, plus identitas akun login.</p></div>
+        <div id="adm-denied" class="placeholder-banner archival"><span class="icon">🔒</span><div><strong>Halaman ini khusus akun Admin.</strong> Akun Anda tidak memiliki role admin — hubungi Adib bila perlu akses.</div></div>
+        <div class="adm-grids">
+         <div id="adm-kelola" style="background:#fff;border:1px solid var(--border,#e7ddd3);border-radius:14px;padding:18px 20px;margin-bottom:16px;">
+           <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;">
+             <div><div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate,#6f6660);font-weight:700;">Kelola Entry</div>
+             <div style="font-family:'Lora',Georgia,serif;font-size:16.5px;color:#2c2724;">🛠️ Edit · Arsip · Hapus data masuk</div></div>
+             <input id="adm-k-q" placeholder="🔍 cari nama / PL / form..." style="padding:8px 12px;border:1.5px solid #e7ddd3;border-radius:9px;font-size:12.5px;background:#fbf7f2;min-width:220px;font-family:inherit;">
+           </div>
+           <div style="max-height:440px;overflow:auto;border:1px solid #f0eaf4;border-radius:10px;">
+             <table class="saha-rawtable"><thead><tr><th>Waktu</th><th>Form</th><th>PL</th><th>Klien</th><th>Ringkas</th><th>Aksi</th></tr></thead>
+             <tbody id="adm-k-body"><tr><td colspan="6" class="saha-rawempty">Login sebagai admin untuk memuat.</td></tr></tbody></table>
+           </div>
+           <div style="font-size:10px;color:#a89f97;margin-top:8px;">🗄️ <strong>Arsip</strong> = pindah ke lemari arsip (bisa dipulihkan) · 🗑️ <strong>Hapus</strong> = salinan otomatis masuk arsip dulu, baru dihapus · setiap aksi tercatat (oleh siapa &amp; kapan).</div>
+         </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:16px;">
+          <div style="background:#fff;border:1px solid var(--border,#e7ddd3);border-radius:14px;padding:18px 20px;">
+            <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate,#6f6660);font-weight:700;margin-bottom:8px;">👤 Akun Login</div>
+            <div style="font-size:14px;font-weight:700;" id="adm-email">—</div>
+            <div style="font-size:11px;color:var(--slate,#6f6660);margin-top:6px;">UID: <code id="adm-uid" style="font-size:10px;background:#f5efe7;padding:2px 6px;border-radius:4px;">—</code> <button id="adm-uid-copy" style="font-size:10px;border:1px solid #ddd3c8;background:#fff;border-radius:6px;padding:2px 8px;cursor:pointer;">salin</button></div>
+            <div style="margin-top:10px;"><span id="adm-role" style="display:inline-block;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;padding:5px 12px;border-radius:20px;background:#f1ede8;color:#7a746e;">Staf (default)</span></div>
+          </div>
+          <div style="background:#fff;border:1px solid var(--border,#e7ddd3);border-radius:14px;padding:18px 20px;">
+            <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate,#6f6660);font-weight:700;margin-bottom:8px;">📥 Total Entry Database</div>
+            <div style="font-size:34px;font-weight:800;color:var(--wine,#a83244);line-height:1;" id="adm-total">—</div>
+            <div style="font-size:11.5px;color:var(--slate,#6f6660);margin-top:6px;" id="adm-total-note">menunggu login…</div>
+          </div>
+          <div style="background:#fff;border:1px solid var(--border,#e7ddd3);border-radius:14px;padding:18px 20px;">
+            <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate,#6f6660);font-weight:700;margin-bottom:8px;">⏱️ Entry Terakhir</div>
+            <div style="font-size:14px;font-weight:700;" id="adm-last">—</div>
+            <div style="font-size:11.5px;color:var(--slate,#6f6660);margin-top:6px;" id="adm-last-who">—</div>
+          </div>
+        </div>
+
+        <div style="background:#fff;border:1px solid var(--border,#e7ddd3);border-radius:14px;padding:18px 20px;margin-bottom:16px;">
+          <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate,#6f6660);font-weight:700;margin-bottom:10px;">🔴 Aktivitas Terbaru (live · 30 entry terakhir)</div>
+          <div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+            <thead><tr style="text-align:left;color:var(--slate,#6f6660);font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;"><th style="padding:7px 10px;">Waktu</th><th style="padding:7px 10px;">Form</th><th style="padding:7px 10px;">Petugas (PL/Korlap)</th><th style="padding:7px 10px;">Referensi</th></tr></thead>
+            <tbody id="adm-feed"><tr><td colspan="4" style="padding:14px 10px;color:var(--slate,#6f6660);">Login untuk melihat aktivitas.</td></tr></tbody>
+          </table></div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-bottom:16px;">
+          <div style="background:#fff;border:1px solid var(--border,#e7ddd3);border-radius:14px;padding:18px 20px;">
+            <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate,#6f6660);font-weight:700;margin-bottom:10px;">📊 Entry per Form</div>
+            <div id="adm-perform" style="font-size:12.5px;line-height:2;color:var(--navy,#2c2724);">—</div>
+          </div>
+          <div style="background:#fff;border:1px solid var(--border,#e7ddd3);border-radius:14px;padding:18px 20px;">
+            <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate,#6f6660);font-weight:700;margin-bottom:10px;">🧑‍🤝‍🧑 Aktivitas per Petugas (entry terakhir)</div>
+            <div id="adm-perpl" style="font-size:12.5px;line-height:2;color:var(--navy,#2c2724);">—</div>
+          </div>
+        </div>
+
+        </div><div style="background:var(--gold-tint,#efe9f4);border:1px solid #cdbcd8;border-left:5px solid var(--gold,#6b4d7a);border-radius:12px;padding:16px 20px;font-size:12.5px;line-height:1.65;color:#4e3859;">
+          <strong>ℹ️ Role &amp; akses (AKTIF sejak v0.22):</strong> role akun dibaca dari koleksi <code>roles</code> di Firestore — <strong>[FIREBASE console · tangan Adib]</strong> buat dokumen <code>roles/&lt;UID di atas&gt;</code> berisi <code>{ role: "admin", nama: "Adib" }</code> lalu apply rule tambahan (file <code>firestore_rules_FULL_v3.txt</code> sudah disiapkan + tersalin di clipboard). Setelah itu badge di kartu Akun otomatis jadi ADMIN. Akun lain: buat <code>roles/&lt;uid&gt;</code> dgn role <code>manager</code> / <code>staff</code> / <code>me</code>. Pembatasan fitur per-role menyusul di tahap 2 setelah role hidup.
+        </div>
+      
+        <div style="background:#fff;border:1px solid var(--border,#e7ddd3);border-radius:14px;padding:18px 20px;margin-top:16px;">
+          <div style="font-size:10px;font-weight:800;letter-spacing:1.2px;color:#6f6660;text-transform:uppercase;">Log Akses KTP</div>
+          <h3 style="font-family:'Lora',Georgia,serif;margin:4px 0 10px;">👁 Siapa membuka foto KTP siapa, kapan</h3>
+          <table style="width:100%;border-collapse:collapse;font-size:12px;">
+            <thead><tr style="text-align:left;color:#6f6660;font-size:10px;text-transform:uppercase;letter-spacing:.6px;"><th style="padding:6px 10px;">Waktu</th><th style="padding:6px 10px;">Oleh</th><th style="padding:6px 10px;">ID KD</th></tr></thead>
+            <tbody id="ktpakses-body"><tr><td colspan="3" style="padding:12px 10px;color:#6f6660;">Memuat…</td></tr></tbody>
+          </table>
+        </div>
+        <div style="background:#f5f0f8;border:1px solid #e0d2ea;border-radius:14px;padding:16px 20px;margin-top:14px;font-size:12px;color:#4e3859;line-height:1.6;">
+          <strong>💾 Status Backup:</strong> otomatis tiap <strong>Senin 01:00 UTC</strong> ke Mac Adib (semua koleksi, termasuk KTP & struk) + uji privasi anon. Mirror foto KTP ke Google Drive: minta Claude <em>"sync KTP ke Drive"</em>. Backup manual kapan pun: bilang <em>"backup sekarang"</em>.
+        </div>
+      </section>
+
       <section class="section active" id="l2b-login">
         <div class="hero"><div class="eyebrow">🔴 Layer 2B · Internal Dashboard</div><h1>🔒 Area Internal — Login Staf</h1><p class="lede">Bagian ini berisi data sensitif: donor aktif &amp; budget, output form lapangan, M&amp;E, dan database klien. Hanya staf Sadar Hati yang login yang bisa membuka. Form entry (Layer 2A) tetap terbuka tanpa login untuk PL.</p></div>
         <div class="lh-login">
