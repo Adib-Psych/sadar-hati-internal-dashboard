@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Papan Entry Hari Ini · Sadar Hati</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#a83244">
+<style>
+  :root { --clay:#a83244; --clay-deep:#7d2433; --cream:#fbf7f2; --ink:#2c2724; --slate:#6f6660; --border:#e7ddd3; --plum:#6b4d7a; --plum-deep:#4e3859; --sage:#8a9a7b; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI', system-ui, -apple-system, sans-serif; background:var(--cream); color:var(--ink); min-height:100vh; }
+  .wrap { max-width:560px; margin:0 auto; padding-bottom:40px; }
+  header { background:linear-gradient(150deg, var(--clay) 0%, var(--clay-deep) 85%); color:#fff; padding:20px 18px 16px; border-radius:0 0 22px 22px; }
+  header h1 { font-family:Georgia, 'Times New Roman', serif; font-size:21px; }
+  header .tgl { font-size:11px; color:#e9c1c8; margin-top:2px; }
+  .live-row { display:flex; justify-content:space-between; align-items:center; margin-top:12px; }
+  .tot { font-size:12px; color:#e9c1c8; }
+  .tot strong { color:#fff; font-size:22px; margin-right:3px; }
+  .pulse { display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,.16); border-radius:12px; padding:4px 11px; font-size:10px; font-weight:700; letter-spacing:.5px; }
+  .dot { width:8px; height:8px; border-radius:50%; background:#8fdc9a; animation:blink 1.6s infinite; }
+  @keyframes blink { 50% { opacity:.35; } }
+  main { padding:14px 14px 0; }
+  .note24 { font-size:10.5px; color:var(--slate); background:#f5efe7; border:1px solid var(--border); border-radius:10px; padding:8px 12px; text-align:center; margin-bottom:12px; line-height:1.5; }
+  .state { text-align:center; padding:34px 18px; color:var(--slate); font-size:13px; line-height:1.7; }
+  .state .big { font-size:38px; margin-bottom:8px; }
+  .state.err { color:var(--clay-deep); }
+  .plcard { background:#fff; border:1.5px solid var(--border); border-radius:16px; margin-bottom:12px; overflow:hidden; }
+  .plcard.top1 { border-color:var(--clay); box-shadow:0 5px 18px rgba(168,50,68,.13); }
+  .plhead { display:flex; justify-content:space-between; align-items:center; padding:11px 14px; background:#fdf3f5; }
+  .plcard.top1 .plhead { background:linear-gradient(90deg, var(--clay), #94395c); }
+  .plname { font-weight:800; font-size:14.5px; color:var(--clay-deep); }
+  .plcard.top1 .plname { color:#fff; }
+  .plnum { font-size:20px; font-weight:800; color:var(--clay); line-height:1; text-align:right; }
+  .plcard.top1 .plnum { color:#fff; }
+  .plnum small { display:block; font-size:8.5px; font-weight:600; opacity:.7; letter-spacing:.5px; }
+  .chips { display:flex; gap:6px; flex-wrap:wrap; padding:9px 14px 2px; }
+  .fc { font-size:10px; font-weight:700; border-radius:10px; padding:3px 9px; background:#f3eef7; color:var(--plum-deep); }
+  .rows { padding:6px 14px 12px; }
+  .er { display:flex; justify-content:space-between; align-items:center; font-size:12px; color:#4a4340; padding:5px 0; border-bottom:1px dashed #f0eaf4; }
+  .er:last-child { border-bottom:none; }
+  .er .t { color:#a89f97; font-size:10.5px; }
+  .krx { background:#f3eef7; color:var(--plum-deep); border-radius:8px; padding:0 6px; font-size:9px; font-weight:700; margin-left:5px; }
+  .more { font-size:10px; color:#a89f97; padding-top:4px; }
+  footer { text-align:center; font-size:10px; color:#a89f97; padding:18px 14px 0; line-height:1.6; }
+  .refresh-note { text-align:center; font-size:10px; color:#a89f97; margin-top:2px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div style="display:flex;justify-content:flex-start;margin-bottom:10px;"><span style="background:#fff;border-radius:10px;padding:5px 12px;display:inline-flex;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.18);"><img src="logo.png" alt="Yayasan Sadar Hati" style="height:30px;width:auto;"></span></div>
+    <h1>📊 Papan Entry Hari Ini</h1>
+    <div class="tgl" id="tgl">—</div>
+    <div class="live-row">
+      <span class="tot"><strong id="tot">0</strong> entry masuk</span>
+      <span class="pulse"><span class="dot"></span> LIVE · update sendiri</span>
+    </div>
+  </header>
+  <main>
+    <div class="note24">🔒 Papan ini hanya menampilkan <strong>24 jam terakhir</strong>: nama/julukan &amp; jam masuk saja — tanpa hasil tes &amp; tanpa data pribadi lain.</div>
+    <div id="board"><div class="state" id="loading"><div class="big">⏳</div>Memuat papan…</div></div>
+  </main>
+  <footer>Yayasan Sadar Hati · papan ini terkunci otomatis 24 jam di server<br>form: dashboard.sadarhati.org/form</footer>
+</div>
+
+<script>
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyC7127G5fsZprEGfeiqLrRqevTg6Qs2fko",
+    authDomain: "sadar-hati-hub.firebaseapp.com",
+    projectId: "sadar-hati-hub",
+    storageBucket: "sadar-hati-hub.firebasestorage.app",
+    messagingSenderId: "576423718259",
+    appId: "1:576423718259:web:76600bbdf4f06892b36906"
+  };
+
+  const LBL = { chemsex:'🔥 Penjangkauan', dast10:'💊 DAST', srq29:'🧠 SRQ', ira:'⚕️ IRA', gra:'👥 GRA', konseling:'💬 Konseling', 'bulanan-kl':'📆 Bulanan', prevkit:'🎒 Kit', checkin:'📍 Check-In', vct:'🩺 VCT' };
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  document.getElementById('tgl').textContent = new Date().toLocaleDateString('id-ID', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+
+  function render(rows) {
+    const board = document.getElementById('board');
+    document.getElementById('tot').textContent = rows.length;
+    if (!rows.length) {
+      board.innerHTML = '<div class="state"><div class="big">📭</div><strong>Belum ada entry yang masuk hari ini.</strong><br>Begitu ada yang submit form, kartunya muncul di sini otomatis —<br>tidak perlu refresh.</div>';
+      return;
+    }
+    // group by PL
+    const byPL = {};
+    rows.forEach(r => { const k = r.pl || '-'; (byPL[k] = byPL[k] || []).push(r); });
+    const groups = Object.entries(byPL).sort((a, b) => b[1].length - a[1].length);
+    let html = '';
+    groups.forEach(([pl, list], gi) => {
+      const byForm = {};
+      list.forEach(r => { const f = r.form || '-'; byForm[f] = (byForm[f] || 0) + 1; });
+      const chips = Object.entries(byForm).sort((a, b) => b[1] - a[1])
+        .map(([f, n]) => '<span class="fc">' + (LBL[f] || esc(f)) + ' ×' + n + '</span>').join('');
+      const shown = list.slice(0, 8);
+      const items = shown.map(r => {
+        const d = new Date(r.jam);
+        const t = isNaN(d) ? '' : d.toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' });
+        return '<div class="er"><span>' + (LBL[r.form] ? LBL[r.form].split(' ')[0] : '📄') + ' ' + esc(r.nm || r.ini || '-') + (r.krx ? '<span class="krx">↻</span>' : '') + '</span><span class="t">' + t + '</span></div>';
+      }).join('');
+      const more = list.length > 8 ? '<div class="more">+ ' + (list.length - 8) + ' entry lain…</div>' : '';
+      html += '<div class="plcard' + (gi === 0 ? ' top1' : '') + '">'
+        + '<div class="plhead"><span class="plname">' + (gi === 0 ? '⭐ ' : '') + esc(pl) + '</span><span class="plnum">' + list.length + '<small>ENTRY</small></span></div>'
+        + '<div class="chips">' + chips + '</div>'
+        + '<div class="rows">' + items + more + '</div></div>';
+    });
+    board.innerHTML = html;
+  }
+  window.__PAPAN_RENDER = render; /* utk QA */
+
+  let _terhubung = false;
+  setTimeout(() => {
+    if (!_terhubung && document.getElementById('loading')) {
+      document.getElementById('board').innerHTML = '<div class="state err"><div class="big">📴</div><strong>Belum bisa terhubung.</strong><br>Cek jaringan HP lalu buka ulang halaman ini.</div>';
+    }
+  }, 15000);
+  (async () => {
+    try {
+      const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js");
+      const { getFirestore, collection, query, where, orderBy, onSnapshot, Timestamp } = await import("https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js");
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const batas = Timestamp.fromMillis(Date.now() - 24 * 3600 * 1000);
+      const q = query(collection(db, 'entry_log'), where('ts', '>', batas), orderBy('ts', 'desc'));
+      onSnapshot(q, snap => {
+        _terhubung = true;
+        const rows = [];
+        snap.forEach(d => rows.push(d.data()));
+        render(rows);
+      }, err => {
+        _terhubung = true;
+        console.error('[Papan]', err);
+        document.getElementById('board').innerHTML = '<div class="state err"><div class="big">🔧</div><strong>Papan belum aktif.</strong><br>Aturan server (rules v4) belum dipasang, atau jaringan bermasalah.<br><span style="font-size:11px;color:#a89f97;">' + esc(err.code || err.message || '') + '</span></div>';
+      });
+    } catch (e) {
+      _terhubung = true;
+      document.getElementById('board').innerHTML = '<div class="state err"><div class="big">📴</div><strong>Tidak dapat terhubung.</strong><br>Cek jaringan lalu buka ulang halaman ini.</div>';
+    }
+  })();
+</script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}</script>
+</body>
+</html>
