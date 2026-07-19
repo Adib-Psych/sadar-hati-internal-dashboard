@@ -902,6 +902,15 @@
   body.role-admin #l2-out-dast10 .me-rawzone, body.role-me #l2-out-dast10 .me-rawzone{display:block;}
   body.role-admin #l2-out-dast10 .me-rawblocked, body.role-me #l2-out-dast10 .me-rawblocked{display:none;}
 </style>
+
+<style id="me-house-css2">
+  /* raw gate generik berbasis kelas — berlaku utk SRQ & rumah baru berikutnya (DAST tetap pakai gate id-nya sendiri) */
+  .me-zone.me-raw .me-rawzone{display:none;}
+  .me-zone.me-raw .me-rawblocked{display:block;color:#a89f97;font-size:12px;background:#fff;border:1px solid var(--line,#e7ddd3);border-radius:12px;padding:22px;text-align:center;}
+  body.role-admin .me-zone.me-raw .me-rawzone, body.role-me .me-zone.me-raw .me-rawzone{display:block;}
+  body.role-admin .me-zone.me-raw .me-rawblocked, body.role-me .me-zone.me-raw .me-rawblocked{display:none;}
+  .me-jpg{border:1px solid var(--line,#e7ddd3);background:#faf7f2;color:#1f4a6e;font-family:inherit;font-size:9.5px;font-weight:800;padding:5px 8px;border-radius:7px;cursor:pointer;white-space:nowrap;}
+</style>
 </head>
 <body>
 
@@ -912,7 +921,7 @@
     <div class="brand">
       <div class="logo">Sadar Hati Foundation</div>
       <div class="est">est. 2002 · Malang</div>
-      <div class="system-tag">Integrated Hub v0.62 · Yayasan Sadar Hati</div>
+      <div class="system-tag">Integrated Hub v0.63 · Yayasan Sadar Hati</div>
     </div>
 
         <nav class="nav">
@@ -958,7 +967,7 @@
           akses sesuai role akun
         </div>
       </div>
-      <div>v0.62 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
+      <div>v0.63 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
     <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#2f6d9e,#1f4a6e);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
@@ -1642,71 +1651,38 @@
 
       <!-- ====== 2B · SRQ-29 OUTPUT HOUSE (placeholder) ====== -->
       <section class="section" id="l2-out-srq29">
-
-        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>🧠 SRQ-29 — Skrining Kesehatan Jiwa</h1><p class="lede"><strong>Self-Reporting Questionnaire</strong> (WHO) mengukur beban kesehatan jiwa 30 hari terakhir: depresi/ansietas, gejala psikotik, trauma, dan pikiran bunuh diri. Dari instrumen <strong>Assessment Mental Health (KoBo)</strong>. Angka agregat, nol identitas.</p></div>
-
-        <div class="cards">
-          <div class="card"><div class="label">Total Di-skrining</div><div class="value">1.423</div><div class="desc">klien menjalani SRQ-29</div></div>
-          <div class="card" style="background:linear-gradient(135deg,var(--clay) 0%,var(--clay-deep) 100%);color:#fff;border-color:var(--clay-deep);"><div class="label" style="color:#fff;opacity:.85;">Kemungkinan Gangguan Mental Umum</div><div class="value" style="color:#fff;">20,3%</div><div class="desc" style="color:#fff;opacity:.9;">289 klien · SRQ-20 skor ≥6</div></div>
-          <div class="card" style="background:var(--clay-tint);border-color:var(--clay);"><div class="label">Pikiran Bunuh Diri (item 17)</div><div class="value" style="color:var(--clay-deep);">39</div><div class="desc">2,7% — perlu tindak lanjut segera</div></div>
-          <div class="card"><div class="label">Gejala Psikotik</div><div class="value">15,1%</div><div class="desc">215 klien · item 22–24</div></div>
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>🧠 SRQ-29 — Skrining Kesehatan Jiwa</h1><p class="lede"><strong>Self-Reporting Questionnaire</strong> (WHO) mengukur beban kesehatan jiwa 30 hari terakhir: depresi/ansietas (CMD), gejala psikotik, trauma/PTSD, dan pikiran bunuh diri. Zona 1 = data live entri dashboard (per periode); Zona 2 = baseline historis KoBo; Zona 3 = data mentah (khusus Admin · M&amp;E · Direktur).</p></div>
+        <!-- ZONA 1 · LIVE -->
+        <div class="me-zone me-live">
+          <div class="me-zhead"><span class="me-zt">1 · Data Live Dashboard</span><span class="me-ztag l"><span class="me-livechip"><span class="me-dot"></span>LIVE</span></span>
+            <div class="me-seg" id="sq-seg"><button data-p="bulan">Bulanan</button><button data-p="kuartal">Kuartalan</button><button data-p="tahun" class="on">Tahunan</button></div><span class="me-pbig" id="sq-pbig">—</span></div>
+          <div class="me-zsub">Dihitung otomatis dari entri form SRQ-29 (pakai tanggal entri). Ambang: CMD = SRQ-20 ≥6 · PTSD = ≥3 gejala · Psikotik = ≥1 gejala.</div>
+          <div class="cards" id="sq-live-kpi"></div>
+          <div class="me-grid" id="sq-live-grid"></div>
         </div>
-
-        <h2 class="section-h2" style="margin-top:30px;">🔗 Indikator Silang — Makin Berat Adiksi, Makin Tinggi Beban Jiwa</h2>
-        <p style="font-size:13px;color:var(--slate);line-height:1.6;margin:4px 0 14px;">Menyilangkan <strong>keparahan DAST-10</strong> dengan <strong>kemungkinan gangguan mental (SRQ-20 ≥6)</strong> pada 1.423 klien yang mengisi keduanya. Terlihat gradien jelas: dari <strong>13,8%</strong> di adiksi rendah melonjak ke <strong>66,7%</strong> di adiksi parah — bukti kuat kebutuhan <strong>layanan napza & jiwa yang terintegrasi</strong>.</p>
-        <div class="xtab"><div class="xrow"><div class="xlab">DAST 1–2 · Rendah</div><div class="xtrack"><div class="xfill" style="width:13.8%;background:#a06b8a;">14%</div></div><div class="xval">13,8% · n=983</div></div><div class="xrow"><div class="xlab">DAST 3–5 · Sedang</div><div class="xtrack"><div class="xfill" style="width:31.7%;background:#6b4d7a;">32%</div></div><div class="xval">31,7% · n=378</div></div><div class="xrow"><div class="xlab">DAST 6–8 · Substansial</div><div class="xtrack"><div class="xfill" style="width:54.7%;background:#c96b2f;">55%</div></div><div class="xval">54,7% · n=53</div></div><div class="xrow"><div class="xlab">DAST 9–10 · Parah</div><div class="xtrack"><div class="xfill" style="width:66.7%;background:#a83244;">67%</div></div><div class="xval">66,7% · n=6</div></div></div>
-
-        <h2 class="section-h2" style="margin-top:30px;">🩺 Beban per Domain Kesehatan Jiwa</h2>
-        <div class="xtab"><div class="xrow"><div class="xlab">Gangguan Mental Umum (SRQ-20 ≥6)</div><div class="xtrack"><div class="xfill" style="width:81.2%;background:#a83244;">20%</div></div><div class="xval">20,3% · 289 org</div></div><div class="xrow"><div class="xlab">Gejala Psikotik (item 22–24)</div><div class="xtrack"><div class="xfill" style="width:60.4%;background:#c96b2f;">15%</div></div><div class="xval">15,1% · 215 org</div></div><div class="xrow"><div class="xlab">PTSD ≥3 gejala (item 25–29)</div><div class="xtrack"><div class="xfill" style="width:30.4%;background:#6b4d7a;"></div></div><div class="xval">7,6% · 108 org</div></div><div class="xrow"><div class="xlab">Pikiran mengakhiri hidup (item 17)</div><div class="xtrack"><div class="xfill" style="width:10.8%;background:#7d2433;"></div></div><div class="xval">2,7% · 39 org</div></div></div>
-
-        <h2 class="section-h2" style="margin-top:30px;">🧾 Rincian 29 Item (data tabel · bisa di-export)</h2>
-        <p style="font-size:13px;color:var(--slate);line-height:1.6;margin:4px 0 10px;"><strong>Klik judul kolom</strong> buat sortir; ketik gejala/domain buat cari; <strong>Export CSV</strong> ikut hasil.</p>
-        <div class="saha-tblbox">
-  <div class="saha-tbar">
-    <input class="saha-tsearch" placeholder="🔍 Cari gejala / domain...">
-    <button class="lh-btn-sm" onclick="SAHA_EXPORT_TABLE(this)">📥 Export CSV</button>
-    <span class="saha-thint">↕ klik judul kolom buat sortir</span>
-  </div>
-  <div class="lh-table-wrap">
-    <table class="lh-table saha-sortable"><thead><tr><th>Item SRQ-29</th><th>Domain</th><th>Jawab 'Ya'</th><th>% Ya</th></tr></thead>
-    <tbody>
-<tr><td style="font-weight:600;">1. Apakah Anda sering menderita sakit kepala?</td><td>Depresi/Ansietas (CMD)</td><td>403</td><td>28,3%</td></tr>
-<tr><td style="font-weight:600;">2. Apakah Anda kehilangan nafsu makan?</td><td>Depresi/Ansietas (CMD)</td><td>416</td><td>29,2%</td></tr>
-<tr><td style="font-weight:600;">3. Apakah tidur Anda tidak lelap?</td><td>Depresi/Ansietas (CMD)</td><td>563</td><td>39,6%</td></tr>
-<tr><td style="font-weight:600;">4. Apakah Anda mudah menjadi takut?</td><td>Depresi/Ansietas (CMD)</td><td>140</td><td>9,8%</td></tr>
-<tr><td style="font-weight:600;">5. Apakah Anda merasa cemas, tegang dan khawatir?</td><td>Depresi/Ansietas (CMD)</td><td>264</td><td>18,6%</td></tr>
-<tr><td style="font-weight:600;">6. Apakah tangan Anda gemetar?</td><td>Depresi/Ansietas (CMD)</td><td>229</td><td>16,1%</td></tr>
-<tr><td style="font-weight:600;">7. Apakah Anda mengalami gangguan pencernaan?</td><td>Depresi/Ansietas (CMD)</td><td>214</td><td>15,0%</td></tr>
-<tr><td style="font-weight:600;">8. Apakah Anda merasa sulit berpikir jernih?</td><td>Depresi/Ansietas (CMD)</td><td>219</td><td>15,4%</td></tr>
-<tr><td style="font-weight:600;">9. Apakah Anda merasa tidak bahagia?</td><td>Depresi/Ansietas (CMD)</td><td>147</td><td>10,3%</td></tr>
-<tr><td style="font-weight:600;">10. Apakah Anda lebih sering menangis?</td><td>Depresi/Ansietas (CMD)</td><td>98</td><td>6,9%</td></tr>
-<tr><td style="font-weight:600;">11. Apakah Anda merasa sulit untuk menikmati aktivitas sehari-hari?</td><td>Depresi/Ansietas (CMD)</td><td>161</td><td>11,3%</td></tr>
-<tr><td style="font-weight:600;">12. Apakah Anda mengalami kesulitan untuk mengambil keputusan?</td><td>Depresi/Ansietas (CMD)</td><td>226</td><td>15,9%</td></tr>
-<tr><td style="font-weight:600;">13. Apakah aktivitas/tugas sehari-hari Anda terbengkalai?</td><td>Depresi/Ansietas (CMD)</td><td>140</td><td>9,8%</td></tr>
-<tr><td style="font-weight:600;">14. Apakah Anda merasa tidak mampu berperan dalam kehidupan ini?</td><td>Depresi/Ansietas (CMD)</td><td>88</td><td>6,2%</td></tr>
-<tr><td style="font-weight:600;">15. Apakah Anda kehilangan minat terhadap banyak hal?</td><td>Depresi/Ansietas (CMD)</td><td>191</td><td>13,4%</td></tr>
-<tr><td style="font-weight:600;">16. Apakah Anda merasa tidak berharga?</td><td>Depresi/Ansietas (CMD)</td><td>120</td><td>8,4%</td></tr>
-<tr><td style="font-weight:600;">17. Apakah Anda mempunyai pikiran untuk mengakhiri hidup Anda?</td><td>Depresi/Ansietas (CMD)</td><td>39</td><td>2,7%</td></tr>
-<tr><td style="font-weight:600;">18. Apakah Anda merasa lelah sepanjang waktu?</td><td>Depresi/Ansietas (CMD)</td><td>321</td><td>22,6%</td></tr>
-<tr><td style="font-weight:600;">19. Apakah Anda merasa tidak enak di perut?</td><td>Depresi/Ansietas (CMD)</td><td>230</td><td>16,2%</td></tr>
-<tr><td style="font-weight:600;">20. Apakah Anda mudah lelah?</td><td>Depresi/Ansietas (CMD)</td><td>471</td><td>33,1%</td></tr>
-<tr><td style="font-weight:600;">21. Apakah Anda minum alkohol lebih banyak dari biasanya atau Apakah Anda menggunakan narkoba?</td><td>Napza/Alkohol</td><td>599</td><td>42,1%</td></tr>
-<tr><td style="font-weight:600;">22. Apakah Anda yakin bahwa seseorang mencoba mencelakai Anda dengan cara tertentu?</td><td>Psikotik</td><td>59</td><td>4,1%</td></tr>
-<tr><td style="font-weight:600;">23. Apakah ada yang mengganggu atau hal yang tidak biasa dalam pikiran Anda?</td><td>Psikotik</td><td>144</td><td>10,1%</td></tr>
-<tr><td style="font-weight:600;">24. Apakah Anda pernah mendengar suara tanpa tahu sumbernya atau yang orang lain tidak dapat mendengar?</td><td>Psikotik</td><td>76</td><td>5,3%</td></tr>
-<tr><td style="font-weight:600;">25. Apakah Anda mengalami mimpi yang mengganggu tentang suatu bencana/musibah atau adakah saat-saat Anda seolah mengalami kembali kejadian bencana itu?</td><td>PTSD/Trauma</td><td>114</td><td>8,0%</td></tr>
-<tr><td style="font-weight:600;">26. Apakah Anda menghindari kegiatan, tempat, orang atau pikiran yang mengingatkan Anda akan bencana tersebut?</td><td>PTSD/Trauma</td><td>121</td><td>8,5%</td></tr>
-<tr><td style="font-weight:600;">27. Apakah minat Anda terhadap teman dan kegiatan yang biasa Anda lakukan berkurang?</td><td>PTSD/Trauma</td><td>222</td><td>15,6%</td></tr>
-<tr><td style="font-weight:600;">28. Apakah Anda merasa sangat terganggu jika berada dalam situasi yang mengingatkan Anda akan bencana atau jika Anda berpikir tentang bencana itu?</td><td>PTSD/Trauma</td><td>113</td><td>7,9%</td></tr>
-<tr><td style="font-weight:600;">29. Apakah Anda kesulitan memahami atau mengekspresikan perasaan Anda?</td><td>PTSD/Trauma</td><td>240</td><td>16,9%</td></tr>
-    </tbody></table>
-  </div>
-</div>
-<p style="font-size:12px;color:var(--slate);margin:8px 2px 0;">SRQ-20 (item 1–20) skor ambang ≥6 = kemungkinan gangguan mental umum. Item 21 napza, 22–24 psikotik, 25–29 trauma/PTSD.</p>
-        <div class="saha-rawbox role-me-up" data-form="srq29" style="margin-top:20px;"><div class="saha-rawhead"><span>🔓 Data Mentah — Level Klien (bernama)</span><span class="saha-rawtag">AKSES: ADMIN · M&amp;E · DIREKTUR</span></div><div class="saha-rawnote">Baris per-klien dari entry form dashboard (live Firestore) — muncul otomatis begitu tim submit. Peran Staf tidak melihat blok ini; agregat di atas tetap tampil untuk semua. Arsip historis KoBo / Master DB tetap di sumber terlindungi.</div><div class="saha-rawbody" data-rawbody="srq29"><div class="saha-rawempty">Login untuk memuat data.</div></div></div>
-        <div class="source-attr" style="margin-top:22px;">📄 <strong>Sumber:</strong> Assessment Mental Health Klien Pengguna Methamphetamine (KoboToolbox) · Bagian II SRQ-29 · n=1.423 · snapshot Jul 2026.</div>
-
-      </section>
+        <!-- ZONA 2 · BASELINE KoBo -->
+        <div class="me-zone me-base">
+          <div class="me-zhead"><span class="me-zt">2 · Baseline Historis</span><span class="me-ztag b">KoBo · KUMULATIF 2024–2026</span></div>
+          <div class="me-zsub">Rekap asesmen KoBo (1.423 klien mengisi SRQ-29) — angka historis kumulatif, pembanding tetap.</div>
+          <div class="cards">
+            <div class="card"><div class="label">Total Di-skrining</div><div class="value">1.423</div><div class="desc">klien (KoBo)</div></div>
+            <div class="card" style="background:linear-gradient(135deg,var(--clay) 0%,var(--clay-deep) 100%);color:#fff;border-color:var(--clay-deep);"><div class="label" style="color:#fff;opacity:.85;">Kemungkinan CMD (SRQ-20 ≥6)</div><div class="value" style="color:#fff;">20,3%</div><div class="desc" style="color:#fff;opacity:.9;">289 klien</div></div>
+            <div class="card" style="background:var(--clay-tint);border-color:var(--clay);"><div class="label">Pikiran Bunuh Diri (Q17)</div><div class="value" style="color:var(--clay-deep);">39</div><div class="desc">2,7% — tindak lanjut segera</div></div>
+            <div class="card"><div class="label">Gejala Psikotik</div><div class="value">215</div><div class="desc">15,1% · item 22–24</div></div>
+          </div>
+          <div class="me-grid" id="sq-base-grid"></div>
+        </div>
+        <!-- ZONA 3 · DATA MENTAH (gated) -->
+        <div class="me-zone me-raw">
+          <div class="me-zhead"><span class="me-zt">3 · Data Mentah (Level Klien)</span><span class="me-ztag r">🔒 ADMIN · M&amp;E · DIREKTUR</span></div>
+          <div class="me-rawzone">
+            <div class="me-rawlock">🔒 Akses terbatas — hanya Admin, M&amp;E, dan Direktur. Baris per-klien dari entri live (double-check M&amp;E). Skor: Neurosis SRQ-20 (0–20), Psikotik (0–3), PTSD (0–5).</div>
+            <div class="me-rawtbar"><input id="sq-rawq" placeholder="🔎 cari ID KD / PL / wilayah..."><button class="me-rawexp" id="sq-rawexp">📥 Export CSV</button><span id="sq-rawcount" style="font-size:11px;color:var(--slate);"></span></div>
+            <div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>Tanggal</th><th>ID KD</th><th>PL</th><th>Wilayah</th><th>Konteks</th><th>Neurosis</th><th>Psikotik</th><th>PTSD</th><th>Q17</th><th>Interpretasi</th></tr></thead><tbody id="sq-rawbody"><tr><td colspan="10" style="padding:14px;color:#a89f97;">Memuat…</td></tr></tbody></table></div>
+          </div>
+          <div class="me-rawblocked">🔒 Anda tidak punya akses ke data mentah level klien.</div>
+        </div>
+        </section>
       <section class="section" id="l2-out-ira">
 
         <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>⚕️ IRA — Penilaian Risiko Pribadi</h1><p class="lede"><strong>Individual Risk Assessment</strong>: memetakan perilaku berisiko HIV per individu — berbagi alat, pola kondom, jumlah pasangan — sebagai dasar rencana pengurangan risiko. Instrumen <strong>Lembar Penilaian Risiko Pribadi (KoBo)</strong>. Angka agregat, nol identitas.</p></div>
@@ -3681,6 +3657,90 @@ window.SAHA_QR_DL = function(){
   window.SAHA_RENDER_DAST=function(){try{renderBase();renderLive();}catch(e){console.warn('[DAST house]',e);}};
   var prev=window.SAHA_RENDER_HOUSES;window.SAHA_RENDER_HOUSES=function(){if(prev)try{prev();}catch(e){}window.SAHA_RENDER_DAST();};
   if(document.readyState!=='loading')window.SAHA_RENDER_DAST();else document.addEventListener('DOMContentLoaded',window.SAHA_RENDER_DAST);
+})();
+</script>
+
+<script>/* ===== RUMAH SRQ-29 — Live + Baseline + Raw (v0.63) ===== */
+(function(){
+  var DOM_COL=['#a83244','#c96b2f','#6b4d7a','#7d2433'];
+  var CROSS_COL=['#a06b8a','#6b4d7a','#c96b2f','#a83244'];
+  var GEJ_COL=['#a83244','#c47a3b','#9a5c26','#6b4d7a','#5f3b50','#2f6d9e'];
+  var WIL_COL=['#a83244','#c47a3b','#9a5c26','#6b4d7a','#5f3b50','#2f6d9e'];
+  var KEL_COL=['#a83244','#94395c','#6b4d7a','#c47a3b','#5f3b50','#2f6d9e'];
+  var MON=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];});};
+  function el(id){return document.getElementById(id);}
+  function vbars(chId,lbId,vals,labels,cols,tops,subs){var ch=el(chId),lb=el(lbId);if(!ch)return;ch.innerHTML='';lb.innerHTML='';var max=Math.max.apply(null,vals.concat([1]));
+    vals.forEach(function(w,i){var c=document.createElement('div');c.className='me-vcol';c.innerHTML='<div class="me-vv">'+tops[i]+'</div><div class="me-vbar" style="height:'+Math.max(w/max*100,2)+'%;background:'+cols[i%cols.length]+';"></div>';ch.appendChild(c);
+      var l=document.createElement('div');l.className='me-vlab';l.innerHTML=esc(labels[i])+'<span class="s">'+esc(subs[i])+'</span>';lb.appendChild(l);});}
+  function cardHTML(id,cls,title,name){return '<div class="me-cc '+cls+'" id="'+id+'"><div class="me-chead"><h4>'+title+'</h4><button class="me-jpg" data-card="'+id+'" data-name="'+name+'">⬇ JPG</button></div><div class="me-ins" id="'+id+'-ins"></div><div class="me-vchart" id="'+id+'-ch"></div><div class="me-vlabs" id="'+id+'-lb"></div><div class="me-cfoot"><span id="'+id+'-ft"></span><span class="me-wm">SRQ-29 · Sadar Hati</span></div></div>';}
+  // ----- baseline KoBo (statis) -----
+  function renderBase(){var g=el('sq-base-grid');if(!g||g.dataset.done)return;g.dataset.done='1';
+    g.innerHTML=cardHTML('sqb1','c1','🩺 Beban per Domain','SRQ_KoBo_Domain')+cardHTML('sqb2','c2','🔗 DAST × Beban Jiwa','SRQ_KoBo_DASTxCMD')+cardHTML('sqb3','c3','📊 Gejala Teratas (% Ya)','SRQ_KoBo_Gejala');
+    vbars('sqb1-ch','sqb1-lb',[20.3,15.1,7.6,2.7],['CMD','Psikotik','PTSD','Bunuh Diri'],DOM_COL,['20,3%','15,1%','7,6%','2,7%'],['n=289','n=215','n=108','n=39']);
+    el('sqb1-ins').innerHTML='<strong>1 dari 5</strong> klien kemungkinan gangguan mental umum (CMD).';el('sqb1-ft').textContent='n=1.423 (KoBo)';
+    vbars('sqb2-ch','sqb2-lb',[13.8,31.7,54.7,66.7],['Rendah','Sedang','Substns','Parah'],CROSS_COL,['14%','32%','55%','67%'],['n=983','n=378','n=53','n=6']);
+    el('sqb2-ins').innerHTML='Makin berat adiksi (DAST) → makin tinggi beban jiwa: <strong>13,8% → 66,7%</strong>.';el('sqb2-ft').textContent='% CMD per tingkat DAST';
+    vbars('sqb3-ch','sqb3-lb',[42.1,39.6,33.1,29.2,28.3,22.6],['Napza','Tidur','Lelah','N.Makan','S.Kepala','Letih'],GEJ_COL,['42%','40%','33%','29%','28%','23%'],['#21','#3','#20','#2','#1','#18']);
+    el('sqb3-ins').innerHTML='Gejala paling sering dijawab "Ya" (dari 29 item).';el('sqb3-ft').textContent='% klien menjawab Ya';}
+  // ----- live aggregation -----
+  var CUR='tahun';
+  function inPeriod(iso){var d=new Date(iso);if(isNaN(d))return false;var now=new Date();
+    if(CUR==='tahun')return d.getFullYear()===now.getFullYear();
+    if(CUR==='bulan')return d.getFullYear()===now.getFullYear()&&d.getMonth()===now.getMonth();
+    return d.getFullYear()===now.getFullYear()&&Math.floor(d.getMonth()/3)===Math.floor(now.getMonth()/3);}
+  function bigLabel(){var now=new Date();if(CUR==='tahun')return 'Tahun '+now.getFullYear();if(CUR==='bulan')return MON[now.getMonth()]+' '+now.getFullYear();return 'Kuartal '+(Math.floor(now.getMonth()/3)+1)+' · '+now.getFullYear();}
+  function liveRows(){return (window.__SAHA_ALL||[]).filter(function(x){return x.form==='srq29';});}
+  function metrics(x){var s=x.subdomain||{};var neu=+s.neurosis||0;return {neu:neu,cmd:neu>=6,psi:(+s.psikotik||0)>=1,pt:(+s.ptsd||0)>=3,sui:!!s.suicide_flag};}
+  function renderLive(){
+    if(el('sq-pbig'))el('sq-pbig').textContent=bigLabel();
+    var rows=liveRows().filter(function(x){return inPeriod(x.created_at);});
+    var n=rows.length,cmd=0,psi=0,pt=0,sui=0,wil={},kel={};
+    rows.forEach(function(x){var mm=metrics(x);if(mm.cmd)cmd++;if(mm.psi)psi++;if(mm.pt)pt++;if(mm.sui)sui++;
+      var w=((x.wilayah||{}).kotakab||'-');wil[w]=wil[w]||[0,0];wil[w][1]++;if(mm.cmd)wil[w][0]++;
+      var k=((x.konteks||{}).konteks_layanan||'-');kel[k]=kel[k]||[0,0];kel[k][1]++;if(mm.cmd)kel[k][0]++;});
+    var kpi=el('sq-live-kpi');
+    kpi.innerHTML='<div class="card"><div class="label">Entri Live</div><div class="value">'+n+'</div><div class="desc">form SRQ periode ini</div></div>'+
+      '<div class="card" style="background:linear-gradient(135deg,var(--clay) 0%,var(--clay-deep) 100%);color:#fff;border-color:var(--clay-deep);"><div class="label" style="color:#fff;opacity:.85;">Kemungkinan CMD (≥6)</div><div class="value" style="color:#fff;">'+cmd+'</div><div class="desc" style="color:#fff;opacity:.9;">'+(n?Math.round(cmd/n*100):0)+'%</div></div>'+
+      '<div class="card" style="background:var(--clay-tint);border-color:var(--clay);"><div class="label">Pikiran Bunuh Diri (Q17)</div><div class="value" style="color:var(--clay-deep);">'+sui+'</div><div class="desc">'+(n?Math.round(sui/n*100):0)+'% — tindak lanjut segera</div></div>'+
+      '<div class="card" style="background:var(--sage-light);border-color:var(--sage);"><div class="label">Sumber</div><div class="value" style="color:var(--sage-deep);font-size:16px;">Firestore</div><div class="desc">otomatis dari entri</div></div>';
+    var g=el('sq-live-grid');
+    if(!n){g.innerHTML='<div class="me-cc" style="grid-column:1/-1;"><div class="me-empty"><div class="big">🗂️</div>Belum ada entri live SRQ untuk '+esc(bigLabel())+'.<br>Kartu terisi otomatis begitu tim mengentri.</div></div>';renderRaw();return;}
+    g.innerHTML=cardHTML('sql1','c1','🩺 Beban per Domain','SRQ_Live_Domain')+cardHTML('sql2','c2','🗺️ CMD per Wilayah','SRQ_Live_Wilayah')+cardHTML('sql3','c3','👥 CMD per Konteks Layanan','SRQ_Live_Konteks');
+    vbars('sql1-ch','sql1-lb',[cmd/n*100,psi/n*100,pt/n*100,sui/n*100],['CMD','Psikotik','PTSD','Bunuh Diri'],DOM_COL,[Math.round(cmd/n*100)+'%',Math.round(psi/n*100)+'%',Math.round(pt/n*100)+'%',Math.round(sui/n*100)+'%'],['n='+cmd,'n='+psi,'n='+pt,'n='+sui]);
+    el('sql1-ins').innerHTML='Beban kesehatan jiwa entri live '+esc(bigLabel())+'.';el('sql1-ft').textContent='n='+n+' entri';
+    var wa=Object.keys(wil).map(function(k){return [k,wil[k][1]?wil[k][0]/wil[k][1]*100:0,wil[k][1]];}).sort(function(a,b){return b[2]-a[2];}).slice(0,6);
+    vbars('sql2-ch','sql2-lb',wa.map(function(x){return x[1];}),wa.map(function(x){return x[0];}),WIL_COL,wa.map(function(x){return Math.round(x[1])+'%';}),wa.map(function(x){return 'n='+x[2];}));
+    el('sql2-ins').innerHTML='Kemungkinan CMD per wilayah (entri live).';el('sql2-ft').textContent='% SRQ-20 ≥6';
+    var ka=Object.keys(kel).map(function(k){return [k,kel[k][1]?kel[k][0]/kel[k][1]*100:0,kel[k][1]];}).sort(function(a,b){return b[2]-a[2];}).slice(0,6);
+    vbars('sql3-ch','sql3-lb',ka.map(function(x){return x[1];}),ka.map(function(x){return x[0];}),KEL_COL,ka.map(function(x){return Math.round(x[1])+'%';}),ka.map(function(x){return 'n='+x[2];}));
+    el('sql3-ins').innerHTML='Kemungkinan CMD per konteks layanan (entri live).';el('sql3-ft').textContent='% SRQ-20 ≥6';
+    renderRaw();
+  }
+  // ----- raw table (gated by CSS) -----
+  function q17pill(f){return f?'<span style="font-weight:800;padding:2px 8px;border-radius:20px;font-size:10.5px;background:#f0cdd4;color:#7d2433;">⚠️ Ya</span>':'<span style="color:#a89f97;">–</span>';}
+  function interpPill(t){t=String(t||'');if(t.indexOf('URGENT')>=0||t.indexOf('Suicide')>=0)return '<span style="font-weight:800;padding:2px 8px;border-radius:20px;font-size:10.5px;background:#f0cdd4;color:#7d2433;">'+esc(t)+'</span>';if(t==='Normal')return '<span style="color:#5f3b50;font-weight:700;">Normal</span>';return '<span style="font-weight:700;padding:2px 8px;border-radius:20px;font-size:10.5px;background:#ece4f0;color:#5f3b50;">'+esc(t)+'</span>';}
+  function renderRaw(){var tb=el('sq-rawbody');if(!tb)return;var qv=(el('sq-rawq')&&el('sq-rawq').value||'').toLowerCase();
+    var rows=liveRows().sort(function(a,b){return String(b.created_at||'').localeCompare(String(a.created_at||''));});
+    var flt=rows.filter(function(x){if(!qv)return true;var kl=x.klien||{};var s=[(x.tanggal||''),(kl.idkd||''),(x.pl||''),((x.wilayah||{}).kotakab||''),((x.konteks||{}).konteks_layanan||'')].join(' ').toLowerCase();return s.indexOf(qv)>=0;});
+    if(el('sq-rawcount'))el('sq-rawcount').textContent=flt.length+' baris (entri live)';
+    tb.innerHTML=flt.length?flt.slice(0,300).map(function(x){var kl=x.klien||{};var s=x.subdomain||{};return '<tr><td>'+esc((x.tanggal||x.created_at||'').slice(0,10))+'</td><td style="font-weight:700;color:#6b2a44;">'+esc(kl.idkd||'-')+'</td><td>'+esc(x.pl||'-')+'</td><td>'+esc((x.wilayah||{}).kotakab||'-')+'</td><td>'+esc((x.konteks||{}).konteks_layanan||'-')+'</td><td style="font-weight:800;">'+esc(s.neurosis!=null?s.neurosis:'-')+'</td><td>'+esc(s.psikotik!=null?s.psikotik:'-')+'</td><td>'+esc(s.ptsd!=null?s.ptsd:'-')+'</td><td>'+q17pill(!!s.suicide_flag)+'</td><td>'+interpPill(x.interpretasi)+'</td></tr>';}).join(''):'<tr><td colspan="10" style="padding:14px;color:#a89f97;">Belum ada entri live SRQ.</td></tr>';}
+  function exportCSV(){var rows=liveRows();var head=['tanggal','idkd','pl','wilayah','konteks','neurosis','psikotik','ptsd','suicide_flag','interpretasi'];
+    var lines=[head.join(',')].concat(rows.map(function(x){var kl=x.klien||{};var s=x.subdomain||{};return [(x.tanggal||x.created_at||'').slice(0,10),(kl.idkd||''),(x.pl||''),((x.wilayah||{}).kotakab||''),((x.konteks||{}).konteks_layanan||''),(s.neurosis!=null?s.neurosis:''),(s.psikotik!=null?s.psikotik:''),(s.ptsd!=null?s.ptsd:''),(s.suicide_flag?'Ya':'Tidak'),(x.interpretasi||'')].map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(',');}));
+    var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(lines.join('\n'));a.download='SRQ_data_mentah_live.csv';a.click();}
+  // ----- wire (SRQ-specific ids only; .me-jpg handled by generic handler below) -----
+  document.addEventListener('click',function(e){
+    var seg=e.target.closest&&e.target.closest('#sq-seg button');if(seg){document.querySelectorAll('#sq-seg button').forEach(function(x){x.classList.remove('on');});seg.classList.add('on');CUR=seg.dataset.p;renderLive();return;}
+    if(e.target&&e.target.id==='sq-rawexp'){exportCSV();return;}
+  });
+  document.addEventListener('input',function(e){if(e.target&&e.target.id==='sq-rawq')renderRaw();});
+  window.SAHA_RENDER_SRQ=function(){try{renderBase();renderLive();}catch(e){console.warn('[SRQ house]',e);}};
+  var prev=window.SAHA_RENDER_HOUSES;window.SAHA_RENDER_HOUSES=function(){if(prev)try{prev();}catch(e){}window.SAHA_RENDER_SRQ();};
+  if(document.readyState!=='loading')window.SAHA_RENDER_SRQ();else document.addEventListener('DOMContentLoaded',window.SAHA_RENDER_SRQ);
+})();
+/* ===== handler generik unduh kartu JPG (.me-jpg) — dipakai SRQ & rumah baru berikutnya ===== */
+(function(){function el(id){return document.getElementById(id);}
+  document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.me-jpg');if(b&&window.html2canvas){var c=el(b.dataset.card);if(c)html2canvas(c,{scale:2,backgroundColor:'#ffffff',ignoreElements:function(x){return x.classList&&x.classList.contains('me-jpg');}}).then(function(cv){var a=document.createElement('a');a.download=(b.dataset.name||'kartu')+'.jpg';a.href=cv.toDataURL('image/jpeg',.95);a.click();});}});
 })();
 </script>
 </body>
