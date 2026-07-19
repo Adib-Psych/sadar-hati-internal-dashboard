@@ -921,7 +921,7 @@
     <div class="brand">
       <div class="logo">Sadar Hati Foundation</div>
       <div class="est">est. 2002 · Malang</div>
-      <div class="system-tag">Integrated Hub v0.63 · Yayasan Sadar Hati</div>
+      <div class="system-tag">Integrated Hub v0.64 · Yayasan Sadar Hati</div>
     </div>
 
         <nav class="nav">
@@ -967,7 +967,7 @@
           akses sesuai role akun
         </div>
       </div>
-      <div>v0.63 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
+      <div>v0.64 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
     <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#2f6d9e,#1f4a6e);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
@@ -1553,7 +1553,19 @@
 
       <!-- ====== 2B · CHEMSEX OUTPUT HOUSE (placeholder) ====== -->
       <section class="section" id="l2-out-chemsex">
-        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>🔥 Penjangkauan — Output</h1><p class="lede">Ringkasan kinerja <strong>penjangkauan komunitas ATS-Chemsex</strong> (Malang–Surabaya–Jakarta), dari instrumen <strong>Penjangkauan KoBo</strong>. Periode <strong>Feb 2024 – Jun 2026</strong>. Angka agregat; identitas klien tetap di roster terlindungi.</p></div>
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>🔥 Penjangkauan — Output</h1><p class="lede">Kinerja <strong>penjangkauan komunitas ATS-Chemsex</strong> (harm reduction · KIE · rujukan). Zona 1 = data live entri dashboard (per periode); Zona 2 = baseline historis KoBo (Feb 2024 – Jun 2026); Zona 3 = data mentah (khusus Admin · M&amp;E · Direktur).</p></div>
+        <!-- ZONA 1 · LIVE -->
+        <div class="me-zone me-live">
+          <div class="me-zhead"><span class="me-zt">1 · Data Live Dashboard</span><span class="me-ztag l"><span class="me-livechip"><span class="me-dot"></span>LIVE</span></span>
+            <div class="me-seg" id="pj-seg"><button data-p="bulan">Bulanan</button><button data-p="kuartal">Kuartalan</button><button data-p="tahun" class="on">Tahunan</button></div><span class="me-pbig" id="pj-pbig">—</span></div>
+          <div class="me-zsub">Dihitung otomatis dari entri Form Penjangkauan (pakai tanggal entri). Tumbuh seiring tim mengisi di lapangan.</div>
+          <div class="cards" id="pj-live-kpi"></div>
+          <div class="me-grid" id="pj-live-grid"></div>
+        </div>
+        <!-- ZONA 2 · BASELINE KoBo -->
+        <div class="me-zone me-base">
+          <div class="me-zhead"><span class="me-zt">2 · Baseline Historis</span><span class="me-ztag b">KoBo · KUMULATIF Feb 2024 – Jun 2026</span></div>
+          <div class="me-zsub">Rekap penjangkauan KoBo (9.623 kontak · 3.155 klien unik) — angka historis kumulatif, pembanding tetap.</div>
 
         <div class="cards">
           <div class="card" style="background:linear-gradient(135deg,var(--clay) 0%,var(--clay-deep) 100%); color:#fff; border-color:var(--clay-deep);">
@@ -1568,7 +1580,7 @@
           <div class="card"><div class="label">Kontak Baru vs Lanjutan</div><div class="value">31% <span style="font-size:14px; color:var(--slate);">baru</span></div><div class="desc">2.988 baru · 6.635 kunjungan lanjutan (retensi dampingan 69%)</div></div>
           <div class="card"><div class="label">Pernah Tes HIV</div><div class="value">42%</div><div class="desc">4.050 dari 9.613 kontak pernah tes — 5.563 entry point rujukan tes</div></div>
           <div class="card"><div class="label">Laki-laki</div><div class="value">81%</div><div class="desc">7.827 LK · 1.767 PR · 29 TG (kontak)</div></div>
-          <div class="card" style="background:var(--gold-tint); border-color:#6b4d7a;"><div class="label">Intensitas Layanan</div><div class="value" style="color:#543c60;">3,4</div><div class="desc">rata-rata komoditas+KIE per kontak</div></div>
+          <div class="card" style="background:var(--sage-tint); border-color:#6b4d7a;"><div class="label">Intensitas Layanan</div><div class="value" style="color:#543c60;">3,4</div><div class="desc">rata-rata komoditas+KIE per kontak</div></div>
         </div>
 
         <h2 class="section-h2" style="margin-top:30px;">📈 Tren Kontak per Bulan</h2>
@@ -1608,7 +1620,17 @@
           </div>
         </div>
 
-        <div class="saha-rawbox role-me-up" data-form="chemsex" style="margin-top:20px;"><div class="saha-rawhead"><span>🔓 Data Mentah — Level Klien (bernama)</span><span class="saha-rawtag">AKSES: ADMIN · M&amp;E · DIREKTUR</span></div><div class="saha-rawnote">Baris per-klien dari entry form dashboard (live Firestore) — muncul otomatis begitu tim submit. Peran Staf tidak melihat blok ini; agregat di atas tetap tampil untuk semua. Arsip historis KoBo / Master DB tetap di sumber terlindungi.</div><div class="saha-rawbody" data-rawbody="chemsex"><div class="saha-rawempty">Login untuk memuat data.</div></div></div>
+        </div>
+        <!-- ZONA 3 · DATA MENTAH (gated, class-based) -->
+        <div class="me-zone me-raw">
+          <div class="me-zhead"><span class="me-zt">3 · Data Mentah (Level Klien)</span><span class="me-ztag r">🔒 ADMIN · M&amp;E · DIREKTUR</span></div>
+          <div class="me-rawzone">
+            <div class="me-rawlock">🔒 Akses terbatas — hanya Admin, M&amp;E, dan Direktur. Baris per-kontak dari entri live (double-check M&amp;E).</div>
+            <div class="me-rawtbar"><input id="pj-rawq" placeholder="🔎 cari ID KD / PL / wilayah / hotspot..."><button class="me-rawexp" id="pj-rawexp">📥 Export CSV</button><span id="pj-rawcount" style="font-size:11px;color:var(--slate);"></span></div>
+            <div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>Tanggal</th><th>ID KD</th><th>PL</th><th>Wilayah</th><th>Status</th><th>Napza</th><th>Kondom</th><th>KIE</th></tr></thead><tbody id="pj-rawbody"><tr><td colspan="8" style="padding:14px;color:#a89f97;">Memuat…</td></tr></tbody></table></div>
+          </div>
+          <div class="me-rawblocked">🔒 Anda tidak punya akses ke data mentah level klien.</div>
+        </div>
 
         <div class="source-attr" style="margin-top:22px;">📄 <strong>Sumber:</strong> Penjangkauan Pengguna ATS-Chemsex Malang–Surabaya (KoboToolbox) · 9.623 kontak · Feb 2024–Jun 2026. Agregat, nol identitas. Snapshot Jul 2026.</div>
 
@@ -3741,6 +3763,74 @@ window.SAHA_QR_DL = function(){
 /* ===== handler generik unduh kartu JPG (.me-jpg) — dipakai SRQ & rumah baru berikutnya ===== */
 (function(){function el(id){return document.getElementById(id);}
   document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.me-jpg');if(b&&window.html2canvas){var c=el(b.dataset.card);if(c)html2canvas(c,{scale:2,backgroundColor:'#ffffff',ignoreElements:function(x){return x.classList&&x.classList.contains('me-jpg');}}).then(function(cv){var a=document.createElement('a');a.download=(b.dataset.name||'kartu')+'.jpg';a.href=cv.toDataURL('image/jpeg',.95);a.click();});}});
+})();
+</script>
+
+<script>/* ===== RUMAH PENJANGKAUAN (chemsex) — Live + Baseline + Raw (v0.64) ===== */
+(function(){
+  var WIL_COL=['#a83244','#c47a3b','#9a5c26','#6b4d7a','#5f3b50','#2f6d9e'];
+  var KOM_COL=['#a83244','#c47a3b','#6b4d7a','#94395c','#5f3b50'];
+  var PL_COL=['#a83244','#c47a3b','#9a5c26','#6b4d7a','#5f3b50','#2f6d9e'];
+  var MON=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];});};
+  function el(id){return document.getElementById(id);}
+  function num(v){var n=parseFloat(v);return isNaN(n)?0:n;}
+  function vbars(chId,lbId,vals,labels,cols,tops,subs){var ch=el(chId),lb=el(lbId);if(!ch)return;ch.innerHTML='';lb.innerHTML='';var max=Math.max.apply(null,vals.concat([1]));
+    vals.forEach(function(w,i){var c=document.createElement('div');c.className='me-vcol';c.innerHTML='<div class="me-vv">'+tops[i]+'</div><div class="me-vbar" style="height:'+Math.max(w/max*100,2)+'%;background:'+cols[i%cols.length]+';"></div>';ch.appendChild(c);
+      var l=document.createElement('div');l.className='me-vlab';l.innerHTML=esc(labels[i])+'<span class="s">'+esc(subs[i])+'</span>';lb.appendChild(l);});}
+  function cardHTML(id,cls,title,name){return '<div class="me-cc '+cls+'" id="'+id+'"><div class="me-chead"><h4>'+title+'</h4><button class="me-jpg" data-card="'+id+'" data-name="'+name+'">⬇ JPG</button></div><div class="me-ins" id="'+id+'-ins"></div><div class="me-vchart" id="'+id+'-ch"></div><div class="me-vlabs" id="'+id+'-lb"></div><div class="me-cfoot"><span id="'+id+'-ft"></span><span class="me-wm">Penjangkauan · Sadar Hati</span></div></div>';}
+  var CUR='tahun';
+  function inPeriod(iso){var d=new Date(iso);if(isNaN(d))return false;var now=new Date();
+    if(CUR==='tahun')return d.getFullYear()===now.getFullYear();
+    if(CUR==='bulan')return d.getFullYear()===now.getFullYear()&&d.getMonth()===now.getMonth();
+    return d.getFullYear()===now.getFullYear()&&Math.floor(d.getMonth()/3)===Math.floor(now.getMonth()/3);}
+  function bigLabel(){var now=new Date();if(CUR==='tahun')return 'Tahun '+now.getFullYear();if(CUR==='bulan')return MON[now.getMonth()]+' '+now.getFullYear();return 'Kuartal '+(Math.floor(now.getMonth()/3)+1)+' · '+now.getFullYear();}
+  function liveRows(){return (window.__SAHA_ALL||[]).filter(function(x){return x.form==='chemsex';});}
+  function A(x){return x.answers||{};}
+  function renderLive(){
+    if(el('pj-pbig'))el('pj-pbig').textContent=bigLabel();
+    var rows=liveRows().filter(function(x){return inPeriod(x.created_at);});
+    var n=rows.length,uniq={},baru=0,kondom=0,jarum=0,kie=0,kaca=0,lip=0,wil={},pl={};
+    rows.forEach(function(x){var a=A(x);var kl=x.klien||{};if(kl.idkd)uniq[kl.idkd]=1;
+      if(String(a.status||'').indexOf('Baru')>=0)baru++;
+      kondom+=num(a.kondom);jarum+=num(a.jarum);kie+=num(a.kie);kaca+=num(a.kaca);lip+=num(a.lipbalm);
+      var w=((x.wilayah||{}).kotakab||a.kotakab||'-');wil[w]=(wil[w]||0)+1;
+      var p=(x.pl||a.pl||'-');pl[p]=(pl[p]||0)+1;});
+    var kpi=el('pj-live-kpi');
+    kpi.innerHTML='<div class="card"><div class="label">Kontak Live</div><div class="value">'+n+'</div><div class="desc">entri periode ini</div></div>'+
+      '<div class="card"><div class="label">Klien Unik</div><div class="value">'+Object.keys(uniq).length+'</div><div class="desc">ID KD berbeda</div></div>'+
+      '<div class="card" style="background:linear-gradient(135deg,var(--clay) 0%,var(--clay-deep) 100%);color:#fff;border-color:var(--clay-deep);"><div class="label" style="color:#fff;opacity:.85;">Kontak Baru</div><div class="value" style="color:#fff;">'+baru+'</div><div class="desc" style="color:#fff;opacity:.9;">'+(n?Math.round(baru/n*100):0)+'% · sisanya lanjutan</div></div>'+
+      '<div class="card" style="background:var(--sage-light);border-color:var(--sage);"><div class="label">Kondom Dist.</div><div class="value" style="color:var(--sage-deep);">'+kondom.toLocaleString('id-ID')+'</div><div class="desc">+ '+kie.toLocaleString('id-ID')+' KIE · '+jarum.toLocaleString('id-ID')+' jarum</div></div>';
+    var g=el('pj-live-grid');
+    if(!n){g.innerHTML='<div class="me-cc" style="grid-column:1/-1;"><div class="me-empty"><div class="big">🗂️</div>Belum ada entri live Penjangkauan untuk '+esc(bigLabel())+'.<br>Kartu terisi otomatis begitu tim mengentri.</div></div>';renderRaw();return;}
+    g.innerHTML=cardHTML('pjl1','c1','🗺️ Kontak per Wilayah','Penjangkauan_Live_Wilayah')+cardHTML('pjl2','c2','📦 Komoditas Terdistribusi','Penjangkauan_Live_Komoditas')+cardHTML('pjl3','c3','👷 Kontak per PL','Penjangkauan_Live_PL');
+    var wa=Object.keys(wil).map(function(k){return [k,wil[k]];}).sort(function(a,b){return b[1]-a[1];}).slice(0,6);
+    vbars('pjl1-ch','pjl1-lb',wa.map(function(x){return x[1];}),wa.map(function(x){return x[0];}),WIL_COL,wa.map(function(x){return String(x[1]);}),wa.map(function(x){return 'kontak';}));
+    el('pjl1-ins').innerHTML='Sebaran kontak per wilayah (entri live).';el('pjl1-ft').textContent='n='+n+' kontak';
+    vbars('pjl2-ch','pjl2-lb',[kondom,kie,jarum,kaca,lip],['Kondom','KIE','Jarum','Kaca','Lipbalm'],KOM_COL,[kondom.toLocaleString('id-ID'),kie.toLocaleString('id-ID'),jarum.toLocaleString('id-ID'),kaca.toLocaleString('id-ID'),lip.toLocaleString('id-ID')],['','','','','']);
+    el('pjl2-ins').innerHTML='Total komoditas & KIE terdistribusi (entri live).';el('pjl2-ft').textContent='unit';
+    var pa=Object.keys(pl).map(function(k){return [k,pl[k]];}).sort(function(a,b){return b[1]-a[1];}).slice(0,6);
+    vbars('pjl3-ch','pjl3-lb',pa.map(function(x){return x[1];}),pa.map(function(x){return x[0];}),PL_COL,pa.map(function(x){return String(x[1]);}),pa.map(function(x){return 'kontak';}));
+    el('pjl3-ins').innerHTML='Produktivitas kontak per PL (entri live).';el('pjl3-ft').textContent='top '+pa.length+' PL';
+    renderRaw();
+  }
+  function arr(v){return Array.isArray(v)?v.join(', '):(v||'-');}
+  function renderRaw(){var tb=el('pj-rawbody');if(!tb)return;var qv=(el('pj-rawq')&&el('pj-rawq').value||'').toLowerCase();
+    var rows=liveRows().sort(function(a,b){return String(b.created_at||'').localeCompare(String(a.created_at||''));});
+    var flt=rows.filter(function(x){if(!qv)return true;var a=A(x);var kl=x.klien||{};var s=[(a.tanggal||''),(kl.idkd||''),(x.pl||a.pl||''),((x.wilayah||{}).kotakab||a.kotakab||''),(a.hotspot||'')].join(' ').toLowerCase();return s.indexOf(qv)>=0;});
+    if(el('pj-rawcount'))el('pj-rawcount').textContent=flt.length+' baris (entri live)';
+    tb.innerHTML=flt.length?flt.slice(0,300).map(function(x){var a=A(x);var kl=x.klien||{};var st=String(a.status||'-');var stp=st.indexOf('Baru')>=0?'<span style="font-weight:800;padding:2px 8px;border-radius:20px;font-size:10.5px;background:#f2d5dc;color:#94395c;">'+esc(st)+'</span>':'<span style="color:#5f3b50;">'+esc(st)+'</span>';return '<tr><td>'+esc((a.tanggal||x.created_at||'').slice(0,10))+'</td><td style="font-weight:700;color:#6b2a44;">'+esc(kl.idkd||'-')+'</td><td>'+esc(x.pl||a.pl||'-')+'</td><td>'+esc((x.wilayah||{}).kotakab||a.kotakab||'-')+'</td><td>'+stp+'</td><td>'+esc(arr(a.napza)).slice(0,40)+'</td><td style="font-weight:700;">'+esc(a.kondom!=null?a.kondom:'-')+'</td><td>'+esc(a.kie!=null?a.kie:'-')+'</td></tr>';}).join(''):'<tr><td colspan="8" style="padding:14px;color:#a89f97;">Belum ada entri live Penjangkauan.</td></tr>';}
+  function exportCSV(){var rows=liveRows();var head=['tanggal','idkd','pl','wilayah','status','napza','kegiatan','kondom','jarum','kie','kaca','lipbalm','hotspot'];
+    var lines=[head.join(',')].concat(rows.map(function(x){var a=A(x);var kl=x.klien||{};return [(a.tanggal||x.created_at||'').slice(0,10),(kl.idkd||''),(x.pl||a.pl||''),((x.wilayah||{}).kotakab||a.kotakab||''),(a.status||''),arr(a.napza),arr(a.kegiatan),(a.kondom||''),(a.jarum||''),(a.kie||''),(a.kaca||''),(a.lipbalm||''),(a.hotspot||'')].map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(',');}));
+    var b=document.createElement('a');b.href='data:text/csv;charset=utf-8,'+encodeURIComponent(lines.join('\n'));b.download='Penjangkauan_data_mentah_live.csv';b.click();}
+  document.addEventListener('click',function(e){
+    var seg=e.target.closest&&e.target.closest('#pj-seg button');if(seg){document.querySelectorAll('#pj-seg button').forEach(function(x){x.classList.remove('on');});seg.classList.add('on');CUR=seg.dataset.p;renderLive();return;}
+    if(e.target&&e.target.id==='pj-rawexp'){exportCSV();return;}
+  });
+  document.addEventListener('input',function(e){if(e.target&&e.target.id==='pj-rawq')renderRaw();});
+  window.SAHA_RENDER_PJ=function(){try{renderLive();}catch(e){console.warn('[Penjangkauan house]',e);}};
+  var prev=window.SAHA_RENDER_HOUSES;window.SAHA_RENDER_HOUSES=function(){if(prev)try{prev();}catch(e){}window.SAHA_RENDER_PJ();};
+  if(document.readyState!=='loading')window.SAHA_RENDER_PJ();else document.addEventListener('DOMContentLoaded',window.SAHA_RENDER_PJ);
 })();
 </script>
 </body>
