@@ -877,7 +877,7 @@
     <div class="brand">
       <div class="logo">Sadar Hati Foundation</div>
       <div class="est">est. 2002 · Malang</div>
-      <div class="system-tag">Integrated Hub v0.57 · Yayasan Sadar Hati</div>
+      <div class="system-tag">Integrated Hub v0.58 · Yayasan Sadar Hati</div>
     </div>
 
         <nav class="nav">
@@ -913,7 +913,7 @@
           akses sesuai role akun
         </div>
       </div>
-      <div>v0.57 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
+      <div>v0.58 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
     <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#a83244,#7d2433);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
@@ -1626,7 +1626,7 @@ function updateBreadcrumb(item) {
   function render(){ if(!$('lh-tbody')) return; const rows=filtered(); $('lh-count').textContent=rows.length; const tb=$('lh-tbody'), empty=$('lh-empty');
     if(!rows.length){ tb.innerHTML=''; empty.style.display='block'; return; } empty.style.display='none';
     tb.innerHTML=rows.map((x,i)=>{ const k=x.klien||{},w=x.wilayah||{};
-      const klien=esc(k.julukan||k.nama||'-')+(k.idkd?' <span class="lh-flag">('+esc(k.idkd)+(k.idkd_placeholder?' ⚠️':'')+')</span>':'');
+      const klien=esc((window.SAHA_TC||String)(k.julukan||k.nama||'-'))+(k.idkd?' <span class="lh-flag">('+esc(k.idkd)+(k.idkd_placeholder?' ⚠️':'')+')</span>':'');
       const area=esc([w.kotakab,w.kecamatan,w.desa].filter(Boolean).join(' · ')||'-');
       const label=(window.SAHA_FORM_LABELS||{})[x.form]||('📄 '+esc(x.form||'-'));       const krx=x.koreksi?' <span class=\"lh-flag\" style=\"background:#f3eef7;color:#4e3859;\">↻ koreksi</span>':'';
       return '<tr><td>'+fmt(x.created_at)+'</td><td><span class="lh-badge '+esc(x.form)+'">'+label+'</span></td><td>'+esc(x.pl||'-')+'</td><td>'+klien+'</td><td>'+area+'</td><td>'+esc(ringkas(x))+krx+'</td><td><span class="lh-detail" data-i="'+i+'">Detail</span></td></tr>';
@@ -1634,7 +1634,7 @@ function updateBreadcrumb(item) {
     tb.querySelectorAll('.lh-detail').forEach(el=>el.addEventListener('click',()=>detail(rows[+el.dataset.i])));
   }
   function detail(x){ const k=x.klien||{},w=x.wilayah||{};
-    alert(['Form: '+x.form,'Waktu: '+fmt(x.created_at),'PL: '+(x.pl||'-'),'Klien: '+(k.nama||'-')+' / '+(k.julukan||'-'),'ID KD: '+(k.idkd||'-')+(k.idkd_placeholder?' (placeholder tgl)':''),'JK / Usia: '+(k.jk||'-')+' / '+(k.usia||'-'),'Area: '+[w.kotakab,w.kecamatan,w.desa].filter(Boolean).join(' · '),'Ringkas: '+ringkas(x),x.interpretasi?('Interpretasi: '+x.interpretasi):'',x.catatan_klinis?('Catatan: '+x.catatan_klinis):''].filter(Boolean).join('\n')); }
+    if(window.SAHA_DTL) window.SAHA_DTL(x, ringkas(x)); else alert('Detail: '+(x.form||'-')); }
   function doExport(){ const rows=filtered(); if(!rows.length){ alert('Tidak ada data untuk di-export.'); return; }
     const H=['Waktu','Form','PL','Tahun','Tanggal','Nama','Julukan','ID KD','Placeholder','JK','Usia','Kota/Kab','Kecamatan','Desa','Skor','Interpretasi','Catatan'];
     const row=x=>{ const k=x.klien||{},w=x.wilayah||{}; return [x.created_at,x.form,x.pl,x.tahun,x.tanggal,k.nama,k.julukan,k.idkd,k.idkd_placeholder?'YA':'',k.jk,k.usia,w.kotakab,w.kecamatan,w.desa,x.skor,x.interpretasi,x.catatan_klinis].map(v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"').join(','); };
@@ -1856,7 +1856,7 @@ function filtered(){
 function render(){
   const rows=filtered();
   if($('cf-count')) $('cf-count').textContent=rows.length;
-  if($('cf-tbody')) $('cf-tbody').innerHTML = rows.slice(0,1000).map(x=>'<tr><td style="font-weight:600;">'+esc(x.PL_Utama)+'</td><td>'+esc(x.Nama_Lengkap)+'</td><td>'+esc(x.Nama_Panggilan)+'</td><td>'+esc(x.ID_KD)+'</td><td>'+esc(x.Jenis_Kelamin)+'</td><td>'+esc(x.Usia)+'</td><td>'+esc(x.Kab_Kota)+'</td><td>'+esc(x.Tahun_Aktif)+'</td><td>'+esc(x.Hasil_HIV)+'</td></tr>').join('');
+  if($('cf-tbody')) $('cf-tbody').innerHTML = rows.slice(0,1000).map(x=>'<tr><td style="font-weight:600;">'+esc(x.PL_Utama)+'</td><td>'+esc((window.SAHA_TC||String)(x.Nama_Lengkap))+'</td><td>'+esc((window.SAHA_TC||String)(x.Nama_Panggilan))+'</td><td>'+esc(x.ID_KD)+'</td><td>'+esc(x.Jenis_Kelamin)+'</td><td>'+esc(x.Usia)+'</td><td>'+esc(x.Kab_Kota)+'</td><td>'+esc(x.Tahun_Aktif)+'</td><td>'+esc(x.Hasil_HIV)+'</td></tr>').join('');
 }
 /* ===== HEMAT KUOTA (v0.24): cache lokal 24 jam — baca DB max 1x/hari/perangkat ===== */
 const CF_CK='cf-cache-v2', CF_TTL=24*60*60*1000;
@@ -1888,7 +1888,7 @@ const exp=$('cf-export');
 if(exp) exp.addEventListener('click',()=>{
   const rows=filtered(); if(!rows.length){ alert('Tidak ada hasil untuk di-export.'); return; }
   const H=['PL','Nama','Julukan','ID_KD','JK','Usia','Wilayah','Tahun_Aktif','Hasil_HIV','Kontak_Pertama','Kontak_Terakhir'];
-  const line=x=>[x.PL_Utama,x.Nama_Lengkap,x.Nama_Panggilan,x.ID_KD,x.Jenis_Kelamin,x.Usia,x.Kab_Kota,x.Tahun_Aktif,x.Hasil_HIV,x.Kontak_Pertama,x.Kontak_Terakhir].map(v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"').join(',');
+  const line=x=>[x.PL_Utama,(window.SAHA_TC||String)(x.Nama_Lengkap),(window.SAHA_TC||String)(x.Nama_Panggilan),x.ID_KD,x.Jenis_Kelamin,x.Usia,x.Kab_Kota,x.Tahun_Aktif,x.Hasil_HIV,x.Kontak_Pertama,x.Kontak_Terakhir].map(v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"').join(',');
   const csv=[H.join(',')].concat(rows.map(line)).join('\n');
   const b=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8;'}); const u=URL.createObjectURL(b);
   const a=document.createElement('a'); a.href=u; a.download='ClientFinder_hasil.csv'; a.click(); URL.revokeObjectURL(u);
@@ -2013,5 +2013,95 @@ window.SAHA_QR_DL = function(){
     <div id="adm-e-msg" style="font-size:11px;margin-top:9px;color:#7d2433;"></div>
   </div>
 </div>
+
+<style id="saha-dtl-css">
+/* === MODAL DETAIL ENTRI (patch 20 Jul 2026) === */
+#saha-dtl{position:fixed;inset:0;z-index:9000;display:none;align-items:flex-end;justify-content:center;background:rgba(44,39,36,.45);backdrop-filter:blur(2px);}
+#saha-dtl.on{display:flex;}
+#saha-dtl .dtl-card{background:var(--paper,#fff);width:min(440px,100%);max-height:88vh;overflow:auto;border-radius:18px 18px 0 0;box-shadow:0 -8px 40px rgba(44,39,36,.28);animation:dtlUp .18s ease-out;}
+@media(min-width:560px){#saha-dtl{align-items:center;padding:20px;}#saha-dtl .dtl-card{border-radius:18px;animation:dtlPop .16s ease-out;}}
+@keyframes dtlUp{from{transform:translateY(24px);opacity:.6}to{transform:none;opacity:1}}
+@keyframes dtlPop{from{transform:scale(.96);opacity:.5}to{transform:none;opacity:1}}
+@media(prefers-reduced-motion:reduce){#saha-dtl .dtl-card{animation:none}}
+.dtl-head{display:flex;align-items:center;gap:8px;padding:13px 16px;border-bottom:1px solid var(--slate-lighter,#e9e1d7);position:sticky;top:0;background:var(--paper,#fff);z-index:1;}
+.dtl-bdg{background:var(--cream,#fbf7f2);color:var(--navy-soft,#4a4340);border:1px solid var(--slate-lighter,#e9e1d7);}
+.dtl-head .lh-badge{font-size:11px;}
+.dtl-time{font-size:11.5px;color:var(--slate,#6f6660);margin-left:auto;white-space:nowrap;}
+.dtl-x{border:0;background:var(--cream,#fbf7f2);color:var(--slate,#6f6660);width:28px;height:28px;border-radius:50%;font-size:16px;cursor:pointer;line-height:1;flex:0 0 auto;}
+.dtl-x:hover{background:var(--clay-light,#fce8ec);color:var(--clay-deep,#7d2433);}
+.dtl-id{display:flex;gap:12px;align-items:center;padding:14px 16px 4px;}
+.dtl-av{width:46px;height:46px;border-radius:50%;background:var(--clay-tint,#fdf3f5);color:var(--clay-deep,#7d2433);font-weight:800;font-size:19px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;border:1.5px solid var(--clay-light,#fce8ec);}
+.dtl-nm{font-weight:700;color:var(--navy,#2c2724);font-size:15.5px;line-height:1.25;}
+.dtl-sub{font-size:12px;color:var(--slate,#6f6660);margin-top:3px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+.dtl-kd{font-family:ui-monospace,Menlo,Consolas,monospace;background:var(--cream,#fbf7f2);border:1px solid var(--slate-lighter,#e9e1d7);border-radius:8px;padding:1px 7px;font-size:11px;color:var(--navy-soft,#4a4340);}
+.dtl-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 16px 2px;}
+.dtl-cell{background:var(--cream,#fbf7f2);border:1px solid var(--slate-lighter,#e9e1d7);border-radius:12px;padding:8px 10px;}
+.dtl-cell .lbl{font-size:9.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--slate,#6f6660);margin-bottom:2px;}
+.dtl-cell .val{font-size:13px;color:var(--navy,#2c2724);font-weight:600;line-height:1.35;}
+.dtl-res{margin:10px 16px 0;padding:12px 14px;border-radius:14px;background:var(--clay-tint,#fdf3f5);border:1px solid var(--clay-light,#fce8ec);display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.dtl-res .big{font-size:14.5px;font-weight:800;color:var(--navy,#2c2724);}
+.dtl-lvl{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:800;white-space:nowrap;}
+.dtl-lvl.lo{background:var(--sage-light,#e9ece1);color:var(--sage-deep,#5f3b50);}
+.dtl-lvl.mid{background:var(--gold-tint,#efe9f4);color:var(--coral-deep,#543c60);}
+.dtl-lvl.hi{background:var(--clay-light,#fce8ec);color:var(--clay-deep,#7d2433);}
+.dtl-note{margin:10px 16px 0;padding:10px 12px;border-left:3px solid var(--coral,#6b4d7a);background:var(--gold-tint,#efe9f4);border-radius:0 12px 12px 0;font-size:12.5px;color:var(--navy-soft,#4a4340);line-height:1.55;}
+.dtl-note .lbl{font-size:9.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--coral-deep,#543c60);margin-bottom:3px;}
+.dtl-close{display:block;width:calc(100% - 32px);margin:14px 16px calc(14px + env(safe-area-inset-bottom,0px));padding:11px;border:0;border-radius:12px;background:var(--clay,#a83244);color:#fff;font-weight:700;font-size:13.5px;cursor:pointer;}
+.dtl-close:hover{background:var(--clay-deep,#7d2433);}
+</style>
+
+<script id="saha-dtl-js">
+/* === TITLE CASE tampilan + MODAL DETAIL ENTRI (patch 20 Jul 2026) === */
+(function(){
+  if(window.SAHA_DTL) return;
+  window.SAHA_TC = window.SAHA_TC || function(s){ s=String(s==null?'':s); if(!s.trim()) return s; return s.toLowerCase().replace(/(^|[\s.\-\/(])([a-zà-ÿ])/g, function(m,p,c){ return p+c.toUpperCase(); }); };
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]; }); }
+  function fmtT(t){ try{ var d=new Date(t); return isNaN(d)?String(t||'-'):d.toLocaleString('id-ID',{day:'2-digit',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'}); }catch(e){ return '-'; } }
+  window.SAHA_DTL_CLOSE = function(){ var o=document.getElementById('saha-dtl'); if(o) o.classList.remove('on'); };
+  window.SAHA_DTL = function(x, ring){
+    x = x||{}; var k = x.klien||{}, w = x.wilayah||{}; var tc = window.SAHA_TC;
+    var lbl = (window.SAHA_FORM_LABELS||{})[x.form] || ('📄 '+esc(x.form||'-'));
+    var nama = tc(k.nama||''), jul = tc(k.julukan||'');
+    var hasK = !!(nama||jul||k.idkd);
+    var ini = ((jul||nama||'?').trim().charAt(0)||'?').toUpperCase();
+    var area = [w.kotakab,w.kecamatan,w.desa].filter(Boolean).join(' · ');
+    var it = String(x.interpretasi||''); var itl = it.toLowerCase(); var cls = 'mid';
+    if(/rendah|ringan|tidak ter|normal|negatif/.test(itl)) cls='lo';
+    else if(/tinggi|berat|parah|rujuk|terindikasi|positif/.test(itl)) cls='hi';
+    var h = '<div class="dtl-head"><span class="lh-badge dtl-bdg '+esc(x.form||'')+'">'+lbl+'</span>'
+      + (x.koreksi ? '<span class="dtl-lvl mid" style="font-size:10px;">↻ koreksi</span>' : '')
+      + '<span class="dtl-time">'+esc(fmtT(x.created_at))+'</span>'
+      + '<button class="dtl-x" onclick="SAHA_DTL_CLOSE()" aria-label="Tutup">×</button></div>';
+    if(hasK){
+      var sub = [];
+      if(jul && nama && jul.toLowerCase()!==nama.toLowerCase()) sub.push('“'+esc(jul)+'”');
+      if(k.idkd) sub.push('<span class="dtl-kd">'+esc(k.idkd)+'</span>'+(k.idkd_placeholder?' <span style="color:var(--clay,#a83244);font-weight:700;">⚠︎ placeholder tgl</span>':''));
+      var jl = [k.jk, (k.usia||k.usia===0)?(k.usia+' th'):null].filter(Boolean).join(' · ');
+      if(jl) sub.push(esc(jl));
+      h += '<div class="dtl-id"><div class="dtl-av">'+esc(ini)+'</div><div><div class="dtl-nm">'+(esc(nama||jul)||'—')+'</div><div class="dtl-sub">'+sub.join(' ')+'</div></div></div>';
+    }
+    var cells = '<div class="dtl-cell"><div class="lbl">Petugas Lapangan</div><div class="val">'+esc(x.pl||'-')+'</div></div>'
+      + '<div class="dtl-cell"><div class="lbl">Area</div><div class="val">'+(esc(area)||'-')+'</div></div>';
+    if(x.hotspot) cells += '<div class="dtl-cell" style="grid-column:1/-1;"><div class="lbl">Hotspot</div><div class="val">'+esc(x.hotspot)+'</div></div>';
+    h += '<div class="dtl-grid">'+cells+'</div>';
+    var rg = (ring==null?'':String(ring));
+    if((rg && rg!=='-') || it){
+      h += '<div class="dtl-res">'+(rg&&rg!=='-'?'<span class="big">'+esc(rg)+'</span>':'')+(it?'<span class="dtl-lvl '+cls+'">'+esc(it)+'</span>':'')+'</div>';
+    }
+    if(x.catatan_klinis) h += '<div class="dtl-note"><div class="lbl">Catatan</div>'+esc(x.catatan_klinis)+'</div>';
+    h += '<button class="dtl-close" onclick="SAHA_DTL_CLOSE()">Tutup</button>';
+    var ov = document.getElementById('saha-dtl');
+    if(!ov){
+      ov = document.createElement('div'); ov.id = 'saha-dtl';
+      document.body.appendChild(ov);
+      ov.addEventListener('click', function(e){ if(e.target===ov) window.SAHA_DTL_CLOSE(); });
+      document.addEventListener('keydown', function(e){ if(e.key==='Escape') window.SAHA_DTL_CLOSE(); });
+    }
+    ov.innerHTML = '<div class="dtl-card" role="dialog" aria-modal="true">'+h+'</div>';
+    ov.classList.add('on');
+    var card = ov.firstChild; if(card) card.scrollTop = 0;
+  };
+})();
+</script>
 </body>
 </html>
