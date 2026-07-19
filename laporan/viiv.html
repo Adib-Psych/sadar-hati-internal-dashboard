@@ -8,55 +8,64 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{--clay:#a83244;--clay-deep:#7d2433;--wine:#94395c;--mauve:#8a5a74;--plum:#6b4d7a;--terra:#c47a3b;--biru:#2f6d9e;--biru-deep:#1f4a6e;--ink:#2c2724;--slate:#6f6660;--line:#e7ddd3;--cream:#fbf7f2;--bg:#f4eee6;}
+  :root{--clay:#a83244;--clay-deep:#7d2433;--clay-tint:#fdf3f5;--wine:#94395c;--mauve:#8a5a74;--plum:#6b4d7a;--plum-tint:#efe9f4;--terra:#c47a3b;--ink:#2c2724;--slate:#6f6660;--line:#e7ddd3;--cream:#fbf7f2;--bg:#f4eee6;}
   *{margin:0;padding:0;box-sizing:border-box;}
-  body{font-family:'Manrope',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;}
-  .wrap{max-width:1080px;margin:0 auto;padding:26px 20px 60px;}
+  html{-webkit-text-size-adjust:100%;}
+  body{font-family:'Manrope',system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;}
+  /* ===== bahasa: toggle EN/ID ===== */
+  body.lang-en .id{display:none !important;}
+  body.lang-id .en{display:none !important;}
+  .lang-sw{display:inline-flex;background:#fff;border:1.5px solid var(--line);border-radius:22px;padding:3px;margin-left:auto;}
+  .lang-sw button{border:none;background:none;font-family:inherit;font-size:11.5px;font-weight:800;letter-spacing:.5px;color:var(--slate);padding:7px 15px;border-radius:18px;cursor:pointer;}
+  .lang-sw button.on{background:linear-gradient(135deg,var(--clay),var(--clay-deep));color:#fff;}
+  .wrap{max-width:1080px;margin:0 auto;padding:22px 18px 60px;}
   /* header */
-  .brand{display:flex;align-items:center;gap:14px;padding:6px 2px 18px;flex-wrap:wrap;}
-  .logo{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--clay),var(--clay-deep));color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Lora',serif;font-weight:700;font-size:19px;letter-spacing:.5px;}
+  .brand{display:flex;align-items:center;gap:13px;padding:4px 2px 16px;flex-wrap:wrap;}
+  .logo{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--clay),var(--clay-deep));color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Lora',serif;font-weight:700;font-size:19px;flex:0 0 auto;}
   .brand h2{font-family:'Lora',serif;font-size:19px;line-height:1.15;}
-  .brand .sub{font-size:11px;color:var(--slate);letter-spacing:1.4px;text-transform:uppercase;font-weight:700;}
-  .badge{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:.6px;background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:7px 14px;color:var(--biru-deep);}
-  .hero{background:linear-gradient(135deg,#243447 0%,#1f4a6e 55%,#2f6d9e 100%);color:#fff;border-radius:20px;padding:30px 32px;margin-bottom:16px;}
+  .brand .sub{font-size:10.5px;color:var(--slate);letter-spacing:1.4px;text-transform:uppercase;font-weight:700;}
+  .hero{background:linear-gradient(135deg,var(--clay) 0%,var(--clay-deep) 100%);color:#fff;border-radius:20px;padding:28px 30px;margin-bottom:16px;box-shadow:0 10px 30px rgba(125,36,51,.18);}
   .hero .eyebrow{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;font-weight:800;opacity:.85;margin-bottom:8px;}
-  .hero h1{font-family:'Lora',serif;font-size:clamp(21px,3.4vw,30px);line-height:1.2;margin-bottom:8px;}
-  .hero p{font-size:13.5px;opacity:.92;max-width:840px;}
-  .hero .id{font-size:12px;opacity:.75;font-style:italic;margin-top:6px;}
+  .hero h1{font-family:'Lora',serif;font-size:clamp(20px,3.4vw,29px);line-height:1.22;margin-bottom:9px;}
+  .hero p{font-size:13.5px;opacity:.94;max-width:860px;}
   .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;}
-  .chip{font-size:11px;font-weight:700;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:6px 13px;}
-  /* sections */
-  .zone{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 22px 24px;margin:16px 0;}
-  .zone.live{border-left:6px solid var(--biru);}
+  .chip{font-size:10.5px;font-weight:700;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);border-radius:20px;padding:6px 12px;}
+  .mstrip{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;padding-top:13px;border-top:1px solid rgba(255,255,255,.22);font-size:10.5px;font-weight:700;}
+  .ms{background:rgba(255,255,255,.1);border-radius:10px;padding:6px 11px;border:1px solid rgba(255,255,255,.2);}
+  .ms b{color:#ffd9e0;}
+  /* zones */
+  .zone{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px 20px 22px;margin:16px 0;}
+  .zone.live{border-left:6px solid var(--plum);}
   .zone.tva{border-left:6px solid var(--clay);}
   .zhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:2px;}
   .zhead h3{font-family:'Lora',serif;font-size:19px;}
-  .tag{font-size:9px;font-weight:800;letter-spacing:.6px;border-radius:16px;padding:4px 11px;}
-  .tag.l{background:#d5e8f5;color:var(--biru-deep);display:inline-flex;align-items:center;gap:6px;}
+  .tag{font-size:9px;font-weight:800;letter-spacing:.6px;border-radius:16px;padding:4px 11px;white-space:nowrap;}
+  .tag.l{background:var(--plum-tint);color:var(--plum);display:inline-flex;align-items:center;gap:6px;}
   .tag.b{background:#f0e7dd;color:#5a5148;}
-  .dot{width:7px;height:7px;border-radius:50%;background:var(--biru);animation:pl 1.6s infinite;}
-  @keyframes pl{0%{box-shadow:0 0 0 0 rgba(47,109,158,.5);}70%{box-shadow:0 0 0 6px rgba(47,109,158,0);}100%{box-shadow:0 0 0 0 rgba(47,109,158,0);}}
-  .zsub{font-size:12px;color:var(--slate);margin:4px 0 14px;max-width:900px;}
-  .zsub em{color:var(--mauve);}
-  .stamp{font-size:11px;color:var(--biru-deep);font-weight:700;background:#eef4f9;border-radius:10px;padding:6px 12px;display:inline-block;margin-bottom:12px;}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--plum);animation:pl 1.6s infinite;}
+  @keyframes pl{0%{box-shadow:0 0 0 0 rgba(107,77,122,.5);}70%{box-shadow:0 0 0 6px rgba(107,77,122,0);}100%{box-shadow:0 0 0 0 rgba(107,77,122,0);}}
+  .zsub{font-size:12px;color:var(--slate);margin:4px 0 12px;max-width:920px;}
+  .disc{background:var(--clay-tint);border:1px solid #f0d4da;border-left:4px solid var(--clay);border-radius:12px;padding:11px 15px;font-size:11.5px;color:#5f3b44;line-height:1.65;margin:0 0 14px;}
+  .disc b{color:var(--clay-deep);}
+  .stamp{font-size:11px;color:var(--plum);font-weight:700;background:var(--plum-tint);border-radius:10px;padding:6px 12px;display:inline-block;margin-bottom:12px;}
   /* kpi */
-  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
   @media(max-width:760px){.kpis{grid-template-columns:repeat(2,1fr);}}
-  .kpi{background:var(--cream);border:1px solid var(--line);border-radius:14px;padding:13px 15px;}
+  @media(max-width:380px){.kpis{grid-template-columns:1fr;}}
+  .kpi{background:var(--cream);border:1px solid var(--line);border-radius:14px;padding:12px 14px;}
   .kpi.hot{background:linear-gradient(135deg,var(--clay),var(--clay-deep));border-color:var(--clay-deep);color:#fff;}
-  .kpi .l{font-size:9px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--slate);}
+  .kpi .l{font-size:8.5px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--slate);}
   .kpi.hot .l{color:#fff;opacity:.85;}
-  .kpi .v{font-family:'Lora',serif;font-size:27px;font-weight:700;margin:3px 0 1px;}
-  .kpi .d{font-size:10px;color:var(--slate);}
+  .kpi .v{font-family:'Lora',serif;font-size:26px;font-weight:700;margin:3px 0 1px;}
+  .kpi .d{font-size:10px;color:var(--slate);line-height:1.45;}
   .kpi.hot .d{color:#fff;opacity:.9;}
-  /* cards grid */
+  /* cards */
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:14px;}
   @media(max-width:860px){.grid{grid-template-columns:1fr;}}
-  .cc{background:#fff;border:1px solid var(--line);border-radius:15px;padding:15px;border-top:4px solid var(--biru);display:flex;flex-direction:column;}
-  .cc.c1{border-top-color:var(--clay);} .cc.c2{border-top-color:var(--terra);} .cc.c3{border-top-color:var(--wine);}
+  .cc{background:#fff;border:1px solid var(--line);border-radius:15px;padding:15px;border-top:4px solid var(--clay);display:flex;flex-direction:column;}
+  .cc.c2{border-top-color:var(--terra);} .cc.c3{border-top-color:var(--plum);}
   .cc h4{font-family:'Lora',serif;font-size:14px;line-height:1.25;}
-  .cc .idt{font-size:10px;color:var(--slate);font-style:italic;margin-bottom:4px;}
-  .ins{font-size:10.5px;color:var(--slate);line-height:1.55;margin:4px 0 10px;min-height:30px;}
+  .ins{font-size:10.5px;color:var(--slate);line-height:1.55;margin:5px 0 10px;min-height:30px;}
   .vchart{display:flex;align-items:flex-end;gap:8px;height:150px;padding:20px 2px 0;}
   .vcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;}
   .vv{font-size:10.5px;font-weight:800;margin-bottom:4px;white-space:nowrap;}
@@ -66,182 +75,196 @@
   .vlabs{display:flex;gap:8px;border-top:2px solid var(--line);padding-top:6px;}
   .vl{flex:1;text-align:center;font-size:9px;font-weight:700;color:#4a4340;line-height:1.25;}
   .vl .s{display:block;font-size:8px;color:#a89f97;margin-top:1px;font-weight:600;}
-  .cfoot{margin-top:10px;padding-top:7px;border-top:1px dashed var(--line);font-size:9.5px;color:var(--slate);display:flex;justify-content:space-between;}
-  .wm{color:#b9b0a7;font-weight:700;}
+  .cfoot{margin-top:10px;padding-top:7px;border-top:1px dashed var(--line);font-size:9.5px;color:var(--slate);display:flex;justify-content:space-between;gap:6px;}
+  .wm{color:#b9b0a7;font-weight:700;white-space:nowrap;}
   /* table */
-  .tblwrap{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:auto;margin-top:14px;}
-  table{width:100%;border-collapse:collapse;font-size:12px;min-width:760px;}
-  th{background:var(--biru-deep);color:#fff;text-align:left;padding:10px 13px;font-size:10.5px;letter-spacing:.4px;white-space:nowrap;position:sticky;top:0;}
-  th .s{display:block;font-size:8.5px;opacity:.75;font-weight:600;}
+  .tblwrap{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:auto;margin-top:12px;-webkit-overflow-scrolling:touch;}
+  table{width:100%;border-collapse:collapse;font-size:12px;min-width:720px;}
+  th{background:var(--clay-deep);color:#fff;text-align:left;padding:10px 13px;font-size:10.5px;letter-spacing:.4px;white-space:nowrap;}
   td{padding:9px 13px;border-top:1px solid #f0e7dd;vertical-align:top;}
-  tr:hover td{background:#faf7f2;}
+  tr:hover td{background:var(--cream);}
   td.num{font-weight:700;white-space:nowrap;}
   .pill{font-weight:800;padding:2px 9px;border-radius:20px;font-size:10px;white-space:nowrap;}
-  .pill.hi{background:#efe9f4;color:var(--plum);}
+  .pill.hi{background:var(--plum-tint);color:var(--plum);}
   .pill.mid{background:#f2d5dc;color:var(--wine);}
   .pill.lo{background:#f0cdd4;color:var(--clay-deep);}
   .pill.na{background:#f0e7dd;color:#8a8078;}
-  .note{font-size:11px;color:var(--slate);line-height:1.6;margin-top:10px;}
-  /* footer */
-  .gov{background:#fff;border:1px dashed #c9bfb4;border-radius:14px;padding:16px 20px;margin-top:18px;font-size:11.5px;color:var(--slate);line-height:1.7;}
+  .note{font-size:11px;color:var(--slate);line-height:1.65;margin-top:10px;}
+  .gov{background:#fff;border:1px dashed #c9bfb4;border-radius:14px;padding:15px 19px;margin-top:18px;font-size:11.5px;color:var(--slate);line-height:1.7;}
   .gov b{color:var(--ink);}
   .foot{text-align:center;font-size:10.5px;color:#a89f97;margin-top:26px;line-height:1.7;}
-  .foot a{color:var(--biru-deep);text-decoration:none;font-weight:700;}
+  .foot a{color:var(--clay-deep);text-decoration:none;font-weight:700;}
 </style>
 </head>
-<body>
+<body class="lang-en">
 <div class="wrap">
 
   <div class="brand">
     <div class="logo">SH</div>
     <div><h2>Sadar Hati Foundation</h2><div class="sub">Est. 2002 · Malang, East Java, Indonesia</div></div>
-    <div class="badge">M&amp;E PROGRESS PAGE · READ-ONLY</div>
+    <div class="lang-sw"><button id="btn-en" class="on" onclick="setLang('en')">EN</button><button id="btn-id" onclick="setLang('id')">ID</button></div>
   </div>
 
   <div class="hero">
     <div class="eyebrow">ViiV Healthcare · Positive Action</div>
     <h1>Behaviour Change Intervention on People Who Use Methamphetamine Related to Chemsex</h1>
-    <p>Monitoring &amp; Evaluation progress page — live programme activity and cumulative achievement against project targets. Aggregate data only; no client-identifying information.</p>
-    <div class="id">Halaman capaian M&amp;E — aktivitas program live dan realisasi kumulatif terhadap target proyek. Hanya data agregat; tanpa informasi identitas klien.</div>
+    <p><span class="en">Monitoring &amp; Evaluation progress page — live programme activity and cumulative achievement against project targets. Aggregate data only; no client-identifying information.</span><span class="id">Halaman capaian Monitoring &amp; Evaluasi — aktivitas program terkini dan realisasi kumulatif terhadap target proyek. Hanya data agregat; tanpa informasi identitas klien.</span></p>
     <div class="chips">
-      <span class="chip">📅 Grant effective 26 Jan 2024 · 24 months</span>
-      <span class="chip">📍 East Java (Malang Raya · Surabaya · Sidoarjo) — Y1 incl. Jakarta</span>
-      <span class="chip">🎓 Regional evaluation: Hanoi Medical University</span>
-      <span class="chip">🏆 Top performer — HIV × Mental Health × Harm Reduction integration</span>
-      <span class="chip">🤝 18 formal service MOUs — regional leader</span>
+      <span class="chip"><span class="en">📅 Grant effective 26 Jan 2024 · 24 months</span><span class="id">📅 Kontrak efektif 26 Jan 2024 · 24 bulan</span></span>
+      <span class="chip"><span class="en">📍 East Java (Malang Raya · Surabaya · Sidoarjo) — Y1 incl. Jakarta</span><span class="id">📍 Jawa Timur (Malang Raya · Surabaya · Sidoarjo) — Th-1 termasuk Jakarta</span></span>
+      <span class="chip"><span class="en">🎓 Regional evaluation: Hanoi Medical University</span><span class="id">🎓 Evaluasi regional: Hanoi Medical University</span></span>
+      <span class="chip"><span class="en">🏆 Top performer — HIV × Mental Health × Harm Reduction integration</span><span class="id">🏆 Top performer — integrasi HIV × Kesehatan Jiwa × Harm Reduction</span></span>
+    </div>
+    <div class="mstrip">
+      <span class="ms"><span class="en">✅ Intermediary Report 1 — Jul 2024</span><span class="id">✅ Laporan Intermediary 1 — Jul 2024</span></span>
+      <span class="ms"><span class="en">✅ Intermediary Report 2 — month 18 (incl. financial)</span><span class="id">✅ Laporan Intermediary 2 — bulan ke-18 (termasuk keuangan)</span></span>
+      <span class="ms"><b><span class="en">📝 Final Report — in preparation</span><span class="id">📝 Laporan Akhir — sedang disusun</span></b></span>
     </div>
   </div>
 
   <!-- LIVE -->
   <div class="zone live">
-    <div class="zhead"><h3>Live Field Activity</h3><span class="tag l"><span class="dot"></span>LIVE</span><span class="tag b" id="lv-year">CURRENT YEAR</span></div>
-    <div class="zsub">Updated automatically from Sadar Hati's field data system as outreach workers submit reports. <em>· Terisi otomatis dari sistem data lapangan saat petugas mengirim laporan.</em></div>
-    <div class="stamp" id="lv-stamp">⏳ Awaiting first synchronisation… <em>· Menunggu sinkronisasi pertama…</em></div>
-    <div class="kpis" id="lv-kpi">
-      <div class="kpi hot"><div class="l">Outreach Contacts</div><div class="v" id="k-kontak">—</div><div class="d">kontak penjangkauan</div></div>
-      <div class="kpi"><div class="l">Screenings (DAST-10 + SRQ-29)</div><div class="v" id="k-skrining">—</div><div class="d">skrining napza &amp; kesehatan jiwa</div></div>
-      <div class="kpi"><div class="l">HIV Test Registrations</div><div class="v" id="k-vct">—</div><div class="d">registrasi tes HIV (VCT)</div></div>
-      <div class="kpi"><div class="l">Counselling Sessions</div><div class="v" id="k-konseling">—</div><div class="d">sesi konseling / dukungan psikososial</div></div>
+    <div class="zhead"><h3><span class="en">Live Field Activity</span><span class="id">Aktivitas Lapangan Terkini</span></h3><span class="tag l"><span class="dot"></span>LIVE</span><span class="tag b" id="lv-year"><span class="en">CURRENT YEAR</span><span class="id">TAHUN BERJALAN</span></span></div>
+    <div class="disc">
+      <span class="en"><b>About this live data:</b> these figures come from Sadar Hati's <b>new real-time field-entry dashboard</b>, launched in <b>mid-July 2026</b>. Field teams have only just begun entering data, so current figures are still limited and will grow as day-to-day entry continues. The cumulative achievements in the section below come from the project's established data systems (KoboToolbox &amp; REDCap, Feb 2024 – Jun 2026) and are not affected.</span>
+      <span class="id"><b>Tentang data live ini:</b> angka di bawah berasal dari <b>dashboard entri lapangan real-time yang baru</b>, diluncurkan <b>pertengahan Juli 2026</b>. Tim lapangan baru mulai mengentri minggu ini, sehingga angkanya masih terbatas dan akan terus bertambah seiring entri harian. Capaian kumulatif pada bagian di bawah bersumber dari sistem data proyek yang sudah berjalan (KoboToolbox &amp; REDCap, Feb 2024 – Jun 2026) dan tidak terpengaruh.</span>
+    </div>
+    <div class="stamp" id="lv-stamp"><span class="en">⏳ Awaiting first synchronisation…</span><span class="id">⏳ Menunggu sinkronisasi pertama…</span></div>
+    <div class="kpis">
+      <div class="kpi hot"><div class="l"><span class="en">Outreach Contacts</span><span class="id">Kontak Penjangkauan</span></div><div class="v" id="k-kontak">—</div><div class="d"><span class="en">from the outreach form</span><span class="id">dari form Penjangkauan</span></div></div>
+      <div class="kpi"><div class="l"><span class="en">Screenings (DAST-10 + SRQ-29)</span><span class="id">Skrining (DAST-10 + SRQ-29)</span></div><div class="v" id="k-skrining">—</div><div class="d"><span class="en">substance use &amp; mental health</span><span class="id">napza &amp; kesehatan jiwa</span></div></div>
+      <div class="kpi"><div class="l"><span class="en">HIV Test Registrations</span><span class="id">Registrasi Tes HIV</span></div><div class="v" id="k-vct">—</div><div class="d"><span class="en">VCT registration form</span><span class="id">form Registrasi VCT</span></div></div>
+      <div class="kpi"><div class="l"><span class="en">Counselling Sessions</span><span class="id">Sesi Konseling</span></div><div class="v" id="k-konseling">—</div><div class="d"><span class="en">psychosocial support</span><span class="id">dukungan psikososial</span></div></div>
     </div>
     <div class="note" id="lv-extra"></div>
   </div>
 
   <!-- TARGET vs ACHIEVEMENT -->
   <div class="zone tva">
-    <div class="zhead"><h3>Progress Against Targets</h3><span class="tag b">CUMULATIVE · FEB 2024 – JUN 2026</span></div>
-    <div class="zsub">Grey bar = two-year project target (proposal &amp; workplan) · coloured bar = cumulative achievement. Percentage = achievement ÷ target. Sources: REDCap 2024 &amp; 2025-26, KoboToolbox, Intermediary Report 07/2024. <em>· Bar abu = target proyek dua tahun; bar berwarna = realisasi kumulatif.</em></div>
+    <div class="zhead"><h3><span class="en">Progress Against Targets</span><span class="id">Capaian terhadap Target</span></h3><span class="tag b"><span class="en">CUMULATIVE · FEB 2024 – JUN 2026</span><span class="id">KUMULATIF · FEB 2024 – JUN 2026</span></span></div>
+    <div class="zsub"><span class="en">Grey bar = two-year project target (proposal &amp; workplan) · coloured bar = cumulative achievement. Percentage = achievement ÷ target. Sources: REDCap 2024 &amp; 2025-26, KoboToolbox, Intermediary Report 07/2024.</span><span class="id">Bar abu = target proyek dua tahun (proposal &amp; workplan) · bar berwarna = realisasi kumulatif. Persentase = realisasi ÷ target. Sumber: REDCap 2024 &amp; 2025-26, KoboToolbox, Laporan Intermediary 07/2024.</span></div>
 
     <div class="kpis">
-      <div class="kpi"><div class="l">Unique Individuals Reached</div><div class="v">1,648</div><div class="d">orang unik dijangkau · vs target ±2,500 (66%) — ongoing</div></div>
-      <div class="kpi"><div class="l">Contact-Based Reach</div><div class="v">3,983</div><div class="d">basis kontak bulanan — one person may be counted more than once</div></div>
-      <div class="kpi hot"><div class="l">HIV Tests Facilitated</div><div class="v">2,117</div><div class="d">368% of target 576 🏆</div></div>
-      <div class="kpi"><div class="l">Strengthening Area Y2</div><div class="v">PrEP 24%</div><div class="d">131 of target 540 — also a regional challenge (HMU)</div></div>
+      <div class="kpi"><div class="l"><span class="en">Unique Individuals Reached</span><span class="id">Orang Unik Dijangkau</span></div><div class="v">1,648</div><div class="d"><span class="en">vs target ±2,500 (66%) — ongoing</span><span class="id">vs target ±2.500 (66%) — masih berjalan</span></div></div>
+      <div class="kpi"><div class="l"><span class="en">Contact-Based Reach</span><span class="id">Jangkauan Basis Kontak</span></div><div class="v">3,983</div><div class="d"><span class="en">one person may be counted more than once (monthly contacts)</span><span class="id">satu orang dapat tercatat lebih dari sekali (kontak bulanan)</span></div></div>
+      <div class="kpi hot"><div class="l"><span class="en">HIV Tests Facilitated</span><span class="id">Tes HIV Difasilitasi</span></div><div class="v">2,117</div><div class="d"><span class="en">368% of target 576 🏆</span><span class="id">368% dari target 576 🏆</span></div></div>
+      <div class="kpi"><div class="l"><span class="en">Strengthening Area Y2</span><span class="id">Area Penguatan Th-2</span></div><div class="v">PrEP 49%</div><div class="d"><span class="en">265 of target 540 — also a regional challenge (HMU)</span><span class="id">265 dari target 540 — juga tantangan regional (HMU)</span></div></div>
     </div>
 
     <div class="grid">
-      <div class="cc c1">
-        <h4>HIV Cascade — Achievement vs Target</h4><div class="idt">Kaskade HIV — capaian vs target</div>
-        <div class="ins">HIV testing at <b>368%</b> of target. Strengthening area: <b>PrEP at 24%</b> — Year-2 priority. ARV: 21 confirmed HIV+ → 22 initiated — <em>treatment linkage 100%</em>.</div>
+      <div class="cc">
+        <h4><span class="en">HIV Cascade — Achievement vs Target</span><span class="id">Kaskade HIV — Capaian vs Target</span></h4>
+        <div class="ins"><span class="en">HIV testing at <b>368%</b> of target; STI services at <b>282%</b>. Strengthening area: <b>PrEP at 49%</b> — Year-2 priority. ARV: 21 confirmed HIV+ (2025-26) → 22 initiated — <em>treatment linkage 100%</em>.</span><span class="id">Tes HIV <b>368%</b> dari target; layanan IMS <b>282%</b>. Area penguatan: <b>PrEP 49%</b> — prioritas Tahun-2. ARV: 21 HIV+ terkonfirmasi (2025-26) → 22 memulai — <em>keterhubungan pengobatan 100%</em>.</span></div>
         <div class="vchart">
           <div class="vcol"><div class="vv" style="color:var(--plum);">368%</div><div class="pair"><div class="vb t" style="height:27%;"></div><div class="vb" style="height:100%;background:var(--clay);"></div></div></div>
-          <div class="vcol"><div class="vv" style="color:var(--clay);">24%</div><div class="pair"><div class="vb t" style="height:26%;"></div><div class="vb" style="height:6%;background:var(--terra);"></div></div></div>
-          <div class="vcol"><div class="vv" style="color:var(--plum);">170%</div><div class="pair"><div class="vb t" style="height:34%;"></div><div class="vb" style="height:58%;background:var(--wine);"></div></div></div>
+          <div class="vcol"><div class="vv" style="color:var(--wine);">49%</div><div class="pair"><div class="vb t" style="height:26%;"></div><div class="vb" style="height:13%;background:var(--terra);"></div></div></div>
+          <div class="vcol"><div class="vv" style="color:var(--plum);">282%</div><div class="pair"><div class="vb t" style="height:34%;"></div><div class="vb" style="height:96%;background:var(--wine);"></div></div></div>
         </div>
         <div class="vlabs">
-          <div class="vl">HIV Testing<span class="s">T 576 · A 2,117</span></div>
-          <div class="vl">PrEP<span class="s">T 540 · A 131</span></div>
-          <div class="vl">STI Services<span class="s">T 720 · A 1,221</span></div>
+          <div class="vl"><span class="en">HIV Testing</span><span class="id">Tes HIV</span><span class="s">T 576 · A 2,117</span></div>
+          <div class="vl">PrEP<span class="s">T 540 · A 265</span></div>
+          <div class="vl"><span class="en">STI Services</span><span class="id">Layanan IMS</span><span class="s">T 720 · A 2,027</span></div>
         </div>
-        <div class="cfoot"><span>grey = target · colour = achieved</span><span class="wm">Sadar Hati · ViiV PA</span></div>
+        <div class="cfoot"><span><span class="en">grey = target · colour = achieved</span><span class="id">abu = target · warna = capaian</span></span><span class="wm">Sadar Hati · ViiV PA</span></div>
       </div>
 
       <div class="cc c2">
-        <h4>Assessment &amp; Mental Health</h4><div class="idt">Asesmen &amp; kesehatan jiwa</div>
-        <div class="ins">Risk assessments exceed targets (IRA 159%, GRA 273%). MH screening at 94%; MH referrals at 64% — Year-2 strengthening priority.</div>
+        <h4><span class="en">Assessment &amp; Mental Health</span><span class="id">Asesmen &amp; Kesehatan Jiwa</span></h4>
+        <div class="ins"><span class="en">Risk assessments exceed targets (IRA 159%, GRA 273%). MH screening at 94%; MH referrals at 67% — Year-2 strengthening priority.</span><span class="id">Asesmen risiko melampaui target (IRA 159%, GRA 273%). Skrining keswa 94%; rujukan keswa 67% — prioritas penguatan Tahun-2.</span></div>
         <div class="vchart">
-          <div class="vcol"><div class="vv" style="color:var(--plum);">159%</div><div class="pair"><div class="vb t" style="height:52%;"></div><div class="vb" style="height:83%;background:var(--mauve);"></div></div></div>
-          <div class="vcol"><div class="vv" style="color:var(--plum);">273%</div><div class="pair"><div class="vb t" style="height:37%;"></div><div class="vb" style="height:100%;background:var(--plum);"></div></div></div>
-          <div class="vcol"><div class="vv" style="color:var(--wine);">94%</div><div class="pair"><div class="vb t" style="height:105%;max-height:100%;"></div><div class="vb" style="height:98%;background:var(--wine);"></div></div></div>
-          <div class="vcol"><div class="vv" style="color:var(--clay);">64%</div><div class="pair"><div class="vb t" style="height:18%;"></div><div class="vb" style="height:12%;background:var(--clay);"></div></div></div>
+          <div class="vcol"><div class="vv" style="color:var(--plum);">159%</div><div class="pair"><div class="vb t" style="height:50%;"></div><div class="vb" style="height:79%;background:var(--mauve);"></div></div></div>
+          <div class="vcol"><div class="vv" style="color:var(--plum);">273%</div><div class="pair"><div class="vb t" style="height:35%;"></div><div class="vb" style="height:95%;background:var(--plum);"></div></div></div>
+          <div class="vcol"><div class="vv" style="color:var(--wine);">94%</div><div class="pair"><div class="vb t" style="height:100%;"></div><div class="vb" style="height:94%;background:var(--wine);"></div></div></div>
+          <div class="vcol"><div class="vv" style="color:var(--clay);">67%</div><div class="pair"><div class="vb t" style="height:18%;"></div><div class="vb" style="height:12%;background:var(--clay);"></div></div></div>
         </div>
         <div class="vlabs">
           <div class="vl">IRA<span class="s">T 900 · A 1,427</span></div>
           <div class="vl">GRA<span class="s">T 630 · A 1,717</span></div>
-          <div class="vl">MH Screening<span class="s">T 1,800 · A 1,683</span></div>
-          <div class="vl">MH Referral<span class="s">T 315 · A 201</span></div>
+          <div class="vl"><span class="en">MH Screening</span><span class="id">Skrining Keswa</span><span class="s">T 1,800 · A 1,683</span></div>
+          <div class="vl"><span class="en">MH Referral</span><span class="id">Rujukan Keswa</span><span class="s">T 315 · A 211</span></div>
         </div>
-        <div class="cfoot"><span>grey = target · colour = achieved</span><span class="wm">Sadar Hati · ViiV PA</span></div>
+        <div class="cfoot"><span><span class="en">grey = target · colour = achieved</span><span class="id">abu = target · warna = capaian</span></span><span class="wm">Sadar Hati · ViiV PA</span></div>
       </div>
 
       <div class="cc c3">
-        <h4>Outreach · Education · Network</h4><div class="idt">Jangkauan · edukasi · jejaring</div>
-        <div class="ins"><b>18 facility MOUs</b> — regional network leader (HMU evaluation). Unique reach at 66% and ongoing; IEC materials at 170%.</div>
+        <h4><span class="en">Outreach · Education · Network</span><span class="id">Jangkauan · Edukasi · Jejaring</span></h4>
+        <div class="ins"><span class="en"><b>18 facility MOUs</b> — regional network leader (HMU evaluation). Unique reach at 66% and ongoing; IEC materials at 170%.</span><span class="id"><b>18 MOU faskes</b> — pemimpin jejaring regional (evaluasi HMU). Jangkauan unik 66% &amp; masih berjalan; materi KIE 170%.</span></div>
         <div class="vchart">
           <div class="vcol"><div class="vv" style="color:var(--wine);">66%</div><div class="pair"><div class="vb t" style="height:81%;"></div><div class="vb" style="height:54%;background:var(--clay);"></div></div></div>
           <div class="vcol"><div class="vv" style="color:var(--plum);">170%</div><div class="pair"><div class="vb t" style="height:59%;"></div><div class="vb" style="height:100%;background:var(--terra);"></div></div></div>
           <div class="vcol"><div class="vv" style="color:var(--plum);">150% 🏆</div><div class="pair"><div class="vb t" style="height:4%;"></div><div class="vb" style="height:6%;background:var(--plum);"></div></div></div>
         </div>
         <div class="vlabs">
-          <div class="vl">Unique Reach<span class="s">T 2,500 · A 1,648</span></div>
-          <div class="vl">IEC Materials<span class="s">T 1,800 · A 3,069</span></div>
-          <div class="vl">Facility MOUs<span class="s">T 12 · A 18</span></div>
+          <div class="vl"><span class="en">Unique Reach</span><span class="id">Jangkauan Unik</span><span class="s">T 2,500 · A 1,648</span></div>
+          <div class="vl"><span class="en">IEC Materials</span><span class="id">Materi KIE</span><span class="s">T 1,800 · A 3,069</span></div>
+          <div class="vl"><span class="en">Facility MOUs</span><span class="id">MOU Faskes</span><span class="s">T 12 · A 18</span></div>
         </div>
-        <div class="cfoot"><span>grey = target · colour = achieved</span><span class="wm">Sadar Hati · ViiV PA</span></div>
+        <div class="cfoot"><span><span class="en">grey = target · colour = achieved</span><span class="id">abu = target · warna = capaian</span></span><span class="wm">Sadar Hati · ViiV PA</span></div>
       </div>
     </div>
 
-    <div class="note">ⓘ The ARV target (288) was set at proposal stage before actual prevalence data became available (21 confirmed HIV+ cases); the more appropriate indicator is <b>treatment linkage: 22 initiated ARV from 21 confirmed cases</b>. GRA counted from KoboToolbox session participants (1,717). MH screening target = 450 per semester × 4 = 1,800.</div>
+    <div class="note"><span class="en">ⓘ The ARV target (288) was set at proposal stage before actual prevalence data became available; the more appropriate indicator is <b>treatment linkage: 22 initiated ARV from 21 confirmed cases (2025-26)</b>. The 2024 HIV-positivity entries are under M&amp;E data-quality review, so cascade percentages use the verified 2025-26 series. GRA counted from KoboToolbox session participants (1,717). MH screening target = 450 per semester × 4.</span><span class="id">ⓘ Target ARV (288) disusun pada tahap proposal sebelum data prevalensi aktual tersedia; indikator yang lebih tepat adalah <b>keterhubungan pengobatan: 22 memulai ARV dari 21 kasus terkonfirmasi (2025-26)</b>. Entri positivitas HIV 2024 sedang ditinjau mutu datanya oleh M&amp;E, sehingga persentase kaskade memakai seri 2025-26 yang terverifikasi. GRA dihitung dari peserta sesi KoboToolbox (1.717). Target skrining keswa = 450 per semester × 4.</span></div>
 
-    <h3 style="font-family:'Lora',serif;font-size:16px;margin:24px 0 4px;">Positive Action Indicators &amp; Project Targets</h3>
-    <div class="zsub">Structured to mirror the Positive Action reporting framework (Cybergrants). <em>· Disusun mengikuti kerangka pelaporan Positive Action.</em></div>
+    <h3 style="font-family:'Lora',serif;font-size:16px;margin:24px 0 4px;"><span class="en">Positive Action Indicators &amp; Project Targets</span><span class="id">Indikator Positive Action &amp; Target Proyek</span></h3>
+    <div class="zsub"><span class="en">Structured to mirror the Positive Action reporting framework (Cybergrants) — the same table the team uses while preparing the final narrative report. The final report requires <b>unique individuals</b> (no double counting across years); M&amp;E is finalising deduplicated counts from the master client roster.</span><span class="id">Disusun mengikuti kerangka pelaporan Positive Action (Cybergrants) — tabel yang sama dipakai tim saat menyusun laporan naratif akhir. Laporan akhir mensyaratkan <b>orang unik</b> (tanpa hitung ganda antar tahun); M&amp;E sedang memfinalkan angka deduplikasi dari master data klien.</span></div>
     <div class="tblwrap">
       <table>
         <thead><tr>
-          <th>Indicator <span class="s">Indikator</span></th>
-          <th>2-Year Target <span class="s">Target 2 tahun</span></th>
-          <th>First 6 Months <span class="s">6 bulan pertama (07/24)</span></th>
-          <th>Cumulative <span class="s">Kumulatif</span></th>
-          <th>Progress <span class="s">Capaian</span></th>
+          <th><span class="en">Indicator</span><span class="id">Indikator</span></th>
+          <th><span class="en">2-Year Target</span><span class="id">Target 2 Tahun</span></th>
+          <th><span class="en">First 6 Months</span><span class="id">6 Bulan Pertama</span></th>
+          <th><span class="en">Cumulative (service records)</span><span class="id">Kumulatif (catatan layanan)</span></th>
+          <th><span class="en">Progress</span><span class="id">Capaian</span></th>
         </tr></thead>
         <tbody>
-          <tr><td>PA-1 · People directly reached (unique)</td><td class="num">±2,500</td><td class="num">635</td><td class="num">1,648</td><td><span class="pill mid">66%</span></td></tr>
-          <tr><td>PA-2a · Receiving condoms &amp; needles</td><td class="num">900 people</td><td class="num">310</td><td class="num">16,399 condoms + 886 needles (units)</td><td><span class="pill na">unit-based</span></td></tr>
-          <tr><td>PA-2b · PrEP referral / initiation</td><td class="num">540</td><td class="num">52</td><td class="num">131</td><td><span class="pill lo">24%</span></td></tr>
-          <tr><td>PA-2c · STI testing / services</td><td class="num">720</td><td class="num">343</td><td class="num">1,221</td><td><span class="pill hi">170%</span></td></tr>
-          <tr><td>PA-3 · Linked to HIV prevention services</td><td class="num">—</td><td class="num">440</td><td class="num">—</td><td><span class="pill na">—</span></td></tr>
-          <tr><td>PA-4 · Tested for HIV (facility + rapid)</td><td class="num">576 + 144 HIVST</td><td class="num">369 + 72</td><td class="num">2,117 + 77 OraQuick</td><td><span class="pill hi">368%</span></td></tr>
-          <tr><td>PA-5 · Linked to HIV treatment (ARV)</td><td class="num">288*</td><td class="num">14</td><td class="num">22 of 21 HIV+</td><td><span class="pill hi">linkage 100%*</span></td></tr>
-          <tr><td>PA-6 · Positive change in self-worth / stigma</td><td>qualitative</td><td>case studies</td><td>case studies</td><td><span class="pill na">—</span></td></tr>
-          <tr><td>PA-7 · Priority populations trained (peer educators)</td><td class="num">10 / area</td><td>from 08/24</td><td class="num">130 training participants</td><td><span class="pill hi">🏆</span></td></tr>
-          <tr><td>PA-8 · Service providers engaged / trained</td><td class="num">30 + 50 webinar ×2</td><td>monthly fora</td><td class="num">18 facility MOUs</td><td><span class="pill hi">150%</span></td></tr>
-          <tr><td>PA-9 · Accessing mental wellbeing services</td><td class="num">1,800 (450/semester)</td><td class="num">175</td><td class="num">1,683 screened · 201 referred</td><td><span class="pill mid">94%</span></td></tr>
-          <tr><td>PA-10 · Economic / livelihood schemes (SAHAWOOD)</td><td class="num">50 craft + 2 therapy groups</td><td class="num">2 + 1 yoga group</td><td class="num">2 artisans</td><td><span class="pill lo">4%</span></td></tr>
-          <tr><td>PA-11 · Community mobilisation events</td><td>monthly FGDs</td><td class="num">10 FGDs + 14 support groups</td><td class="num">14 support-group series</td><td><span class="pill hi">on track</span></td></tr>
-          <tr><td>PA-12 · Community leadership initiatives</td><td class="num">—</td><td>legal-aid MoU</td><td class="num">18 MOUs · regional leader</td><td><span class="pill hi">🏆</span></td></tr>
-          <tr><td>IRA — Individual Risk Assessment (proposal target)</td><td class="num">900</td><td class="num">369</td><td class="num">1,427</td><td><span class="pill hi">159%</span></td></tr>
-          <tr><td>GRA — Group Risk Assessment (proposal target)</td><td class="num">630 people</td><td class="num">240</td><td class="num">1,717 participants (KoBo)</td><td><span class="pill hi">273%</span></td></tr>
-          <tr><td>Support-group participation</td><td class="num">630</td><td class="num">100</td><td>recap in progress</td><td><span class="pill na">—</span></td></tr>
-          <tr><td>IEC materials developed / distributed</td><td class="num">1,800</td><td class="num">1,142</td><td class="num">3,069</td><td><span class="pill hi">170%</span></td></tr>
-          <tr><td>MH screening per semester</td><td class="num">450 × 4</td><td class="num">175</td><td class="num">1,683</td><td><span class="pill mid">94%</span></td></tr>
-          <tr><td>MH referrals to health facilities</td><td class="num">315</td><td class="num">25</td><td class="num">201</td><td><span class="pill mid">64%</span></td></tr>
+          <tr><td><span class="en">PA-1 · People directly reached (unique)</span><span class="id">PA-1 · Orang dijangkau langsung (unik)</span></td><td class="num">±2,500</td><td class="num">635</td><td class="num">1,648</td><td><span class="pill mid">66%</span></td></tr>
+          <tr><td><span class="en">PA-2a · Receiving condoms &amp; needles</span><span class="id">PA-2a · Menerima kondom &amp; jarum</span></td><td class="num"><span class="en">900 people</span><span class="id">900 orang</span></td><td class="num">310</td><td class="num"><span class="en">21,924 condoms · 904 needles (units)</span><span class="id">21.924 kondom · 904 jarum (unit)</span></td><td><span class="pill na"><span class="en">unit-based</span><span class="id">basis unit</span></span></td></tr>
+          <tr><td><span class="en">PA-2b · PrEP referral / initiation</span><span class="id">PA-2b · Rujukan / mulai PrEP</span></td><td class="num">540</td><td class="num">52</td><td class="num">265</td><td><span class="pill lo">49%</span></td></tr>
+          <tr><td><span class="en">PA-2c · STI testing / services</span><span class="id">PA-2c · Tes / layanan IMS</span></td><td class="num">720</td><td class="num">343</td><td class="num">2,027</td><td><span class="pill hi">282%</span></td></tr>
+          <tr><td><span class="en">PA-3 · Linked to HIV prevention services</span><span class="id">PA-3 · Terhubung layanan pencegahan HIV</span></td><td class="num">—</td><td class="num">440</td><td class="num">—</td><td><span class="pill na">—</span></td></tr>
+          <tr><td><span class="en">PA-4 · Tested for HIV (facility + rapid)</span><span class="id">PA-4 · Tes HIV (faskes + rapid)</span></td><td class="num">576 + 144 HIVST</td><td class="num">369 + 72</td><td class="num">2,117 + 77 OraQuick</td><td><span class="pill hi">368%</span></td></tr>
+          <tr><td><span class="en">PA-5 · Linked to HIV treatment (ARV)</span><span class="id">PA-5 · Terhubung pengobatan HIV (ARV)</span></td><td class="num">288*</td><td class="num">14</td><td class="num"><span class="en">22 of 21 HIV+ (2025-26)</span><span class="id">22 dari 21 HIV+ (2025-26)</span></td><td><span class="pill hi"><span class="en">linkage 100%*</span><span class="id">keterhubungan 100%*</span></span></td></tr>
+          <tr><td><span class="en">PA-6 · Positive change in self-worth / stigma</span><span class="id">PA-6 · Perubahan positif harga diri / stigma</span></td><td><span class="en">qualitative</span><span class="id">kualitatif</span></td><td><span class="en">case studies</span><span class="id">studi kasus</span></td><td><span class="en">case studies</span><span class="id">studi kasus</span></td><td><span class="pill na">—</span></td></tr>
+          <tr><td><span class="en">PA-7 · Priority populations trained (peer educators)</span><span class="id">PA-7 · Populasi kunci terlatih (pendidik sebaya)</span></td><td class="num">10 / area</td><td><span class="en">from 08/24</span><span class="id">mulai 08/24</span></td><td class="num"><span class="en">130 training participants</span><span class="id">130 peserta pelatihan</span></td><td><span class="pill hi">🏆</span></td></tr>
+          <tr><td><span class="en">PA-8 · Service providers engaged / trained</span><span class="id">PA-8 · Penyedia layanan dilibatkan / dilatih</span></td><td class="num">30 + 50 webinar ×2</td><td><span class="en">monthly fora</span><span class="id">forum bulanan</span></td><td class="num"><span class="en">18 facility MOUs</span><span class="id">18 MOU faskes</span></td><td><span class="pill hi">150%</span></td></tr>
+          <tr><td><span class="en">PA-9 · Accessing mental wellbeing services</span><span class="id">PA-9 · Mengakses layanan kesejahteraan jiwa</span></td><td class="num">1,800 (450/sem)</td><td class="num">175</td><td class="num"><span class="en">1,683 screened · 847 psychosocial · 211 referred</span><span class="id">1.683 skrining · 847 psikososial · 211 rujukan</span></td><td><span class="pill mid">94%</span></td></tr>
+          <tr><td><span class="en">PA-10 · Economic / livelihood schemes (SAHAWOOD)</span><span class="id">PA-10 · Skema ekonomi / mata pencaharian (SAHAWOOD)</span></td><td class="num"><span class="en">50 craft + 2 therapy groups</span><span class="id">50 perajin + 2 grup terapi</span></td><td class="num"><span class="en">2 + 1 yoga group</span><span class="id">2 + 1 grup yoga</span></td><td class="num"><span class="en">2 artisans</span><span class="id">2 perajin</span></td><td><span class="pill lo">4%</span></td></tr>
+          <tr><td><span class="en">PA-11 · Community mobilisation events</span><span class="id">PA-11 · Kegiatan mobilisasi komunitas</span></td><td><span class="en">monthly FGDs</span><span class="id">FGD bulanan</span></td><td class="num"><span class="en">10 FGDs + 14 support groups</span><span class="id">10 FGD + 14 kelompok dukungan</span></td><td class="num"><span class="en">14 support-group series</span><span class="id">14 seri kelompok dukungan</span></td><td><span class="pill hi"><span class="en">on track</span><span class="id">berjalan</span></span></td></tr>
+          <tr><td><span class="en">PA-12 · Community leadership initiatives</span><span class="id">PA-12 · Inisiatif kepemimpinan komunitas</span></td><td class="num">—</td><td><span class="en">legal-aid MoU</span><span class="id">MoU bantuan hukum</span></td><td class="num"><span class="en">18 MOUs · regional leader</span><span class="id">18 MOU · pemimpin regional</span></td><td><span class="pill hi">🏆</span></td></tr>
+          <tr><td><span class="en">IRA — Individual Risk Assessment</span><span class="id">IRA — Asesmen Risiko Individu</span></td><td class="num">900</td><td class="num">369</td><td class="num">1,427</td><td><span class="pill hi">159%</span></td></tr>
+          <tr><td><span class="en">Substance-use counselling after IRA</span><span class="id">Konseling napza pasca-IRA</span></td><td class="num">—</td><td class="num">—</td><td class="num">703</td><td><span class="pill hi"><span class="en">follow-up</span><span class="id">tindak lanjut</span></span></td></tr>
+          <tr><td><span class="en">GRA — Group Risk Assessment</span><span class="id">GRA — Asesmen Risiko Kelompok</span></td><td class="num"><span class="en">630 people</span><span class="id">630 orang</span></td><td class="num">240</td><td class="num"><span class="en">1,717 participants (KoBo)</span><span class="id">1.717 peserta (KoBo)</span></td><td><span class="pill hi">273%</span></td></tr>
+          <tr><td><span class="en">Support-group participation</span><span class="id">Partisipasi kelompok dukungan</span></td><td class="num">630</td><td class="num">100</td><td><span class="en">recap in progress</span><span class="id">rekap berjalan</span></td><td><span class="pill na">—</span></td></tr>
+          <tr><td><span class="en">IEC materials developed / distributed</span><span class="id">Materi KIE dikembangkan / didistribusikan</span></td><td class="num">1,800</td><td class="num">1,142</td><td class="num">3,069</td><td><span class="pill hi">170%</span></td></tr>
+          <tr><td><span class="en">MH screening per semester</span><span class="id">Skrining keswa per semester</span></td><td class="num">450 × 4</td><td class="num">175</td><td class="num">1,683</td><td><span class="pill mid">94%</span></td></tr>
+          <tr><td><span class="en">MH referrals to health facilities</span><span class="id">Rujukan keswa ke faskes</span></td><td class="num">315</td><td class="num">25</td><td class="num">211</td><td><span class="pill mid">67%</span></td></tr>
         </tbody>
       </table>
     </div>
-    <div class="note">* The ARV target (288) was set at proposal stage before actual prevalence data became available; achievement reflects full treatment linkage — 21 confirmed HIV+ cases, 22 ARV initiations. All figures are aggregates; no personally identifiable information. Definition note: the PA-2a target is expressed in people, while distribution is recorded in commodity units.</div>
+    <div class="note"><span class="en">* The ARV target (288) was set at proposal stage before actual prevalence data became available; achievement reflects full treatment linkage. All figures are aggregates; no personally identifiable information. Definition notes: the PA-2a target is expressed in people while distribution is recorded in commodity units; "cumulative" sums service records across 2024 and 2025-26 — the final report will use deduplicated unique individuals.</span><span class="id">* Target ARV (288) disusun pada tahap proposal sebelum data prevalensi aktual tersedia; capaian mencerminkan keterhubungan pengobatan penuh. Semua angka agregat; tanpa informasi identitas pribadi. Catatan definisi: target PA-2a dinyatakan dalam orang sementara distribusi tercatat dalam unit komoditas; "kumulatif" menjumlah catatan layanan 2024 dan 2025-26 — laporan akhir akan memakai orang unik hasil deduplikasi.</span></div>
   </div>
 
   <div class="gov">
-    <b>Data governance / Tata kelola data:</b> This page presents aggregate programme indicators only — it contains no names, IDs, or any client-identifying information. Client-level records remain in Sadar Hati's protected internal systems with role-based access. Financial reporting is submitted separately through Positive Action's official channels. <em>Halaman ini hanya menampilkan indikator agregat — tanpa nama, ID, atau informasi identitas klien. Data level-klien tetap berada di sistem internal terlindungi dengan akses berbasis peran. Pelaporan keuangan disampaikan terpisah melalui kanal resmi Positive Action.</em>
+    <b><span class="en">Data governance:</span><span class="id">Tata kelola data:</span></b> <span class="en">This page presents aggregate programme indicators only — it contains no names, IDs, or any client-identifying information. Client-level records remain in Sadar Hati's protected internal systems with role-based access. Financial reporting is submitted separately through Positive Action's official channels.</span><span class="id">Halaman ini hanya menampilkan indikator program agregat — tanpa nama, ID, atau informasi identitas klien apa pun. Data level-klien tetap berada di sistem internal terlindungi Sadar Hati dengan akses berbasis peran. Pelaporan keuangan disampaikan terpisah melalui kanal resmi Positive Action.</span>
   </div>
 
   <div class="foot">
     <b>Sadar Hati Foundation</b> · Jl. Sisingamangaraja No. 250, Malang City, East Java, Indonesia · <a href="https://sadarhati.org">sadarhati.org</a><br>
-    Sources: Grant Agreement 26 Jan 2024 &amp; Change Request #1 · Cybergrants Proposal · Workplan · Intermediary Report 07/2024 · REDCap 2024 &amp; 2025-26 · KoboToolbox · HMU Regional KPI Review, Jun 2026.<br>
-    <span id="pg-ver">Live data bridge: public_stats/viiv_me · page v1.0</span>
+    <span class="en">Sources: Grant Agreement 26 Jan 2024 &amp; Change Request #1 · Cybergrants Proposal · Workplan · Intermediary Report 07/2024 · REDCap 2024 &amp; 2025-26 · KoboToolbox · HMU Regional KPI Review, Jun 2026.</span>
+    <span class="id">Sumber: Grant Agreement 26 Jan 2024 &amp; Change Request #1 · Proposal Cybergrants · Workplan · Laporan Intermediary 07/2024 · REDCap 2024 &amp; 2025-26 · KoboToolbox · Tinjauan KPI Regional HMU, Jun 2026.</span><br>
+    <span id="pg-ver">page v2.0 · live bridge: public_stats/viiv_me</span>
   </div>
 </div>
 
 <script>
+function setLang(l){
+  document.body.className='lang-'+l;
+  document.documentElement.lang=l;
+  document.getElementById('btn-en').className=(l==='en')?'on':'';
+  document.getElementById('btn-id').className=(l==='id')?'on':'';
+  try{localStorage.setItem('viiv_lang',l);}catch(e){}
+}
+try{var sv=localStorage.getItem('viiv_lang'); if(sv==='id'||sv==='en') setLang(sv);}catch(e){}
 (function(){
   var URL='https://firestore.googleapis.com/v1/projects/sadar-hati-hub/databases/(default)/documents/public_stats/viiv_me';
   function gv(f){ if(!f) return null; if('integerValue' in f) return +f.integerValue; if('doubleValue' in f) return +f.doubleValue; if('stringValue' in f) return f.stringValue; if('mapValue' in f){ var o={},ff=f.mapValue.fields||{}; for(var k in ff) o[k]=gv(ff[k]); return o;} return null; }
@@ -251,21 +274,22 @@
     var yr=gv(f.tahun)||new Date().getFullYear();
     var t=gv(f.tahun_ini)||{};
     var up=gv(f.updated_at)||'';
-    document.getElementById('lv-year').textContent='YEAR '+yr+' · TAHUN BERJALAN';
+    document.getElementById('lv-year').innerHTML='<span class="en">YEAR '+yr+'</span><span class="id">TAHUN '+yr+'</span>';
     document.getElementById('k-kontak').textContent=num(t.kontak);
     document.getElementById('k-skrining').textContent=num(t.skrining);
     document.getElementById('k-vct').textContent=num(t.vct);
     document.getElementById('k-konseling').textContent=num(t.konseling);
     var d=up?new Date(up):null;
-    document.getElementById('lv-stamp').innerHTML='🔄 Last synchronised / Sinkronisasi terakhir: <b>'+(d?d.toLocaleString('en-GB',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})+' WIB':'—')+'</b>';
-    var ekstra=[];
-    if(t.kondom!=null) ekstra.push(num(t.kondom)+' condoms / kondom');
-    if(t.kie!=null) ekstra.push(num(t.kie)+' IEC / KIE');
-    if(t.rujukan_dast!=null) ekstra.push(num(t.rujukan_dast)+' substance-use referrals (DAST ≥3) / rujukan napza');
-    if(t.cmd_srq!=null) ekstra.push(num(t.cmd_srq)+' probable CMD (SRQ-20 ≥6) / kemungkinan gangguan mental umum');
-    if(ekstra.length) document.getElementById('lv-extra').innerHTML='Also this year / Tahun ini juga: '+ekstra.join(' · ')+'.';
+    var ds=d?d.toLocaleString('en-GB',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
+    document.getElementById('lv-stamp').innerHTML='<span class="en">🔄 Last synchronised: <b>'+ds+' WIB</b></span><span class="id">🔄 Sinkronisasi terakhir: <b>'+ds+' WIB</b></span>';
+    var exEn=[],exId=[];
+    if(t.kondom!=null){exEn.push(num(t.kondom)+' condoms');exId.push(num(t.kondom)+' kondom');}
+    if(t.kie!=null){exEn.push(num(t.kie)+' IEC materials');exId.push(num(t.kie)+' KIE');}
+    if(t.rujukan_dast!=null){exEn.push(num(t.rujukan_dast)+' substance-use referrals (DAST ≥3)');exId.push(num(t.rujukan_dast)+' rujukan napza (DAST ≥3)');}
+    if(t.cmd_srq!=null){exEn.push(num(t.cmd_srq)+' probable CMD (SRQ-20 ≥6)');exId.push(num(t.cmd_srq)+' kemungkinan GME (SRQ-20 ≥6)');}
+    if(exEn.length) document.getElementById('lv-extra').innerHTML='<span class="en">Also this year: '+exEn.join(' · ')+'.</span><span class="id">Tahun ini juga: '+exId.join(' · ')+'.</span>';
   }).catch(function(e){
-    document.getElementById('lv-stamp').innerHTML='⏳ Live figures will appear after the next data synchronisation. <em>· Angka live tampil setelah sinkronisasi data berikutnya.</em>';
+    document.getElementById('lv-stamp').innerHTML='<span class="en">⏳ Live figures will appear after the next data synchronisation.</span><span class="id">⏳ Angka live tampil setelah sinkronisasi data berikutnya.</span>';
   });
 })();
 </script>
