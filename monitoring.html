@@ -921,7 +921,7 @@
     <div class="brand">
       <div class="logo">Sadar Hati Foundation</div>
       <div class="est">est. 2002 · Malang</div>
-      <div class="system-tag">Integrated Hub v0.64 · Yayasan Sadar Hati</div>
+      <div class="system-tag">Integrated Hub v0.65 · Yayasan Sadar Hati</div>
     </div>
 
         <nav class="nav">
@@ -967,7 +967,7 @@
           akses sesuai role akun
         </div>
       </div>
-      <div>v0.64 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
+      <div>v0.65 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
     <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#2f6d9e,#1f4a6e);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
@@ -1707,27 +1707,29 @@
         </section>
       <section class="section" id="l2-out-ira">
 
-        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>⚕️ IRA — Penilaian Risiko Pribadi</h1><p class="lede"><strong>Individual Risk Assessment</strong>: memetakan perilaku berisiko HIV per individu — berbagi alat, pola kondom, jumlah pasangan — sebagai dasar rencana pengurangan risiko. Instrumen <strong>Lembar Penilaian Risiko Pribadi (KoBo)</strong>. Angka agregat, nol identitas.</p></div>
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>⚕️ IRA — Penilaian Risiko Pribadi</h1><p class="lede"><strong>Individual Risk Assessment</strong>: memetakan perilaku berisiko HIV per individu — berbagi alat, pola kondom, jumlah pasangan — dasar rencana pengurangan risiko. Zona 1 = data live entri dashboard (per periode); Zona 2 = baseline historis KoBo; Zona 3 = data mentah (khusus Admin · M&amp;E · Direktur).</p></div>
 
-        <div class="cards">
-          <div class="card"><div class="label">Total Assessment</div><div class="value">1.819</div><div class="desc">penilaian risiko individual</div></div>
-          <div class="card" style="background:linear-gradient(135deg,var(--clay) 0%,var(--clay-deep) 100%);color:#fff;border-color:var(--clay-deep);"><div class="label" style="color:#fff;opacity:.85;">Berbagi Jarum/Alat Hisap</div><div class="value" style="color:#fff;">76,5%</div><div class="desc" style="color:#fff;opacity:.9;">1.392 pinjam · 1.471 pinjamkan</div></div>
-          <div class="card" style="background:var(--clay-tint);border-color:var(--clay);"><div class="label">Kondom "Selalu" Pakai</div><div class="value" style="color:var(--clay-deep);">2,9%</div><div class="desc">hanya 51 dari 1.776 — celah pencegahan</div></div>
-          <div class="card"><div class="label">Seks ≥2 Pasangan/bln</div><div class="value">56,9%</div><div class="desc">1.000 klien</div></div>
+        <!-- ZONA 1 · LIVE -->
+        <div class="me-zone me-live">
+          <div class="me-zhead"><span class="me-zt">1 · Data Live Dashboard</span><span class="me-ztag l"><span class="me-livechip"><span class="me-dot"></span>LIVE</span></span>
+            <div class="me-seg" id="ir-seg"><button data-p="bulan">Bulanan</button><button data-p="kuartal">Kuartalan</button><button data-p="tahun" class="on">Tahunan</button></div><span class="me-pbig" id="ir-pbig">—</span></div>
+          <div class="me-zsub">Dihitung otomatis dari entri form IRA (pakai tanggal entri). Berbagi alat = pinjam ATAU pinjamkan jarum/alat hisap.</div>
+          <div class="cards" id="ir-live-kpi"></div>
+          <div class="me-grid" id="ir-live-grid"></div>
         </div>
 
-        <h2 class="section-h2" style="margin-top:30px;">🛡️ Pola Pemakaian Kondom</h2>
-        <p style="font-size:13px;color:var(--slate);line-height:1.6;margin:4px 0 14px;">Hanya <strong>2,9%</strong> yang konsisten pakai kondom — mayoritas "tidak pernah". Ini indikator prioritas untuk program distribusi kondom & KIE.</p>
-        <div class="xtab"><div class="xrow"><div class="xlab">Selalu pakai</div><div class="xtrack"><div class="xfill" style="width:2.9%;background:#8a5a74;"></div></div><div class="xval">51 · 2,9%</div></div><div class="xrow"><div class="xlab">Kadang-kadang</div><div class="xtrack"><div class="xfill" style="width:37.7%;background:#6b4d7a;">38%</div></div><div class="xval">669 · 37,7%</div></div><div class="xrow"><div class="xlab">Tidak pernah</div><div class="xtrack"><div class="xfill" style="width:59.5%;background:#a83244;">59%</div></div><div class="xval">1.056 · 59,5%</div></div></div>
-
-        <h2 class="section-h2" style="margin-top:30px;">🔗 Indikator Silang — Kondom "Tidak Pernah" × Jumlah Pasangan</h2>
-        <p style="font-size:13px;color:var(--slate);line-height:1.6;margin:4px 0 14px;">Menariknya, kelompok <strong>≥2 pasangan</strong> justru sedikit lebih sering pakai kondom dibanding yang 1 pasangan — kemungkinan persepsi "pasangan tetap = aman". Keduanya tetap tinggi & butuh intervensi.</p>
-        <div class="xtab"><div class="xrow"><div class="xlab">≥2 pasangan/bln</div><div class="xtrack"><div class="xfill" style="width:49.9%;background:#c96b2f;">50%</div></div><div class="xval">49,9% · n=1.000</div></div><div class="xrow"><div class="xlab">1 pasangan/bln</div><div class="xtrack"><div class="xfill" style="width:72.0%;background:#a83244;">72%</div></div><div class="xval">72,0% · n=744</div></div></div>
-
-        <h2 class="section-h2" style="margin-top:30px;">💞 Jenis Pasangan Seks (1 bln terakhir)</h2>
-        <div class="xtab"><div class="xrow"><div class="xlab">Pacar</div><div class="xtrack"><div class="xfill" style="width:100.0%;background:#a83244;">44%</div></div><div class="xval">790</div></div><div class="xrow"><div class="xlab">Suami/Isteri</div><div class="xtrack"><div class="xfill" style="width:50.0%;background:#94395c;">22%</div></div><div class="xval">395</div></div><div class="xrow"><div class="xlab">PSP</div><div class="xtrack"><div class="xfill" style="width:36.3%;background:#6b4d7a;">16%</div></div><div class="xval">287</div></div><div class="xrow"><div class="xlab">WPS</div><div class="xtrack"><div class="xfill" style="width:23.2%;background:#c47a3b;">10%</div></div><div class="xval">183</div></div><div class="xrow"><div class="xlab">Lainnya</div><div class="xtrack"><div class="xfill" style="width:18.7%;background:#5f3b50;">8%</div></div><div class="xval">148</div></div></div>
-
-        <h2 class="section-h2" style="margin-top:30px;">🧾 Rincian Indikator Risiko (data tabel · bisa di-export)</h2>
+        <!-- ZONA 2 · BASELINE KoBo -->
+        <div class="me-zone me-base">
+          <div class="me-zhead"><span class="me-zt">2 · Baseline Historis</span><span class="me-ztag b">KoBo · KUMULATIF 2024–2026</span></div>
+          <div class="me-zsub">Rekap asesmen KoBo (1.819 penilaian risiko individual) — angka historis kumulatif, pembanding tetap.</div>
+          <div class="cards">
+            <div class="card"><div class="label">Total Assessment</div><div class="value">1.819</div><div class="desc">penilaian risiko individual</div></div>
+            <div class="card" style="background:linear-gradient(135deg,var(--clay) 0%,var(--clay-deep) 100%);color:#fff;border-color:var(--clay-deep);"><div class="label" style="color:#fff;opacity:.85;">Berbagi Jarum/Alat Hisap</div><div class="value" style="color:#fff;">76,5%</div><div class="desc" style="color:#fff;opacity:.9;">1.392 pinjam · 1.471 pinjamkan</div></div>
+            <div class="card" style="background:var(--clay-tint);border-color:var(--clay);"><div class="label">Kondom "Selalu" Pakai</div><div class="value" style="color:var(--clay-deep);">2,9%</div><div class="desc">hanya 51 dari 1.776 — celah pencegahan</div></div>
+            <div class="card"><div class="label">Seks ≥2 Pasangan/bln</div><div class="value">56,9%</div><div class="desc">1.000 klien</div></div>
+          </div>
+          <div class="me-grid" id="ir-base-grid"></div>
+          <h2 class="section-h2" style="margin-top:30px;">🧾 Rincian Indikator Risiko (data tabel · bisa di-export)</h2>
         <p style="font-size:13px;color:var(--slate);line-height:1.6;margin:4px 0 10px;"><strong>Klik judul kolom</strong> buat sortir; ketik buat cari; <strong>Export CSV</strong> ikut hasil.</p>
         <div class="saha-tblbox">
   <div class="saha-tbar">
@@ -1748,13 +1750,37 @@
   </div>
 </div>
 <p style="font-size:12px;color:var(--slate);margin:8px 2px 0;">Perilaku berisiko individual dalam 1 bulan terakhir. Persentase dihitung dari baris yang mengisi item tsb.</p>
-        <div class="saha-rawbox role-me-up" data-form="ira" style="margin-top:20px;"><div class="saha-rawhead"><span>🔓 Data Mentah — Level Klien (bernama)</span><span class="saha-rawtag">AKSES: ADMIN · M&amp;E · DIREKTUR</span></div><div class="saha-rawnote">Baris per-klien dari entry form dashboard (live Firestore) — muncul otomatis begitu tim submit. Peran Staf tidak melihat blok ini; agregat di atas tetap tampil untuk semua. Arsip historis KoBo / Master DB tetap di sumber terlindungi.</div><div class="saha-rawbody" data-rawbody="ira"><div class="saha-rawempty">Login untuk memuat data.</div></div></div>
+        
+        </div>
+
+        <!-- ZONA 3 · DATA MENTAH (gated) -->
+        <div class="me-zone me-raw">
+          <div class="me-zhead"><span class="me-zt">3 · Data Mentah (Level Klien)</span><span class="me-ztag r">🔒 ADMIN · M&amp;E · DIREKTUR</span></div>
+          <div class="me-rawzone">
+            <div class="me-rawlock">🔒 Akses terbatas — hanya Admin, M&amp;E, dan Direktur. Baris per-klien dari entri live (double-check M&amp;E).</div>
+            <div class="me-rawtbar"><input id="ir-rawq" placeholder="🔎 cari ID KD / PL / wilayah..."><button class="me-rawexp" id="ir-rawexp">📥 Export CSV</button><span id="ir-rawcount" style="font-size:11px;color:var(--slate);"></span></div>
+            <div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>Tanggal</th><th>ID KD</th><th>PL</th><th>Wilayah</th><th>Kelompok</th><th>Tipe</th><th>Kondom</th><th>Pinjam</th><th>Pinjamkan</th><th>Pasangan</th></tr></thead><tbody id="ir-rawbody"><tr><td colspan="10" style="padding:14px;color:#a89f97;">Memuat…</td></tr></tbody></table></div>
+          </div>
+          <div class="me-rawblocked">🔒 Anda tidak punya akses ke data mentah level klien.</div>
+        </div>
         <div class="source-attr" style="margin-top:22px;">📄 <strong>Sumber:</strong> Lembar Penilaian Risiko Pribadi IRA (KoboToolbox) · n=1.819 · Malang–Surabaya–Sidoarjo–Jakarta · snapshot Jul 2026.</div>
 
       </section>
       <section class="section" id="l2-out-konseling">
 
-        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>💬 Konseling — Output Layanan Konselor</h1><p class="lede">Rekap <strong>sesi konseling</strong> oleh konselor komunitas: volume layanan, cakupan klien, dan tindak lanjut. Instrumen <strong>Laporan Konseling oleh Konselor (KoBo)</strong>, 2024-04-28 – 2026-06-30. Isi konseling bersifat rahasia — hanya agregat ditampilkan.</p></div>
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>💬 Konseling — Output Layanan Konselor</h1><p class="lede">Rekap <strong>sesi konseling</strong> oleh konselor komunitas: volume layanan, cakupan klien, dan tindak lanjut. Isi konseling bersifat rahasia — agregat untuk semua, data mentah khusus Admin · M&amp;E · Direktur. Zona 1 = live dashboard; Zona 2 = baseline historis KoBo.</p></div>
+        <!-- ZONA 1 · LIVE -->
+        <div class="me-zone me-live">
+          <div class="me-zhead"><span class="me-zt">1 · Data Live Dashboard</span><span class="me-ztag l"><span class="me-livechip"><span class="me-dot"></span>LIVE</span></span>
+            <div class="me-seg" id="ko-seg"><button data-p="bulan">Bulanan</button><button data-p="kuartal">Kuartalan</button><button data-p="tahun" class="on">Tahunan</button></div><span class="me-pbig" id="ko-pbig">—</span></div>
+          <div class="me-zsub">Dihitung otomatis dari entri form Konseling (pakai tanggal entri). Isi sesi tidak pernah tampil di zona ini — hanya volume &amp; tindak lanjut.</div>
+          <div class="cards" id="ko-live-kpi"></div>
+          <div class="me-grid" id="ko-live-grid"></div>
+        </div>
+        <!-- ZONA 2 · BASELINE KoBo -->
+        <div class="me-zone me-base">
+          <div class="me-zhead"><span class="me-zt">2 · Baseline Historis</span><span class="me-ztag b">KoBo · KUMULATIF Apr 2024 – Jun 2026</span></div>
+          <div class="me-zsub">Rekap KoBo (461 sesi · 427 klien) — angka historis kumulatif, pembanding tetap.</div>
 
         <div class="cards">
           <div class="card" style="background:linear-gradient(135deg,var(--clay) 0%,var(--clay-deep) 100%);color:#fff;border-color:var(--clay-deep);"><div class="label" style="color:#fff;opacity:.85;">Total Sesi Konseling</div><div class="value" style="color:#fff;">461</div><div class="desc" style="color:#fff;opacity:.9;">sesi tercatat</div></div>
@@ -1790,13 +1816,35 @@
   </div>
 </div>
 <p style="font-size:12px;color:var(--slate);margin:8px 2px 0;">Data staf (bukan identitas klien). Isi/hasil konseling bersifat sangat sensitif → tidak ditampilkan.</p>
-        <div class="saha-rawbox role-me-up" data-form="konseling" style="margin-top:20px;"><div class="saha-rawhead"><span>🔓 Data Mentah — Level Klien (bernama)</span><span class="saha-rawtag">AKSES: ADMIN · M&amp;E · DIREKTUR</span></div><div class="saha-rawnote">Baris per-klien dari entry form dashboard (live Firestore) — muncul otomatis begitu tim submit. Peran Staf tidak melihat blok ini; agregat di atas tetap tampil untuk semua. Arsip historis KoBo / Master DB tetap di sumber terlindungi.</div><div class="saha-rawbody" data-rawbody="konseling"><div class="saha-rawempty">Login untuk memuat data.</div></div></div>
+        </div>
+        <!-- ZONA 3 · DATA MENTAH (gated) -->
+        <div class="me-zone me-raw">
+          <div class="me-zhead"><span class="me-zt">3 · Data Mentah (Level Klien)</span><span class="me-ztag r">🔒 ADMIN · M&amp;E · DIREKTUR</span></div>
+          <div class="me-rawzone">
+            <div class="me-rawlock">🔒 Akses terbatas — hanya Admin, M&amp;E, dan Direktur. Isi konseling sangat sensitif: tabel hanya menampilkan cuplikan kondisi; teks lengkap ada di Export CSV.</div>
+            <div class="me-rawtbar"><input id="ko-rawq" placeholder="🔎 cari ID KD / konselor / wilayah..."><button class="me-rawexp" id="ko-rawexp">📥 Export CSV</button><span id="ko-rawcount" style="font-size:11px;color:var(--slate);"></span></div>
+            <div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>Tanggal</th><th>ID KD</th><th>Konselor</th><th>Wilayah</th><th>Jadwal Lanjutan</th><th>RTL</th><th>Kondisi (cuplikan)</th></tr></thead><tbody id="ko-rawbody"><tr><td colspan="7" style="padding:14px;color:#a89f97;">Memuat…</td></tr></tbody></table></div>
+          </div>
+          <div class="me-rawblocked">🔒 Anda tidak punya akses ke data mentah level klien.</div>
+        </div>
         <div class="source-attr" style="margin-top:22px;">📄 <strong>Sumber:</strong> Laporan Konseling oleh Konselor (KoboToolbox) · 461 sesi · 427 klien · 2024-04-28–2026-06-30 · snapshot Jul 2026.</div>
 
       </section>
       <section class="section" id="l2-out-gra">
 
-        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>👥 GRA — Penilaian Risiko Kelompok</h1><p class="lede"><strong>Group Risk Assessment</strong>: sesi penilaian & pengurangan risiko berbasis kelompok/komunitas — menjangkau banyak orang sekaligus lewat diskusi terfasilitasi. Instrumen <strong>Penilaian Risiko Kelompok (KoBo)</strong>. Angka agregat, nol identitas.</p></div>
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>👥 GRA — Penilaian Risiko Kelompok</h1><p class="lede"><strong>Group Risk Assessment</strong>: sesi penilaian &amp; pengurangan risiko berbasis kelompok/komunitas — menjangkau banyak orang sekaligus lewat diskusi terfasilitasi. Zona 1 = data live entri dashboard (per periode); Zona 2 = baseline historis KoBo; Zona 3 = data mentah sesi (khusus Admin · M&amp;E · Direktur).</p></div>
+        <!-- ZONA 1 · LIVE -->
+        <div class="me-zone me-live">
+          <div class="me-zhead"><span class="me-zt">1 · Data Live Dashboard</span><span class="me-ztag l"><span class="me-livechip"><span class="me-dot"></span>LIVE</span></span>
+            <div class="me-seg" id="gr-seg"><button data-p="bulan">Bulanan</button><button data-p="kuartal">Kuartalan</button><button data-p="tahun" class="on">Tahunan</button></div><span class="me-pbig" id="gr-pbig">—</span></div>
+          <div class="me-zsub">Dihitung otomatis dari entri form GRA (pakai tanggal entri). Sesi kelompok dicatat per hotspot — tanpa identitas individu, hanya jumlah peserta L/P/TG.</div>
+          <div class="cards" id="gr-live-kpi"></div>
+          <div class="me-grid" id="gr-live-grid"></div>
+        </div>
+        <!-- ZONA 2 · BASELINE KoBo -->
+        <div class="me-zone me-base">
+          <div class="me-zhead"><span class="me-zt">2 · Baseline Historis</span><span class="me-ztag b">KoBo · KUMULATIF 2024–2026</span></div>
+          <div class="me-zsub">Rekap KoBo (804 sesi · 1.717 peserta) — angka historis kumulatif, pembanding tetap.</div>
 
         <div class="cards">
           <div class="card" style="background:linear-gradient(135deg,var(--clay) 0%,var(--clay-deep) 100%);color:#fff;border-color:var(--clay-deep);"><div class="label" style="color:#fff;opacity:.85;">Total Sesi Grup</div><div class="value" style="color:#fff;">804</div><div class="desc" style="color:#fff;opacity:.9;">penilaian risiko kelompok</div></div>
@@ -1809,8 +1857,7 @@
         <p style="font-size:13px;color:var(--slate);line-height:1.6;margin:4px 0 14px;">Aktivitas kelompok konsisten sepanjang 2024–2026, memuncak <strong>Jun 2026 (237 sesi)</strong>. Bulan tanpa batang = tidak ada pencatatan.</p>
         <div class="mchart"><div class="mbar" title="2024-04: 1 sesi"><div class="mbar-fill" style="height:3%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2024-05: 6 sesi"><div class="mbar-fill" style="height:3%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2024-09: 21 sesi"><div class="mbar-fill" style="height:9%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2024-10: 25 sesi"><div class="mbar-fill" style="height:11%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2024-11: 14 sesi"><div class="mbar-fill" style="height:6%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2024-12: 21 sesi"><div class="mbar-fill" style="height:9%"></div><div class="mbar-lbl">12</div></div><div class="mbar" title="2025-01: 54 sesi"><div class="mbar-fill" style="height:23%"></div><div class="mbar-lbl">01</div></div><div class="mbar" title="2025-07: 1 sesi"><div class="mbar-fill" style="height:3%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2025-08: 18 sesi"><div class="mbar-fill" style="height:8%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2025-09: 31 sesi"><div class="mbar-fill" style="height:13%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2025-10: 55 sesi"><div class="mbar-fill" style="height:23%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2025-11: 24 sesi"><div class="mbar-fill" style="height:10%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2025-12: 59 sesi"><div class="mbar-fill" style="height:25%"></div><div class="mbar-lbl">12</div></div><div class="mbar" title="2026-01: 50 sesi"><div class="mbar-fill" style="height:21%"></div><div class="mbar-lbl">01</div></div><div class="mbar" title="2026-02: 55 sesi"><div class="mbar-fill" style="height:23%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2026-03: 60 sesi"><div class="mbar-fill" style="height:25%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2026-04: 39 sesi"><div class="mbar-fill" style="height:16%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2026-05: 33 sesi"><div class="mbar-fill" style="height:14%"></div><div class="mbar-lbl"></div></div><div class="mbar" title="2026-06: 237 sesi"><div class="mbar-fill" style="height:100%"></div><div class="mbar-lbl">06</div></div></div>
 
-        <h2 class="section-h2" style="margin-top:30px;">🧑‍🤝‍🧑 Komposisi Gender Peserta</h2>
-        <div class="xtab"><div class="xrow"><div class="xlab">Laki-laki</div><div class="xtrack"><div class="xfill" style="width:85.1%;background:#8a5a74;">85%</div></div><div class="xval">1.462 · 85,1%</div></div><div class="xrow"><div class="xlab">Perempuan</div><div class="xtrack"><div class="xfill" style="width:14.5%;background:#6b4d7a;">15%</div></div><div class="xval">249 · 14,5%</div></div><div class="xrow"><div class="xlab">Transgender</div><div class="xtrack"><div class="xfill" style="width:2.5%;background:#c96b2f;"></div></div><div class="xval">6 · 0,3%</div></div></div>
+        <div class="me-grid" id="gr-base-grid" style="margin-top:16px;"></div>
 
         <h2 class="section-h2" style="margin-top:30px;">🎯 Sesi per Kelompok Sasaran (data tabel · bisa di-export)</h2>
         <p style="font-size:13px;color:var(--slate);line-height:1.6;margin:4px 0 10px;"><strong>Klik judul kolom</strong> buat sortir; ketik buat cari; <strong>Export CSV</strong> ikut hasil.</p>
@@ -1832,7 +1879,17 @@
   </div>
 </div>
 <p style="font-size:12px;color:var(--slate);margin:8px 2px 0;">Sesi penilaian risiko tingkat kelompok. Peserta dicatat agregat (jumlah + gender), tanpa identitas individual.</p>
-        <div class="saha-rawbox role-me-up" data-form="gra" style="margin-top:20px;"><div class="saha-rawhead"><span>🔓 Data Mentah — Level Klien (bernama)</span><span class="saha-rawtag">AKSES: ADMIN · M&amp;E · DIREKTUR</span></div><div class="saha-rawnote">Baris per-klien dari entry form dashboard (live Firestore) — muncul otomatis begitu tim submit. Peran Staf tidak melihat blok ini; agregat di atas tetap tampil untuk semua. Arsip historis KoBo / Master DB tetap di sumber terlindungi.</div><div class="saha-rawbody" data-rawbody="gra"><div class="saha-rawempty">Login untuk memuat data.</div></div></div>
+        </div>
+        <!-- ZONA 3 · DATA MENTAH (gated) -->
+        <div class="me-zone me-raw">
+          <div class="me-zhead"><span class="me-zt">3 · Data Mentah (Level Sesi)</span><span class="me-ztag r">🔒 ADMIN · M&amp;E · DIREKTUR</span></div>
+          <div class="me-rawzone">
+            <div class="me-rawlock">🔒 Akses terbatas — hanya Admin, M&amp;E, dan Direktur. Baris per-sesi kelompok dari entri live (tanpa identitas individu — GRA memang dicatat agregat per hotspot).</div>
+            <div class="me-rawtbar"><input id="gr-rawq" placeholder="🔎 cari hotspot / fasilitator / kelompok..."><button class="me-rawexp" id="gr-rawexp">📥 Export CSV</button><span id="gr-rawcount" style="font-size:11px;color:var(--slate);"></span></div>
+            <div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>Tanggal</th><th>Hotspot</th><th>Fasilitator</th><th>Kelompok</th><th>Tipe Napza</th><th>L</th><th>P</th><th>TG</th><th>Total</th></tr></thead><tbody id="gr-rawbody"><tr><td colspan="9" style="padding:14px;color:#a89f97;">Memuat…</td></tr></tbody></table></div>
+          </div>
+          <div class="me-rawblocked">🔒 Anda tidak punya akses ke data mentah level sesi.</div>
+        </div>
         <div class="source-attr" style="margin-top:22px;">📄 <strong>Sumber:</strong> Penilaian Risiko Kelompok GRA (KoboToolbox) · 804 sesi · 1.717 peserta · snapshot Jul 2026.</div>
 
       </section>
@@ -3831,6 +3888,203 @@ window.SAHA_QR_DL = function(){
   window.SAHA_RENDER_PJ=function(){try{renderLive();}catch(e){console.warn('[Penjangkauan house]',e);}};
   var prev=window.SAHA_RENDER_HOUSES;window.SAHA_RENDER_HOUSES=function(){if(prev)try{prev();}catch(e){}window.SAHA_RENDER_PJ();};
   if(document.readyState!=='loading')window.SAHA_RENDER_PJ();else document.addEventListener('DOMContentLoaded',window.SAHA_RENDER_PJ);
+})();
+</script>
+
+<script>/* ===== RUMAH IRA + GRA + KONSELING — Live + Baseline + Raw (v0.65) ===== */
+(function(){/* util bersama batch ini */
+  window.__ME_UTIL=window.__ME_UTIL||(function(){
+    var MON=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+    var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];});};
+    function el(id){return document.getElementById(id);}
+    function num(v){var n=parseFloat(v);return isNaN(n)?0:n;}
+    function vbars(chId,lbId,vals,labels,cols,tops,subs){var ch=el(chId),lb=el(lbId);if(!ch)return;ch.innerHTML='';lb.innerHTML='';var max=Math.max.apply(null,vals.concat([1]));
+      vals.forEach(function(w,i){var c=document.createElement('div');c.className='me-vcol';c.innerHTML='<div class="me-vv">'+tops[i]+'</div><div class="me-vbar" style="height:'+Math.max(w/max*100,2)+'%;background:'+cols[i%cols.length]+';"></div>';ch.appendChild(c);
+        var l=document.createElement('div');l.className='me-vlab';l.innerHTML=esc(labels[i])+'<span class="s">'+esc(subs[i])+'</span>';lb.appendChild(l);});}
+    function cardHTML(id,cls,title,name,wm){return '<div class="me-cc '+cls+'" id="'+id+'"><div class="me-chead"><h4>'+title+'</h4><button class="me-jpg" data-card="'+id+'" data-name="'+name+'">⬇ JPG</button></div><div class="me-ins" id="'+id+'-ins"></div><div class="me-vchart" id="'+id+'-ch"></div><div class="me-vlabs" id="'+id+'-lb"></div><div class="me-cfoot"><span id="'+id+'-ft"></span><span class="me-wm">'+wm+'</span></div></div>';}
+    function periodFns(getCur){return {
+      inP:function(iso){var d=new Date(iso);if(isNaN(d))return false;var now=new Date();var c=getCur();
+        if(c==='tahun')return d.getFullYear()===now.getFullYear();
+        if(c==='bulan')return d.getFullYear()===now.getFullYear()&&d.getMonth()===now.getMonth();
+        return d.getFullYear()===now.getFullYear()&&Math.floor(d.getMonth()/3)===Math.floor(now.getMonth()/3);},
+      big:function(){var now=new Date();var c=getCur();if(c==='tahun')return 'Tahun '+now.getFullYear();if(c==='bulan')return MON[now.getMonth()]+' '+now.getFullYear();return 'Kuartal '+(Math.floor(now.getMonth()/3)+1)+' · '+now.getFullYear();}};}
+    return {esc:esc,el:el,num:num,vbars:vbars,cardHTML:cardHTML,periodFns:periodFns};
+  })();
+  var U=window.__ME_UTIL;
+
+  /* ---------- IRA ---------- */
+  (function(){
+    var esc=U.esc,el=U.el,vbars=U.vbars,cardHTML=U.cardHTML;
+    var KCOL=['#8a5a74','#6b4d7a','#a83244'];           /* Selalu / Kadang / Tidak Pernah */
+    var ACOL=['#a83244','#c47a3b','#6b4d7a'];           /* pinjam / pinjamkan / poppers */
+    var PCOL=['#6b4d7a','#a83244','#5f3b50'];           /* 1 pasangan / >=2 / lainnya */
+    var JCOL=['#a83244','#94395c','#6b4d7a','#c47a3b','#5f3b50'];
+    var CUR='tahun'; var P=U.periodFns(function(){return CUR;});
+    function rows(){return (window.__SAHA_ALL||[]).filter(function(x){return x.form==='ira';});}
+    function D(x){return x.data||{};}
+    function renderBase(){var g=el('ir-base-grid');if(!g||g.dataset.done)return;g.dataset.done='1';
+      g.innerHTML=cardHTML('irb1','c1','🛡️ Pola Pemakaian Kondom','IRA_KoBo_Kondom','IRA · Sadar Hati')+cardHTML('irb2','c2','🔗 Kondom "Tidak Pernah" × Pasangan','IRA_KoBo_KondomPasangan','IRA · Sadar Hati')+cardHTML('irb3','c3','💞 Jenis Pasangan Seks','IRA_KoBo_JenisPasangan','IRA · Sadar Hati');
+      vbars('irb1-ch','irb1-lb',[2.9,37.7,59.5],['Selalu','Kadang','Tdk Pernah'],KCOL,['2,9%','37,7%','59,5%'],['n=51','n=669','n=1.056']);
+      el('irb1-ins').innerHTML='Hanya <strong>2,9%</strong> konsisten pakai kondom — prioritas distribusi kondom &amp; KIE.';el('irb1-ft').textContent='n=1.776 terisi (KoBo)';
+      vbars('irb2-ch','irb2-lb',[49.9,72.0],['≥2 pasangan/bln','1 pasangan/bln'],['#c96b2f','#a83244'],['49,9%','72,0%'],['n=1.000','n=744']);
+      el('irb2-ins').innerHTML='Kelompok 1-pasangan justru lebih jarang pakai kondom — persepsi "pasangan tetap = aman".';el('irb2-ft').textContent='% "tidak pernah" pakai kondom';
+      vbars('irb3-ch','irb3-lb',[790,395,287,183,148],['Pacar','Suami/Istri','PSP','WPS','Lainnya'],JCOL,['790','395','287','183','148'],['44%','22%','16%','10%','8%']);
+      el('irb3-ins').innerHTML='Jenis pasangan seks 1 bulan terakhir (bisa lebih dari satu).';el('irb3-ft').textContent='n jawaban (KoBo)';}
+    function renderLive(){
+      if(el('ir-pbig'))el('ir-pbig').textContent=P.big();
+      var rws=rows().filter(function(x){return P.inP(x.created_at);});
+      var n=rws.length,kS=0,kK=0,kT=0,bagi=0,pop=0,p1=0,p2=0,pl=0;
+      rws.forEach(function(x){var d=D(x);var k=String(d.kondom||'');
+        if(k==='Selalu')kS++;else if(k==='Kadang-Kadang')kK++;else if(k==='Tidak Pernah')kT++;
+        if(d.lend==='Ya'||d.borrow==='Ya')bagi++; if(d.poppers==='Ya')pop++;
+        var ps=String(d.perilaku_seks||'');
+        if(ps==='Dengan satu pasangan')p1++;else if(ps==='Lebih dari satu pasangan')p2++;else if(ps)pl++;});
+      var kpi=el('ir-live-kpi');
+      kpi.innerHTML='<div class="card"><div class="label">Entri Live</div><div class="value">'+n+'</div><div class="desc">form IRA periode ini</div></div>'+
+        '<div class="card" style="background:linear-gradient(135deg,var(--clay) 0%,var(--clay-deep) 100%);color:#fff;border-color:var(--clay-deep);"><div class="label" style="color:#fff;opacity:.85;">Berbagi Jarum/Alat</div><div class="value" style="color:#fff;">'+bagi+'</div><div class="desc" style="color:#fff;opacity:.9;">'+(n?Math.round(bagi/n*100):0)+'% pinjam/pinjamkan</div></div>'+
+        '<div class="card" style="background:var(--clay-tint);border-color:var(--clay);"><div class="label">Kondom "Selalu"</div><div class="value" style="color:var(--clay-deep);">'+kS+'</div><div class="desc">'+(n?Math.round(kS/n*100):0)+'% dari entri</div></div>'+
+        '<div class="card"><div class="label">Seks ≥2 Pasangan</div><div class="value">'+p2+'</div><div class="desc">'+(n?Math.round(p2/n*100):0)+'% dari entri</div></div>';
+      var g=el('ir-live-grid');
+      if(!n){g.innerHTML='<div class="me-cc" style="grid-column:1/-1;"><div class="me-empty"><div class="big">🗂️</div>Belum ada entri live IRA untuk '+esc(P.big())+'.<br>Kartu terisi otomatis begitu tim mengentri.</div></div>';renderRaw();return;}
+      g.innerHTML=cardHTML('irl1','c1','🛡️ Pola Pemakaian Kondom','IRA_Live_Kondom','IRA · Sadar Hati')+cardHTML('irl2','c2','💉 Perilaku Berbagi Alat','IRA_Live_BerbagiAlat','IRA · Sadar Hati')+cardHTML('irl3','c3','💞 Jumlah Pasangan Seks','IRA_Live_Pasangan','IRA · Sadar Hati');
+      vbars('irl1-ch','irl1-lb',[kS,kK,kT],['Selalu','Kadang','Tdk Pernah'],KCOL,[kS,kK,kT].map(function(v){return n?Math.round(v/n*100)+'%':'0%';}),[kS,kK,kT].map(function(v){return 'n='+v;}));
+      el('irl1-ins').innerHTML='Pola kondom entri live '+esc(P.big())+'.';el('irl1-ft').textContent='n='+n+' entri';
+      var pj=rws.filter(function(x){return D(x).borrow==='Ya';}).length, pk=rws.filter(function(x){return D(x).lend==='Ya';}).length;
+      vbars('irl2-ch','irl2-lb',[pj,pk,pop],['Pinjam','Pinjamkan','Poppers'],ACOL,[pj,pk,pop].map(function(v){return n?Math.round(v/n*100)+'%':'0%';}),[pj,pk,pop].map(function(v){return 'n='+v;}));
+      el('irl2-ins').innerHTML='Jawaban "Ya" perilaku berbagi alat (entri live).';el('irl2-ft').textContent='% dari '+n+' entri';
+      vbars('irl3-ch','irl3-lb',[p1,p2,pl],['1 pasangan','≥2 pasangan','Lainnya'],PCOL,[p1,p2,pl].map(function(v){return String(v);}),[p1,p2,pl].map(function(v){return n?Math.round(v/n*100)+'%':'0%';}));
+      el('irl3-ins').innerHTML='Jumlah pasangan seks 1 bulan terakhir (entri live).';el('irl3-ft').textContent='n='+n+' entri';
+      renderRaw();
+    }
+    function kPill(t){t=String(t||'-');var c=t==='Tidak Pernah'?['#f0cdd4','#7d2433']:(t==='Kadang-Kadang'?['#ece4f0','#5f3b50']:(t==='Selalu'?['#efe9f4','#6b4d7a']:['#f5f0f8','#a89f97']));return '<span style="font-weight:700;padding:2px 8px;border-radius:20px;font-size:10.5px;background:'+c[0]+';color:'+c[1]+';">'+esc(t)+'</span>';}
+    function yn(v){return v==='Ya'?'<span style="font-weight:800;color:#7d2433;">Ya</span>':'<span style="color:#a89f97;">'+esc(v||'-')+'</span>';}
+    function renderRaw(){var tb=el('ir-rawbody');if(!tb)return;var qv=(el('ir-rawq')&&el('ir-rawq').value||'').toLowerCase();
+      var rws=rows().sort(function(a,b){return String(b.created_at||'').localeCompare(String(a.created_at||''));});
+      var flt=rws.filter(function(x){if(!qv)return true;var kl=x.klien||{};var d=D(x);var s=[(x.tanggal||''),(kl.idkd||''),(x.pl||''),((x.wilayah||{}).kotakab||''),(d.kelompok_sasaran||'')].join(' ').toLowerCase();return s.indexOf(qv)>=0;});
+      if(el('ir-rawcount'))el('ir-rawcount').textContent=flt.length+' baris (entri live)';
+      tb.innerHTML=flt.length?flt.slice(0,300).map(function(x){var kl=x.klien||{};var d=D(x);return '<tr><td>'+esc((x.tanggal||x.created_at||'').slice(0,10))+'</td><td style="font-weight:700;color:#6b2a44;">'+esc(kl.idkd||'-')+'</td><td>'+esc(x.pl||'-')+'</td><td>'+esc((x.wilayah||{}).kotakab||'-')+'</td><td>'+esc(d.kelompok_sasaran||'-')+'</td><td>'+esc(d.tipe_drugs||'-')+'</td><td>'+kPill(d.kondom)+'</td><td>'+yn(d.borrow)+'</td><td>'+yn(d.lend)+'</td><td>'+esc(d.perilaku_seks||'-')+'</td></tr>';}).join(''):'<tr><td colspan="10" style="padding:14px;color:#a89f97;">Belum ada entri live IRA.</td></tr>';}
+    function exportCSV(){var rws=rows();var head=['tanggal','idkd','pl','wilayah','kelompok_sasaran','tipe_drugs','kondom','pinjam','pinjamkan','poppers','perilaku_seks','pasangan_seks','media_bersih','alat_bersama','rencana','hambatan'];
+      var lines=[head.join(',')].concat(rws.map(function(x){var kl=x.klien||{};var d=D(x);var j=function(v){return Array.isArray(v)?v.join('; '):(v==null?'':v);};
+        return [(x.tanggal||x.created_at||'').slice(0,10),(kl.idkd||''),(x.pl||''),((x.wilayah||{}).kotakab||''),j(d.kelompok_sasaran),j(d.tipe_drugs),j(d.kondom),j(d.borrow),j(d.lend),j(d.poppers),j(d.perilaku_seks),j(d.pasangan_seks),j(d.media_bersih),j(d.alat_bersama),j(d.rencana),j(d.hambatan)].map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(',');}));
+      var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(lines.join('\n'));a.download='IRA_data_mentah_live.csv';a.click();}
+    document.addEventListener('click',function(e){
+      var seg=e.target.closest&&e.target.closest('#ir-seg button');if(seg){document.querySelectorAll('#ir-seg button').forEach(function(x){x.classList.remove('on');});seg.classList.add('on');CUR=seg.dataset.p;renderLive();return;}
+      if(e.target&&e.target.id==='ir-rawexp'){exportCSV();return;}});
+    document.addEventListener('input',function(e){if(e.target&&e.target.id==='ir-rawq')renderRaw();});
+    window.SAHA_RENDER_IRA=function(){try{renderBase();renderLive();}catch(e){console.warn('[IRA house]',e);}};
+  })();
+
+  /* ---------- GRA ---------- */
+  (function(){
+    var esc=U.esc,el=U.el,num=U.num,vbars=U.vbars,cardHTML=U.cardHTML;
+    var GCOL=['#8a5a74','#6b4d7a','#c96b2f'];
+    var KELC=['#a83244','#94395c','#6b4d7a','#c47a3b','#5f3b50'];
+    var PLC=['#a83244','#c47a3b','#9a5c26','#6b4d7a','#5f3b50','#2f6d9e'];
+    var CUR='tahun'; var P=U.periodFns(function(){return CUR;});
+    function rows(){return (window.__SAHA_ALL||[]).filter(function(x){return x.form==='gra';});}
+    function D(x){return x.data||{};}
+    function renderBase(){var g=el('gr-base-grid');if(!g||g.dataset.done)return;g.dataset.done='1';
+      g.innerHTML=cardHTML('grb1','c1','🧑‍🤝‍🧑 Komposisi Gender Peserta','GRA_KoBo_Gender','GRA · Sadar Hati');
+      vbars('grb1-ch','grb1-lb',[85.1,14.5,0.3],['Laki-laki','Perempuan','Transgender'],GCOL,['85,1%','14,5%','0,3%'],['n=1.462','n=249','n=6']);
+      el('grb1-ins').innerHTML='Peserta sesi kelompok didominasi laki-laki.';el('grb1-ft').textContent='n=1.717 peserta (KoBo)';}
+    function renderLive(){
+      if(el('gr-pbig'))el('gr-pbig').textContent=P.big();
+      var rws=rows().filter(function(x){return P.inP(x.created_at);});
+      var n=rws.length,L=0,Pp=0,T=0,hs={},kel={},pl={};
+      rws.forEach(function(x){var d=D(x);L+=num(d.jml_l);Pp+=num(d.jml_p);T+=num(d.jml_tg);
+        var hh=(x.hotspot||d.hotspot||'-');hs[hh]=(hs[hh]||0)+1;
+        var k=(d.kelompok_sasaran||'-');kel[k]=(kel[k]||0)+1;
+        var p=(x.pl||'-');pl[p]=(pl[p]||0)+1;});
+      var tot=L+Pp+T;
+      var kpi=el('gr-live-kpi');
+      kpi.innerHTML='<div class="card" style="background:linear-gradient(135deg,var(--clay) 0%,var(--clay-deep) 100%);color:#fff;border-color:var(--clay-deep);"><div class="label" style="color:#fff;opacity:.85;">Sesi Grup Live</div><div class="value" style="color:#fff;">'+n+'</div><div class="desc" style="color:#fff;opacity:.9;">periode ini</div></div>'+
+        '<div class="card"><div class="label">Total Peserta</div><div class="value">'+tot.toLocaleString('id-ID')+'</div><div class="desc">'+(n?('≈ '+(Math.round(tot/n*10)/10).toLocaleString('id-ID')+' per sesi'):'—')+'</div></div>'+
+        '<div class="card"><div class="label">Hotspot Aktif</div><div class="value">'+Object.keys(hs).length+'</div><div class="desc">lokasi sesi berbeda</div></div>'+
+        '<div class="card" style="background:var(--sage-light);border-color:var(--sage);"><div class="label">Sumber</div><div class="value" style="color:var(--sage-deep);font-size:16px;">Firestore</div><div class="desc">otomatis dari entri</div></div>';
+      var g=el('gr-live-grid');
+      if(!n){g.innerHTML='<div class="me-cc" style="grid-column:1/-1;"><div class="me-empty"><div class="big">🗂️</div>Belum ada entri live GRA untuk '+esc(P.big())+'.<br>Kartu terisi otomatis begitu tim mengentri.</div></div>';renderRaw();return;}
+      g.innerHTML=cardHTML('grl1','c1','🧑‍🤝‍🧑 Komposisi Gender Peserta','GRA_Live_Gender','GRA · Sadar Hati')+cardHTML('grl2','c2','🎯 Sesi per Kelompok Sasaran','GRA_Live_Kelompok','GRA · Sadar Hati')+cardHTML('grl3','c3','👷 Sesi per Fasilitator','GRA_Live_Fasilitator','GRA · Sadar Hati');
+      vbars('grl1-ch','grl1-lb',[L,Pp,T],['Laki-laki','Perempuan','Transgender'],GCOL,[L,Pp,T].map(function(v){return String(v);}),[L,Pp,T].map(function(v){return tot?Math.round(v/tot*100)+'%':'0%';}));
+      el('grl1-ins').innerHTML='Peserta sesi live '+esc(P.big())+'.';el('grl1-ft').textContent=tot.toLocaleString('id-ID')+' peserta';
+      var ka=Object.keys(kel).map(function(k){return [k,kel[k]];}).sort(function(a,b){return b[1]-a[1];}).slice(0,5);
+      vbars('grl2-ch','grl2-lb',ka.map(function(x){return x[1];}),ka.map(function(x){return x[0];}),KELC,ka.map(function(x){return String(x[1]);}),ka.map(function(x){return n?Math.round(x[1]/n*100)+'%':'';}));
+      el('grl2-ins').innerHTML='Distribusi sesi per kelompok sasaran (entri live).';el('grl2-ft').textContent='n='+n+' sesi';
+      var pa=Object.keys(pl).map(function(k){return [k,pl[k]];}).sort(function(a,b){return b[1]-a[1];}).slice(0,6);
+      vbars('grl3-ch','grl3-lb',pa.map(function(x){return x[1];}),pa.map(function(x){return x[0];}),PLC,pa.map(function(x){return String(x[1]);}),pa.map(function(x){return 'sesi';}));
+      el('grl3-ins').innerHTML='Produktivitas fasilitator (entri live).';el('grl3-ft').textContent='top '+pa.length+' fasilitator';
+      renderRaw();
+    }
+    function renderRaw(){var tb=el('gr-rawbody');if(!tb)return;var qv=(el('gr-rawq')&&el('gr-rawq').value||'').toLowerCase();
+      var rws=rows().sort(function(a,b){return String(b.created_at||'').localeCompare(String(a.created_at||''));});
+      var flt=rws.filter(function(x){if(!qv)return true;var d=D(x);var s=[(x.tanggal||''),(x.hotspot||''),(x.pl||''),(d.kelompok_sasaran||''),(d.tipe_napza||'')].join(' ').toLowerCase();return s.indexOf(qv)>=0;});
+      if(el('gr-rawcount'))el('gr-rawcount').textContent=flt.length+' baris (entri live)';
+      tb.innerHTML=flt.length?flt.slice(0,300).map(function(x){var d=D(x);var l=num(d.jml_l),p=num(d.jml_p),t=num(d.jml_tg);return '<tr><td>'+esc((x.tanggal||x.created_at||'').slice(0,10))+'</td><td style="font-weight:700;color:#6b2a44;">'+esc(x.hotspot||'-')+'</td><td>'+esc(x.pl||'-')+'</td><td>'+esc(d.kelompok_sasaran||'-')+'</td><td>'+esc(d.tipe_napza||'-')+'</td><td>'+l+'</td><td>'+p+'</td><td>'+t+'</td><td style="font-weight:800;">'+(l+p+t)+'</td></tr>';}).join(''):'<tr><td colspan="9" style="padding:14px;color:#a89f97;">Belum ada entri live GRA.</td></tr>';}
+    function exportCSV(){var rws=rows();var head=['tanggal','hotspot','fasilitator','kelompok_sasaran','tipe_napza','jml_l','jml_p','jml_tg','total','tindakan','kondisi_mendukung','kondisi_menghambat','solusi'];
+      var lines=[head.join(',')].concat(rws.map(function(x){var d=D(x);var l=num(d.jml_l),p=num(d.jml_p),t=num(d.jml_tg);
+        return [(x.tanggal||x.created_at||'').slice(0,10),(x.hotspot||''),(x.pl||''),(d.kelompok_sasaran||''),(d.tipe_napza||''),l,p,t,(l+p+t),(d.tindakan||''),(d.kondisi_mendukung||''),(d.kondisi_menghambat||''),(d.solusi||'')].map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(',');}));
+      var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(lines.join('\n'));a.download='GRA_data_mentah_live.csv';a.click();}
+    document.addEventListener('click',function(e){
+      var seg=e.target.closest&&e.target.closest('#gr-seg button');if(seg){document.querySelectorAll('#gr-seg button').forEach(function(x){x.classList.remove('on');});seg.classList.add('on');CUR=seg.dataset.p;renderLive();return;}
+      if(e.target&&e.target.id==='gr-rawexp'){exportCSV();return;}});
+    document.addEventListener('input',function(e){if(e.target&&e.target.id==='gr-rawq')renderRaw();});
+    window.SAHA_RENDER_GRA=function(){try{renderBase();renderLive();}catch(e){console.warn('[GRA house]',e);}};
+  })();
+
+  /* ---------- KONSELING ---------- */
+  (function(){
+    var esc=U.esc,el=U.el,vbars=U.vbars,cardHTML=U.cardHTML;
+    var WCOL=['#a83244','#c47a3b','#9a5c26','#6b4d7a','#5f3b50','#2f6d9e'];
+    var KCOL=['#8a5a74','#6b4d7a','#a83244','#c47a3b','#94395c','#2f6d9e'];
+    var CUR='tahun'; var P=U.periodFns(function(){return CUR;});
+    function rows(){return (window.__SAHA_ALL||[]).filter(function(x){return x.form==='konseling';});}
+    function D(x){return x.data||{};}
+    function tglSesi(x){return (D(x).tgl_konseling||x.tanggal||x.created_at||'');}
+    function renderLive(){
+      if(el('ko-pbig'))el('ko-pbig').textContent=P.big();
+      var rws=rows().filter(function(x){return P.inP(x.created_at);});
+      var n=rws.length,uniq={},lanjut=0,wil={},kon={};
+      rws.forEach(function(x){var d=D(x);var kl=x.klien||{};if(kl.idkd)uniq[kl.idkd]=1;
+        if(String(d.tgl_lanjutan||'').trim())lanjut++;
+        var w=((x.wilayah||{}).kotakab||'-');wil[w]=(wil[w]||0)+1;
+        var k=(x.pl||'-');kon[k]=(kon[k]||0)+1;});
+      var kpi=el('ko-live-kpi');
+      kpi.innerHTML='<div class="card" style="background:linear-gradient(135deg,var(--clay) 0%,var(--clay-deep) 100%);color:#fff;border-color:var(--clay-deep);"><div class="label" style="color:#fff;opacity:.85;">Sesi Live</div><div class="value" style="color:#fff;">'+n+'</div><div class="desc" style="color:#fff;opacity:.9;">sesi konseling periode ini</div></div>'+
+        '<div class="card"><div class="label">Klien Unik</div><div class="value">'+Object.keys(uniq).length+'</div><div class="desc">ID KD berbeda</div></div>'+
+        '<div class="card" style="background:var(--sage-light);border-color:var(--sage);"><div class="label">Dijadwalkan Lanjutan</div><div class="value" style="color:var(--sage-deep);">'+(n?Math.round(lanjut/n*100):0)+'%</div><div class="desc">'+lanjut+' sesi punya tanggal lanjutan</div></div>'+
+        '<div class="card"><div class="label">Konselor Aktif</div><div class="value">'+Object.keys(kon).length+'</div><div class="desc">memberi sesi periode ini</div></div>';
+      var g=el('ko-live-grid');
+      if(!n){g.innerHTML='<div class="me-cc" style="grid-column:1/-1;"><div class="me-empty"><div class="big">🗂️</div>Belum ada entri live Konseling untuk '+esc(P.big())+'.<br>Kartu terisi otomatis begitu tim mengentri.</div></div>';renderRaw();return;}
+      g.innerHTML=cardHTML('kol1','c1','🗺️ Sesi per Wilayah','Konseling_Live_Wilayah','Konseling · Sadar Hati')+cardHTML('kol2','c2','👷 Sesi per Konselor','Konseling_Live_Konselor','Konseling · Sadar Hati')+cardHTML('kol3','c3','🔁 Tindak Lanjut Sesi','Konseling_Live_TindakLanjut','Konseling · Sadar Hati');
+      var wa=Object.keys(wil).map(function(k){return [k,wil[k]];}).sort(function(a,b){return b[1]-a[1];}).slice(0,6);
+      vbars('kol1-ch','kol1-lb',wa.map(function(x){return x[1];}),wa.map(function(x){return x[0];}),WCOL,wa.map(function(x){return String(x[1]);}),wa.map(function(x){return 'sesi';}));
+      el('kol1-ins').innerHTML='Sebaran sesi per wilayah (entri live).';el('kol1-ft').textContent='n='+n+' sesi';
+      var ca=Object.keys(kon).map(function(k){return [k,kon[k]];}).sort(function(a,b){return b[1]-a[1];}).slice(0,6);
+      vbars('kol2-ch','kol2-lb',ca.map(function(x){return x[1];}),ca.map(function(x){return x[0];}),KCOL,ca.map(function(x){return String(x[1]);}),ca.map(function(x){return 'sesi';}));
+      el('kol2-ins').innerHTML='Produktivitas konselor (entri live).';el('kol2-ft').textContent='top '+ca.length+' konselor';
+      vbars('kol3-ch','kol3-lb',[lanjut,n-lanjut],['Ada jadwal lanjutan','Tanpa jadwal'],['#8a5a74','#a83244'],[lanjut,n-lanjut].map(function(v){return n?Math.round(v/n*100)+'%':'0%';}),[lanjut,n-lanjut].map(function(v){return 'n='+v;}));
+      el('kol3-ins').innerHTML='Kontinuitas layanan: sesi dengan tanggal lanjutan terjadwal.';el('kol3-ft').textContent='n='+n+' sesi';
+      renderRaw();
+    }
+    function renderRaw(){var tb=el('ko-rawbody');if(!tb)return;var qv=(el('ko-rawq')&&el('ko-rawq').value||'').toLowerCase();
+      var rws=rows().sort(function(a,b){return String(b.created_at||'').localeCompare(String(a.created_at||''));});
+      var flt=rws.filter(function(x){if(!qv)return true;var kl=x.klien||{};var s=[tglSesi(x),(kl.idkd||''),(x.pl||''),((x.wilayah||{}).kotakab||'')].join(' ').toLowerCase();return s.indexOf(qv)>=0;});
+      if(el('ko-rawcount'))el('ko-rawcount').textContent=flt.length+' baris (entri live)';
+      tb.innerHTML=flt.length?flt.slice(0,300).map(function(x){var kl=x.klien||{};var d=D(x);var lj=String(d.tgl_lanjutan||'').trim();var rtl=String(d.rtl||'').trim();var cup=String(d.deskripsi_kondisi||'').replace(/\s+/g,' ').slice(0,45);
+        return '<tr><td>'+esc(tglSesi(x).slice(0,10))+'</td><td style="font-weight:700;color:#6b2a44;">'+esc(kl.idkd||'-')+'</td><td>'+esc(x.pl||'-')+'</td><td>'+esc((x.wilayah||{}).kotakab||'-')+'</td><td>'+(lj?'<span style="font-weight:700;color:#5f3b50;">'+esc(lj)+'</span>':'<span style="color:#a89f97;">—</span>')+'</td><td>'+(rtl?'<span style="font-weight:800;color:#6b4d7a;">✓</span>':'<span style="color:#a89f97;">—</span>')+'</td><td style="color:#6f6660;">'+esc(cup)+(String(d.deskripsi_kondisi||'').length>45?'…':'')+'</td></tr>';}).join(''):'<tr><td colspan="7" style="padding:14px;color:#a89f97;">Belum ada entri live Konseling.</td></tr>';}
+    function exportCSV(){var rws=rows();var head=['tgl_konseling','idkd','konselor','wilayah','deskripsi_kondisi','hasil','rtl','tgl_lanjutan'];
+      var lines=[head.join(',')].concat(rws.map(function(x){var kl=x.klien||{};var d=D(x);
+        return [tglSesi(x).slice(0,10),(kl.idkd||''),(x.pl||''),((x.wilayah||{}).kotakab||''),(d.deskripsi_kondisi||''),(d.hasil||''),(d.rtl||''),(d.tgl_lanjutan||'')].map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(',');}));
+      var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(lines.join('\n'));a.download='Konseling_data_mentah_live.csv';a.click();}
+    document.addEventListener('click',function(e){
+      var seg=e.target.closest&&e.target.closest('#ko-seg button');if(seg){document.querySelectorAll('#ko-seg button').forEach(function(x){x.classList.remove('on');});seg.classList.add('on');CUR=seg.dataset.p;renderLive();return;}
+      if(e.target&&e.target.id==='ko-rawexp'){exportCSV();return;}});
+    document.addEventListener('input',function(e){if(e.target&&e.target.id==='ko-rawq')renderRaw();});
+    window.SAHA_RENDER_KONSELING=function(){try{renderLive();}catch(e){console.warn('[Konseling house]',e);}};
+  })();
+
+  function all(){window.SAHA_RENDER_IRA();window.SAHA_RENDER_GRA();window.SAHA_RENDER_KONSELING();}
+  var prev=window.SAHA_RENDER_HOUSES;window.SAHA_RENDER_HOUSES=function(){if(prev)try{prev();}catch(e){}all();};
+  if(document.readyState!=='loading')all();else document.addEventListener('DOMContentLoaded',all);
 })();
 </script>
 </body>
