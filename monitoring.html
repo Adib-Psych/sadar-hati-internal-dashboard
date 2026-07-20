@@ -921,7 +921,7 @@
     <div class="brand">
       <div class="logo">Sadar Hati Foundation</div>
       <div class="est">est. 2002 · Malang</div>
-      <div class="system-tag">Integrated Hub v0.73 · Yayasan Sadar Hati</div>
+      <div class="system-tag">Integrated Hub v0.74 · Yayasan Sadar Hati</div>
     </div>
 
         <nav class="nav">
@@ -968,7 +968,7 @@
           akses sesuai role akun
         </div>
       </div>
-      <div>v0.73 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
+      <div>v0.74 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
     <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#2f6d9e,#1f4a6e);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
@@ -1670,6 +1670,8 @@
         .st-terjadwal{background:#e8eef5;color:#2f4256;}
         .st-sesi{background:var(--sage-light,#e9ece1);color:var(--sage-deep,#5f3b50);}
         .st-selesai{background:#eee9e2;color:#6f6660;}
+        .st-batal{background:#f1ede8;color:#a89f97;}
+        .cm-cancel{background:#fff;border:1.5px solid #e7b9c4;color:var(--clay-deep);margin-right:auto;}
         .cm-pj{font-size:12px;color:var(--navy-soft,#4a4340);font-weight:600;}
         .cm-edit{border:1.5px solid #6b4d7a;border-radius:16px;padding:14px;margin:4px 0 12px;background:#efe9f4;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
         .cm-edit label{font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#543c60;display:block;margin-bottom:4px;}
@@ -2398,7 +2400,8 @@ function updateBreadcrumb(item) {
       await updateDoc(ref,f);
     }catch(e){ alert('Gagal simpan: '+(e.code||e.message)); }
   };
-  window.SAHA_REF_ARCH = async function(id){ await window.SAHA_REF_SAVE(id,{archived:true,status:'selesai'}); };
+  window.SAHA_REF_ARCH = async function(id){ await window.SAHA_REF_SAVE(id,{archived:true,status:'selesai'}); alert('✓ Masuk Arsip — lihat tab "Arsip · Selesai".'); };
+  window.SAHA_REF_CANCEL = async function(id){ await window.SAHA_REF_SAVE(id,{archived:true,status:'batal'}); alert('✓ Rujukan dibatalkan (salah input) — tersimpan di Arsip dengan tanda "Dibatalkan", tidak dihitung di kaskade.'); };
   let __cmSub=null;
   onAuthStateChanged(auth, u=>{
     if(u && !__cmSub){
@@ -3693,7 +3696,7 @@ tr.me-rawclick{cursor:pointer;}
   window.__CM_TAB='aktif'; window.__CM_OPEN=null;
   function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];}); }
   function el(id){ return document.getElementById(id); }
-  var STL={baru:'Baru',dikontak:'Dikontak',terjadwal:'Terjadwal',sesi:'Sesi berjalan',selesai:'Selesai'};
+  var STL={baru:'Baru',dikontak:'Dikontak',terjadwal:'Terjadwal',sesi:'Sesi berjalan',selesai:'Selesai',batal:'Dibatalkan'};
   var PRC={1:['cm-p1','HARI INI'],2:['cm-p2','ASESMEN'],3:['cm-p3','PTSD'],4:['cm-p4','']};
   function age(r){ try{ return (Date.now()-new Date(r.created_at).getTime())/864e5; }catch(e){ return 0; } }
   function firstT(r,st){ var h=r.history||[]; for(var i=0;i<h.length;i++){ if(h[i].status===st) return h[i].t; } return null; }
@@ -3746,7 +3749,7 @@ tr.me-rawclick{cursor:pointer;}
           +'<div><label>Tanggal kontak / jadwal</label><input type="date" id="cm-e-tgl" value="'+esc((r.tgl_kontak||'').slice(0,10))+'"></div>'
           +'<div><label>Penanggung jawab</label><select id="cm-e-pj">'+['','Psikolog','Konselor Adiksi','Case Manager','PL: Nuri','PL: David','PL: Ibi','PL: Dodik'].map(function(p){return '<option value="'+p+'"'+(r.pj===p?' selected':'')+'>'+(p||'— pilih —')+'</option>';}).join('')+'</select></div>'
           +'<div class="full"><label>Catatan tindak lanjut (internal)</label><textarea id="cm-e-cat" rows="2">'+esc(r.catatan||'')+'</textarea></div>'
-          +'<div class="cm-ebtns">'+(r.archived?'':'<button class="cm-btn cm-arch" data-arch="'+esc(r.__id)+'">🗂 Arsipkan (selesai)</button>')+'<button class="cm-btn cm-save" data-save="'+esc(r.__id)+'">💾 Simpan perubahan</button></div>'
+          +'<div class="cm-ebtns">'+(r.archived?'':'<button class="cm-btn cm-cancel" data-cancel="'+esc(r.__id)+'">✖ Batalkan — salah input</button><button class="cm-btn cm-arch" data-arch="'+esc(r.__id)+'">🗂 Arsipkan (selesai)</button>')+'<button class="cm-btn cm-save" data-save="'+esc(r.__id)+'">💾 Simpan perubahan</button></div>'
           +'</div>';
       }
     });
@@ -3755,7 +3758,7 @@ tr.me-rawclick{cursor:pointer;}
   };
   function renderKas(R){
     var kb=el('cm-kaskade'); if(!kb) return;
-    R=R||[];
+    R=(R||[]).filter(function(r){ return r.status!=='batal'; });
     var ALL=window.__SAHA_ALL||[];
     var ident=0, konsCount={};
     ALL.forEach(function(x){
@@ -3788,6 +3791,8 @@ tr.me-rawclick{cursor:pointer;}
     if(sv){ var id=sv.getAttribute('data-save');
       var f={status:(document.getElementById('cm-e-status')||{}).value, tgl_kontak:(document.getElementById('cm-e-tgl')||{}).value||'', pj:(document.getElementById('cm-e-pj')||{}).value||'', catatan:(document.getElementById('cm-e-cat')||{}).value||''};
       if(window.SAHA_REF_SAVE) window.SAHA_REF_SAVE(id,f); return; }
+    var cn=t.closest && t.closest('[data-cancel]');
+    if(cn){ if(confirm('Batalkan rujukan ini (salah input)?\nKasus pindah ke Arsip dengan tanda "Dibatalkan" dan TIDAK dihitung di kaskade.')){ if(window.SAHA_REF_CANCEL) window.SAHA_REF_CANCEL(cn.getAttribute('data-cancel')); window.__CM_OPEN=null; } return; }
     var ar=t.closest && t.closest('[data-arch]');
     if(ar){ if(window.SAHA_REF_ARCH) window.SAHA_REF_ARCH(ar.getAttribute('data-arch')); window.__CM_OPEN=null; return; }
     if(t.closest && t.closest('.cm-edit')) return;
