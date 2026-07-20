@@ -444,8 +444,26 @@
     <div id="srq-container"></div>
   </div>
 
+  <!-- Triase Lanjutan Psikosis · Adaptasi SAHA (tampil otomatis bila Q22-24 ada jawaban "Ya") -->
+  <div class="section" id="triase-sec" style="display:none;">
+    <div class="section-title">🔎 Triase Lanjutan Psikosis · 3 Pertanyaan</div>
+    <div style="background:#f5f0f8;border-left:4px solid #6b4d7a;border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:11.5px;line-height:1.55;color:#4e3859;"><strong>Adaptasi SAHA</strong> — 3 pertanyaan lanjutan ini <strong>bukan bagian instrumen SRQ-29 baku</strong>. Fungsinya membantu menimbang kedaruratan rujukan pada pengguna napza — bukan alat diagnosis.</div>
+    <div class="question-block">
+      <div><span class="question-num">T1</span><span class="question-text">Apakah keluhan tadi (pertanyaan 22–24) tetap Anda alami saat sedang TIDAK memakai napza (misalnya sudah beberapa hari berhenti)?</span></div>
+      <div class="yesno-row"><button onclick="answerT('menetap','Ya',this)">Ya</button><button onclick="answerT('menetap','Tidak',this)">Tidak</button></div>
+    </div>
+    <div class="question-block">
+      <div><span class="question-num">T2</span><span class="question-text">Apakah ada keluarga kandung Anda yang pernah mengalami gangguan jiwa berat (misalnya sering bicara sendiri, keyakinan yang tidak biasa, pernah dirawat karena gangguan jiwa)?</span></div>
+      <div class="yesno-row"><button onclick="answerT('keluarga','Ya',this)">Ya</button><button onclick="answerT('keluarga','Tidak',this)">Tidak</button></div>
+    </div>
+    <div class="question-block">
+      <div><span class="question-num">T3</span><span class="question-text">Dalam 2 minggu terakhir, apakah Anda hampir setiap hari merasa sangat sedih atau kehilangan minat pada hampir semua hal?</span></div>
+      <div class="yesno-row"><button onclick="answerT('depresi','Ya',this)">Ya</button><button onclick="answerT('depresi','Tidak',this)">Tidak</button></div>
+    </div>
+  </div>
+
   <div class="submit-bar">
-    <div class="progress-text">Terjawab: <strong id="answered-count">0</strong> dari <strong>39</strong> pertanyaan</div>
+    <div class="progress-text">Terjawab: <strong id="answered-count">0</strong> dari <strong id="need-count">39</strong> pertanyaan</div>
     <button class="btn-submit" id="btn-submit" disabled onclick="calculateScore()">📊 Hitung Skor &amp; Interpretasi</button>
   </div>
 
@@ -483,24 +501,24 @@
 <script>
 
   /* ===== SOAL ===== */
-  const DQ = [
-    "Apakah Anda menggunakan obat-obatan selain yang diperlukan untuk alasan medis?",
-    "Apakah Anda menyalahgunakan lebih dari satu obat pada satu waktu?",
-    "Apakah Anda tidak dapat berhenti menyalahgunakan obat-obatan ketika Anda ingin?",
-    "Pernahkah Anda mengalami pingsan atau tidak sadarkan diri sebagai akibat dari penggunaan narkoba?",
-    "Apakah Anda pernah merasa buruk atau bersalah tentang penggunaan narkoba Anda?",
-    "Apakah pasangan Anda (atau orang tua) pernah mengeluh tentang keterlibatan Anda dengan obat-obatan?",
-    "Apakah Anda pernah mengabaikan keluarga Anda karena penggunaan obat-obatan?",
-    "Apakah Anda pernah terlibat dalam kegiatan ilegal untuk mendapatkan obat-obatan?",
-    "Pernahkah Anda mengalami gejala withdrawal (merasa sakit) ketika Anda berhenti minum obat?",
-    "Apakah Anda pernah memiliki masalah medis sebagai akibat dari penggunaan obat Anda (misalnya kehilangan memori, hepatitis, kejang, pendarahan)?"
+  const DQ = [   // item-set v2 · 20 Jul 2026 · seragam "napza" · #3 kalimat positif asli (reverse tetap)
+    "Apakah Anda menggunakan napza selain yang diperlukan untuk alasan medis?",
+    "Apakah Anda menyalahgunakan lebih dari satu jenis napza pada satu waktu?",
+    "Apakah Anda selalu dapat berhenti menggunakan napza ketika Anda menginginkannya?",
+    "Pernahkah Anda mengalami blackout (lupa kejadian saat memakai) atau flashback (mengalami kembali sensasi/kejadian lama) akibat penggunaan napza?",
+    "Apakah Anda pernah merasa buruk atau bersalah tentang penggunaan napza Anda?",
+    "Apakah pasangan Anda (atau orang tua) pernah mengeluh tentang keterlibatan Anda dengan napza?",
+    "Apakah Anda pernah mengabaikan keluarga Anda karena penggunaan napza?",
+    "Apakah Anda pernah terlibat dalam kegiatan ilegal untuk mendapatkan napza?",
+    "Pernahkah Anda mengalami gejala withdrawal (merasa sakit) ketika Anda berhenti menggunakan napza?",
+    "Apakah Anda pernah memiliki masalah medis sebagai akibat dari penggunaan napza Anda (misalnya kehilangan memori, hepatitis, kejang, pendarahan)?"
   ];
   const SQ = [
-    { q: "Apakah Anda sering menderita sakit kepala?", d: "neurosis" },
+    { q: "Apakah Anda sering merasa sakit kepala?", d: "neurosis" },
     { q: "Apakah Anda kehilangan nafsu makan?", d: "neurosis" },
-    { q: "Apakah tidur Anda tidak lelap?", d: "neurosis" },
-    { q: "Apakah Anda mudah menjadi takut?", d: "neurosis" },
-    { q: "Apakah Anda merasa cemas, tegang dan khawatir?", d: "neurosis" },
+    { q: "Apakah tidur Anda tidak nyenyak?", d: "neurosis" },
+    { q: "Apakah Anda mudah merasa takut?", d: "neurosis" },
+    { q: "Apakah Anda merasa cemas, tegang, atau khawatir?", d: "neurosis" },
     { q: "Apakah tangan Anda gemetar?", d: "neurosis" },
     { q: "Apakah Anda mengalami gangguan pencernaan?", d: "neurosis" },
     { q: "Apakah Anda merasa sulit berpikir jernih?", d: "neurosis" },
@@ -568,10 +586,29 @@
     const parent = btn.parentElement;
     parent.querySelectorAll('button').forEach(b => b.classList.remove('selected-ya', 'selected-tidak'));
     btn.classList.add(ans === 'Ya' ? 'selected-ya' : 'selected-tidak');
-    const count = Object.keys(dAns).length + Object.keys(sAns).length;
-    document.getElementById('answered-count').textContent = count;
-    document.getElementById('btn-submit').disabled = (count !== 39);
+    if (group === 's' && qn >= 22 && qn <= 24) updateTriase();
+    refreshGate();
   };
+
+  /* ===== Triase Lanjutan Psikosis (Adaptasi SAHA — bukan bagian SRQ-29 baku) ===== */
+  const tAns = {};
+  function triaseOn() { return sAns[22] === 'Ya' || sAns[23] === 'Ya' || sAns[24] === 'Ya'; }
+  function updateTriase() { const sec = document.getElementById('triase-sec'); if (sec) sec.style.display = triaseOn() ? 'block' : 'none'; }
+  window.answerT = function (k, ans, btn) {
+    tAns[k] = ans;
+    const p = btn.parentElement;
+    p.querySelectorAll('button').forEach(b => b.classList.remove('selected-ya', 'selected-tidak'));
+    btn.classList.add(ans === 'Ya' ? 'selected-ya' : 'selected-tidak');
+    refreshGate();
+  };
+  function refreshGate() {
+    const on = triaseOn();
+    const need = 39 + (on ? 3 : 0);
+    const cnt = Object.keys(dAns).length + Object.keys(sAns).length + (on ? ['menetap', 'keluarga', 'depresi'].filter(function (k) { return tAns[k]; }).length : 0);
+    document.getElementById('answered-count').textContent = cnt;
+    const nc = document.getElementById('need-count'); if (nc) nc.textContent = need;
+    document.getElementById('btn-submit').disabled = (cnt !== need);
+  }
 
   function dastInterpret(score) {
     if (score === 0) return ['Tidak ada masalah', 'Tidak ada masalah yang dilaporkan terkait penyalahgunaan narkoba dalam 3 bulan terakhir.', 'Lanjutkan monitoring rutin + KIE preventif, pemantauan berkala 6-12 bulan.'];
@@ -582,7 +619,7 @@
   }
 
   function calculateScore() {
-    /* DAST: 1 poin tiap Ya, KECUALI Q3 yang Tidak = 1 poin */
+    /* DAST (item-set v2, #3 kalimat positif asli): 1 poin tiap Ya, KECUALI Q3 reverse — Tidak = 1 poin */
     let dast = 0;
     for (let i = 1; i <= 10; i++) {
       if (i === 3) { if (dAns[i] === 'Tidak') dast++; }
@@ -596,11 +633,13 @@
     for (let i = 22; i <= 24; i++) if (sAns[i] === 'Ya') psikotik++;
     for (let i = 25; i <= 29; i++) if (sAns[i] === 'Ya') ptsd++;
     const suicideFlag = sAns[17] === 'Ya';
+    const triase = triaseOn() ? { menetap: tAns.menetap || '-', keluarga: tAns.keluarga || '-', depresi: tAns.depresi || '-', ya: ['menetap', 'keluarga', 'depresi'].filter(function (k) { return tAns[k] === 'Ya'; }).length } : null;
+    const triaseNote = triase ? '<br><strong>🔎 Triase lanjutan (Adaptasi SAHA):</strong> keluhan tetap ada saat tidak memakai: ' + triase.menetap + ' · riwayat keluarga gangguan jiwa berat: ' + triase.keluarga + ' · indikasi depresi berat: ' + triase.depresi + ' — <strong>' + triase.ya + '/3 red flag</strong>' + (triase.ya >= 2 ? ' → indikasi kuat evaluasi psikiatri (kemungkinan bukan sekadar efek zat)' : triase.ya === 0 ? ' → kemungkinan terkait pemakaian zat — tetap rujuk, pantau ulang saat tidak memakai' : ' → rujuk psikiater + pantau ulang saat tidak memakai') : '';
 
     document.getElementById('g-dast-skor').textContent = dast;
     document.getElementById('g-dast-lvl').textContent = dLvl;
     document.getElementById('g-srq-neu').textContent = neurosis + '/20';
-    document.getElementById('g-srq-lvl').textContent = neurosis >= 8 ? 'di atas cutoff' : neurosis >= 5 ? 'zona cutoff' : 'batas normal';
+    document.getElementById('g-srq-lvl').textContent = neurosis >= 6 ? 'di atas ambang (≥6)' : neurosis >= 4 ? 'zona reviu (4–5)' : 'dalam batas';
     document.getElementById('ss-zat').textContent = zat;
     document.getElementById('ss-psikotik').textContent = psikotik + '/3';
     document.getElementById('ss-ptsd').textContent = ptsd + '/5';
@@ -609,10 +648,10 @@
     const fb = document.getElementById('flags-container');
     fb.innerHTML = '';
     if (suicideFlag) fb.innerHTML += '<div class="flag-box urgent"><strong>🚨 URGENT · Ide Bunuh Diri Terdeteksi</strong>SRQ Q17 dijawab "Ya". <strong>Wajib safety assessment segera</strong> + rujukan psikolog/psikiater. Jangan tinggalkan dampingan sendirian — hubungi support person / hotline 119 ext. 8.</div>';
-    if (psikotik >= 1) fb.innerHTML += '<div class="flag-box urgent"><strong>🚨 Gejala Psikotik Terdeteksi (' + psikotik + '/3)</strong>Rujukan urgent ke psikiater/RSJ.</div>';
-    if (neurosis >= 8) fb.innerHTML += '<div class="flag-box alert"><strong>⚠️ Neurosis Tinggi (' + neurosis + '/20)</strong>Melampaui cutoff 5-7 — indikasi depresi/ansietas moderat-berat, perlu asesmen klinis lanjutan.</div>';
-    else if (neurosis >= 5) fb.innerHTML += '<div class="flag-box alert"><strong>⚠️ Neurosis di Threshold (' + neurosis + '/20)</strong>Zona cutoff — perlu konseling dan monitoring.</div>';
-    else fb.innerHTML += '<div class="flag-box normal"><strong>✅ Neurosis dalam batas normal (' + neurosis + '/20)</strong></div>';
+    if (psikotik >= 1) fb.innerHTML += '<div class="flag-box urgent"><strong>🚨 Gejala Psikotik Terdeteksi (' + psikotik + '/3)</strong>Rujukan urgent ke psikiater/RSJ.' + triaseNote + '</div>';
+    if (neurosis >= 6) fb.innerHTML += '<div class="flag-box alert"><strong>⚠️ Neurosis di Atas Ambang (' + neurosis + '/20)</strong>Mencapai ambang lembaga ≥6 — terindikasi membutuhkan layanan lanjutan (asesmen klinis + konseling).</div>';
+    else if (neurosis >= 4) fb.innerHTML += '<div class="flag-box alert"><strong>🔎 Zona Reviu Klinis (' + neurosis + '/20)</strong>Skor 4–5 belum mencapai ambang ≥6 — pertimbangkan konseling bila ada tanda lain.</div>';
+    else fb.innerHTML += '<div class="flag-box normal"><strong>✅ Neurosis dalam batas (' + neurosis + '/20)</strong></div>';
     if (zat === 'Ya' && dast <= 2) fb.innerHTML += '<div class="flag-box alert"><strong>⚠️ Sinyal silang</strong>SRQ Q21 "Ya" tapi skor DAST rendah — gali lebih dalam pola penggunaan zat saat konseling.</div>';
     if (ptsd >= 1) fb.innerHTML += '<div class="flag-box alert"><strong>⚠️ Gejala PTSD (' + ptsd + '/5)</strong>Eksplorasi riwayat trauma + rujukan psikolog trauma-informed.</div>';
     if (dast >= 3) fb.innerHTML += '<div class="flag-box alert"><strong>💊 DAST ' + dast + '/10 · ' + dLvl + '</strong>' + dDesc + '</div>';
@@ -621,13 +660,13 @@
     if (suicideFlag) recs.push('Safety planning segera + rujukan psikiater');
     if (psikotik >= 1) recs.push('Rujukan urgent psikiater/RSJ');
     recs.push('DAST: ' + dRec);
-    if (neurosis >= 5) recs.push('SRQ: konseling reguler + monitoring gejala mingguan');
+    if (neurosis >= 6) recs.push('SRQ: konseling reguler + monitoring gejala mingguan'); else if (neurosis >= 4) recs.push('SRQ: zona reviu klinis (4–5) — cek ulang saat kunjungan berikut');
     if (ptsd >= 1) recs.push('SRQ: rujukan psikolog trauma-informed');
-    if (recs.length === 1 && neurosis < 5) recs.push('SRQ: follow-up 3-6 bulan monitoring rutin');
+    if (recs.length === 1 && neurosis < 4) recs.push('SRQ: follow-up 3-6 bulan monitoring rutin');
     document.getElementById('rec-box').innerHTML = '<strong>💡 Rekomendasi Tindak Lanjut:</strong><ul style="margin:8px 0 0 20px;padding:0;">' + recs.map(r => '<li style="margin-bottom:4px;">' + r + '</li>').join('') + '</ul>';
 
     document.getElementById('result-overlay').classList.add('show');
-    window._lastResult = { dast, dLvl, dDesc, dRec, neurosis, zat, psikotik, ptsd, suicideFlag, recs };
+    window._lastResult = { dast, dLvl, dDesc, dRec, neurosis, zat, psikotik, ptsd, suicideFlag, recs, triase };
   }
   window.calculateScore = calculateScore;
 
@@ -643,23 +682,24 @@
     const wilayah = { provinsi: 'Jawa Timur', kotakab: id.kotakab || '', kecamatan: id.kecamatan || '', desa: id.desa || '', desa_manual: !!id.desa_manual };
     const klien = { nama: id.nama || '', julukan: id.julukan || '', idkd: id.idkd || '', idkd_placeholder: !!id.idkd_placeholder, jk: id.jk || '', usia: id.usia || '', tgllahir: id.tgllahir || '' };
 
-    const recDast = { form: 'dast10', instrumen: 'DAST-10', via: 'gabungan', pl: id.pl || '', created_at: now, schema_version: 'dast-1.0',
+    const recDast = { form: 'dast10', instrumen: 'DAST-10', via: 'gabungan', pl: id.pl || '', created_at: now, schema_version: 'dast-2.0',
       tahun: id.tahun || '', tanggal: id.tanggal || '', wilayah: wilayah, klien: klien,
       konteks: { tipe_pengguna: document.getElementById('f-tipepengguna').value, kelompok_sasaran: document.getElementById('f-kelompoksasaran').value },
       answers: dAns, skor: r.dast, interpretasi: r.dLvl, catatan_klinis: r.dDesc };
 
     let interp = [];
     if (r.suicideFlag) interp.push('URGENT-Suicide');
-    if (r.neurosis >= 5) interp.push('Neurosis+');
+    if (r.neurosis >= 6) interp.push('Neurosis+');
     if (r.zat === 'Ya') interp.push('Zat+');
     if (r.psikotik >= 1) interp.push('Psikotik+');
     if (r.ptsd >= 1) interp.push('PTSD+');
+    if (r.triase && r.triase.ya >= 1) interp.push('RF' + r.triase.ya + '/3');
     if (interp.length === 0) interp = ['Normal'];
-    const recSrq = { form: 'srq29', instrumen: 'SRQ-29', via: 'gabungan', pl: id.pl || '', created_at: now, schema_version: 'srq-1.0',
+    const recSrq = { form: 'srq29', instrumen: 'SRQ-29', via: 'gabungan', pl: id.pl || '', created_at: now, schema_version: 'srq-2.0',
       tahun: id.tahun || '', tanggal: id.tanggal || '', wilayah: wilayah, klien: klien,
       konteks: { konteks_layanan: document.getElementById('f-kelompoksasaran').value },
       answers: sAns, skor: 'N' + r.neurosis + '/Z' + r.zat + '/P' + r.psikotik + '/T' + r.ptsd,
-      subdomain: { neurosis: r.neurosis, zat: r.zat, psikotik: r.psikotik, ptsd: r.ptsd, suicide_flag: !!r.suicideFlag },
+      subdomain: (function () { var sd = { neurosis: r.neurosis, zat: r.zat, psikotik: r.psikotik, ptsd: r.ptsd, suicide_flag: !!r.suicideFlag }; if (r.triase) { sd.triase_menetap = r.triase.menetap; sd.triase_keluarga = r.triase.keluarga; sd.triase_depresi = r.triase.depresi; sd.triase_redflag = r.triase.ya; } return sd; })(),
       interpretasi: interp.join(' · '),
       catatan_klinis: 'Neurosis=' + r.neurosis + '/20 · Zat=' + r.zat + ' · Psikotik=' + r.psikotik + '/3 · PTSD=' + r.ptsd + '/5' + (r.suicideFlag ? ' · SUICIDE FLAG (Q17)' : ''),
       rekomendasi: r.recs.join('; ') };

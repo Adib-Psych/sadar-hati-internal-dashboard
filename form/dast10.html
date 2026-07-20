@@ -397,17 +397,17 @@
 <script src="saha-data.js"></script>
 <script src="saha-shared.js"></script>
 <script>
-  const questions = [
-    "Apakah Anda menggunakan obat-obatan selain yang diperlukan untuk alasan medis?",
-    "Apakah Anda menyalahgunakan lebih dari satu obat pada satu waktu?",
-    "Apakah Anda tidak dapat berhenti menyalahgunakan obat-obatan ketika Anda ingin?",
-    "Pernahkah Anda mengalami pingsan atau tidak sadarkan diri sebagai akibat dari penggunaan narkoba?",
-    "Apakah Anda pernah merasa buruk atau bersalah tentang penggunaan narkoba Anda?",
-    "Apakah pasangan Anda (atau orang tua) pernah mengeluh tentang keterlibatan Anda dengan obat-obatan?",
-    "Apakah Anda pernah mengabaikan keluarga Anda karena penggunaan obat-obatan?",
-    "Apakah Anda pernah terlibat dalam kegiatan ilegal untuk mendapatkan obat-obatan?",
-    "Pernahkah Anda mengalami gejala withdrawal (merasa sakit) ketika Anda berhenti minum obat?",
-    "Apakah Anda pernah memiliki masalah medis sebagai akibat dari penggunaan obat Anda (misalnya kehilangan memori, hepatitis, kejang, pendarahan)?"
+  const questions = [   // item-set v2 · 20 Jul 2026 · seragam "napza" · #3 kalimat positif asli (reverse tetap)
+    "Apakah Anda menggunakan napza selain yang diperlukan untuk alasan medis?",
+    "Apakah Anda menyalahgunakan lebih dari satu jenis napza pada satu waktu?",
+    "Apakah Anda selalu dapat berhenti menggunakan napza ketika Anda menginginkannya?",
+    "Pernahkah Anda mengalami blackout (lupa kejadian saat memakai) atau flashback (mengalami kembali sensasi/kejadian lama) akibat penggunaan napza?",
+    "Apakah Anda pernah merasa buruk atau bersalah tentang penggunaan napza Anda?",
+    "Apakah pasangan Anda (atau orang tua) pernah mengeluh tentang keterlibatan Anda dengan napza?",
+    "Apakah Anda pernah mengabaikan keluarga Anda karena penggunaan napza?",
+    "Apakah Anda pernah terlibat dalam kegiatan ilegal untuk mendapatkan napza?",
+    "Pernahkah Anda mengalami gejala withdrawal (merasa sakit) ketika Anda berhenti menggunakan napza?",
+    "Apakah Anda pernah memiliki masalah medis sebagai akibat dari penggunaan napza Anda (misalnya kehilangan memori, hepatitis, kejang, pendarahan)?"
   ];
 
   const answers = {};
@@ -446,7 +446,7 @@
   }
 
   function calculateScore() {
-    // Scoring: 1 point for each "Ya", KECUALI Q3 yang "Tidak" dapat 1 poin
+    // Skoring Skinner 1982 (item-set v2, #3 kalimat positif): 1 poin tiap "Ya", KECUALI Q3 reverse — "Tidak" = 1 poin
     let score = 0;
     for (let i = 1; i <= 10; i++) {
       const a = answers[i];
@@ -511,7 +511,7 @@
       instrumen: 'DAST-10',
       pl: id.pl || '',
       created_at: new Date().toISOString(),
-      schema_version: 'dast-1.0',
+      schema_version: 'dast-2.0',
       tahun: id.tahun || '',
       tanggal: id.tanggal || '',
       wilayah: { provinsi: 'Jawa Timur', kotakab: id.kotakab || '', kecamatan: id.kecamatan || '', desa: id.desa || '', desa_manual: !!id.desa_manual },
