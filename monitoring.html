@@ -910,6 +910,8 @@
   body.role-admin .me-zone.me-raw .me-rawzone, body.role-me .me-zone.me-raw .me-rawzone{display:block;}
   body.role-admin .me-zone.me-raw .me-rawblocked, body.role-me .me-zone.me-raw .me-rawblocked{display:none;}
   .me-jpg{border:1px solid var(--line,#e7ddd3);background:#faf7f2;color:#1f4a6e;font-family:inherit;font-size:9.5px;font-weight:800;padding:5px 8px;border-radius:7px;cursor:pointer;white-space:nowrap;}
+  .me-rawhint{display:inline-block;margin:0 0 8px;font-size:11.5px;font-weight:700;color:#6b2a44;background:#faf3f6;border:1px dashed #d9b8c8;border-radius:8px;padding:6px 10px;line-height:1.45;}
+  table.me-rawtable tr.me-rawclick:hover td{background:#f4e8ef;}
 </style>
 </head>
 <body>
@@ -921,7 +923,7 @@
     <div class="brand">
       <div class="logo">Sadar Hati Foundation</div>
       <div class="est">est. 2002 · Malang</div>
-      <div class="system-tag">Integrated Hub v0.74 · Yayasan Sadar Hati</div>
+      <div class="system-tag">Integrated Hub v0.75 · Yayasan Sadar Hati</div>
     </div>
 
         <nav class="nav">
@@ -936,7 +938,7 @@
               <a class="nav-item" data-section="l2-me-dashboard"><span class="icon">📊</span> M&E · Project ViiV</a>
           <div class="donor-group expanded">
             <div class="donor-header">
-              <span class="donor-name">🏠 Rumah Output</span>
+              <span class="donor-name">📤 Output Form</span>
               <span class="donor-badge">8 FORM</span><span class="chevron">▶</span>
             </div>
             <div class="donor-sub-items">
@@ -968,7 +970,7 @@
           akses sesuai role akun
         </div>
       </div>
-      <div>v0.74 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
+      <div>v0.75 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
     <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#2f6d9e,#1f4a6e);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
@@ -1404,14 +1406,14 @@
           .hs-note{font-size:11px;color:#6f6660;background:#f2f6f9;border:1px dashed #b9cddd;border-radius:9px;padding:8px 12px;margin-top:10px;line-height:1.55;}
           .hs-maplink{color:#2f6d9e;font-weight:700;text-decoration:none;white-space:nowrap;}
         </style>
-        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output · No. 8</div><h1>Pemetaan Hotspot — Peta &amp; Direktori</h1><p class="lede">Rumah output form <strong>Pemetaan Hotspot</strong>: semua titik dari lapangan tampil sebagai <strong>pin di peta</strong> + direktori lengkap (tipe · jam aktif · contact person · perkiraan KD) — bahan merencanakan rute penjangkauan, cakupan wilayah, dan prioritas alokasi PL.</p></div>
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output · No. 8</div><h1>Pemetaan Hotspot — Peta &amp; Direktori</h1><p class="lede">Halaman output form <strong>Pemetaan Hotspot</strong>: semua titik dari lapangan tampil sebagai <strong>pin di peta</strong> + direktori lengkap (tipe · jam aktif · contact person · perkiraan KD) — bahan merencanakan rute penjangkauan, cakupan wilayah, dan prioritas alokasi PL.</p></div>
         <div class="hs-chips">
           <div class="hs-chip"><b id="hs-c-total">0</b><span>hotspot terpetakan</span></div>
           <div class="hs-chip"><b id="hs-c-kd">0</b><span>perkiraan total KD</span></div>
           <div class="hs-chip"><b id="hs-c-gps">0</b><span>ber-pin GPS</span></div>
           <div class="hs-chip"><b id="hs-c-entri">0</b><span>total entri</span></div>
         </div>
-        <div id="hs-map" style="height:420px;border:1px solid var(--slate-lighter);border-radius:14px;background:#eef2f5;display:flex;align-items:center;justify-content:center;color:#6f6660;font-size:13px;z-index:0;">Peta dimuat otomatis saat rumah ini dibuka…</div>
+        <div id="hs-map" style="height:420px;border:1px solid var(--slate-lighter);border-radius:14px;background:#eef2f5;display:flex;align-items:center;justify-content:center;color:#6f6660;font-size:13px;z-index:0;">Peta dimuat otomatis saat halaman ini dibuka…</div>
         <div style="overflow:auto;margin-top:14px;background:#fff;border:1px solid var(--slate-lighter);border-radius:12px;max-height:430px;">
           <table class="hs-tbl" style="width:100%;border-collapse:collapse;font-size:12.5px;min-width:820px;">
             <thead><tr><th>HOTSPOT</th><th>TIPE</th><th>JAM AKTIF</th><th>CP</th><th>± KD</th><th>PL</th><th>UPDATE TERAKHIR</th><th>PETA</th></tr></thead>
@@ -1437,7 +1439,7 @@
           .vct-tbl td{padding:7px 10px;border-top:1px solid #f5edf1;}
           .vct-tbl tr:hover td{background:#faf5f8;}
         </style>
-        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output · No. 11</div><h1>Registrasi VCT — Rekap &amp; Monitoring</h1><p class="lede">Rumah output form <strong>Registrasi VCT · Kartu Identitas</strong>: berapa KD sudah teregistrasi, ke puskesmas mana dirujuk, rencana tanggal VCT, dan sebaran per PL. <strong>Identitas lengkap (NIK &amp; foto KTP) tidak tampil di sini</strong> — hanya bisa dibuka per-PL lewat Portal PL dan tiap akses tercatat.</p></div>
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output · No. 11</div><h1>Registrasi VCT — Rekap &amp; Monitoring</h1><p class="lede">Halaman output form <strong>Registrasi VCT · Kartu Identitas</strong>: berapa KD sudah teregistrasi, ke puskesmas mana dirujuk, rencana tanggal VCT, dan sebaran per PL. <strong>Identitas lengkap (NIK &amp; foto KTP) tidak tampil di sini</strong> — hanya bisa dibuka per-PL lewat Portal PL dan tiap akses tercatat.</p></div>
         <div class="vct-chips">
           <div class="vct-chip"><b id="vct-c-total">0</b><span>total registrasi VCT</span></div>
           <div class="vct-chip"><b id="vct-c-7">0</b><span>7 hari terakhir</span></div>
@@ -1628,7 +1630,7 @@
           <div class="me-rawzone">
             <div class="me-rawlock">🔒 Akses terbatas — hanya Admin, M&amp;E, dan Direktur. Baris per-kontak dari entri live (double-check M&amp;E).</div>
             <div class="me-rawtbar"><input id="pj-rawq" placeholder="🔎 cari ID KD / PL / wilayah / hotspot..."><button class="me-rawexp" id="pj-rawexp">📥 Export CSV</button><span id="pj-rawcount" style="font-size:11px;color:var(--slate);"></span></div>
-            <div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>Tanggal</th><th>ID KD</th><th>PL</th><th>Wilayah</th><th>Status</th><th>Napza</th><th>Kondom</th><th>KIE</th></tr></thead><tbody id="pj-rawbody"><tr><td colspan="8" style="padding:14px;color:#a89f97;">Memuat…</td></tr></tbody></table></div>
+            <div class="me-rawhint">💡 Klik <b>baris mana pun</b> untuk membuka detail entri</div><div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>Tanggal</th><th>ID KD</th><th>PL</th><th>Wilayah</th><th>Status</th><th>Napza</th><th>Kondom</th><th>KIE</th></tr></thead><tbody id="pj-rawbody"><tr><td colspan="8" style="padding:14px;color:#a89f97;">Memuat…</td></tr></tbody></table></div>
           </div>
           <div class="me-rawblocked">🔒 Anda tidak punya akses ke data mentah level klien.</div>
         </div>
@@ -1700,7 +1702,7 @@
         }
       </style>
       <section class="section" id="l2-casemgmt">
-        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Case Management (akses: Admin · M&amp;E · Direktur)</div><h1>📋 Case Management — Antrian Konseling</h1><p class="lede">Semua rujukan dari hasil skrining masuk ke sini otomatis, terurut prioritas (bendera dulu, skor kemudian). Klik baris untuk mengubah status; kasus selesai berpindah ke Arsip. SLA kontak: <strong>≤3 hari</strong>. Tombol <strong>📅 Rujuk ke Konseling</strong> ada di detail entri (Log Harian &amp; tabel rumah output).</p></div>
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Case Management (akses: Admin · M&amp;E · Direktur)</div><h1>📋 Case Management — Antrian Konseling</h1><p class="lede">Semua rujukan dari hasil skrining masuk ke sini otomatis, terurut prioritas (bendera dulu, skor kemudian). Klik baris untuk mengubah status; kasus selesai berpindah ke Arsip. SLA kontak: <strong>≤3 hari</strong>. Tombol <strong>📅 Rujuk ke Konseling</strong> ada di detail entri (Log Harian &amp; tabel output form).</p></div>
         <div class="cm-alert1" id="cm-p1banner"></div>
         <div class="cards" id="cm-kpis"></div>
         <div class="cm-tabs">
@@ -1741,7 +1743,7 @@
           <div class="me-rawzone">
             <div class="me-rawlock">🔒 Akses terbatas — hanya Admin, M&amp;E, dan Direktur. Baris per-klien dari entri live (double-check M&amp;E).</div>
             <div class="me-rawtbar"><input id="dh-rawq" placeholder="🔎 cari ID KD / PL / wilayah..."><button class="me-rawexp" id="dh-rawexp">📥 Export CSV</button><span id="dh-rawcount" style="font-size:11px;color:var(--slate);"></span></div>
-            <div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>Tanggal</th><th>ID KD</th><th>PL</th><th>Wilayah</th><th>Kelompok</th><th>Tipe</th><th>Skor</th><th>Interpretasi</th></tr></thead><tbody id="dh-rawbody"><tr><td colspan="8" style="padding:14px;color:#a89f97;">Memuat…</td></tr></tbody></table></div>
+            <div class="me-rawhint">💡 Klik <b>baris mana pun</b> untuk membuka detail entri</div><div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>Tanggal</th><th>ID KD</th><th>PL</th><th>Wilayah</th><th>Kelompok</th><th>Tipe</th><th>Skor</th><th>Interpretasi</th></tr></thead><tbody id="dh-rawbody"><tr><td colspan="8" style="padding:14px;color:#a89f97;">Memuat…</td></tr></tbody></table></div>
           </div>
           <div class="me-rawblocked">🔒 Anda tidak punya akses ke data mentah level klien.</div>
         </div>
@@ -1776,7 +1778,7 @@
           <div class="me-rawzone">
             <div class="me-rawlock">🔒 Akses terbatas — hanya Admin, M&amp;E, dan Direktur. Baris per-klien dari entri live (double-check M&amp;E). Skor: Neurosis SRQ-20 (0–20), Psikotik (0–3), PTSD (0–5).</div>
             <div class="me-rawtbar"><input id="sq-rawq" placeholder="🔎 cari ID KD / PL / wilayah..."><button class="me-rawexp" id="sq-rawexp">📥 Export CSV</button><span id="sq-rawcount" style="font-size:11px;color:var(--slate);"></span></div>
-            <div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>Tanggal</th><th>ID KD</th><th>PL</th><th>Wilayah</th><th>Konteks</th><th>Neurosis</th><th>Psikotik</th><th>PTSD</th><th>Q17</th><th>Interpretasi</th></tr></thead><tbody id="sq-rawbody"><tr><td colspan="10" style="padding:14px;color:#a89f97;">Memuat…</td></tr></tbody></table></div>
+            <div class="me-rawhint">💡 Klik <b>baris mana pun</b> untuk membuka detail entri</div><div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>Tanggal</th><th>ID KD</th><th>PL</th><th>Wilayah</th><th>Konteks</th><th>Neurosis</th><th>Psikotik</th><th>PTSD</th><th>Q17</th><th>Interpretasi</th></tr></thead><tbody id="sq-rawbody"><tr><td colspan="10" style="padding:14px;color:#a89f97;">Memuat…</td></tr></tbody></table></div>
           </div>
           <div class="me-rawblocked">🔒 Anda tidak punya akses ke data mentah level klien.</div>
         </div>
@@ -1835,7 +1837,7 @@
           <div class="me-rawzone">
             <div class="me-rawlock">🔒 Akses terbatas — hanya Admin, M&amp;E, dan Direktur. Baris per-klien dari entri live (double-check M&amp;E).</div>
             <div class="me-rawtbar"><input id="ir-rawq" placeholder="🔎 cari ID KD / PL / wilayah..."><button class="me-rawexp" id="ir-rawexp">📥 Export CSV</button><span id="ir-rawcount" style="font-size:11px;color:var(--slate);"></span></div>
-            <div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>Tanggal</th><th>ID KD</th><th>PL</th><th>Wilayah</th><th>Kelompok</th><th>Tipe</th><th>Kondom</th><th>Pinjam</th><th>Pinjamkan</th><th>Pasangan</th></tr></thead><tbody id="ir-rawbody"><tr><td colspan="10" style="padding:14px;color:#a89f97;">Memuat…</td></tr></tbody></table></div>
+            <div class="me-rawhint">💡 Klik <b>baris mana pun</b> untuk membuka detail entri</div><div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>Tanggal</th><th>ID KD</th><th>PL</th><th>Wilayah</th><th>Kelompok</th><th>Tipe</th><th>Kondom</th><th>Pinjam</th><th>Pinjamkan</th><th>Pasangan</th></tr></thead><tbody id="ir-rawbody"><tr><td colspan="10" style="padding:14px;color:#a89f97;">Memuat…</td></tr></tbody></table></div>
           </div>
           <div class="me-rawblocked">🔒 Anda tidak punya akses ke data mentah level klien.</div>
         </div>
@@ -1899,7 +1901,7 @@
           <div class="me-rawzone">
             <div class="me-rawlock">🔒 Akses terbatas — hanya Admin, M&amp;E, dan Direktur. Isi konseling sangat sensitif: tabel hanya menampilkan cuplikan kondisi; teks lengkap ada di Export CSV.</div>
             <div class="me-rawtbar"><input id="ko-rawq" placeholder="🔎 cari ID KD / konselor / wilayah..."><button class="me-rawexp" id="ko-rawexp">📥 Export CSV</button><span id="ko-rawcount" style="font-size:11px;color:var(--slate);"></span></div>
-            <div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>Tanggal</th><th>ID KD</th><th>Konselor</th><th>Wilayah</th><th>Jadwal Lanjutan</th><th>RTL</th><th>Kondisi (cuplikan)</th></tr></thead><tbody id="ko-rawbody"><tr><td colspan="7" style="padding:14px;color:#a89f97;">Memuat…</td></tr></tbody></table></div>
+            <div class="me-rawhint">💡 Klik <b>baris mana pun</b> untuk membuka detail entri</div><div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>Tanggal</th><th>ID KD</th><th>Konselor</th><th>Wilayah</th><th>Jadwal Lanjutan</th><th>RTL</th><th>Kondisi (cuplikan)</th></tr></thead><tbody id="ko-rawbody"><tr><td colspan="7" style="padding:14px;color:#a89f97;">Memuat…</td></tr></tbody></table></div>
           </div>
           <div class="me-rawblocked">🔒 Anda tidak punya akses ke data mentah level klien.</div>
         </div>
@@ -1962,7 +1964,7 @@
           <div class="me-rawzone">
             <div class="me-rawlock">🔒 Akses terbatas — hanya Admin, M&amp;E, dan Direktur. Baris per-sesi kelompok dari entri live (tanpa identitas individu — GRA memang dicatat agregat per hotspot).</div>
             <div class="me-rawtbar"><input id="gr-rawq" placeholder="🔎 cari hotspot / fasilitator / kelompok..."><button class="me-rawexp" id="gr-rawexp">📥 Export CSV</button><span id="gr-rawcount" style="font-size:11px;color:var(--slate);"></span></div>
-            <div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>Tanggal</th><th>Hotspot</th><th>Fasilitator</th><th>Kelompok</th><th>Tipe Napza</th><th>L</th><th>P</th><th>TG</th><th>Total</th></tr></thead><tbody id="gr-rawbody"><tr><td colspan="9" style="padding:14px;color:#a89f97;">Memuat…</td></tr></tbody></table></div>
+            <div class="me-rawhint">💡 Klik <b>baris mana pun</b> untuk membuka detail entri</div><div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>Tanggal</th><th>Hotspot</th><th>Fasilitator</th><th>Kelompok</th><th>Tipe Napza</th><th>L</th><th>P</th><th>TG</th><th>Total</th></tr></thead><tbody id="gr-rawbody"><tr><td colspan="9" style="padding:14px;color:#a89f97;">Memuat…</td></tr></tbody></table></div>
           </div>
           <div class="me-rawblocked">🔒 Anda tidak punya akses ke data mentah level sesi.</div>
         </div>
@@ -3729,7 +3731,7 @@ tr.me-rawclick{cursor:pointer;}
     var tA=el('cm-tab-aktif'), tR=el('cm-tab-arsip');
     if(tA){ tA.textContent='Aktif ('+act.length+')'; tA.className='cm-tab'+(window.__CM_TAB==='aktif'?' on':''); }
     if(tR){ tR.textContent='Arsip · Selesai ('+arc.length+')'; tR.className='cm-tab'+(window.__CM_TAB==='arsip'?' on':''); }
-    if(!rows.length){ box.innerHTML='<div class="cm-empty">'+(window.__CM_TAB==='arsip'?'Arsip masih kosong.':'Belum ada rujukan di antrian — tombol 📅 <b>Rujuk ke Konseling</b> ada di detail entri (klik baris di Log Harian / tabel rumah output).')+'</div>'; renderKas(R); return; }
+    if(!rows.length){ box.innerHTML='<div class="cm-empty">'+(window.__CM_TAB==='arsip'?'Arsip masih kosong.':'Belum ada rujukan di antrian — tombol 📅 <b>Rujuk ke Konseling</b> ada di detail entri (klik baris di Log Harian / tabel output form).')+'</div>'; renderKas(R); return; }
     var h='<div class="cm-hdr"><div>Prio</div><div>Klien</div><div>Sumber & hasil</div><div>Umur antrian</div><div>Status</div><div>Penanggung jawab</div><div></div></div>';
     rows.forEach(function(r){
       var k=r.klien||{}, pc=PRC[r.priority]||PRC[4];
