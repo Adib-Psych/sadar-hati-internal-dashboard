@@ -887,6 +887,15 @@
   .me-ins{font-size:10px;color:var(--slate,#6f6660);line-height:1.5;margin:3px 0 10px;min-height:28px;}
   .me-cwhat{font-size:11px;line-height:1.5;color:#5b5450;background:#faf7f2;border-left:3px solid #c9bda9;border-radius:0 7px 7px 0;padding:7px 10px;margin:2px 0 9px;}
   .me-cwhat:empty{display:none;}
+  .hiv-note{background:#fce8ec;border-left:4px solid #a83244;border-radius:0 8px 8px 0;padding:11px 14px;margin:0 0 14px;font-size:12.5px;line-height:1.55;color:#7d2433;}
+  .hiv-listhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:18px 0 8px;}
+  .hiv-listtitle{font-weight:800;color:#6b2a44;font-size:14px;}
+  .hiv-bars{display:flex;flex-direction:column;gap:7px;padding:4px 2px;}
+  .hiv-bar{display:flex;align-items:center;gap:9px;font-size:12px;}
+  .hiv-bar .nm{flex:0 0 128px;color:#3f3a36;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .hiv-bar .track{flex:1;height:14px;background:#f0eaf4;border-radius:8px;overflow:hidden;}
+  .hiv-bar .fill{display:block;height:100%;background:linear-gradient(90deg,#8a5a72,#5f3b50);border-radius:8px;}
+  .hiv-bar .n{flex:0 0 34px;text-align:right;font-weight:800;color:#5f3b50;}
   .me-vchart{display:flex;align-items:flex-end;gap:6px;height:170px;padding:18px 2px 0;}
   .me-vcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;}
   .me-vv{font-size:10.5px;font-weight:800;margin-bottom:4px;white-space:nowrap;color:var(--navy,#2c2724);}
@@ -925,7 +934,7 @@
     <div class="brand">
       <div class="logo">Sadar Hati Foundation</div>
       <div class="est">est. 2002 · Malang</div>
-      <div class="system-tag">Integrated Hub v0.76 · Yayasan Sadar Hati</div>
+      <div class="system-tag">Integrated Hub v0.77 · Yayasan Sadar Hati</div>
     </div>
 
         <nav class="nav">
@@ -958,6 +967,7 @@
           </div>
               <a class="nav-item" data-section="l2-clients"><span class="icon">👥</span> Clients Database</a>
               <a class="nav-item" data-section="l2-casemgmt"><span class="icon">📋</span> Case Management</a>
+              <a class="nav-item" data-section="l2-hiv-cm"><span class="icon">🎗️</span> Case Management HIV</a>
           <div class="nav-divider-label role-admin-only">Kelola &amp; Sistem</div>
           <a class="nav-item role-admin-only" data-section="l2-admin"><span class="icon">🛡️</span> Panel Admin · Kelola Entry · Sistem</a>
         </div>
@@ -972,7 +982,7 @@
           akses sesuai role akun
         </div>
       </div>
-      <div>v0.76 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
+      <div>v0.77 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
     <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#2f6d9e,#1f4a6e);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
@@ -1542,7 +1552,9 @@
             <input type="email" id="saha-email" class="lh-in" placeholder="Email" autocomplete="username">
             <input type="password" id="saha-pass" class="lh-in" placeholder="Password" autocomplete="current-password">
             <button class="lh-btn" id="saha-login-btn">Masuk</button>
+            <button type="button" id="saha-pwreset-btn" style="background:none;border:0;color:#2f6d9e;font:inherit;font-size:12px;text-decoration:underline;cursor:pointer;margin-top:8px;padding:2px;">Lupa / ganti password?</button>
             <div class="lh-err" id="saha-login-err"></div>
+            <div id="saha-pwreset-msg" style="display:none;font-size:12px;line-height:1.5;margin-top:6px;"></div>
           </div>
         </div>
       </section>
@@ -1716,6 +1728,25 @@
         <div id="cm-kaskade"></div>
         <div class="source-attr" style="margin-top:20px;">📄 Kaskade = alur layanan berjenjang; semua proporsi dihitung di antara yang <strong>terindikasi membutuhkan layanan lanjutan</strong> (kerangka: Cascade of Care — sitasi di Panduan Skoring &amp; SOP). Identitas di modul ini terbatas julukan + ID KD; akses role-gated.</div>
       </section>
+
+      <section class="section" id="l2-hiv-cm">
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Case Management HIV (akses: Admin · M&amp;E · Direktur · PM)</div><h1>🎗️ Case Management HIV — Linkage ARV</h1><p class="lede">Data historikal roster M&amp;E (<strong>kumulatif 2024–2026</strong>). Fokus: menutup jarak antara dampingan yang <strong>Reaktif (HIV+)</strong> dan yang sudah ter-<em>link</em> ke pengobatan ARV. Angka ini <strong>berbeda</strong> dari kasus terkonfirmasi program ViiV (lihat halaman M&amp;E) — beda periode &amp; definisi.</p></div>
+        <div id="hiv-guard"></div>
+        <div id="hiv-body" style="display:none;">
+          <div class="hiv-note">🔒 <strong>Data paling sensitif — status HIV.</strong> Identitas dibatasi ID KD + julukan; akses role-gated (Admin · M&amp;E · Direktur · Program Manager). Mohon tidak menampilkan layar ini di ruang publik.</div>
+          <div class="cards" id="hiv-kpis"></div>
+          <div class="me-grid" id="hiv-charts"></div>
+          <div class="hiv-listhead">
+            <span class="hiv-listtitle">📋 Daftar Tindak Lanjut — Reaktif yang belum ter-link ARV</span>
+            <input class="cm-q" id="hiv-q" placeholder="🔎 cari ID KD / julukan / kota / PL…">
+            <span id="hiv-count" style="font-size:12px;color:#6f6660;"></span>
+          </div>
+          <div class="me-rawhint">💡 Ini dasar kerja linkage: kejar tiap orang di sini agar mulai ARV. Kolom Keswa / Asesmen Jiwa = pintu masuk dukungan psikososial.</div>
+          <div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>ID KD</th><th>Julukan</th><th>Wilayah</th><th>PL</th><th>Tahun Aktif</th><th>Keswa</th><th>Asesmen Jiwa</th></tr></thead><tbody id="hiv-listbody"><tr><td colspan="7" style="padding:14px;color:#a89f97;">Memuat…</td></tr></tbody></table></div>
+          <div class="source-attr" style="margin-top:18px;">📄 Sumber: roster M&amp;E (koleksi <code>clients</code>), kumulatif. "Belum ARV" = Hasil HIV <strong>Reaktif</strong> &amp; Akses ARV belum tercatat. Identitas terbatas julukan + ID KD; akses role-gated. Untuk pengetatan server-side (rules v9) — koordinasi dengan Adib.</div>
+        </div>
+      </section>
+
 
       <section class="section" id="l2-out-dast10">
         <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>💊 DAST-10 — Skrining Keparahan Penggunaan Napza</h1><p class="lede"><strong>Drug Abuse Screening Test</strong> (10 item) mengukur keparahan penggunaan napza 3 bulan terakhir → dasar rujukan Faskes. Zona 1 = data live entri dashboard (per periode); Zona 2 = baseline historis KoBo; Zona 3 = data mentah (khusus Admin · M&amp;E · Direktur).</p></div>
@@ -2348,7 +2379,7 @@ function updateBreadcrumb(item) {
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
   import { getFirestore, collection, onSnapshot, query, orderBy, limit, doc, getDoc, updateDoc, deleteDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
-  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
   const firebaseConfig = {
     apiKey: "AIzaSyC7127G5fsZprEGfeiqLrRqevTg6Qs2fko",
     authDomain: "sadar-hati-hub.firebaseapp.com",
@@ -2417,6 +2448,8 @@ function updateBreadcrumb(item) {
     }
     if(!u){ window.__SAHA_REFS=null; if(window.SAHA_RENDER_CM){ try{ window.SAHA_RENDER_CM(); }catch(e){} } }
   });
+  const rstBtn=$('saha-pwreset-btn');
+  if(rstBtn){ rstBtn.addEventListener('click', async ()=>{ const em=($('saha-email').value||'').trim(); const m=$('saha-pwreset-msg'); if(m){m.style.display='block';} if(!em){ if(m){m.style.color='#a83244';m.textContent='Isi email di kolom di atas dulu, lalu klik lagi.';} return; } try{ await sendPasswordResetEmail(auth, em); if(m){m.style.color='#2f6d9e';m.textContent='\u2713 Link ganti password dikirim ke '+em+'. Cek inbox/spam, lalu buat password baru sesukamu.';} }catch(e){ if(m){m.style.color='#a83244';m.textContent='Gagal kirim: '+(e.code||e.message||'');} } }); }
   const gateBtn=$('saha-login-btn');
   if(gateBtn){
     gateBtn.addEventListener('click', async ()=>{ const err=$('saha-login-err'); if(err)err.textContent=''; try{ await signInWithEmailAndPassword(auth, $('saha-email').value.trim(), $('saha-pass').value); }catch(e){ if(err)err.textContent='Login gagal: '+(e.code||e.message||''); } });
@@ -2505,9 +2538,9 @@ function updateBreadcrumb(item) {
   function applyRoleUI(){
     const r=window.SAHA_ROLE;
     document.body.classList.remove('role-admin','role-me','role-staff');
-    document.body.classList.add(r==='admin'?'role-admin':(r==='me'||r==='manager')?'role-me':'role-staff');
+    document.body.classList.add(r==='admin'?'role-admin':(r==='me'||r==='manager'||r==='pm')?'role-me':'role-staff');
     const active=document.querySelector('.section.active');
-    if(active && ((active.id==='l2-admin'&&r!=='admin')||(active.id==='l1-loghari'&&!(r==='admin'||r==='me'||r==='manager'))||(active.id==='l2-casemgmt'&&!(r==='admin'||r==='me'||r==='manager')))){
+    if(active && ((active.id==='l2-admin'&&r!=='admin')||(active.id==='l1-loghari'&&!(r==='admin'||r==='me'||r==='manager'||r==='pm'))||(active.id==='l2-casemgmt'&&!(r==='admin'||r==='me'||r==='manager'||r==='pm'))||(active.id==='l2-hiv-cm'&&!(r==='admin'||r==='me'||r==='manager'||r==='pm')))){
       const home=document.querySelector('.nav-item[data-section="l2-overview-program"]'); if(home) home.click();
     }
     renderAdmin();
@@ -2518,9 +2551,9 @@ function updateBreadcrumb(item) {
       const snap=await getDoc(doc(db,'roles',user.uid));
       if(snap.exists()){
         const r=(snap.data().role||'staff').toLowerCase();
-        const M={admin:['ADMIN','#7d2433','#f7e9ec'],manager:['DIREKTUR','#2f4256','#e3eaf1'],me:['M&E','#2f6d9e','#e7f0f7'],staff:['STAF','#7a746e','#f1ede8']};
+        const M={admin:['ADMIN','#7d2433','#f7e9ec'],manager:['DIREKTUR','#2f4256','#e3eaf1'],me:['M&E','#2f6d9e','#e7f0f7'],staff:['STAF','#7a746e','#f1ede8'],pm:['PROGRAM MANAGER','#5f3b50','#efe9f4']};
         const m=M[r]||M.staff; if(badge){ badge.textContent=m[0]+(snap.data().nama?' · '+snap.data().nama:''); badge.style.color=m[1]; badge.style.background=m[2]; }
-        const chip=document.getElementById('saha-rolechip'); if(chip){ chip.textContent=(r==='me')?'M&E':(r==='manager')?'Direktur':(m[0].charAt(0)+m[0].slice(1).toLowerCase()); chip.style.fontWeight='800'; chip.style.color=m[1]; }
+        const chip=document.getElementById('saha-rolechip'); if(chip){ chip.textContent=(r==='me')?'M&E':(r==='manager')?'Direktur':(r==='pm')?'Program Manager':(m[0].charAt(0)+m[0].slice(1).toLowerCase()); chip.style.fontWeight='800'; chip.style.color=m[1]; }
         window.SAHA_ROLE=r; applyRoleUI();
       } else { if(badge) badge.textContent='Staf (default — dok roles belum dibuat)'; const chip=document.getElementById('saha-rolechip'); if(chip){ chip.textContent='Staf'; chip.style.color=''; } window.SAHA_ROLE='staff'; applyRoleUI(); }
     }catch(e){ if(badge) badge.textContent='Staf (default — rule roles belum di-apply)'; window.SAHA_ROLE='staff'; applyRoleUI(); }
@@ -2739,6 +2772,15 @@ onAuthStateChanged(auth, u=>{
   if(u){ if($('cf-locked'))$('cf-locked').style.display='none'; $('cf-panel').style.display='block'; if(!loaded){ if(!cfFromCache()) load(); } }
   else { if($('cf-locked'))$('cf-locked').style.display='block'; $('cf-panel').style.display='none'; }
 });
+async function sahaHivLoad(force){
+  if(window.__SAHA_CLIENTS && !force){ if(window.SAHA_RENDER_HIV) window.SAHA_RENDER_HIV(); return; }
+  try{ const snap=await getDocs(collection(db,'clients')); const a=[]; snap.forEach(d=>a.push(d.data())); window.__SAHA_CLIENTS=a; window.__SAHA_CLIENTS_ERR=null; }
+  catch(e){ window.__SAHA_CLIENTS_ERR=(e.code||e.message); }
+  if(window.SAHA_RENDER_HIV) window.SAHA_RENDER_HIV();
+}
+const hivNav=document.querySelector('[data-section="l2-hiv-cm"]');
+if(hivNav) hivNav.addEventListener('click', ()=>{ setTimeout(()=>{ if(auth.currentUser) sahaHivLoad(); else if(window.SAHA_RENDER_HIV) window.SAHA_RENDER_HIV(); }, 60); });
+onAuthStateChanged(auth, u=>{ if(!u){ window.__SAHA_CLIENTS=null; if(window.SAHA_RENDER_HIV) window.SAHA_RENDER_HIV(); } else { const sec=document.getElementById('l2-hiv-cm'); if(sec && sec.classList.contains('active')) sahaHivLoad(); } });
 ['cf-q','cf-thn','cf-bln','cf-loc','cf-pl'].forEach(id=>{ const el=$(id); if(el){ el.addEventListener('input',render); el.addEventListener('change',render); } });
 const exp=$('cf-export');
 if(exp) exp.addEventListener('click',()=>{
@@ -2756,7 +2798,7 @@ window.CF_MOCK = function(arr){ ALL=arr; loaded=true; fillFilters(); render(); i
 /* === DATA MENTAH v0.28 (role-gated raw rows, reuses Log Harian live cache — 0 extra reads) === */
 window.SAHA_RENDER_RAW = function(){
   var role = window.SAHA_ROLE;
-  var can = (role==='admin'||role==='me'||role==='manager');
+  var can = (role==='admin'||role==='me'||role==='manager'||role==='pm');
   var ALLR = window.__SAHA_ALL || [];
   function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]; }); }
   function fmtT(t){ try{ var d=new Date(t); return isNaN(d)?esc(t):d.toLocaleString('id-ID',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}); }catch(e){ return esc(t); } }
@@ -2796,7 +2838,7 @@ window.SAHA_RAW_DET = function(el, i){
 };
 window.SAHA_RAW_CSV = function(f){
   var role = window.SAHA_ROLE;
-  if(!(role==='admin'||role==='me'||role==='manager')) return;
+  if(!(role==='admin'||role==='me'||role==='manager'||role==='pm')) return;
   var rows = (window.__SAHA_ALL||[]).filter(function(x){ return x.form===f; });
   if(!rows.length) return;
   var keys = [];
@@ -3694,6 +3736,52 @@ tr.me-rawclick{cursor:pointer;}
 })();
 </script>
 
+<script id="hiv-js">
+(function(){
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function tru(v){return v===1||v==='1'||v===true||v==='Ya'||v==='ya'||v==='Sudah';}
+  function reak(v){return String(v||'').trim().toLowerCase()==='reaktif';}
+  function bars(rows){var mx=Math.max.apply(null,rows.map(function(r){return r[1];}).concat([1]));return rows.map(function(r){return '<div class="hiv-bar"><span class="nm" title="'+esc(r[0])+'">'+esc(r[0])+'</span><span class="track"><span class="fill" style="width:'+Math.round(r[1]/mx*100)+'%"></span></span><span class="n">'+r[1]+'</span></div>';}).join('')||'<div style="font-size:12px;color:#6f6660;">—</div>';}
+  function card(l,v,d){return '<div class="card"><div class="label">'+l+'</div><div class="value">'+v+'</div><div class="desc">'+esc(d)+'</div></div>';}
+  function cardHi(l,v,d){return '<div class="card" style="background:linear-gradient(135deg,var(--clay,#a83244),var(--clay-deep,#7d2433));border-color:var(--clay-deep,#7d2433);"><div class="label" style="color:#fff;opacity:.85;">'+l+'</div><div class="value" style="color:#fff;">'+v+'</div><div class="desc" style="color:#fff;opacity:.82;">'+esc(d)+'</div></div>';}
+  function renderList(belum){
+    var tb=document.getElementById('hiv-listbody'); if(!tb) return;
+    var qi=document.getElementById('hiv-q'); var q=(qi&&qi.value||'').toLowerCase();
+    var rows=belum.filter(function(x){ if(!q) return true; return ((x.ID_KD||'')+' '+(x.Nama_Panggilan||'')+' '+(x.Kab_Kota||'')+' '+(x.PL_Utama||'')).toLowerCase().indexOf(q)>=0; });
+    var cnt=document.getElementById('hiv-count'); if(cnt) cnt.textContent=rows.length+' orang';
+    tb.innerHTML=rows.length?rows.map(function(x){
+      return '<tr><td style="font-weight:700;color:#6b2a44;white-space:nowrap;">'+esc(x.ID_KD||'-')+'</td><td>'+esc(x.Nama_Panggilan||'-')+'</td><td>'+esc(x.Kab_Kota||'-')+'</td><td>'+esc(x.PL_Utama||'-')+'</td><td>'+esc(x.Tahun_Aktif||'-')+'</td><td style="text-align:center;">'+(tru(x.Akses_Keswa)?'✓':'–')+'</td><td style="text-align:center;">'+(tru(x.MH_Assessment)?'✓':'–')+'</td></tr>';
+    }).join(''):'<tr><td colspan="7" style="padding:14px;color:#6f6660;">Tidak ada yang cocok pencarian.</td></tr>';
+  }
+  window.SAHA_RENDER_HIV=function(){
+    var guard=document.getElementById('hiv-guard'), body=document.getElementById('hiv-body'); if(!guard||!body) return;
+    var role=window.SAHA_ROLE, can=(role==='admin'||role==='me'||role==='manager'||role==='pm');
+    if(!can){ guard.style.display='block'; body.style.display='none'; guard.innerHTML='<div class="hiv-note">🔒 Halaman ini khusus <strong>Admin · M&amp;E · Direktur · Program Manager</strong>. Silakan login dengan akun yang sesuai.</div>'; return; }
+    var C=window.__SAHA_CLIENTS;
+    if(C==null){ guard.style.display='block'; body.style.display='none'; guard.innerHTML=window.__SAHA_CLIENTS_ERR?('<div class="hiv-note">⚠️ Gagal memuat roster: '+esc(window.__SAHA_CLIENTS_ERR)+'. Coba buka lagi menu ini.</div>'):'<div class="hiv-note" style="background:#f3eef7;border-color:#6b4d7a;color:#4e3859;">⏳ Memuat data roster… buka lagi menu ini sebentar.</div>'; return; }
+    guard.style.display='none'; body.style.display='block';
+    var reaktif=C.filter(function(x){return reak(x.Hasil_HIV);});
+    var tested=C.filter(function(x){return tru(x.Tes_HIV_Program);}).length;
+    var arv=reaktif.filter(function(x){return tru(x.Akses_ARV);}).length;
+    var belum=reaktif.filter(function(x){return !tru(x.Akses_ARV);});
+    var pct=reaktif.length?Math.round(arv/reaktif.length*100):0;
+    document.getElementById('hiv-kpis').innerHTML=
+      card('Pernah Tes HIV',tested,'roster kumulatif')+
+      card('Reaktif (HIV+)',reaktif.length,'dari '+C.length+' dampingan')+
+      card('Sudah akses ARV',arv,pct+'% dari Reaktif')+
+      cardHi('Belum ter-link ARV',belum.length,'target tindak lanjut');
+    var byKota={},byPL={};
+    belum.forEach(function(x){var k=(x.Kab_Kota||'—');byKota[k]=(byKota[k]||0)+1;var p=(x.PL_Utama||'—');byPL[p]=(byPL[p]||0)+1;});
+    var kk=Object.keys(byKota).map(function(k){return [k,byKota[k]];}).sort(function(a,b){return b[1]-a[1];}).slice(0,6);
+    var pp=Object.keys(byPL).map(function(k){return [k,byPL[k]];}).sort(function(a,b){return b[1]-a[1];}).slice(0,8);
+    document.getElementById('hiv-charts').innerHTML=
+      '<div class="me-cc c1"><div class="me-chead"><h4>🗺️ Belum ARV per Wilayah</h4></div><div class="me-cwhat">Di mana dampingan Reaktif yang belum ter-link ARV paling menumpuk — prioritas penempatan pendampingan linkage.</div><div class="hiv-bars">'+bars(kk)+'</div></div>'+
+      '<div class="me-cc c2"><div class="me-chead"><h4>👷 Belum ARV per PL</h4></div><div class="me-cwhat">PL dengan beban follow-up linkage terbanyak — dasar pembagian tugas pendampingan.</div><div class="hiv-bars">'+bars(pp)+'</div></div>';
+    renderList(belum);
+    var qi=document.getElementById('hiv-q'); if(qi&&!qi.dataset.w){ qi.dataset.w='1'; qi.addEventListener('input',function(){renderList(belum);}); }
+  };
+})();
+</script>
 <script id="cm-js">
 /* === CASE MANAGEMENT render (v0.73) — data dari window.__SAHA_REFS (module feeder) === */
 (function(){
@@ -3707,7 +3795,7 @@ tr.me-rawclick{cursor:pointer;}
   function firstT(r,st){ var h=r.history||[]; for(var i=0;i<h.length;i++){ if(h[i].status===st) return h[i].t; } return null; }
   window.SAHA_RENDER_CM = function(){
     var box=el('cm-list'); if(!box) return;
-    var role=window.SAHA_ROLE, can=(role==='admin'||role==='me'||role==='manager');
+    var role=window.SAHA_ROLE, can=(role==='admin'||role==='me'||role==='manager'||role==='pm');
     if(!can){ box.innerHTML='<div class="cm-empty">🔒 Login sebagai Admin / M&E / Direktur untuk memuat antrian.</div>'; el('cm-kpis').innerHTML=''; el('cm-kaskade').innerHTML=''; el('cm-p1banner').style.display='none';
       if(!window.__cmRoleRetry){ window.__cmRoleRetry=1; setTimeout(function(){ try{SAHA_RENDER_CM();}catch(e){} },1500); } return; }
     var R=window.__SAHA_REFS;
