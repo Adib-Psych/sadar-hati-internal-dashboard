@@ -934,7 +934,7 @@
     <div class="brand">
       <div class="logo">Sadar Hati Foundation</div>
       <div class="est">est. 2002 · Malang</div>
-      <div class="system-tag">Integrated Hub v0.77 · Yayasan Sadar Hati</div>
+      <div class="system-tag">Integrated Hub v0.78 · Yayasan Sadar Hati</div>
     </div>
 
         <nav class="nav">
@@ -966,10 +966,19 @@
             </div>
           </div>
               <a class="nav-item" data-section="l2-clients"><span class="icon">👥</span> Clients Database</a>
-              <a class="nav-item" data-section="l2-casemgmt"><span class="icon">📋</span> Case Management</a>
-              <a class="nav-item" data-section="l2-hiv-cm"><span class="icon">🎗️</span> Case Management HIV</a>
           <div class="nav-divider-label role-admin-only">Kelola &amp; Sistem</div>
           <a class="nav-item role-admin-only" data-section="l2-admin"><span class="icon">🛡️</span> Panel Admin · Kelola Entry · Sistem</a>
+        </div>
+      </div>
+      <div class="nav-layer expanded" data-zone="2B">
+        <div class="nav-layer-header">
+          <span class="zone-dot z2b"></span>
+          <span class="nav-layer-title">CASE MANAGEMENT</span>
+          <span class="lock-ind" title="Butuh login staf">🔒</span><span class="chevron">▶</span>
+        </div>
+        <div class="nav-layer-body">
+          <a class="nav-item" data-section="l2-casemgmt"><span class="icon">💊</span> Napza &amp; Jiwa</a>
+          <a class="nav-item" data-section="l2-hiv-cm"><span class="icon">🎗️</span> HIV · Linkage ARV</a>
         </div>
       </div>
     </nav>
@@ -982,7 +991,7 @@
           akses sesuai role akun
         </div>
       </div>
-      <div>v0.77 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
+      <div>v0.78 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
     <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#2f6d9e,#1f4a6e);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
@@ -998,6 +1007,7 @@
       </div>
       <div class="topbar-actions">
         <span class="saha-authbar saha-authed-only">🔓 <span id="saha-rolechip">Staf</span> <span class="saha-user"></span></span>
+        <button class="btn saha-authed-only" id="saha-chpw-btn" style="background:var(--gold,#6b4d7a);color:#fff;">🔑 Ganti Password</button>
         <button class="btn saha-logout saha-authed-only">Logout</button>
       </div>
     </div>
@@ -2379,7 +2389,7 @@ function updateBreadcrumb(item) {
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
   import { getFirestore, collection, onSnapshot, query, orderBy, limit, doc, getDoc, updateDoc, deleteDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
-  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail, updatePassword, EmailAuthProvider, reauthenticateWithCredential } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
   const firebaseConfig = {
     apiKey: "AIzaSyC7127G5fsZprEGfeiqLrRqevTg6Qs2fko",
     authDomain: "sadar-hati-hub.firebaseapp.com",
@@ -2450,6 +2460,23 @@ function updateBreadcrumb(item) {
   });
   const rstBtn=$('saha-pwreset-btn');
   if(rstBtn){ rstBtn.addEventListener('click', async ()=>{ const em=($('saha-email').value||'').trim(); const m=$('saha-pwreset-msg'); if(m){m.style.display='block';} if(!em){ if(m){m.style.color='#a83244';m.textContent='Isi email di kolom di atas dulu, lalu klik lagi.';} return; } try{ await sendPasswordResetEmail(auth, em); if(m){m.style.color='#2f6d9e';m.textContent='\u2713 Link ganti password dikirim ke '+em+'. Cek inbox/spam, lalu buat password baru sesukamu.';} }catch(e){ if(m){m.style.color='#a83244';m.textContent='Gagal kirim: '+(e.code||e.message||'');} } }); }
+  const chpwBtn=$('saha-chpw-btn'), chpwOv=$('chpw-overlay');
+  function chpwClose(){ if(chpwOv) chpwOv.classList.remove('show'); }
+  function chpwOpen(){ const u=auth.currentUser; if(!u) return; const em=$('chpw-email'); if(em) em.textContent=u.email||''; ['chpw-cur','chpw-new','chpw-new2'].forEach(id=>{const e=$(id); if(e)e.value='';}); const m=$('chpw-msg'); if(m){m.textContent='';m.style.display='none';} if(chpwOv) chpwOv.classList.add('show'); const c=$('chpw-cur'); if(c) c.focus(); }
+  if(chpwBtn) chpwBtn.addEventListener('click', chpwOpen);
+  if($('chpw-cancel')) $('chpw-cancel').addEventListener('click', chpwClose);
+  if(chpwOv) chpwOv.addEventListener('click', e=>{ if(e.target===chpwOv) chpwClose(); });
+  if($('chpw-save')) $('chpw-save').addEventListener('click', async ()=>{
+    const u=auth.currentUser, m=$('chpw-msg'); if(m) m.style.display='block';
+    if(!u){ if(m){m.style.color='#a83244';m.textContent='Sesi berakhir — silakan login lagi.';} return; }
+    const cur=$('chpw-cur').value, nw=$('chpw-new').value, nw2=$('chpw-new2').value;
+    if(nw.length<6){ if(m){m.style.color='#a83244';m.textContent='Password baru minimal 6 karakter.';} return; }
+    if(nw!==nw2){ if(m){m.style.color='#a83244';m.textContent='Ulangi password belum sama.';} return; }
+    const sv=$('chpw-save'); sv.disabled=true; sv.textContent='Menyimpan…';
+    try{ await reauthenticateWithCredential(u, EmailAuthProvider.credential(u.email, cur)); await updatePassword(u, nw); if(m){m.style.color='#2f6d9e';m.textContent='\u2713 Password berhasil diganti. Pakai password baru saat login berikutnya.';} setTimeout(chpwClose,1700); }
+    catch(e){ const c=String(e.code||e.message||''); let t='Gagal: '+c; if(c.indexOf('wrong-password')>=0||c.indexOf('invalid-cred')>=0) t='Password sekarang salah.'; else if(c.indexOf('weak-password')>=0) t='Password baru terlalu lemah (min. 6 karakter).'; else if(c.indexOf('too-many-requests')>=0) t='Terlalu banyak percobaan, coba lagi nanti.'; if(m){m.style.color='#a83244';m.textContent=t;} }
+    finally{ sv.disabled=false; sv.textContent='Simpan'; }
+  });
   const gateBtn=$('saha-login-btn');
   if(gateBtn){
     gateBtn.addEventListener('click', async ()=>{ const err=$('saha-login-err'); if(err)err.textContent=''; try{ await signInWithEmailAndPassword(auth, $('saha-email').value.trim(), $('saha-pass').value); }catch(e){ if(err)err.textContent='Login gagal: '+(e.code||e.message||''); } });
@@ -3598,6 +3625,20 @@ var lines=R.map(function(r){return r.map(function(v){return '"'+String(v).replac
 var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(lines.join('\n'));a.download='ViiV_Laporan_Keuangan_FullProject.csv';a.click();}
 </script>
 
+<div class="chpw-overlay" id="chpw-overlay">
+  <div class="chpw-card">
+    <div class="chpw-title">🔑 Ganti Password</div>
+    <div class="chpw-sub">Buat password baru untuk akun <strong id="chpw-email"></strong>. Berlaku langsung untuk login berikutnya — tidak butuh email aktif.</div>
+    <input type="password" id="chpw-cur" class="chpw-in" placeholder="Password sekarang" autocomplete="current-password">
+    <input type="password" id="chpw-new" class="chpw-in" placeholder="Password baru (min. 6 karakter)" autocomplete="new-password">
+    <input type="password" id="chpw-new2" class="chpw-in" placeholder="Ulangi password baru" autocomplete="new-password">
+    <div class="chpw-msg" id="chpw-msg" style="display:none;"></div>
+    <div class="chpw-actions">
+      <button class="chpw-save" id="chpw-save">Simpan</button>
+      <button class="chpw-cancel" id="chpw-cancel">Batal</button>
+    </div>
+  </div>
+</div>
 <style id="saha-dtl-css">
 /* === MODAL DETAIL ENTRI v2 (patch 20 Jul 2026) === */
 #saha-dtl{position:fixed;inset:0;z-index:9000;display:none;align-items:flex-end;justify-content:center;background:rgba(44,39,36,.45);backdrop-filter:blur(2px);}
@@ -3645,6 +3686,18 @@ var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeUR
 .dtl-close{display:block;width:calc(100% - 32px);margin:14px 16px calc(14px + env(safe-area-inset-bottom,0px));padding:11px;border:0;border-radius:12px;background:var(--clay,#a83244);color:#fff;font-weight:700;font-size:13.5px;cursor:pointer;}
 .dtl-close:hover{background:var(--clay-deep,#7d2433);}
 tr.me-rawclick{cursor:pointer;}
+  .chpw-overlay{display:none;position:fixed;inset:0;background:rgba(30,24,28,.5);z-index:200;align-items:center;justify-content:center;padding:18px;}
+  .chpw-overlay.show{display:flex;}
+  .chpw-card{background:#fff;border-radius:18px;max-width:400px;width:100%;padding:22px 20px;box-shadow:0 18px 50px rgba(0,0,0,.28);}
+  .chpw-title{font-family:Lora,Georgia,serif;font-size:19px;font-weight:700;color:#6b2a44;margin-bottom:4px;}
+  .chpw-sub{font-size:12.5px;line-height:1.5;color:#6f6660;margin-bottom:14px;}
+  .chpw-in{width:100%;padding:11px 13px;font-size:15px;border:1.5px solid #e7ddd3;border-radius:10px;background:#fbf7f2;font-family:inherit;color:#2c2724;margin-bottom:9px;box-sizing:border-box;}
+  .chpw-in:focus{outline:none;border-color:#a83244;background:#fff;}
+  .chpw-msg{font-size:12.5px;line-height:1.5;margin:2px 0 10px;}
+  .chpw-actions{display:flex;gap:8px;margin-top:4px;}
+  .chpw-actions button{flex:1;padding:11px;font-size:13.5px;font-weight:700;border:0;border-radius:11px;cursor:pointer;font-family:inherit;}
+  .chpw-save{background:#6b2a44;color:#fff;}
+  .chpw-cancel{background:#e7ddd3;color:#2c2724;}
 </style>
 <script id="saha-dtl-js">
 /* === TITLE CASE + RINGKAS GENERIK + MODAL DETAIL v2 (patch 20 Jul 2026) === */
