@@ -871,7 +871,7 @@
     <div class="brand">
       <div class="logo">Sadar Hati Foundation</div>
       <div class="est">est. 2002 · Malang</div>
-      <div class="system-tag">Integrated Hub v0.56 · Yayasan Sadar Hati</div>
+      <div class="system-tag">Integrated Hub v0.57 · Yayasan Sadar Hati</div>
     </div>
 
         <nav class="nav">
@@ -918,7 +918,7 @@
           akses sesuai role akun
         </div>
       </div>
-      <div>v0.56 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
+      <div>v0.57 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
     <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#48607b,#2f4256);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
@@ -2207,6 +2207,34 @@ function updateBreadcrumb(item) {
   function fmt(iso){ if(!iso) return '-'; const d=new Date(iso); if(isNaN(d)) return String(iso); return d.toLocaleString('id-ID',{day:'2-digit',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'}); }
   function ringkas(x){ if(x.form==='chemsex'){ const a=x.answers||{}; const n=Array.isArray(a.napza)?a.napza.join(', '):(a.napza||'-'); return 'Napza: '+n; } if(x.form==='dast10') return 'Skor '+(x.skor==null?'-':x.skor)+' · '+(x.interpretasi||'-'); if(x.form==='srq29') return (x.skor||'-')+' · '+(x.interpretasi||'-'); return '-'; }
   // ===== GLOBAL 2B AUTH GATE (generalized from Log Harian) =====
+  /* === CASE MANAGEMENT feeder & aksi (v0.73) === */
+  function __cmPrio(x){
+    if(x.form==='srq29'){ const s=x.subdomain||{};
+      if(s.suicide_flag) return {p:1,label:'Q17',s:1000};
+      if((+s.psikotik||0)>=1) return {p:2,label:'PSIKOTIK',s:(+s.neurosis||0)};
+      if((+s.ptsd||0)>=1) return {p:3,label:'PTSD',s:(+s.neurosis||0)};
+      return {p:4,label:'SKOR '+((s.neurosis!=null)?s.neurosis:(x.skor||'-')),s:(+s.neurosis||0)}; }
+    if(x.form==='dast10') return {p:4,label:'DAST '+(x.skor!=null?x.skor:'-'),s:(+x.skor||0)};
+    return {p:4,label:String(x.form||'').toUpperCase()||'LAIN',s:0};
+  }
+  window.SAHA_REFER = async function(x, btn){
+    try{
+      const u=auth.currentUser; if(!u){ alert('Login dashboard dulu untuk merujuk.'); return; }
+      const k=x.klien||{}; const pr=__cmPrio(x);
+      const rid='ref_'+(x.__id||('m'+Date.now()));
+      const ex=await getDoc(doc(db,'referrals',rid));
+      if(ex.exists()){ if(btn){btn.textContent='ℹ️ Sudah di antrian';btn.disabled=true;} else alert('ℹ️ Entri ini sudah ada di antrian konseling.'); return; }
+      const now=new Date().toISOString();
+      await setDoc(doc(db,'referrals',rid),{
+        created_at:now, source_form:x.form||'', source_entry_id:x.__id||'',
+        klien:{julukan:k.julukan||'',idkd:k.idkd||''}, pl:x.pl||'',
+        priority:pr.p, priority_label:pr.label, sort_score:pr.s,
+        ringkas:(window.SAHA_RINGKAS?window.SAHA_RINGKAS(x):'')+(x.interpretasi?(' · '+x.interpretasi):''),
+        status:'baru', pj:'', tgl_kontak:'', catatan:'', archived:false,
+        history:[{t:now,status:'baru',by:(u.email||'')}], updated_at:now, updated_by:(u.email||'') });
+      if(btn){ btn.textContent='✓ Masuk antrian konseling'; btn.disabled=true; } else alert('✓ Masuk antrian konseling.');
+    }catch(e){ alert('Gagal merujuk: '+(e.code||e.message)+'\n(Bila permission-denied: rules v8 belum dipasang.)'); }
+  };
   const gateBtn=$('saha-login-btn');
   if(gateBtn){
     gateBtn.addEventListener('click', async ()=>{ const err=$('saha-login-err'); if(err)err.textContent=''; try{ await signInWithEmailAndPassword(auth, $('saha-email').value.trim(), $('saha-pass').value); }catch(e){ if(err)err.textContent='Login gagal: '+(e.code||e.message||''); } });
@@ -2695,6 +2723,9 @@ window.SAHA_QR_DL = function(){
 .dtl-kv.long{flex-direction:column;gap:3px;}
 .dtl-kv.long span{max-width:100%;}
 .dtl-kv.long b{text-align:left;}
+.dtl-refer{display:block;width:calc(100% - 32px);margin:12px 16px 0;padding:11px;border:0;border-radius:12px;background:var(--coral,#6b4d7a);color:#fff;font-weight:700;font-size:13.5px;cursor:pointer;}
+.dtl-refer:hover{background:#543c60;}
+.dtl-refer:disabled{background:var(--sage-light,#e9ece1);color:var(--sage-deep,#5f3b50);cursor:default;}
 .dtl-close{display:block;width:calc(100% - 32px);margin:14px 16px calc(14px + env(safe-area-inset-bottom,0px));padding:11px;border:0;border-radius:12px;background:var(--clay,#a83244);color:#fff;font-weight:700;font-size:13.5px;cursor:pointer;}
 .dtl-close:hover{background:var(--clay-deep,#7d2433);}
 tr.me-rawclick{cursor:pointer;}
@@ -2721,6 +2752,7 @@ tr.me-rawclick{cursor:pointer;}
   function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]; }); }
   function fmtT(t){ try{ var d=new Date(t); return isNaN(d)?String(t||'-'):d.toLocaleString('id-ID',{day:'2-digit',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'}); }catch(e){ return '-'; } }
   function kvflat(o, pre, out){ Object.keys(o||{}).forEach(function(k){ if(k==='__id') return; var v=o[k]; if(v&&typeof v==='object'&&!Array.isArray(v)){ kvflat(v,(pre?pre+'.':'')+k,out); } else { out.push([(pre?pre+'.':'')+k, Array.isArray(v)?v.join(', '):String(v==null?'':v)]); } }); }
+  window.SAHA_DTL_REFER = function(btn){ if(window.SAHA_REFER && window.__DTL_X) window.SAHA_REFER(window.__DTL_X, btn); };
   window.SAHA_DTL_CLOSE = function(){ var o=document.getElementById('saha-dtl'); if(o) o.classList.remove('on'); };
   window.SAHA_DTL = function(x, ring){
     x = x||{}; var k = x.klien||{}, w = x.wilayah||{}; var tc = window.SAHA_TC;
@@ -2763,6 +2795,8 @@ tr.me-rawclick{cursor:pointer;}
       }).join('')+(more?'<div class="dtl-kv"><span>…</span><b>+'+more+' field lain (lihat Export CSV)</b></div>':'')+'</div>';
     }
     if(x.catatan_klinis) h += '<div class="dtl-note"><div class="lbl">Catatan</div>'+esc(x.catatan_klinis)+'</div>';
+    window.__DTL_X = x;
+    if(window.SAHA_REFER && (x.form==='dast10'||x.form==='srq29')) h += '<button class="dtl-refer" onclick="SAHA_DTL_REFER(this)">📅 Rujuk ke Konseling</button>';
     h += '<button class="dtl-close" onclick="SAHA_DTL_CLOSE()">Tutup</button>';
     var ov = document.getElementById('saha-dtl');
     if(!ov){

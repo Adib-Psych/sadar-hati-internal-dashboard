@@ -921,7 +921,7 @@
     <div class="brand">
       <div class="logo">Sadar Hati Foundation</div>
       <div class="est">est. 2002 · Malang</div>
-      <div class="system-tag">Integrated Hub v0.72 · Yayasan Sadar Hati</div>
+      <div class="system-tag">Integrated Hub v0.73 · Yayasan Sadar Hati</div>
     </div>
 
         <nav class="nav">
@@ -953,6 +953,7 @@
             </div>
           </div>
               <a class="nav-item" data-section="l2-clients"><span class="icon">👥</span> Clients Database</a>
+              <a class="nav-item" data-section="l2-casemgmt"><span class="icon">📋</span> Case Management</a>
           <div class="nav-divider-label role-admin-only">Kelola &amp; Sistem</div>
           <a class="nav-item role-admin-only" data-section="l2-admin"><span class="icon">🛡️</span> Panel Admin · Kelola Entry · Sistem</a>
         </div>
@@ -967,7 +968,7 @@
           akses sesuai role akun
         </div>
       </div>
-      <div>v0.72 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
+      <div>v0.73 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
     <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#2f6d9e,#1f4a6e);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
@@ -1637,6 +1638,79 @@
       </section>
 
       <!-- ====== 2B · DAST-10 OUTPUT HOUSE (placeholder) ====== -->
+      
+      <!-- ====== 2B · CASE MANAGEMENT — ANTRIAN KONSELING (v0.73) ====== -->
+      <style id="cm-css">
+        #l2-casemgmt .cm-alert1{display:none;gap:10px;align-items:center;background:var(--clay-light);border:1px solid #f2c9d2;border-radius:12px;padding:10px 14px;font-size:13px;font-weight:700;color:var(--clay-deep);margin:0 0 14px;}
+        #l2-casemgmt .cm-tabs{display:flex;gap:8px;margin:14px 0 12px;align-items:center;flex-wrap:wrap;}
+        #l2-casemgmt .cm-tab{padding:8px 16px;border-radius:999px;font-size:12.5px;font-weight:700;background:var(--cream);border:1px solid var(--line,#e7ddd3);color:var(--slate);cursor:pointer;}
+        #l2-casemgmt .cm-tab.on{background:var(--clay);border-color:var(--clay);color:#fff;}
+        #l2-casemgmt .cm-q{margin-left:auto;border:1px solid var(--line,#e7ddd3);border-radius:999px;padding:8px 14px;font-size:12.5px;min-width:220px;background:#fff;}
+        .cm-row{display:grid;grid-template-columns:60px 1.4fr 1.5fr .9fr .9fr 1fr 44px;gap:10px;align-items:center;border:1px solid var(--line,#e7ddd3);border-radius:14px;padding:11px 14px;margin-bottom:8px;background:#fffdfa;cursor:pointer;}
+        .cm-row:hover{background:var(--cream);}
+        .cm-row.p1row{border-color:#e7b9c4;background:#fdf3f5;}
+        .cm-hdr{display:grid;grid-template-columns:60px 1.4fr 1.5fr .9fr .9fr 1fr 44px;gap:10px;padding:2px 14px 6px;font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);}
+        .cm-pri{width:50px;height:50px;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;}
+        .cm-pri .n{font-size:15px;line-height:1;}
+        .cm-pri .t{font-size:7.5px;letter-spacing:.04em;margin-top:2px;text-align:center;}
+        .cm-p1{background:var(--clay-deep);color:#fff;}
+        .cm-p2{background:var(--clay-light);color:var(--clay-deep);}
+        .cm-p3{background:#efe9f4;color:#543c60;}
+        .cm-p4{background:var(--sage-light,#e9ece1);color:var(--sage-deep,#5f3b50);}
+        .cm-nm{font-weight:700;font-size:13.5px;}
+        .cm-id{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:var(--slate);background:var(--cream);border:1px solid var(--line,#e7ddd3);border-radius:6px;padding:1px 6px;display:inline-block;margin-top:3px;}
+        .cm-src .f{font-size:10.5px;font-weight:800;color:#543c60;background:#efe9f4;border-radius:8px;padding:2px 8px;display:inline-block;}
+        .cm-src .r{font-size:11.5px;color:var(--navy-soft,#4a4340);margin-top:4px;line-height:1.35;}
+        .cm-sla{font-size:11.5px;font-weight:700;display:flex;align-items:center;gap:6px;}
+        .cm-dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+        .cm-ok{background:#7c9a6d;} .cm-warn{background:#b0713a;} .cm-late{background:#a83244;}
+        .cm-st{font-size:10.5px;font-weight:800;border-radius:999px;padding:4px 10px;display:inline-block;}
+        .st-baru{background:var(--clay-light);color:var(--clay-deep);}
+        .st-dikontak{background:#efe9f4;color:#543c60;}
+        .st-terjadwal{background:#e8eef5;color:#2f4256;}
+        .st-sesi{background:var(--sage-light,#e9ece1);color:var(--sage-deep,#5f3b50);}
+        .st-selesai{background:#eee9e2;color:#6f6660;}
+        .cm-pj{font-size:12px;color:var(--navy-soft,#4a4340);font-weight:600;}
+        .cm-edit{border:1.5px solid #6b4d7a;border-radius:16px;padding:14px;margin:4px 0 12px;background:#efe9f4;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+        .cm-edit label{font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#543c60;display:block;margin-bottom:4px;}
+        .cm-edit select,.cm-edit input,.cm-edit textarea{width:100%;background:#fff;border:1px solid #cbb8d8;border-radius:10px;padding:8px 11px;font-size:12.5px;color:var(--navy);font-family:inherit;}
+        .cm-edit .full{grid-column:1/-1;}
+        .cm-ebtns{grid-column:1/-1;display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;}
+        .cm-btn{border:0;border-radius:10px;padding:9px 16px;font-weight:700;font-size:12.5px;cursor:pointer;}
+        .cm-save{background:#6b4d7a;color:#fff;}
+        .cm-arch{background:#fff;border:1.5px solid var(--line,#e7ddd3);color:var(--slate);}
+        .cm-empty{border:1px dashed var(--line,#e7ddd3);border-radius:14px;padding:26px;text-align:center;color:#a89f97;font-size:13px;background:#fff;}
+        #cm-kaskade{margin-top:26px;}
+        .cmk-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;align-items:end;margin:14px 0 6px;}
+        .cmk-bar{border-radius:12px 12px 0 0;width:100%;display:flex;align-items:flex-start;justify-content:center;padding-top:7px;color:#fff;font-weight:800;font-size:14px;}
+        .cmk-sl{font-size:9.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;color:var(--slate);margin-top:7px;line-height:1.35;text-align:center;}
+        .cmk-pc{font-size:11.5px;font-weight:800;color:var(--navy);margin-top:2px;text-align:center;}
+        .cmk-conv{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:10px;}
+        .cmk-c{font-size:10px;color:var(--slate);text-align:center;background:var(--cream);border:1px solid var(--line,#e7ddd3);border-radius:10px;padding:5px 3px;}
+        .cmk-c b{color:var(--clay-deep);}
+        @media(max-width:760px){
+          .cm-hdr{display:none;}
+          .cm-row{grid-template-columns:52px 1fr;grid-auto-rows:auto;}
+          .cm-row>div:nth-child(n+3){grid-column:2;}
+          .cm-edit{grid-template-columns:1fr;}
+          .cmk-grid,.cmk-conv{grid-template-columns:repeat(3,1fr);}
+          #l2-casemgmt .cm-q{min-width:140px;}
+        }
+      </style>
+      <section class="section" id="l2-casemgmt">
+        <div class="hero"><div class="eyebrow">🔴 Layer 2B · Case Management (akses: Admin · M&amp;E · Direktur)</div><h1>📋 Case Management — Antrian Konseling</h1><p class="lede">Semua rujukan dari hasil skrining masuk ke sini otomatis, terurut prioritas (bendera dulu, skor kemudian). Klik baris untuk mengubah status; kasus selesai berpindah ke Arsip. SLA kontak: <strong>≤3 hari</strong>. Tombol <strong>📅 Rujuk ke Konseling</strong> ada di detail entri (Log Harian &amp; tabel rumah output).</p></div>
+        <div class="cm-alert1" id="cm-p1banner"></div>
+        <div class="cards" id="cm-kpis"></div>
+        <div class="cm-tabs">
+          <div class="cm-tab on" id="cm-tab-aktif">Aktif</div>
+          <div class="cm-tab" id="cm-tab-arsip">Arsip · Selesai</div>
+          <input class="cm-q" id="cm-q" placeholder="🔎 cari julukan / ID KD / PL…">
+        </div>
+        <div id="cm-list"><div class="cm-empty">Login sebagai Admin / M&amp;E / Direktur untuk memuat antrian.</div></div>
+        <div id="cm-kaskade"></div>
+        <div class="source-attr" style="margin-top:20px;">📄 Kaskade = alur layanan berjenjang; semua proporsi dihitung di antara yang <strong>terindikasi membutuhkan layanan lanjutan</strong> (kerangka: Cascade of Care — sitasi di Panduan Skoring &amp; SOP). Identitas di modul ini terbatas julukan + ID KD; akses role-gated.</div>
+      </section>
+
       <section class="section" id="l2-out-dast10">
         <div class="hero"><div class="eyebrow">🔴 Layer 2B · Laporan Lapangan · Output</div><h1>💊 DAST-10 — Skrining Keparahan Penggunaan Napza</h1><p class="lede"><strong>Drug Abuse Screening Test</strong> (10 item) mengukur keparahan penggunaan napza 3 bulan terakhir → dasar rujukan Faskes. Zona 1 = data live entri dashboard (per periode); Zona 2 = baseline historis KoBo; Zona 3 = data mentah (khusus Admin · M&amp;E · Direktur).</p></div>
         <!-- ZONA 1 · LIVE -->
@@ -2285,6 +2359,57 @@ function updateBreadcrumb(item) {
   function fmt(iso){ if(!iso) return '-'; const d=new Date(iso); if(isNaN(d)) return String(iso); return d.toLocaleString('id-ID',{day:'2-digit',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'}); }
   function ringkas(x){ if(x.form==='chemsex'){ const a=x.answers||{}; const n=Array.isArray(a.napza)?a.napza.join(', '):(a.napza||'-'); return 'Napza: '+n; } if(x.form==='dast10') return 'Skor '+(x.skor==null?'-':x.skor)+' · '+(x.interpretasi||'-'); if(x.form==='srq29') return (x.skor||'-')+' · '+(x.interpretasi||'-'); return '-'; }
   // ===== GLOBAL 2B AUTH GATE (generalized from Log Harian) =====
+  /* === CASE MANAGEMENT feeder & aksi (v0.73) === */
+  function __cmPrio(x){
+    if(x.form==='srq29'){ const s=x.subdomain||{};
+      if(s.suicide_flag) return {p:1,label:'Q17',s:1000};
+      if((+s.psikotik||0)>=1) return {p:2,label:'PSIKOTIK',s:(+s.neurosis||0)};
+      if((+s.ptsd||0)>=1) return {p:3,label:'PTSD',s:(+s.neurosis||0)};
+      return {p:4,label:'SKOR '+((s.neurosis!=null)?s.neurosis:(x.skor||'-')),s:(+s.neurosis||0)}; }
+    if(x.form==='dast10') return {p:4,label:'DAST '+(x.skor!=null?x.skor:'-'),s:(+x.skor||0)};
+    return {p:4,label:String(x.form||'').toUpperCase()||'LAIN',s:0};
+  }
+  window.SAHA_REFER = async function(x, btn){
+    try{
+      const u=auth.currentUser; if(!u){ alert('Login dashboard dulu untuk merujuk.'); return; }
+      const k=x.klien||{}; const pr=__cmPrio(x);
+      const rid='ref_'+(x.__id||('m'+Date.now()));
+      const ex=await getDoc(doc(db,'referrals',rid));
+      if(ex.exists()){ if(btn){btn.textContent='ℹ️ Sudah di antrian';btn.disabled=true;} else alert('ℹ️ Entri ini sudah ada di antrian konseling.'); return; }
+      const now=new Date().toISOString();
+      await setDoc(doc(db,'referrals',rid),{
+        created_at:now, source_form:x.form||'', source_entry_id:x.__id||'',
+        klien:{julukan:k.julukan||'',idkd:k.idkd||''}, pl:x.pl||'',
+        priority:pr.p, priority_label:pr.label, sort_score:pr.s,
+        ringkas:(window.SAHA_RINGKAS?window.SAHA_RINGKAS(x):'')+(x.interpretasi?(' · '+x.interpretasi):''),
+        status:'baru', pj:'', tgl_kontak:'', catatan:'', archived:false,
+        history:[{t:now,status:'baru',by:(u.email||'')}], updated_at:now, updated_by:(u.email||'') });
+      if(btn){ btn.textContent='✓ Masuk antrian konseling'; btn.disabled=true; } else alert('✓ Masuk antrian konseling.');
+    }catch(e){ alert('Gagal merujuk: '+(e.code||e.message)+'\n(Bila permission-denied: rules v8 belum dipasang.)'); }
+  };
+  window.SAHA_REF_SAVE = async function(id, f){
+    try{ const u=auth.currentUser; if(!u) return;
+      const ref=doc(db,'referrals',id); const cur=await getDoc(ref);
+      if(!cur.exists()){ alert('Rujukan tidak ditemukan.'); return; }
+      const now=new Date().toISOString(); f.updated_at=now; f.updated_by=(u.email||'');
+      const h=(cur.data().history||[]).slice();
+      if(f.status && f.status!==cur.data().status) h.push({t:now,status:f.status,by:f.updated_by});
+      f.history=h;
+      await updateDoc(ref,f);
+    }catch(e){ alert('Gagal simpan: '+(e.code||e.message)); }
+  };
+  window.SAHA_REF_ARCH = async function(id){ await window.SAHA_REF_SAVE(id,{archived:true,status:'selesai'}); };
+  let __cmSub=null;
+  onAuthStateChanged(auth, u=>{
+    if(u && !__cmSub){
+      __cmSub=onSnapshot(collection(db,'referrals'), snap=>{
+        const R=[]; snap.forEach(d=>{ const v=d.data(); v.__id=d.id; R.push(v); });
+        window.__SAHA_REFS=R;
+        if(window.SAHA_RENDER_CM){ try{ window.SAHA_RENDER_CM(); }catch(e){} }
+      }, err=>{ window.__SAHA_REFS=[]; if(window.SAHA_RENDER_CM){ try{ window.SAHA_RENDER_CM(); }catch(e){} } });
+    }
+    if(!u){ window.__SAHA_REFS=null; if(window.SAHA_RENDER_CM){ try{ window.SAHA_RENDER_CM(); }catch(e){} } }
+  });
   const gateBtn=$('saha-login-btn');
   if(gateBtn){
     gateBtn.addEventListener('click', async ()=>{ const err=$('saha-login-err'); if(err)err.textContent=''; try{ await signInWithEmailAndPassword(auth, $('saha-email').value.trim(), $('saha-pass').value); }catch(e){ if(err)err.textContent='Login gagal: '+(e.code||e.message||''); } });
@@ -2375,7 +2500,7 @@ function updateBreadcrumb(item) {
     document.body.classList.remove('role-admin','role-me','role-staff');
     document.body.classList.add(r==='admin'?'role-admin':(r==='me'||r==='manager')?'role-me':'role-staff');
     const active=document.querySelector('.section.active');
-    if(active && ((active.id==='l2-admin'&&r!=='admin')||(active.id==='l1-loghari'&&!(r==='admin'||r==='me'||r==='manager')))){
+    if(active && ((active.id==='l2-admin'&&r!=='admin')||(active.id==='l1-loghari'&&!(r==='admin'||r==='me'||r==='manager'))||(active.id==='l2-casemgmt'&&!(r==='admin'||r==='me'||r==='manager')))){
       const home=document.querySelector('.nav-item[data-section="l2-overview-program"]'); if(home) home.click();
     }
     renderAdmin();
@@ -3464,6 +3589,9 @@ var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeUR
 .dtl-kv.long{flex-direction:column;gap:3px;}
 .dtl-kv.long span{max-width:100%;}
 .dtl-kv.long b{text-align:left;}
+.dtl-refer{display:block;width:calc(100% - 32px);margin:12px 16px 0;padding:11px;border:0;border-radius:12px;background:var(--coral,#6b4d7a);color:#fff;font-weight:700;font-size:13.5px;cursor:pointer;}
+.dtl-refer:hover{background:#543c60;}
+.dtl-refer:disabled{background:var(--sage-light,#e9ece1);color:var(--sage-deep,#5f3b50);cursor:default;}
 .dtl-close{display:block;width:calc(100% - 32px);margin:14px 16px calc(14px + env(safe-area-inset-bottom,0px));padding:11px;border:0;border-radius:12px;background:var(--clay,#a83244);color:#fff;font-weight:700;font-size:13.5px;cursor:pointer;}
 .dtl-close:hover{background:var(--clay-deep,#7d2433);}
 tr.me-rawclick{cursor:pointer;}
@@ -3490,6 +3618,7 @@ tr.me-rawclick{cursor:pointer;}
   function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]; }); }
   function fmtT(t){ try{ var d=new Date(t); return isNaN(d)?String(t||'-'):d.toLocaleString('id-ID',{day:'2-digit',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'}); }catch(e){ return '-'; } }
   function kvflat(o, pre, out){ Object.keys(o||{}).forEach(function(k){ if(k==='__id') return; var v=o[k]; if(v&&typeof v==='object'&&!Array.isArray(v)){ kvflat(v,(pre?pre+'.':'')+k,out); } else { out.push([(pre?pre+'.':'')+k, Array.isArray(v)?v.join(', '):String(v==null?'':v)]); } }); }
+  window.SAHA_DTL_REFER = function(btn){ if(window.SAHA_REFER && window.__DTL_X) window.SAHA_REFER(window.__DTL_X, btn); };
   window.SAHA_DTL_CLOSE = function(){ var o=document.getElementById('saha-dtl'); if(o) o.classList.remove('on'); };
   window.SAHA_DTL = function(x, ring){
     x = x||{}; var k = x.klien||{}, w = x.wilayah||{}; var tc = window.SAHA_TC;
@@ -3532,6 +3661,8 @@ tr.me-rawclick{cursor:pointer;}
       }).join('')+(more?'<div class="dtl-kv"><span>…</span><b>+'+more+' field lain (lihat Export CSV)</b></div>':'')+'</div>';
     }
     if(x.catatan_klinis) h += '<div class="dtl-note"><div class="lbl">Catatan</div>'+esc(x.catatan_klinis)+'</div>';
+    window.__DTL_X = x;
+    if(window.SAHA_REFER && (x.form==='dast10'||x.form==='srq29')) h += '<button class="dtl-refer" onclick="SAHA_DTL_REFER(this)">📅 Rujuk ke Konseling</button>';
     h += '<button class="dtl-close" onclick="SAHA_DTL_CLOSE()">Tutup</button>';
     var ov = document.getElementById('saha-dtl');
     if(!ov){
@@ -3552,6 +3683,122 @@ tr.me-rawclick{cursor:pointer;}
     var all = window.__SAHA_ALL || [];
     for(var i=0;i<all.length;i++){ if(all[i].__id===id){ window.SAHA_DTL(all[i], window.SAHA_RINGKAS(all[i])); return; } }
   });
+})();
+</script>
+
+<script id="cm-js">
+/* === CASE MANAGEMENT render (v0.73) — data dari window.__SAHA_REFS (module feeder) === */
+(function(){
+  if(window.SAHA_RENDER_CM) return;
+  window.__CM_TAB='aktif'; window.__CM_OPEN=null;
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];}); }
+  function el(id){ return document.getElementById(id); }
+  var STL={baru:'Baru',dikontak:'Dikontak',terjadwal:'Terjadwal',sesi:'Sesi berjalan',selesai:'Selesai'};
+  var PRC={1:['cm-p1','HARI INI'],2:['cm-p2','ASESMEN'],3:['cm-p3','PTSD'],4:['cm-p4','']};
+  function age(r){ try{ return (Date.now()-new Date(r.created_at).getTime())/864e5; }catch(e){ return 0; } }
+  function firstT(r,st){ var h=r.history||[]; for(var i=0;i<h.length;i++){ if(h[i].status===st) return h[i].t; } return null; }
+  window.SAHA_RENDER_CM = function(){
+    var box=el('cm-list'); if(!box) return;
+    var role=window.SAHA_ROLE, can=(role==='admin'||role==='me'||role==='manager');
+    if(!can){ box.innerHTML='<div class="cm-empty">🔒 Login sebagai Admin / M&E / Direktur untuk memuat antrian.</div>'; el('cm-kpis').innerHTML=''; el('cm-kaskade').innerHTML=''; el('cm-p1banner').style.display='none';
+      if(!window.__cmRoleRetry){ window.__cmRoleRetry=1; setTimeout(function(){ try{SAHA_RENDER_CM();}catch(e){} },1500); } return; }
+    var R=window.__SAHA_REFS;
+    if(R===null||R===undefined){ box.innerHTML='<div class="cm-empty">Memuat antrian…</div>'; return; }
+    var q=(el('cm-q')&&el('cm-q').value||'').toLowerCase();
+    var act=R.filter(function(r){return !r.archived;}), arc=R.filter(function(r){return !!r.archived;});
+    // KPI
+    var menunggu=act.filter(function(r){return r.status==='baru';}).length;
+    var late=act.filter(function(r){return r.status==='baru'&&age(r)>3;}).length;
+    var sesi7=R.filter(function(r){ var t=firstT(r,'sesi'); return t && (Date.now()-new Date(t).getTime())<7*864e5; }).length;
+    el('cm-kpis').innerHTML =
+      '<div class="card"><div class="label">Antrian aktif</div><div class="value">'+act.length+'</div><div class="desc">rujukan berjalan</div></div>'
+      +'<div class="card"><div class="label">Menunggu kontak</div><div class="value">'+menunggu+'</div><div class="desc">status Baru</div></div>'
+      +'<div class="card"'+(late?' style="background:var(--clay-tint);border-color:var(--clay-light);"':'')+'><div class="label">Melewati SLA ≤3 hari</div><div class="value"'+(late?' style="color:var(--clay-deep);"':'')+'>'+late+'</div><div class="desc">perlu dikejar</div></div>'
+      +'<div class="card"><div class="label">Sesi 7 hari terakhir</div><div class="value">'+sesi7+'</div><div class="desc">mulai sesi</div></div>';
+    // banner P1
+    var p1=act.filter(function(r){return r.priority===1&&r.status==='baru';}).length;
+    var bn=el('cm-p1banner');
+    if(p1){ bn.style.display='flex'; bn.innerHTML='🚨 '+p1+' kasus Prioritas-1 menunggu — target dikontak HARI INI'; } else bn.style.display='none';
+    // list
+    var rows=(window.__CM_TAB==='arsip'?arc:act).slice();
+    if(q) rows=rows.filter(function(r){ var k=r.klien||{}; return ((k.julukan||'')+' '+(k.idkd||'')+' '+(r.pl||'')).toLowerCase().indexOf(q)>=0; });
+    rows.sort(function(a,b){ return (a.priority-b.priority)||((b.sort_score||0)-(a.sort_score||0))||String(a.created_at||'').localeCompare(String(b.created_at||'')); });
+    var tA=el('cm-tab-aktif'), tR=el('cm-tab-arsip');
+    if(tA){ tA.textContent='Aktif ('+act.length+')'; tA.className='cm-tab'+(window.__CM_TAB==='aktif'?' on':''); }
+    if(tR){ tR.textContent='Arsip · Selesai ('+arc.length+')'; tR.className='cm-tab'+(window.__CM_TAB==='arsip'?' on':''); }
+    if(!rows.length){ box.innerHTML='<div class="cm-empty">'+(window.__CM_TAB==='arsip'?'Arsip masih kosong.':'Belum ada rujukan di antrian — tombol 📅 <b>Rujuk ke Konseling</b> ada di detail entri (klik baris di Log Harian / tabel rumah output).')+'</div>'; renderKas(R); return; }
+    var h='<div class="cm-hdr"><div>Prio</div><div>Klien</div><div>Sumber & hasil</div><div>Umur antrian</div><div>Status</div><div>Penanggung jawab</div><div></div></div>';
+    rows.forEach(function(r){
+      var k=r.klien||{}, pc=PRC[r.priority]||PRC[4];
+      var a=age(r), slaCls=(r.status==='baru'? (a>3?'cm-late':(a>2?'cm-warn':'cm-ok')) : 'cm-ok');
+      var aTxt=(a<1? Math.max(1,Math.round(a*24))+' jam' : (Math.round(a*10)/10)+' hari')+(r.status==='baru'&&a>3?' ⚠':'');
+      h+='<div class="cm-row'+(r.priority===1?' p1row':'')+'" data-id="'+esc(r.__id)+'">'
+        +'<div class="cm-pri '+pc[0]+'"><div class="n">P'+r.priority+'</div><div class="t">'+esc(r.priority===4?(r.priority_label||''):pc[1])+'</div></div>'
+        +'<div><div class="cm-nm">'+esc((window.SAHA_TC||String)(k.julukan||'—'))+'</div><div class="cm-id">'+esc(k.idkd||'-')+'</div></div>'
+        +'<div class="cm-src"><span class="f">'+esc((r.source_form||'').toUpperCase())+'</span><div class="r">'+esc(r.ringkas||'-')+'</div></div>'
+        +'<div class="cm-sla"><span class="cm-dot '+slaCls+'"></span> '+esc(aTxt)+'</div>'
+        +'<div><span class="cm-st st-'+esc(r.status||'baru')+'">'+esc(STL[r.status]||r.status||'-')+'</span></div>'
+        +'<div class="cm-pj">'+esc(r.pj||'—')+'</div>'
+        +'<div style="text-align:right;font-weight:800;color:#6b4d7a;">'+(window.__CM_OPEN===r.__id?'▴':'▾')+'</div></div>';
+      if(window.__CM_OPEN===r.__id){
+        h+='<div class="cm-edit" data-eid="'+esc(r.__id)+'">'
+          +'<div><label>Status</label><select id="cm-e-status">'+['baru','dikontak','terjadwal','sesi','selesai'].map(function(s){return '<option value="'+s+'"'+(r.status===s?' selected':'')+'>'+STL[s]+'</option>';}).join('')+'</select></div>'
+          +'<div><label>Tanggal kontak / jadwal</label><input type="date" id="cm-e-tgl" value="'+esc((r.tgl_kontak||'').slice(0,10))+'"></div>'
+          +'<div><label>Penanggung jawab</label><select id="cm-e-pj">'+['','Psikolog','Konselor Adiksi','Case Manager','PL: Nuri','PL: David','PL: Ibi','PL: Dodik'].map(function(p){return '<option value="'+p+'"'+(r.pj===p?' selected':'')+'>'+(p||'— pilih —')+'</option>';}).join('')+'</select></div>'
+          +'<div class="full"><label>Catatan tindak lanjut (internal)</label><textarea id="cm-e-cat" rows="2">'+esc(r.catatan||'')+'</textarea></div>'
+          +'<div class="cm-ebtns">'+(r.archived?'':'<button class="cm-btn cm-arch" data-arch="'+esc(r.__id)+'">🗂 Arsipkan (selesai)</button>')+'<button class="cm-btn cm-save" data-save="'+esc(r.__id)+'">💾 Simpan perubahan</button></div>'
+          +'</div>';
+      }
+    });
+    box.innerHTML=h;
+    renderKas(R);
+  };
+  function renderKas(R){
+    var kb=el('cm-kaskade'); if(!kb) return;
+    R=R||[];
+    var ALL=window.__SAHA_ALL||[];
+    var ident=0, konsCount={};
+    ALL.forEach(function(x){
+      if(x.form==='srq29'){ var s=x.subdomain||{}; if(s.suicide_flag||(+s.psikotik||0)>=1||(+s.ptsd||0)>=1||(+s.neurosis||0)>=6) ident++; }
+      else if(x.form==='dast10'){ if((+x.skor||0)>=3) ident++; }
+      else if(x.form==='konseling'){ var kk=(x.klien||{}).idkd||''; if(kk) konsCount[kk]=(konsCount[kk]||0)+1; }
+    });
+    var S2=R.length;
+    var S3=R.filter(function(r){ var t=firstT(r,'dikontak'); return t && (new Date(t)-new Date(r.created_at))<=3*864e5; }).length;
+    var S4=R.filter(function(r){ return firstT(r,'sesi') || r.status==='selesai'; }).length;
+    var S5=R.filter(function(r){ var kk=(r.klien||{}).idkd||''; return kk && (konsCount[kk]||0)>=2; }).length;
+    var S6=R.filter(function(r){ return r.status==='selesai'; }).length;
+    var S1=Math.max(ident,S2);
+    var st=[[S1,'Terindikasi membutuhkan layanan lanjutan','#6b2a44'],[S2,'Dirujuk konseling','#7d2433'],[S3,'Dikontak ≤3 hari','#a83244'],[S4,'Sesi pertama','#6b4d7a'],[S5,'Sesi lanjutan (retensi)','#8a5a74'],[S6,'Selesai / rencana rampung','#5f3b50']];
+    if(!S1){ kb.innerHTML='<h2 class="section-h2" style="margin-top:8px;">📈 Kaskade Layanan — dari Skrining ke Konseling</h2><div class="cm-empty">Kaskade akan terisi otomatis begitu ada entri skrining yang terindikasi membutuhkan layanan lanjutan.</div>'; return; }
+    var mx=Math.max.apply(null,st.map(function(x){return x[0];}))||1;
+    var h='<h2 class="section-h2" style="margin-top:8px;">📈 Kaskade Layanan — dari Skrining ke Konseling</h2>'
+      +'<div style="font-size:12px;color:var(--slate);margin-bottom:4px;">Alur layanan berjenjang — semua proporsi dihitung di antara yang <strong>terindikasi membutuhkan layanan lanjutan</strong>. Terisi otomatis dari antrian di atas (kumulatif entri live).</div>';
+    h+='<div class="cmk-grid">'+st.map(function(x){ var hh=Math.max(34,Math.round(150*x[0]/mx)); var pc=Math.round(100*x[0]/S1);
+      return '<div><div class="cmk-bar" style="height:'+hh+'px;background:'+x[2]+';">'+x[0]+'</div><div class="cmk-sl">'+x[1]+'</div><div class="cmk-pc">'+pc+'%</div></div>'; }).join('')+'</div>';
+    h+='<div class="cmk-conv">'+st.map(function(x,i){ if(!i) return '<div class="cmk-c">—</div>'; var p=st[i-1][0]; var c=p?Math.round(100*x[0]/p):0;
+      return '<div class="cmk-c">konversi <b>'+c+'%</b></div>'; }).join('')+'</div>';
+    kb.innerHTML=h;
+  }
+  document.addEventListener('click', function(e){
+    var t=e.target;
+    if(t.closest && t.closest('#cm-tab-aktif')){ window.__CM_TAB='aktif'; window.__CM_OPEN=null; SAHA_RENDER_CM(); return; }
+    if(t.closest && t.closest('#cm-tab-arsip')){ window.__CM_TAB='arsip'; window.__CM_OPEN=null; SAHA_RENDER_CM(); return; }
+    var sv=t.closest && t.closest('[data-save]');
+    if(sv){ var id=sv.getAttribute('data-save');
+      var f={status:(document.getElementById('cm-e-status')||{}).value, tgl_kontak:(document.getElementById('cm-e-tgl')||{}).value||'', pj:(document.getElementById('cm-e-pj')||{}).value||'', catatan:(document.getElementById('cm-e-cat')||{}).value||''};
+      if(window.SAHA_REF_SAVE) window.SAHA_REF_SAVE(id,f); return; }
+    var ar=t.closest && t.closest('[data-arch]');
+    if(ar){ if(window.SAHA_REF_ARCH) window.SAHA_REF_ARCH(ar.getAttribute('data-arch')); window.__CM_OPEN=null; return; }
+    if(t.closest && t.closest('.cm-edit')) return;
+    var row=t.closest && t.closest('.cm-row');
+    if(row){ var rid=row.getAttribute('data-id'); window.__CM_OPEN=(window.__CM_OPEN===rid?null:rid); SAHA_RENDER_CM(); return; }
+  });
+  var iq=document.getElementById('cm-q');
+  if(iq) iq.addEventListener('input', function(){ try{SAHA_RENDER_CM();}catch(e){} });
+  /* ikut chain rumah: re-render tiap __SAHA_ALL berubah (utk kaskade S1) */
+  var prev=window.SAHA_RENDER_HOUSES;
+  window.SAHA_RENDER_HOUSES=function(){ if(prev){ try{prev();}catch(e){} } try{ if(document.getElementById('cm-list')) SAHA_RENDER_CM(); }catch(e){} };
 })();
 </script>
 </body>
