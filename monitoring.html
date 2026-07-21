@@ -907,6 +907,18 @@
   .hiv-meter-legend{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-size:12px;color:#3f3a36;margin-top:12px;}
   .hiv-meter-legend b{color:#6b2a44;font-size:15px;}
   .hiv-meter-legend .gap{color:#7d2433;font-weight:700;}
+  .hiv-worktitle{font-weight:800;color:#6b2a44;font-size:15px;margin:20px 0 8px;}
+  .hiv-cnt{font-size:12px;font-weight:600;color:#6f6660;margin-left:6px;}
+  #hiv-syncbar{margin-top:12px;}
+  .hiv-syncbtn{background:#6b2a44;color:#fff;border:0;border-radius:10px;padding:9px 14px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;}
+  .hiv-syncbtn:disabled{background:#e9ece1;color:#5f6e52;cursor:default;}
+  .hiv-st{display:inline-block;font-weight:800;font-size:10.5px;padding:3px 9px;border-radius:20px;white-space:nowrap;}
+  tr.hiv-row{cursor:pointer;} tr.hiv-row:hover td{background:#f4e8ef;}
+  .hiv-edit{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;padding:14px 4px 6px;}
+  .hiv-edit .full{grid-column:1/-1;}
+  .hiv-edit label{display:block;font-size:10.5px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:#6f6660;margin-bottom:3px;}
+  .hiv-edit select,.hiv-edit textarea{width:100%;padding:9px 11px;border:1.5px solid #e7ddd3;border-radius:9px;background:#fbf7f2;font:inherit;font-size:13.5px;box-sizing:border-box;}
+  .hiv-ebtns{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap;margin-top:2px;}
   .me-vchart{display:flex;align-items:flex-end;gap:6px;height:170px;padding:18px 2px 0;}
   .me-vcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;}
   .me-vv{font-size:10.5px;font-weight:800;margin-bottom:4px;white-space:nowrap;color:var(--navy,#2c2724);}
@@ -945,7 +957,7 @@
     <div class="brand">
       <div class="logo">Sadar Hati Foundation</div>
       <div class="est">est. 2002 · Malang</div>
-      <div class="system-tag">Integrated Hub v0.80 · Yayasan Sadar Hati</div>
+      <div class="system-tag">Integrated Hub v0.81 · Yayasan Sadar Hati</div>
     </div>
 
         <nav class="nav">
@@ -1010,7 +1022,7 @@
           akses sesuai role akun
         </div>
       </div>
-      <div>v0.80 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
+      <div>v0.81 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
     <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#2f6d9e,#1f4a6e);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
@@ -1764,17 +1776,21 @@
         <div id="hiv-guard"></div>
         <div id="hiv-body" style="display:none;">
           <div class="hiv-note">🔒 <strong>Data paling sensitif — status HIV.</strong> Identitas dibatasi ID KD + julukan; akses role-gated (Admin · M&amp;E · Direktur · Program Manager). Mohon tidak menampilkan layar ini di ruang publik.</div>
-          <div class="cards" id="hiv-kpis"></div>
-          <div id="hiv-cascade"></div>
-          <div class="me-grid" id="hiv-charts"></div>
-          <div class="hiv-listhead">
-            <span class="hiv-listtitle">📋 Daftar Tindak Lanjut — Reaktif yang belum ter-link ARV</span>
-            <input class="cm-q" id="hiv-q" placeholder="🔎 cari ID KD / julukan / kota / PL…">
-            <span id="hiv-count" style="font-size:12px;color:#6f6660;"></span>
+          <div id="hiv-oversight">
+            <div class="cards" id="hiv-kpis"></div>
+            <div id="hiv-cascade"></div>
+            <div class="me-grid" id="hiv-charts"></div>
+            <div id="hiv-syncbar"></div>
           </div>
-          <div class="me-rawhint">💡 Ini dasar kerja linkage: kejar tiap orang di sini agar mulai ARV. Kolom Keswa / Asesmen Jiwa = pintu masuk dukungan psikososial.</div>
-          <div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>ID KD</th><th>Julukan</th><th>Wilayah</th><th>PL</th><th>Tahun Aktif</th><th>Keswa</th><th>Asesmen Jiwa</th></tr></thead><tbody id="hiv-listbody"><tr><td colspan="7" style="padding:14px;color:#a89f97;">Memuat…</td></tr></tbody></table></div>
-          <div class="source-attr" style="margin-top:18px;">📄 Sumber: roster M&amp;E (koleksi <code>clients</code>), kumulatif. "Belum ARV" = Hasil HIV <strong>Reaktif</strong> &amp; Akses ARV belum tercatat. Identitas terbatas julukan + ID KD; akses role-gated. Untuk pengetatan server-side (rules v9) — koordinasi dengan Adib.</div>
+          <div class="hiv-worktitle">📋 Antrian Kerja — Linkage ARV <span id="hiv-count" class="hiv-cnt"></span></div>
+          <div class="cm-tabs">
+            <div class="cm-tab on" id="hiv-tab-aktif">Aktif</div>
+            <div class="cm-tab" id="hiv-tab-arsip">Arsip</div>
+            <input class="cm-q" id="hiv-q" placeholder="🔎 cari ID KD / julukan / kota / PL…">
+          </div>
+          <div class="me-rawhint">💡 Klik satu baris untuk mengubah status linkage. "Mulai ARV" = tujuan tercapai (pindah ke Arsip). Kolom Keswa / Jiwa = pintu dukungan psikososial.</div>
+          <div id="hiv-list"><div class="cm-empty">Memuat antrian…</div></div>
+          <div class="source-attr" style="margin-top:18px;">📄 Antrian dari koleksi <code>hiv_cases</code> (hanya dampingan yang ditarik ke Case Management) — <strong>bukan seluruh roster</strong>. Kaskade &amp; sebaran di atas dihitung dari roster (khusus Admin/M&amp;E/Direktur/PM). Identitas terbatas julukan + ID KD; akses role-gated.</div>
         </div>
       </section>
 
@@ -2498,6 +2514,30 @@ function updateBreadcrumb(item) {
     catch(e){ const c=String(e.code||e.message||''); let t='Gagal: '+c; if(c.indexOf('wrong-password')>=0||c.indexOf('invalid-cred')>=0) t='Password sekarang salah.'; else if(c.indexOf('weak-password')>=0) t='Password baru terlalu lemah (min. 6 karakter).'; else if(c.indexOf('too-many-requests')>=0) t='Terlalu banyak percobaan, coba lagi nanti.'; if(m){m.style.color='#a83244';m.textContent=t;} }
     finally{ sv.disabled=false; sv.textContent='Simpan'; }
   });
+  /* === HIV CASE MANAGEMENT (v0.81) — feeder hiv_cases + aksi === */
+  let __hivSub=null;
+  onAuthStateChanged(auth, u=>{
+    if(u && !__hivSub){
+      __hivSub=onSnapshot(collection(db,'hiv_cases'), snap=>{ const H=[]; snap.forEach(d=>{ const v=d.data(); v.__id=d.id; H.push(v); }); window.__SAHA_HIVCASES=H; if(window.SAHA_RENDER_HIV){ try{ SAHA_RENDER_HIV(); }catch(e){} } }, err=>{ window.__SAHA_HIVCASES=[]; window.__SAHA_HIV_ERR=(err&&(err.code||err.message)); if(window.SAHA_RENDER_HIV){ try{ SAHA_RENDER_HIV(); }catch(e){} } });
+    }
+    if(!u){ window.__SAHA_HIVCASES=null; if(window.SAHA_RENDER_HIV){ try{ SAHA_RENDER_HIV(); }catch(e){} } }
+  });
+  window.SAHA_HIV_SAVE = async function(id, f){
+    try{ const u=auth.currentUser; if(!u){ alert('Login dulu.'); return; }
+      const ref=doc(db,'hiv_cases',id); const cur=await getDoc(ref); if(!cur.exists()){ alert('Kasus tidak ditemukan.'); return; }
+      const now=new Date().toISOString(); f.updated_at=now; f.updated_by=(u.email||'');
+      const h=(cur.data().history||[]).slice(); if(f.status && f.status!==cur.data().status) h.push({t:now,status:f.status,by:f.updated_by}); f.history=h;
+      await updateDoc(ref,f);
+    }catch(e){ alert('Gagal simpan: '+(e.code||e.message)+'\n(Bila permission-denied: rules v9 belum aktif.)'); }
+  };
+  window.SAHA_HIV_SYNC = async function(list){
+    try{ const u=auth.currentUser; if(!u){ alert('Login dulu.'); return; }
+      const have={}; (window.__SAHA_HIVCASES||[]).forEach(function(r){ if(r.idkd) have[r.idkd]=1; });
+      let n=0; for(const x of (list||[])){ if(!x.idkd || have[x.idkd]) continue; const ref=doc(collection(db,'hiv_cases')); const now=new Date().toISOString();
+        await setDoc(ref,{ julukan:x.julukan||'', idkd:x.idkd, wilayah:x.wilayah||'', pl:x.pl||'', tahun:x.tahun||'', keswa:!!x.keswa, mh:!!x.mh, status:'baru', pj:'', catatan:'', archived:false, source:'sinkron '+now.slice(0,10), created_at:now, updated_at:now, updated_by:(u.email||''), history:[{t:now,status:'baru',by:(u.email||'')}] }); have[x.idkd]=1; n++; }
+      alert(n? ('\u2713 '+n+' kasus baru ditambahkan ke antrian.') : 'Antrian sudah sinkron — tidak ada kasus baru.');
+    }catch(e){ alert('Gagal sinkron: '+(e.code||e.message)); }
+  };
   const gateBtn=$('saha-login-btn');
   if(gateBtn){
     gateBtn.addEventListener('click', async ()=>{ const err=$('saha-login-err'); if(err)err.textContent=''; try{ await signInWithEmailAndPassword(auth, $('saha-email').value.trim(), $('saha-pass').value); }catch(e){ if(err)err.textContent='Login gagal: '+(e.code||e.message||''); } });
@@ -3828,44 +3868,84 @@ tr.me-rawclick{cursor:pointer;}
   function bars(rows){var mx=Math.max.apply(null,rows.map(function(r){return r[1];}).concat([1]));return rows.map(function(r){return '<div class="hiv-bar"><span class="nm" title="'+esc(r[0])+'">'+esc(r[0])+'</span><span class="track"><span class="fill" style="width:'+Math.round(r[1]/mx*100)+'%"></span></span><span class="n">'+r[1]+'</span></div>';}).join('')||'<div style="font-size:12px;color:#6f6660;">—</div>';}
   function card(l,v,d){return '<div class="card"><div class="label">'+l+'</div><div class="value">'+v+'</div><div class="desc">'+esc(d)+'</div></div>';}
   function cardHi(l,v,d){return '<div class="card" style="background:linear-gradient(135deg,var(--clay,#a83244),var(--clay-deep,#7d2433));border-color:var(--clay-deep,#7d2433);"><div class="label" style="color:#fff;opacity:.85;">'+l+'</div><div class="value" style="color:#fff;">'+v+'</div><div class="desc" style="color:#fff;opacity:.82;">'+esc(d)+'</div></div>';}
-  function renderList(belum){
-    var tb=document.getElementById('hiv-listbody'); if(!tb) return;
-    var qi=document.getElementById('hiv-q'); var q=(qi&&qi.value||'').toLowerCase();
-    var rows=belum.filter(function(x){ if(!q) return true; return ((x.ID_KD||'')+' '+(x.Nama_Panggilan||'')+' '+(x.Kab_Kota||'')+' '+(x.PL_Utama||'')).toLowerCase().indexOf(q)>=0; });
-    var cnt=document.getElementById('hiv-count'); if(cnt) cnt.textContent=rows.length+' orang';
-    tb.innerHTML=rows.length?rows.map(function(x){
-      return '<tr><td style="font-weight:700;color:#6b2a44;white-space:nowrap;">'+esc(maskId(x.ID_KD))+'</td><td>'+esc(x.Nama_Panggilan||'-')+'</td><td>'+esc(x.Kab_Kota||'-')+'</td><td>'+esc(x.PL_Utama||'-')+'</td><td>'+esc(x.Tahun_Aktif||'-')+'</td><td style="text-align:center;">'+(tru(x.Akses_Keswa)?'✓':'–')+'</td><td style="text-align:center;">'+(tru(x.MH_Assessment)?'✓':'–')+'</td></tr>';
-    }).join(''):'<tr><td colspan="7" style="padding:14px;color:#6f6660;">Tidak ada yang cocok pencarian.</td></tr>';
+  var HSTL={baru:'Baru',dikontak:'Dikontak',dijadwalkan:'Dijadwalkan',mulai_arv:'Mulai ARV',batal:'Dibatalkan'};
+  var HSTCOL={baru:['#f3eef7','#4e3859'],dikontak:['#eef4fa','#2f6d9e'],dijadwalkan:['#f3e0d3','#9a5c26'],mulai_arv:['#e9ece1','#4f5f43'],batal:['#f1ede8','#7a746e']};
+  function stBadge(s){ var c=HSTCOL[s]||HSTCOL.baru; return '<span class="hiv-st" style="background:'+c[0]+';color:'+c[1]+';">'+(HSTL[s]||s||'-')+'</span>'; }
+  var HPJ=['','Case Manager','Konselor Adiksi','Psikolog','PL: Reno','PL: Aris','PL: Husen','PL: Nuri','PL: Hanim'];
+  function renderWork(){
+    var box=document.getElementById('hiv-list'); if(!box) return;
+    var H=window.__SAHA_HIVCASES;
+    if(H==null){ box.innerHTML=window.__SAHA_HIV_ERR?('<div class="cm-empty">\u26a0\ufe0f Gagal memuat antrian: '+esc(window.__SAHA_HIV_ERR)+' (bila permission-denied: rules v9 belum aktif).</div>'):'<div class="cm-empty">Memuat antrian\u2026</div>'; return; }
+    var q=(document.getElementById('hiv-q')&&document.getElementById('hiv-q').value||'').toLowerCase();
+    var act=H.filter(function(r){return !r.archived;}), arc=H.filter(function(r){return !!r.archived;});
+    var tab=window.__HIV_TAB||'aktif';
+    var ta=document.getElementById('hiv-tab-aktif'), tr=document.getElementById('hiv-tab-arsip');
+    if(ta){ ta.textContent='Aktif ('+act.length+')'; ta.className='cm-tab'+(tab==='aktif'?' on':''); }
+    if(tr){ tr.textContent='Arsip ('+arc.length+')'; tr.className='cm-tab'+(tab==='arsip'?' on':''); }
+    var cnt=document.getElementById('hiv-count'); if(cnt) cnt.textContent=act.length+' aktif \u00b7 '+arc.length+' arsip';
+    var rows=(tab==='arsip'?arc:act).slice();
+    if(q) rows=rows.filter(function(r){ return ((r.julukan||'')+' '+(r.idkd||'')+' '+(r.wilayah||'')+' '+(r.pl||'')).toLowerCase().indexOf(q)>=0; });
+    rows.sort(function(a,b){ return String(a.status||'').localeCompare(String(b.status||''))||String(a.wilayah||'').localeCompare(String(b.wilayah||'')); });
+    if(!rows.length){ box.innerHTML='<div class="cm-empty">'+(tab==='arsip'?'Arsip masih kosong.':'Antrian kosong.')+'</div>'; return; }
+    var h='<div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>ID KD</th><th>Julukan</th><th>Wilayah</th><th>PL</th><th>Keswa</th><th>Jiwa</th><th>Status</th><th></th></tr></thead><tbody>';
+    rows.forEach(function(r){
+      var op=(window.__HIV_OPEN===r.__id);
+      h+='<tr class="hiv-row" data-hid="'+esc(r.__id)+'"><td style="font-weight:700;color:#6b2a44;white-space:nowrap;">'+esc(maskId(r.idkd))+'</td><td>'+esc(r.julukan||'-')+'</td><td>'+esc(r.wilayah||'-')+'</td><td>'+esc(r.pl||'-')+'</td><td style="text-align:center;">'+(r.keswa?'\u2713':'\u2013')+'</td><td style="text-align:center;">'+(r.mh?'\u2713':'\u2013')+'</td><td>'+stBadge(r.status||'baru')+'</td><td style="text-align:right;font-weight:800;color:#6b4d7a;">'+(op?'\u25b4':'\u25be')+'</td></tr>';
+      if(op){
+        h+='<tr class="hiv-editrow"><td colspan="8" style="background:#faf7f2;"><div class="hiv-edit">'
+          +'<div><label>Status linkage</label><select id="hiv-e-status">'+['baru','dikontak','dijadwalkan','mulai_arv','batal'].map(function(x){return '<option value="'+x+'"'+(r.status===x?' selected':'')+'>'+({baru:'Baru',dikontak:'Dikontak',dijadwalkan:'Dijadwalkan ke layanan ARV',mulai_arv:'Mulai ARV (selesai)',batal:'Batalkan (salah input)'})[x]+'</option>';}).join('')+'</select></div>'
+          +'<div><label>Penanggung jawab</label><select id="hiv-e-pj">'+HPJ.map(function(p){return '<option'+(r.pj===p?' selected':'')+'>'+(p||'\u2014 pilih \u2014')+'</option>';}).join('')+'</select></div>'
+          +'<div class="full"><label>Catatan linkage (internal)</label><textarea id="hiv-e-cat" rows="2">'+esc(r.catatan||'')+'</textarea></div>'
+          +'<div class="hiv-ebtns"><button class="cm-btn cm-save" data-hsave="'+esc(r.__id)+'">\ud83d\udcbe Simpan</button>'+(r.archived?'':'<button class="cm-btn cm-arch" data-harv="'+esc(r.__id)+'">\u2705 Mulai ARV \u2014 selesai</button><button class="cm-btn cm-cancel" data-hbatal="'+esc(r.__id)+'">\u2716 Batalkan</button>')+'</div>'
+          +'</div></td></tr>';
+      }
+    });
+    h+='</tbody></table></div>';
+    box.innerHTML=h;
   }
+  /* listener sekali */
+  document.addEventListener('click', function(e){
+    var t=e.target;
+    var sv=t.closest&&t.closest('[data-hsave]'); if(sv){ var id=sv.getAttribute('data-hsave'); var st=document.getElementById('hiv-e-status').value, pj=document.getElementById('hiv-e-pj').value, cat=document.getElementById('hiv-e-cat').value; if(window.SAHA_HIV_SAVE) SAHA_HIV_SAVE(id,{status:st,pj:pj,catatan:cat,archived:(st==='mulai_arv'||st==='batal')}); window.__HIV_OPEN=null; return; }
+    var av=t.closest&&t.closest('[data-harv]'); if(av){ if(window.SAHA_HIV_SAVE) SAHA_HIV_SAVE(av.getAttribute('data-harv'),{status:'mulai_arv',archived:true}); window.__HIV_OPEN=null; return; }
+    var bt=t.closest&&t.closest('[data-hbatal]'); if(bt){ if(confirm('Batalkan kasus ini (salah input)? Akan pindah ke Arsip.')&&window.SAHA_HIV_SAVE) SAHA_HIV_SAVE(bt.getAttribute('data-hbatal'),{status:'batal',archived:true}); window.__HIV_OPEN=null; return; }
+    var sy=t.closest&&t.closest('#hiv-syncbtn'); if(sy){ if(window.SAHA_HIV_SYNC) SAHA_HIV_SYNC(window.__HIV_BELUM||[]); return; }
+    var row=t.closest&&t.closest('.hiv-row'); if(row){ var hid=row.getAttribute('data-hid'); window.__HIV_OPEN=(window.__HIV_OPEN===hid?null:hid); renderWork(); return; }
+    var tk=t.closest&&t.closest('#hiv-tab-aktif'); if(tk){ window.__HIV_TAB='aktif'; renderWork(); return; }
+    var tr2=t.closest&&t.closest('#hiv-tab-arsip'); if(tr2){ window.__HIV_TAB='arsip'; renderWork(); return; }
+  });
+  document.addEventListener('input', function(e){ if(e.target&&e.target.id==='hiv-q') renderWork(); });
   window.SAHA_RENDER_HIV=function(){
     var guard=document.getElementById('hiv-guard'), body=document.getElementById('hiv-body'); if(!guard||!body) return;
-    var role=window.SAHA_ROLE, can=(role==='admin'||role==='me'||role==='manager'||role==='pm'||role==='case_manager');
-    if(!can){ guard.style.display='block'; body.style.display='none'; guard.innerHTML='<div class="hiv-note">🔒 Halaman ini khusus <strong>Admin · M&amp;E · Direktur · Program Manager</strong>. Silakan login dengan akun yang sesuai.</div>'; return; }
-    var C=window.__SAHA_CLIENTS;
-    if(C==null){ guard.style.display='block'; body.style.display='none'; guard.innerHTML=window.__SAHA_CLIENTS_ERR?('<div class="hiv-note">⚠️ Gagal memuat roster: '+esc(window.__SAHA_CLIENTS_ERR)+'. Coba buka lagi menu ini.</div>'):'<div class="hiv-note" style="background:#f3eef7;border-color:#6b4d7a;color:#4e3859;">⏳ Memuat data roster… buka lagi menu ini sebentar.</div>'; return; }
+    var role=window.SAHA_ROLE, oversight=(role==='admin'||role==='me'||role==='manager'||role==='pm'), can=oversight||role==='case_manager';
+    if(!can){ guard.style.display='block'; body.style.display='none'; guard.innerHTML='<div class="hiv-note">\ud83d\udd12 Halaman ini khusus <strong>Admin \u00b7 M&amp;E \u00b7 Direktur \u00b7 Program Manager \u00b7 Case Manager</strong>. Silakan login dengan akun yang sesuai.</div>'; return; }
     guard.style.display='none'; body.style.display='block';
-    var reaktif=C.filter(function(x){return reak(x.Hasil_HIV);});
-    var tested=C.filter(function(x){return tru(x.Tes_HIV_Program);}).length;
-    var arv=reaktif.filter(function(x){return tru(x.Akses_ARV);}).length;
-    var belum=reaktif.filter(function(x){return !tru(x.Akses_ARV);});
-    var pct=reaktif.length?Math.round(arv/reaktif.length*100):0;
-    var cov=reaktif.length?(arv/reaktif.length*100):0, covR=Math.round(cov), gapPct=Math.max(0,95-covR);
-    var cas=document.getElementById('hiv-cascade');
-    if(cas) cas.innerHTML='<div class="hiv-casc"><div class="hiv-casc-head"><h4>🎯 Kaskade Pengobatan HIV — Cakupan ARV</h4><span class="hiv-casc-sub">Dari <strong>'+reaktif.length+'</strong> dampingan Reaktif: <strong>'+arv+'</strong> sudah akses ARV, <strong>'+belum.length+'</strong> belum. Standar global <strong>UNAIDS 95%</strong> yang terdiagnosis semestinya sudah on-ARV.</span></div><div class="hiv-meter"><div class="hiv-meter-fill" style="width:'+covR+'%;"></div><div class="hiv-meter-target" style="left:95%;"><span>target 95%</span></div></div><div class="hiv-meter-legend"><span><b>'+covR+'%</b> cakupan ARV saat ini</span><span class="gap">masih '+gapPct+' poin di bawah target · '+belum.length+' orang perlu dikejar</span></div></div>';
-    document.getElementById('hiv-kpis').innerHTML=
-      card('Pernah Tes HIV',tested,'roster kumulatif')+
-      card('Reaktif (HIV+)',reaktif.length,'dari '+C.length+' dampingan')+
-      card('Sudah akses ARV',arv,pct+'% dari Reaktif')+
-      cardHi('Belum ter-link ARV',belum.length,'target tindak lanjut');
-    var byKota={},byPL={};
-    belum.forEach(function(x){var k=(x.Kab_Kota||'—');byKota[k]=(byKota[k]||0)+1;var p=(x.PL_Utama||'—');byPL[p]=(byPL[p]||0)+1;});
-    var kk=Object.keys(byKota).map(function(k){return [k,byKota[k]];}).sort(function(a,b){return b[1]-a[1];}).slice(0,6);
-    var pp=Object.keys(byPL).map(function(k){return [k,byPL[k]];}).sort(function(a,b){return b[1]-a[1];}).slice(0,8);
-    document.getElementById('hiv-charts').innerHTML=
-      '<div class="me-cc c1"><div class="me-chead"><h4>🗺️ Belum ARV per Wilayah</h4></div><div class="me-cwhat">Di mana dampingan Reaktif yang belum ter-link ARV paling menumpuk — prioritas penempatan pendampingan linkage.</div><div class="hiv-bars">'+bars(kk)+'</div></div>'+
-      '<div class="me-cc c2"><div class="me-chead"><h4>👷 Belum ARV per PL</h4></div><div class="me-cwhat">PL dengan beban follow-up linkage terbanyak — dasar pembagian tugas pendampingan.</div><div class="hiv-bars">'+bars(pp)+'</div></div>';
-    renderList(belum);
-    var qi=document.getElementById('hiv-q'); if(qi&&!qi.dataset.w){ qi.dataset.w='1'; qi.addEventListener('input',function(){renderList(belum);}); }
+    var ov=document.getElementById('hiv-oversight');
+    if(oversight){
+      var C=window.__SAHA_CLIENTS;
+      if(ov) ov.style.display='block';
+      if(C==null){ if(document.getElementById('hiv-kpis')) document.getElementById('hiv-kpis').innerHTML='<div class="cm-empty" style="grid-column:1/-1;">\u23f3 Memuat ringkasan roster\u2026</div>'; }
+      else {
+        var reaktif=C.filter(function(x){return reak(x.Hasil_HIV);});
+        var tested=C.filter(function(x){return tru(x.Tes_HIV_Program);}).length;
+        var arvN=reaktif.filter(function(x){return tru(x.Akses_ARV);}).length;
+        var belum=reaktif.filter(function(x){return !tru(x.Akses_ARV);});
+        var pct=reaktif.length?Math.round(arvN/reaktif.length*100):0, covR=pct, gapPct=Math.max(0,95-covR);
+        window.__HIV_BELUM=belum.map(function(x){return {julukan:x.Nama_Panggilan||'',idkd:x.ID_KD||'',wilayah:x.Kab_Kota||'',pl:x.PL_Utama||'',tahun:x.Tahun_Aktif||'',keswa:tru(x.Akses_Keswa),mh:tru(x.MH_Assessment)};});
+        var casEl=document.getElementById('hiv-cascade');
+        if(casEl) casEl.innerHTML='<div class="hiv-casc"><div class="hiv-casc-head"><h4>\ud83c\udfaf Kaskade Pengobatan HIV \u2014 Cakupan ARV</h4><span class="hiv-casc-sub">Dari <strong>'+reaktif.length+'</strong> dampingan Reaktif: <strong>'+arvN+'</strong> sudah akses ARV, <strong>'+belum.length+'</strong> belum. Standar global <strong>UNAIDS 95%</strong> yang terdiagnosis semestinya sudah on-ARV.</span></div><div class="hiv-meter"><div class="hiv-meter-fill" style="width:'+covR+'%;"></div><div class="hiv-meter-target" style="left:95%;"><span>target 95%</span></div></div><div class="hiv-meter-legend"><span><b>'+covR+'%</b> cakupan ARV saat ini</span><span class="gap">masih '+gapPct+' poin di bawah target \u00b7 '+belum.length+' orang perlu dikejar</span></div></div>';
+        document.getElementById('hiv-kpis').innerHTML=card('Pernah Tes HIV',tested,'roster kumulatif')+card('Reaktif (HIV+)',reaktif.length,'dari '+C.length+' dampingan')+card('Sudah akses ARV',arvN,pct+'% dari Reaktif')+cardHi('Belum ter-link ARV',belum.length,'target tindak lanjut');
+        var byKota={},byPL={}; belum.forEach(function(x){var k=(x.Kab_Kota||'\u2014');byKota[k]=(byKota[k]||0)+1;var p=(x.PL_Utama||'\u2014');byPL[p]=(byPL[p]||0)+1;});
+        var kk=Object.keys(byKota).map(function(k){return [k,byKota[k]];}).sort(function(a,b){return b[1]-a[1];}).slice(0,6);
+        var pp=Object.keys(byPL).map(function(k){return [k,byPL[k]];}).sort(function(a,b){return b[1]-a[1];}).slice(0,8);
+        document.getElementById('hiv-charts').innerHTML='<div class="me-cc c1"><div class="me-chead"><h4>\ud83d\uddfa\ufe0f Belum ARV per Wilayah</h4></div><div class="me-cwhat">Di mana dampingan Reaktif yang belum ter-link ARV paling menumpuk \u2014 prioritas penempatan pendampingan linkage.</div><div class="hiv-bars">'+bars(kk)+'</div></div><div class="me-cc c2"><div class="me-chead"><h4>\ud83d\udc77 Belum ARV per PL</h4></div><div class="me-cwhat">PL dengan beban follow-up linkage terbanyak \u2014 dasar pembagian tugas pendampingan.</div><div class="hiv-bars">'+bars(pp)+'</div></div>';
+        var H=window.__SAHA_HIVCASES||[]; var have={}; H.forEach(function(r){ if(r.idkd) have[r.idkd]=1; });
+        var nBaru=window.__HIV_BELUM.filter(function(x){return x.idkd && !have[x.idkd];}).length;
+        var sb=document.getElementById('hiv-syncbar');
+        if(sb) sb.innerHTML='<button class="hiv-syncbtn" id="hiv-syncbtn"'+(nBaru?'':' disabled')+'>'+(nBaru?('\u2795 Sinkronkan '+nBaru+' kasus baru (belum-ARV) ke antrian'):'\u2713 Antrian sinkron dengan roster')+'</button>';
+      }
+    } else { if(ov) ov.style.display='none'; }
+    renderWork();
   };
 })();
 </script>
