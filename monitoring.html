@@ -919,6 +919,11 @@
   .hiv-edit label{display:block;font-size:10.5px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:#6f6660;margin-bottom:3px;}
   .hiv-edit select,.hiv-edit textarea{width:100%;padding:9px 11px;border:1.5px solid #e7ddd3;border-radius:9px;background:#fbf7f2;font:inherit;font-size:13.5px;box-sizing:border-box;}
   .hiv-ebtns{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap;margin-top:2px;}
+  .hiv-filters{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px;}
+  .hiv-fsel{padding:8px 11px;border:1.5px solid #e7ddd3;border-radius:9px;background:#fbf7f2;font:inherit;font-size:12.5px;color:#2c2724;cursor:pointer;max-width:210px;}
+  .hiv-fsel:focus{outline:none;border-color:#6b2a44;}
+  .hiv-freset{padding:8px 12px;border:1.5px solid #e7ddd3;border-radius:9px;background:#fff;font:inherit;font-size:12.5px;font-weight:700;color:#6b2a44;cursor:pointer;}
+  .hiv-freset:hover{background:#f4e8ef;}
   .me-vchart{display:flex;align-items:flex-end;gap:6px;height:170px;padding:18px 2px 0;}
   .me-vcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;}
   .me-vv{font-size:10.5px;font-weight:800;margin-bottom:4px;white-space:nowrap;color:var(--navy,#2c2724);}
@@ -957,7 +962,7 @@
     <div class="brand">
       <div class="logo">Sadar Hati Foundation</div>
       <div class="est">est. 2002 · Malang</div>
-      <div class="system-tag">Integrated Hub v0.81 · Yayasan Sadar Hati</div>
+      <div class="system-tag">Integrated Hub v0.82 · Yayasan Sadar Hati</div>
     </div>
 
         <nav class="nav">
@@ -1022,7 +1027,7 @@
           akses sesuai role akun
         </div>
       </div>
-      <div>v0.81 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
+      <div>v0.82 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
     <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#2f6d9e,#1f4a6e);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
@@ -1787,6 +1792,13 @@
             <div class="cm-tab on" id="hiv-tab-aktif">Aktif</div>
             <div class="cm-tab" id="hiv-tab-arsip">Arsip</div>
             <input class="cm-q" id="hiv-q" placeholder="🔎 cari ID KD / julukan / kota / PL…">
+          </div>
+          <div class="hiv-filters">
+            <select id="hiv-f-status" class="hiv-fsel"><option value="">Semua status</option></select>
+            <select id="hiv-f-pl" class="hiv-fsel"><option value="">Semua PL</option></select>
+            <select id="hiv-f-wil" class="hiv-fsel"><option value="">Semua wilayah</option></select>
+            <select id="hiv-f-pj" class="hiv-fsel"><option value="">Semua penanggung jawab</option></select>
+            <button id="hiv-f-reset" class="hiv-freset">↺ Reset</button>
           </div>
           <div class="me-rawhint">💡 Klik satu baris untuk mengubah status linkage. "Mulai ARV" = tujuan tercapai (pindah ke Arsip). Kolom Keswa / Jiwa = pintu dukungan psikososial.</div>
           <div id="hiv-list"><div class="cm-empty">Memuat antrian…</div></div>
@@ -3872,6 +3884,14 @@ tr.me-rawclick{cursor:pointer;}
   var HSTCOL={baru:['#f3eef7','#4e3859'],dikontak:['#eef4fa','#2f6d9e'],dijadwalkan:['#f3e0d3','#9a5c26'],mulai_arv:['#e9ece1','#4f5f43'],batal:['#f1ede8','#7a746e']};
   function stBadge(s){ var c=HSTCOL[s]||HSTCOL.baru; return '<span class="hiv-st" style="background:'+c[0]+';color:'+c[1]+';">'+(HSTL[s]||s||'-')+'</span>'; }
   var HPJ=['','Case Manager','Konselor Adiksi','Psikolog','PL: Reno','PL: Aris','PL: Husen','PL: Nuri','PL: Hanim'];
+  function hivDistinct(H,key){ var s={}; (H||[]).forEach(function(r){ var v=String(r[key]||'').trim(); if(v) s[v]=1; }); return Object.keys(s).sort(); }
+  function hivOpt(sel, vals, allLabel, noneLabel){ if(!sel) return; var cur=sel.value; var o='<option value="">'+allLabel+'</option>'; if(noneLabel) o+='<option value="__none">'+noneLabel+'</option>'; o+=vals.map(function(v){return '<option value="'+esc(v)+'">'+esc(v)+'</option>';}).join(''); sel.innerHTML=o; sel.value=cur; if(sel.value!==cur) sel.value=''; }
+  function hivFillFilters(H, tab){
+    hivOpt(document.getElementById('hiv-f-pl'), hivDistinct(H,'pl'), 'Semua PL');
+    hivOpt(document.getElementById('hiv-f-wil'), hivDistinct(H,'wilayah'), 'Semua wilayah');
+    hivOpt(document.getElementById('hiv-f-pj'), hivDistinct(H,'pj'), 'Semua penanggung jawab', 'Belum ditugaskan');
+    var st=document.getElementById('hiv-f-status'); if(st){ var cur=st.value; var opts=(tab==='arsip')?[['mulai_arv','Mulai ARV'],['batal','Dibatalkan']]:[['baru','Baru'],['dikontak','Dikontak'],['dijadwalkan','Dijadwalkan']]; st.innerHTML='<option value="">Semua status</option>'+opts.map(function(o){return '<option value="'+o[0]+'">'+o[1]+'</option>';}).join(''); st.value=cur; if(st.value!==cur) st.value=''; }
+  }
   function renderWork(){
     var box=document.getElementById('hiv-list'); if(!box) return;
     var H=window.__SAHA_HIVCASES;
@@ -3882,9 +3902,16 @@ tr.me-rawclick{cursor:pointer;}
     var ta=document.getElementById('hiv-tab-aktif'), tr=document.getElementById('hiv-tab-arsip');
     if(ta){ ta.textContent='Aktif ('+act.length+')'; ta.className='cm-tab'+(tab==='aktif'?' on':''); }
     if(tr){ tr.textContent='Arsip ('+arc.length+')'; tr.className='cm-tab'+(tab==='arsip'?' on':''); }
+    hivFillFilters(H, tab);
     var cnt=document.getElementById('hiv-count'); if(cnt) cnt.textContent=act.length+' aktif \u00b7 '+arc.length+' arsip';
     var rows=(tab==='arsip'?arc:act).slice();
     if(q) rows=rows.filter(function(r){ return ((r.julukan||'')+' '+(r.idkd||'')+' '+(r.wilayah||'')+' '+(r.pl||'')).toLowerCase().indexOf(q)>=0; });
+    var fpl=(document.getElementById('hiv-f-pl')||{}).value||'', fwil=(document.getElementById('hiv-f-wil')||{}).value||'', fpj=(document.getElementById('hiv-f-pj')||{}).value||'', fst=(document.getElementById('hiv-f-status')||{}).value||'';
+    if(fpl) rows=rows.filter(function(r){return String(r.pl||'')===fpl;});
+    if(fwil) rows=rows.filter(function(r){return String(r.wilayah||'')===fwil;});
+    if(fpj) rows=rows.filter(function(r){ return fpj==='__none'? !String(r.pj||'').trim() : String(r.pj||'')===fpj; });
+    if(fst) rows=rows.filter(function(r){return String(r.status||'')===fst;});
+    if(cnt&&(q||fpl||fwil||fpj||fst)) cnt.textContent=act.length+' aktif \u00b7 '+arc.length+' arsip \u00b7 '+rows.length+' cocok filter';
     rows.sort(function(a,b){ return String(a.status||'').localeCompare(String(b.status||''))||String(a.wilayah||'').localeCompare(String(b.wilayah||'')); });
     if(!rows.length){ box.innerHTML='<div class="cm-empty">'+(tab==='arsip'?'Arsip masih kosong.':'Antrian kosong.')+'</div>'; return; }
     var h='<div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>ID KD</th><th>Julukan</th><th>Wilayah</th><th>PL</th><th>Keswa</th><th>Jiwa</th><th>Status</th><th></th></tr></thead><tbody>';
@@ -3910,11 +3937,13 @@ tr.me-rawclick{cursor:pointer;}
     var av=t.closest&&t.closest('[data-harv]'); if(av){ if(window.SAHA_HIV_SAVE) SAHA_HIV_SAVE(av.getAttribute('data-harv'),{status:'mulai_arv',archived:true}); window.__HIV_OPEN=null; return; }
     var bt=t.closest&&t.closest('[data-hbatal]'); if(bt){ if(confirm('Batalkan kasus ini (salah input)? Akan pindah ke Arsip.')&&window.SAHA_HIV_SAVE) SAHA_HIV_SAVE(bt.getAttribute('data-hbatal'),{status:'batal',archived:true}); window.__HIV_OPEN=null; return; }
     var sy=t.closest&&t.closest('#hiv-syncbtn'); if(sy){ if(window.SAHA_HIV_SYNC) SAHA_HIV_SYNC(window.__HIV_BELUM||[]); return; }
+    var rs=t.closest&&t.closest('#hiv-f-reset'); if(rs){ ['hiv-f-status','hiv-f-pl','hiv-f-wil','hiv-f-pj'].forEach(function(id){var e2=document.getElementById(id); if(e2)e2.value='';}); var qb=document.getElementById('hiv-q'); if(qb)qb.value=''; renderWork(); return; }
     var row=t.closest&&t.closest('.hiv-row'); if(row){ var hid=row.getAttribute('data-hid'); window.__HIV_OPEN=(window.__HIV_OPEN===hid?null:hid); renderWork(); return; }
     var tk=t.closest&&t.closest('#hiv-tab-aktif'); if(tk){ window.__HIV_TAB='aktif'; renderWork(); return; }
     var tr2=t.closest&&t.closest('#hiv-tab-arsip'); if(tr2){ window.__HIV_TAB='arsip'; renderWork(); return; }
   });
   document.addEventListener('input', function(e){ if(e.target&&e.target.id==='hiv-q') renderWork(); });
+  document.addEventListener('change', function(e){ if(e.target&&/^hiv-f-/.test(e.target.id||'')) renderWork(); });
   window.SAHA_RENDER_HIV=function(){
     var guard=document.getElementById('hiv-guard'), body=document.getElementById('hiv-body'); if(!guard||!body) return;
     var role=window.SAHA_ROLE, oversight=(role==='admin'||role==='me'||role==='manager'||role==='pm'), can=oversight||role==='case_manager';
