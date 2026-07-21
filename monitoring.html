@@ -945,11 +945,11 @@
     <div class="brand">
       <div class="logo">Sadar Hati Foundation</div>
       <div class="est">est. 2002 · Malang</div>
-      <div class="system-tag">Integrated Hub v0.79 · Yayasan Sadar Hati</div>
+      <div class="system-tag">Integrated Hub v0.80 · Yayasan Sadar Hati</div>
     </div>
 
         <nav class="nav">
-      <div class="nav-layer expanded" data-zone="2B">
+      <div class="nav-layer expanded nav-md" data-zone="2B">
         <div class="nav-layer-header">
           <span class="zone-dot z2b"></span>
           <span class="nav-layer-title">MONITORING & DATA</span>
@@ -977,8 +977,6 @@
             </div>
           </div>
               <a class="nav-item" data-section="l2-clients"><span class="icon">👥</span> Clients Database</a>
-          <div class="nav-divider-label role-admin-only">Kelola &amp; Sistem</div>
-          <a class="nav-item role-admin-only" data-section="l2-admin"><span class="icon">🛡️</span> Panel Admin · Kelola Entry · Sistem</a>
         </div>
       </div>
       <div class="nav-layer expanded" data-zone="2B">
@@ -992,6 +990,16 @@
           <a class="nav-item" data-section="l2-hiv-cm"><span class="icon">🎗️</span> HIV · Linkage ARV</a>
         </div>
       </div>
+      <div class="nav-layer expanded role-admin-only" data-zone="2B">
+        <div class="nav-layer-header">
+          <span class="zone-dot z2b"></span>
+          <span class="nav-layer-title">KELOLA & SISTEM</span>
+          <span class="lock-ind" title="Khusus admin">🔒</span><span class="chevron">▶</span>
+        </div>
+        <div class="nav-layer-body">
+          <a class="nav-item" data-section="l2-admin"><span class="icon">🛡️</span> Panel Admin · Kelola Entry · Sistem</a>
+        </div>
+      </div>
     </nav>
 
     <div class="sidebar-footer">
@@ -1002,7 +1010,7 @@
           akses sesuai role akun
         </div>
       </div>
-      <div>v0.79 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
+      <div>v0.80 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
     <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#2f6d9e,#1f4a6e);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
@@ -1148,6 +1156,7 @@
         .l1-embed iframe { display:block; width:100%; height:78vh; min-height:620px; border:0; }
         /* ===== ROLE GATING (v0.22) ===== */
         body:not(.role-admin) .role-admin-only { display:none !important; }
+        body.role-cm .nav-md { display:none !important; }
         body.role-staff .role-me-up { display:none !important; }
         body.role-staff #lh-data { display:none !important; }
         body.role-staff #cf-panel { display:none !important; }
@@ -2499,7 +2508,7 @@ function updateBreadcrumb(item) {
   if($('lh-export')) $('lh-export').addEventListener('click', doExport);
   function sahaLock(){
     window.SAHA_AUTH=false;
-    window.SAHA_ROLE='staff'; document.body.classList.remove('role-admin','role-me','role-staff');
+    window.SAHA_ROLE='staff'; document.body.classList.remove('role-admin','role-me','role-staff','role-cm');
     const chip=document.getElementById('saha-rolechip'); if(chip){ chip.textContent='Staf'; chip.style.color=''; }
     document.body.classList.remove('saha-authed');
     document.querySelectorAll('[data-zone="2B"]').forEach(z=>z.classList.add('zone-locked'));
@@ -2576,11 +2585,20 @@ function updateBreadcrumb(item) {
   window.SAHA_ROLE='staff';
   function applyRoleUI(){
     const r=window.SAHA_ROLE;
-    document.body.classList.remove('role-admin','role-me','role-staff');
-    document.body.classList.add(r==='admin'?'role-admin':(r==='me'||r==='manager'||r==='pm')?'role-me':'role-staff');
+    document.body.classList.remove('role-admin','role-me','role-staff','role-cm');
+    document.body.classList.add(r==='admin'?'role-admin':(r==='me'||r==='manager'||r==='pm')?'role-me':(r==='case_manager')?'role-cm':'role-staff');
     const active=document.querySelector('.section.active');
-    if(active && ((active.id==='l2-admin'&&r!=='admin')||(active.id==='l1-loghari'&&!(r==='admin'||r==='me'||r==='manager'||r==='pm'))||(active.id==='l2-casemgmt'&&!(r==='admin'||r==='me'||r==='manager'||r==='pm'))||(active.id==='l2-hiv-cm'&&!(r==='admin'||r==='me'||r==='manager'||r==='pm')))){
-      const home=document.querySelector('.nav-item[data-section="l2-overview-program"]'); if(home) home.click();
+    const cmOk=(r==='admin'||r==='me'||r==='manager'||r==='pm'||r==='case_manager');
+    let bounce=false;
+    if(active){
+      if(active.id==='l2-admin'&&r!=='admin') bounce=true;
+      else if(active.id==='l1-loghari'&&!(r==='admin'||r==='me'||r==='manager'||r==='pm')) bounce=true;
+      else if((active.id==='l2-casemgmt'||active.id==='l2-hiv-cm')&&!cmOk) bounce=true;
+      else if(r==='case_manager'&&active.id!=='l2-casemgmt'&&active.id!=='l2-hiv-cm'&&active.id!=='l2b-login') bounce=true;
+    }
+    if(bounce){
+      const dest=(r==='case_manager')?'l2-casemgmt':'l2-overview-program';
+      const home=document.querySelector('.nav-item[data-section="'+dest+'"]'); if(home) home.click();
     }
     renderAdmin();
   }
@@ -2590,9 +2608,9 @@ function updateBreadcrumb(item) {
       const snap=await getDoc(doc(db,'roles',user.uid));
       if(snap.exists()){
         const r=(snap.data().role||'staff').toLowerCase();
-        const M={admin:['ADMIN','#7d2433','#f7e9ec'],manager:['DIREKTUR','#2f4256','#e3eaf1'],me:['M&E','#2f6d9e','#e7f0f7'],staff:['STAF','#7a746e','#f1ede8'],pm:['PROGRAM MANAGER','#5f3b50','#efe9f4']};
+        const M={admin:['ADMIN','#7d2433','#f7e9ec'],manager:['DIREKTUR','#2f4256','#e3eaf1'],me:['M&E','#2f6d9e','#e7f0f7'],staff:['STAF','#7a746e','#f1ede8'],pm:['PROGRAM MANAGER','#5f3b50','#efe9f4'],case_manager:['CASE MANAGER','#1f4a6e','#e7f0f7']};
         const m=M[r]||M.staff; if(badge){ badge.textContent=m[0]+(snap.data().nama?' · '+snap.data().nama:''); badge.style.color=m[1]; badge.style.background=m[2]; }
-        const chip=document.getElementById('saha-rolechip'); if(chip){ chip.textContent=(r==='me')?'M&E':(r==='manager')?'Direktur':(r==='pm')?'Program Manager':(m[0].charAt(0)+m[0].slice(1).toLowerCase()); chip.style.fontWeight='800'; chip.style.color=m[1]; }
+        const chip=document.getElementById('saha-rolechip'); if(chip){ chip.textContent=(r==='me')?'M&E':(r==='manager')?'Direktur':(r==='pm')?'Program Manager':(r==='case_manager')?'Case Manager':(m[0].charAt(0)+m[0].slice(1).toLowerCase()); chip.style.fontWeight='800'; chip.style.color=m[1]; }
         window.SAHA_ROLE=r; applyRoleUI();
       } else { if(badge) badge.textContent='Staf (default — dok roles belum dibuat)'; const chip=document.getElementById('saha-rolechip'); if(chip){ chip.textContent='Staf'; chip.style.color=''; } window.SAHA_ROLE='staff'; applyRoleUI(); }
     }catch(e){ if(badge) badge.textContent='Staf (default — rule roles belum di-apply)'; window.SAHA_ROLE='staff'; applyRoleUI(); }
@@ -3821,7 +3839,7 @@ tr.me-rawclick{cursor:pointer;}
   }
   window.SAHA_RENDER_HIV=function(){
     var guard=document.getElementById('hiv-guard'), body=document.getElementById('hiv-body'); if(!guard||!body) return;
-    var role=window.SAHA_ROLE, can=(role==='admin'||role==='me'||role==='manager'||role==='pm');
+    var role=window.SAHA_ROLE, can=(role==='admin'||role==='me'||role==='manager'||role==='pm'||role==='case_manager');
     if(!can){ guard.style.display='block'; body.style.display='none'; guard.innerHTML='<div class="hiv-note">🔒 Halaman ini khusus <strong>Admin · M&amp;E · Direktur · Program Manager</strong>. Silakan login dengan akun yang sesuai.</div>'; return; }
     var C=window.__SAHA_CLIENTS;
     if(C==null){ guard.style.display='block'; body.style.display='none'; guard.innerHTML=window.__SAHA_CLIENTS_ERR?('<div class="hiv-note">⚠️ Gagal memuat roster: '+esc(window.__SAHA_CLIENTS_ERR)+'. Coba buka lagi menu ini.</div>'):'<div class="hiv-note" style="background:#f3eef7;border-color:#6b4d7a;color:#4e3859;">⏳ Memuat data roster… buka lagi menu ini sebentar.</div>'; return; }
@@ -3864,7 +3882,7 @@ tr.me-rawclick{cursor:pointer;}
   function firstT(r,st){ var h=r.history||[]; for(var i=0;i<h.length;i++){ if(h[i].status===st) return h[i].t; } return null; }
   window.SAHA_RENDER_CM = function(){
     var box=el('cm-list'); if(!box) return;
-    var role=window.SAHA_ROLE, can=(role==='admin'||role==='me'||role==='manager'||role==='pm');
+    var role=window.SAHA_ROLE, can=(role==='admin'||role==='me'||role==='manager'||role==='pm'||role==='case_manager');
     if(!can){ box.innerHTML='<div class="cm-empty">🔒 Login sebagai Admin / M&E / Direktur untuk memuat antrian.</div>'; el('cm-kpis').innerHTML=''; el('cm-kaskade').innerHTML=''; el('cm-p1banner').style.display='none';
       if(!window.__cmRoleRetry){ window.__cmRoleRetry=1; setTimeout(function(){ try{SAHA_RENDER_CM();}catch(e){} },1500); } return; }
     var R=window.__SAHA_REFS;
