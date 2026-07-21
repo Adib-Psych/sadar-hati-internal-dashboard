@@ -85,6 +85,9 @@
     text-transform: uppercase; font-weight: 600;
   }
 
+  .brand .page-now{margin-top:10px;font-size:11px;font-weight:800;letter-spacing:.4px;color:#fff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);border-radius:9px;padding:7px 10px;line-height:1.5;}
+  .brand .page-now .pn-sub{display:block;font-weight:600;opacity:.85;letter-spacing:.2px;font-size:10.5px;margin-top:2px;}
+
   .nav { flex: 1; padding: 12px 8px; }
   .nav-layer { margin-bottom: 8px; }
   .nav-layer-header {
@@ -118,6 +121,7 @@
     padding-left: 6px;
   }
   .nav-layer.expanded > .nav-items { display: block; }
+  .nav-layer:not(.expanded) > .nav-layer-body { display: none; }
   .nav-item {
     display: flex; align-items: center;
     padding: 7px 10px; cursor: pointer;
@@ -963,7 +967,8 @@
     <div class="brand">
       <div class="logo">Sadar Hati Foundation</div>
       <div class="est">est. 2002 · Malang</div>
-      <div class="system-tag">Integrated Hub v0.85 · Yayasan Sadar Hati</div>
+      <div class="system-tag">Integrated Hub v0.86 · Yayasan Sadar Hati</div>
+      <div class="page-now" id="page-now">📊 Monitoring &amp; Data</div>
     </div>
 
         <nav class="nav">
@@ -979,7 +984,7 @@
           <div class="donor-group expanded">
             <div class="donor-header">
               <span class="donor-name">📤 Output Form</span>
-              <span class="donor-badge">8 FORM</span><span class="chevron">▶</span>
+              <span class="donor-badge">10 FORM</span><span class="chevron">▶</span>
             </div>
             <div class="donor-sub-items">
               <a class="nav-item" data-section="l2-out-dast10"><span class="icon">💊</span> 2 · DAST-10 Napza</a>
@@ -997,7 +1002,7 @@
               <a class="nav-item" data-section="l2-clients"><span class="icon">👥</span> Clients Database</a>
         </div>
       </div>
-      <div class="nav-layer expanded" data-zone="2B">
+      <div class="nav-layer expanded nav-cm" data-zone="2B">
         <div class="nav-layer-header">
           <span class="zone-dot z2b"></span>
           <span class="nav-layer-title">CASE MANAGEMENT</span>
@@ -1028,7 +1033,7 @@
           akses sesuai role akun
         </div>
       </div>
-      <div>v0.85 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
+      <div>v0.86 · Yayasan Sadar Hati · Manrope + Lora · 21 Jul 2026</div>
     <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#2f6d9e,#1f4a6e);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
@@ -1175,6 +1180,9 @@
         /* ===== ROLE GATING (v0.22) ===== */
         body:not(.role-admin) .role-admin-only { display:none !important; }
         body.role-cm .nav-md { display:none !important; }
+        body:not(.ctx-cm):not(.role-cm) .nav-cm { display:none; }
+        body.ctx-cm .nav-md { display:none !important; }
+        body.ctx-cm .role-admin-only { display:none !important; }
         body.role-staff .role-me-up { display:none !important; }
         body.role-staff #lh-data { display:none !important; }
         body.role-staff #cf-panel { display:none !important; }
@@ -1706,10 +1714,10 @@
       <!-- ====== 2B · CASE MANAGEMENT — ANTRIAN KONSELING (v0.73) ====== -->
       <style id="cm-css">
         #l2-casemgmt .cm-alert1{display:none;gap:10px;align-items:center;background:var(--clay-light);border:1px solid #f2c9d2;border-radius:12px;padding:10px 14px;font-size:13px;font-weight:700;color:var(--clay-deep);margin:0 0 14px;}
-        #l2-casemgmt .cm-tabs{display:flex;gap:8px;margin:14px 0 12px;align-items:center;flex-wrap:wrap;}
-        #l2-casemgmt .cm-tab{padding:8px 16px;border-radius:999px;font-size:12.5px;font-weight:700;background:var(--cream);border:1px solid var(--line,#e7ddd3);color:var(--slate);cursor:pointer;}
-        #l2-casemgmt .cm-tab.on{background:var(--clay);border-color:var(--clay);color:#fff;}
-        #l2-casemgmt .cm-q{margin-left:auto;border:1px solid var(--line,#e7ddd3);border-radius:999px;padding:8px 14px;font-size:12.5px;min-width:220px;background:#fff;}
+        #l2-casemgmt .cm-tabs,#l2-hiv-cm .cm-tabs{display:flex;gap:8px;margin:14px 0 12px;align-items:center;flex-wrap:wrap;}
+        #l2-casemgmt .cm-tab,#l2-hiv-cm .cm-tab{padding:8px 16px;border-radius:999px;font-size:12.5px;font-weight:700;background:var(--cream);border:1px solid var(--line,#e7ddd3);color:var(--slate);cursor:pointer;}
+        #l2-casemgmt .cm-tab.on,#l2-hiv-cm .cm-tab.on{background:var(--clay);border-color:var(--clay);color:#fff;}
+        #l2-casemgmt .cm-q,#l2-hiv-cm .cm-q{margin-left:auto;border:1px solid var(--line,#e7ddd3);border-radius:999px;padding:8px 14px;font-size:12.5px;min-width:220px;background:#fff;}
         .cm-row{display:grid;grid-template-columns:60px 1.4fr 1.5fr .9fr .9fr 1fr 44px;gap:10px;align-items:center;border:1px solid var(--line,#e7ddd3);border-radius:14px;padding:11px 14px;margin-bottom:8px;background:#fffdfa;cursor:pointer;}
         .cm-row:hover{background:var(--cream);}
         .cm-row.p1row{border-color:#e7b9c4;background:#fdf3f5;}
@@ -1760,7 +1768,7 @@
           .cm-row>div:nth-child(n+3){grid-column:2;}
           .cm-edit{grid-template-columns:1fr;}
           .cmk-grid,.cmk-conv{grid-template-columns:repeat(3,1fr);}
-          #l2-casemgmt .cm-q{min-width:140px;}
+          #l2-casemgmt .cm-q,#l2-hiv-cm .cm-q{min-width:140px;}
         }
       </style>
       <section class="section" id="l2-casemgmt">
@@ -2387,6 +2395,7 @@ document.querySelectorAll('.donor-header').forEach(header => {
   });
 });
 
+window.SAHA_PAGENOW = function(isCM, txt){ var pn=document.getElementById('page-now'); if(!pn) return; pn.innerHTML=(isCM?'🗂️ Case Management':'📊 Monitoring &amp; Data')+(txt?'<span class="pn-sub">'+txt+'</span>':''); };
 // Nav item click (with 2B auth gate)
 function sahaSetActive(sectionId){
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -2399,6 +2408,8 @@ document.querySelectorAll('.nav-item').forEach(item => {
     e.stopPropagation();
     const sectionId = item.dataset.section;
     if (!sectionId) return;
+    const isCM = (sectionId==='l2-casemgmt'||sectionId==='l2-hiv-cm');
+    document.body.classList.toggle('ctx-cm', isCM);
     const zone2b = item.closest('[data-zone="2B"]');
     document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
     item.classList.add('active');
@@ -2407,10 +2418,12 @@ document.querySelectorAll('.nav-item').forEach(item => {
       sahaSetActive('l2b-login');
       document.getElementById('breadcrumb').innerHTML =
         '<span class="layer-tag zone2b">🔴 Layer 2B · Internal</span><span class="sep">/</span><span class="current">🔒 Login Staf diperlukan</span>';
+      SAHA_PAGENOW(isCM,'🔒 Login staf diperlukan');
       return;
     }
     sahaSetActive(sectionId);
     updateBreadcrumb(item);
+    SAHA_PAGENOW(isCM, item.innerText.trim());
   });
 });
 

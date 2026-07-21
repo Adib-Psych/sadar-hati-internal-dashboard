@@ -85,6 +85,9 @@
     text-transform: uppercase; font-weight: 600;
   }
 
+  .brand .page-now{margin-top:10px;font-size:11px;font-weight:800;letter-spacing:.4px;color:#fff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);border-radius:9px;padding:7px 10px;line-height:1.5;}
+  .brand .page-now .pn-sub{display:block;font-weight:600;opacity:.85;letter-spacing:.2px;font-size:10.5px;margin-top:2px;}
+
   .nav { flex: 1; padding: 12px 8px; }
   .nav-layer { margin-bottom: 8px; }
   .nav-layer-header {
@@ -118,6 +121,7 @@
     padding-left: 6px;
   }
   .nav-layer.expanded > .nav-items { display: block; }
+  .nav-layer:not(.expanded) > .nav-layer-body { display: none; }
   .nav-item {
     display: flex; align-items: center;
     padding: 7px 10px; cursor: pointer;
@@ -871,7 +875,8 @@
     <div class="brand">
       <div class="logo">Sadar Hati Foundation</div>
       <div class="est">est. 2002 · Malang</div>
-      <div class="system-tag">Integrated Hub v0.57 · Yayasan Sadar Hati</div>
+      <div class="system-tag">Integrated Hub v0.58 · Yayasan Sadar Hati</div>
+      <div class="page-now">🏛️ Profil Lembaga</div>
     </div>
 
         <nav class="nav">
@@ -925,7 +930,7 @@
           akses sesuai role akun
         </div>
       </div>
-      <div>v0.57 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
+      <div>v0.58 · Yayasan Sadar Hati · Manrope + Lora · 21 Jul 2026</div>
     <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#8a5a74,#5f3b50);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
