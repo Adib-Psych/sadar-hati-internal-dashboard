@@ -896,6 +896,17 @@
   .hiv-bar .track{flex:1;height:14px;background:#f0eaf4;border-radius:8px;overflow:hidden;}
   .hiv-bar .fill{display:block;height:100%;background:linear-gradient(90deg,#8a5a72,#5f3b50);border-radius:8px;}
   .hiv-bar .n{flex:0 0 34px;text-align:right;font-weight:800;color:#5f3b50;}
+  #hiv-charts{align-items:start;}
+  .hiv-casc{background:#fff;border:1px solid var(--line,#e7ddd3);border-radius:14px;padding:16px 18px;margin-top:13px;}
+  .hiv-casc-head h4{margin:0 0 2px;font-size:14.5px;color:#6b2a44;}
+  .hiv-casc-sub{font-size:11.5px;line-height:1.5;color:#6f6660;display:block;margin-bottom:13px;}
+  .hiv-meter{position:relative;height:26px;background:#f0eaf4;border-radius:13px;overflow:visible;margin:6px 0 4px;}
+  .hiv-meter-fill{height:100%;background:linear-gradient(90deg,#8a5a72,#6b2a44);border-radius:13px 4px 4px 13px;min-width:2px;transition:width .5s ease;}
+  .hiv-meter-target{position:absolute;top:-6px;bottom:-6px;width:0;border-left:2.5px dashed #2f6d9e;}
+  .hiv-meter-target span{position:absolute;top:-16px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:9.5px;font-weight:800;color:#2f6d9e;}
+  .hiv-meter-legend{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-size:12px;color:#3f3a36;margin-top:12px;}
+  .hiv-meter-legend b{color:#6b2a44;font-size:15px;}
+  .hiv-meter-legend .gap{color:#7d2433;font-weight:700;}
   .me-vchart{display:flex;align-items:flex-end;gap:6px;height:170px;padding:18px 2px 0;}
   .me-vcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;}
   .me-vv{font-size:10.5px;font-weight:800;margin-bottom:4px;white-space:nowrap;color:var(--navy,#2c2724);}
@@ -934,7 +945,7 @@
     <div class="brand">
       <div class="logo">Sadar Hati Foundation</div>
       <div class="est">est. 2002 · Malang</div>
-      <div class="system-tag">Integrated Hub v0.78 · Yayasan Sadar Hati</div>
+      <div class="system-tag">Integrated Hub v0.79 · Yayasan Sadar Hati</div>
     </div>
 
         <nav class="nav">
@@ -991,7 +1002,7 @@
           akses sesuai role akun
         </div>
       </div>
-      <div>v0.78 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
+      <div>v0.79 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
     <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#2f6d9e,#1f4a6e);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
@@ -1745,6 +1756,7 @@
         <div id="hiv-body" style="display:none;">
           <div class="hiv-note">🔒 <strong>Data paling sensitif — status HIV.</strong> Identitas dibatasi ID KD + julukan; akses role-gated (Admin · M&amp;E · Direktur · Program Manager). Mohon tidak menampilkan layar ini di ruang publik.</div>
           <div class="cards" id="hiv-kpis"></div>
+          <div id="hiv-cascade"></div>
           <div class="me-grid" id="hiv-charts"></div>
           <div class="hiv-listhead">
             <span class="hiv-listtitle">📋 Daftar Tindak Lanjut — Reaktif yang belum ter-link ARV</span>
@@ -3794,6 +3806,7 @@ tr.me-rawclick{cursor:pointer;}
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   function tru(v){return v===1||v==='1'||v===true||v==='Ya'||v==='ya'||v==='Sudah';}
   function reak(v){return String(v||'').trim().toLowerCase()==='reaktif';}
+  function maskId(id){ id=String(id||''); var m=id.match(/^(.*?)-(\d{4})-/); if(m) return m[1]+' \u00b7 '+m[2]; var p=id.split('-'); return p[0]||id||'-'; }
   function bars(rows){var mx=Math.max.apply(null,rows.map(function(r){return r[1];}).concat([1]));return rows.map(function(r){return '<div class="hiv-bar"><span class="nm" title="'+esc(r[0])+'">'+esc(r[0])+'</span><span class="track"><span class="fill" style="width:'+Math.round(r[1]/mx*100)+'%"></span></span><span class="n">'+r[1]+'</span></div>';}).join('')||'<div style="font-size:12px;color:#6f6660;">—</div>';}
   function card(l,v,d){return '<div class="card"><div class="label">'+l+'</div><div class="value">'+v+'</div><div class="desc">'+esc(d)+'</div></div>';}
   function cardHi(l,v,d){return '<div class="card" style="background:linear-gradient(135deg,var(--clay,#a83244),var(--clay-deep,#7d2433));border-color:var(--clay-deep,#7d2433);"><div class="label" style="color:#fff;opacity:.85;">'+l+'</div><div class="value" style="color:#fff;">'+v+'</div><div class="desc" style="color:#fff;opacity:.82;">'+esc(d)+'</div></div>';}
@@ -3803,7 +3816,7 @@ tr.me-rawclick{cursor:pointer;}
     var rows=belum.filter(function(x){ if(!q) return true; return ((x.ID_KD||'')+' '+(x.Nama_Panggilan||'')+' '+(x.Kab_Kota||'')+' '+(x.PL_Utama||'')).toLowerCase().indexOf(q)>=0; });
     var cnt=document.getElementById('hiv-count'); if(cnt) cnt.textContent=rows.length+' orang';
     tb.innerHTML=rows.length?rows.map(function(x){
-      return '<tr><td style="font-weight:700;color:#6b2a44;white-space:nowrap;">'+esc(x.ID_KD||'-')+'</td><td>'+esc(x.Nama_Panggilan||'-')+'</td><td>'+esc(x.Kab_Kota||'-')+'</td><td>'+esc(x.PL_Utama||'-')+'</td><td>'+esc(x.Tahun_Aktif||'-')+'</td><td style="text-align:center;">'+(tru(x.Akses_Keswa)?'✓':'–')+'</td><td style="text-align:center;">'+(tru(x.MH_Assessment)?'✓':'–')+'</td></tr>';
+      return '<tr><td style="font-weight:700;color:#6b2a44;white-space:nowrap;">'+esc(maskId(x.ID_KD))+'</td><td>'+esc(x.Nama_Panggilan||'-')+'</td><td>'+esc(x.Kab_Kota||'-')+'</td><td>'+esc(x.PL_Utama||'-')+'</td><td>'+esc(x.Tahun_Aktif||'-')+'</td><td style="text-align:center;">'+(tru(x.Akses_Keswa)?'✓':'–')+'</td><td style="text-align:center;">'+(tru(x.MH_Assessment)?'✓':'–')+'</td></tr>';
     }).join(''):'<tr><td colspan="7" style="padding:14px;color:#6f6660;">Tidak ada yang cocok pencarian.</td></tr>';
   }
   window.SAHA_RENDER_HIV=function(){
@@ -3818,6 +3831,9 @@ tr.me-rawclick{cursor:pointer;}
     var arv=reaktif.filter(function(x){return tru(x.Akses_ARV);}).length;
     var belum=reaktif.filter(function(x){return !tru(x.Akses_ARV);});
     var pct=reaktif.length?Math.round(arv/reaktif.length*100):0;
+    var cov=reaktif.length?(arv/reaktif.length*100):0, covR=Math.round(cov), gapPct=Math.max(0,95-covR);
+    var cas=document.getElementById('hiv-cascade');
+    if(cas) cas.innerHTML='<div class="hiv-casc"><div class="hiv-casc-head"><h4>🎯 Kaskade Pengobatan HIV — Cakupan ARV</h4><span class="hiv-casc-sub">Dari <strong>'+reaktif.length+'</strong> dampingan Reaktif: <strong>'+arv+'</strong> sudah akses ARV, <strong>'+belum.length+'</strong> belum. Standar global <strong>UNAIDS 95%</strong> yang terdiagnosis semestinya sudah on-ARV.</span></div><div class="hiv-meter"><div class="hiv-meter-fill" style="width:'+covR+'%;"></div><div class="hiv-meter-target" style="left:95%;"><span>target 95%</span></div></div><div class="hiv-meter-legend"><span><b>'+covR+'%</b> cakupan ARV saat ini</span><span class="gap">masih '+gapPct+' poin di bawah target · '+belum.length+' orang perlu dikejar</span></div></div>';
     document.getElementById('hiv-kpis').innerHTML=
       card('Pernah Tes HIV',tested,'roster kumulatif')+
       card('Reaktif (HIV+)',reaktif.length,'dari '+C.length+' dampingan')+
