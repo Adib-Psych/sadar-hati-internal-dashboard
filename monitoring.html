@@ -962,7 +962,7 @@
     <div class="brand">
       <div class="logo">Sadar Hati Foundation</div>
       <div class="est">est. 2002 · Malang</div>
-      <div class="system-tag">Integrated Hub v0.82 · Yayasan Sadar Hati</div>
+      <div class="system-tag">Integrated Hub v0.83 · Yayasan Sadar Hati</div>
     </div>
 
         <nav class="nav">
@@ -1027,7 +1027,7 @@
           akses sesuai role akun
         </div>
       </div>
-      <div>v0.82 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
+      <div>v0.83 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
     <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#2f6d9e,#1f4a6e);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
@@ -1798,6 +1798,9 @@
             <select id="hiv-f-pl" class="hiv-fsel"><option value="">Semua PL</option></select>
             <select id="hiv-f-wil" class="hiv-fsel"><option value="">Semua wilayah</option></select>
             <select id="hiv-f-pj" class="hiv-fsel"><option value="">Semua penanggung jawab</option></select>
+            <select id="hiv-f-thn" class="hiv-fsel"><option value="">Semua tahun</option></select>
+            <select id="hiv-f-psi" class="hiv-fsel"><option value="">Semua psikososial</option><option value="keswa0">Belum akses Keswa</option><option value="keswa1">Sudah akses Keswa</option><option value="mh0">Belum Asesmen Jiwa</option><option value="mh1">Sudah Asesmen Jiwa</option></select>
+            <select id="hiv-f-sla" class="hiv-fsel"><option value="">Semua umur antrian</option><option value="baru3">Baru &gt; 3 hari (lewat SLA)</option><option value="baru7">Baru &gt; 7 hari</option></select>
             <button id="hiv-f-reset" class="hiv-freset">↺ Reset</button>
           </div>
           <div class="me-rawhint">💡 Klik satu baris untuk mengubah status linkage. "Mulai ARV" = tujuan tercapai (pindah ke Arsip). Kolom Keswa / Jiwa = pintu dukungan psikososial.</div>
@@ -3890,6 +3893,7 @@ tr.me-rawclick{cursor:pointer;}
     hivOpt(document.getElementById('hiv-f-pl'), hivDistinct(H,'pl'), 'Semua PL');
     hivOpt(document.getElementById('hiv-f-wil'), hivDistinct(H,'wilayah'), 'Semua wilayah');
     hivOpt(document.getElementById('hiv-f-pj'), hivDistinct(H,'pj'), 'Semua penanggung jawab', 'Belum ditugaskan');
+    var yrs={}; (H||[]).forEach(function(r){ String(r.tahun||'').split(/[^0-9]+/).forEach(function(y){ if(/^20\d\d$/.test(y)) yrs[y]=1; }); }); hivOpt(document.getElementById('hiv-f-thn'), Object.keys(yrs).sort(), 'Semua tahun');
     var st=document.getElementById('hiv-f-status'); if(st){ var cur=st.value; var opts=(tab==='arsip')?[['mulai_arv','Mulai ARV'],['batal','Dibatalkan']]:[['baru','Baru'],['dikontak','Dikontak'],['dijadwalkan','Dijadwalkan']]; st.innerHTML='<option value="">Semua status</option>'+opts.map(function(o){return '<option value="'+o[0]+'">'+o[1]+'</option>';}).join(''); st.value=cur; if(st.value!==cur) st.value=''; }
   }
   function renderWork(){
@@ -3907,11 +3911,15 @@ tr.me-rawclick{cursor:pointer;}
     var rows=(tab==='arsip'?arc:act).slice();
     if(q) rows=rows.filter(function(r){ return ((r.julukan||'')+' '+(r.idkd||'')+' '+(r.wilayah||'')+' '+(r.pl||'')).toLowerCase().indexOf(q)>=0; });
     var fpl=(document.getElementById('hiv-f-pl')||{}).value||'', fwil=(document.getElementById('hiv-f-wil')||{}).value||'', fpj=(document.getElementById('hiv-f-pj')||{}).value||'', fst=(document.getElementById('hiv-f-status')||{}).value||'';
+    var fthn=(document.getElementById('hiv-f-thn')||{}).value||'', fpsi=(document.getElementById('hiv-f-psi')||{}).value||'', fsla=(document.getElementById('hiv-f-sla')||{}).value||'';
     if(fpl) rows=rows.filter(function(r){return String(r.pl||'')===fpl;});
     if(fwil) rows=rows.filter(function(r){return String(r.wilayah||'')===fwil;});
     if(fpj) rows=rows.filter(function(r){ return fpj==='__none'? !String(r.pj||'').trim() : String(r.pj||'')===fpj; });
     if(fst) rows=rows.filter(function(r){return String(r.status||'')===fst;});
-    if(cnt&&(q||fpl||fwil||fpj||fst)) cnt.textContent=act.length+' aktif \u00b7 '+arc.length+' arsip \u00b7 '+rows.length+' cocok filter';
+    if(fthn) rows=rows.filter(function(r){ return String(r.tahun||'').indexOf(fthn)>=0; });
+    if(fpsi) rows=rows.filter(function(r){ if(fpsi==='keswa0') return !r.keswa; if(fpsi==='keswa1') return !!r.keswa; if(fpsi==='mh0') return !r.mh; if(fpsi==='mh1') return !!r.mh; return true; });
+    if(fsla) rows=rows.filter(function(r){ if(String(r.status||'')!=='baru') return false; var ag=(Date.now()-new Date(r.created_at).getTime())/864e5; return fsla==='baru7'? ag>7 : ag>3; });
+    if(cnt&&(q||fpl||fwil||fpj||fst||fthn||fpsi||fsla)) cnt.textContent=act.length+' aktif \u00b7 '+arc.length+' arsip \u00b7 '+rows.length+' cocok filter';
     rows.sort(function(a,b){ return String(a.status||'').localeCompare(String(b.status||''))||String(a.wilayah||'').localeCompare(String(b.wilayah||'')); });
     if(!rows.length){ box.innerHTML='<div class="cm-empty">'+(tab==='arsip'?'Arsip masih kosong.':'Antrian kosong.')+'</div>'; return; }
     var h='<div class="me-rawwrap"><table class="me-rawtable"><thead><tr><th>ID KD</th><th>Julukan</th><th>Wilayah</th><th>PL</th><th>Keswa</th><th>Jiwa</th><th>Status</th><th></th></tr></thead><tbody>';
@@ -3937,7 +3945,7 @@ tr.me-rawclick{cursor:pointer;}
     var av=t.closest&&t.closest('[data-harv]'); if(av){ if(window.SAHA_HIV_SAVE) SAHA_HIV_SAVE(av.getAttribute('data-harv'),{status:'mulai_arv',archived:true}); window.__HIV_OPEN=null; return; }
     var bt=t.closest&&t.closest('[data-hbatal]'); if(bt){ if(confirm('Batalkan kasus ini (salah input)? Akan pindah ke Arsip.')&&window.SAHA_HIV_SAVE) SAHA_HIV_SAVE(bt.getAttribute('data-hbatal'),{status:'batal',archived:true}); window.__HIV_OPEN=null; return; }
     var sy=t.closest&&t.closest('#hiv-syncbtn'); if(sy){ if(window.SAHA_HIV_SYNC) SAHA_HIV_SYNC(window.__HIV_BELUM||[]); return; }
-    var rs=t.closest&&t.closest('#hiv-f-reset'); if(rs){ ['hiv-f-status','hiv-f-pl','hiv-f-wil','hiv-f-pj'].forEach(function(id){var e2=document.getElementById(id); if(e2)e2.value='';}); var qb=document.getElementById('hiv-q'); if(qb)qb.value=''; renderWork(); return; }
+    var rs=t.closest&&t.closest('#hiv-f-reset'); if(rs){ ['hiv-f-status','hiv-f-pl','hiv-f-wil','hiv-f-pj','hiv-f-thn','hiv-f-psi','hiv-f-sla'].forEach(function(id){var e2=document.getElementById(id); if(e2)e2.value='';}); var qb=document.getElementById('hiv-q'); if(qb)qb.value=''; renderWork(); return; }
     var row=t.closest&&t.closest('.hiv-row'); if(row){ var hid=row.getAttribute('data-hid'); window.__HIV_OPEN=(window.__HIV_OPEN===hid?null:hid); renderWork(); return; }
     var tk=t.closest&&t.closest('#hiv-tab-aktif'); if(tk){ window.__HIV_TAB='aktif'; renderWork(); return; }
     var tr2=t.closest&&t.closest('#hiv-tab-arsip'); if(tr2){ window.__HIV_TAB='arsip'; renderWork(); return; }
