@@ -962,7 +962,7 @@
     <div class="brand">
       <div class="logo">Sadar Hati Foundation</div>
       <div class="est">est. 2002 · Malang</div>
-      <div class="system-tag">Integrated Hub v0.83 · Yayasan Sadar Hati</div>
+      <div class="system-tag">Integrated Hub v0.84 · Yayasan Sadar Hati</div>
     </div>
 
         <nav class="nav">
@@ -1027,7 +1027,7 @@
           akses sesuai role akun
         </div>
       </div>
-      <div>v0.83 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
+      <div>v0.84 · Yayasan Sadar Hati · Manrope + Lora · 18 Jul 2026</div>
     <div style="margin-top:10px;"><a href="./" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#2f6d9e,#1f4a6e);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:12px 14px;border-radius:12px;letter-spacing:.3px;box-shadow:0 4px 12px rgba(44,39,36,.22);">🏠 &larr; Beranda Hub</a></div>
     </div>
   </aside>
@@ -1770,6 +1770,13 @@
           <div class="cm-tab on" id="cm-tab-aktif">Aktif</div>
           <div class="cm-tab" id="cm-tab-arsip">Arsip · Selesai</div>
           <input class="cm-q" id="cm-q" placeholder="🔎 cari julukan / ID KD / PL…">
+        </div>
+        <div class="hiv-filters">
+          <select id="cm-f-status" class="hiv-fsel"><option value="">Semua status</option></select>
+          <select id="cm-f-prio" class="hiv-fsel"><option value="">Semua prioritas</option><option value="1">P1 · Bunuh diri</option><option value="2">P2 · Psikotik</option><option value="3">P3 · PTSD</option><option value="4">P4 · Skor</option></select>
+          <select id="cm-f-pl" class="hiv-fsel"><option value="">Semua PL</option></select>
+          <select id="cm-f-pj" class="hiv-fsel"><option value="">Semua penanggung jawab</option></select>
+          <button id="cm-f-reset" class="hiv-freset">↺ Reset</button>
         </div>
         <div id="cm-list"><div class="cm-empty">Login sebagai Admin / M&amp;E / Direktur untuk memuat antrian.</div></div>
         <div id="cm-kaskade"></div>
@@ -3997,6 +4004,9 @@ tr.me-rawclick{cursor:pointer;}
   var PRC={1:['cm-p1','HARI INI'],2:['cm-p2','ASESMEN'],3:['cm-p3','PTSD'],4:['cm-p4','']};
   function age(r){ try{ return (Date.now()-new Date(r.created_at).getTime())/864e5; }catch(e){ return 0; } }
   function firstT(r,st){ var h=r.history||[]; for(var i=0;i<h.length;i++){ if(h[i].status===st) return h[i].t; } return null; }
+  function cmDistinct(R,key){ var s={}; (R||[]).forEach(function(r){ var v=String((key==='pl'?r.pl:r.pj)||'').trim(); if(v) s[v]=1; }); return Object.keys(s).sort(); }
+  function cmOpt(sel,vals,allLabel,noneLabel){ if(!sel) return; var cur=sel.value; var o='<option value="">'+allLabel+'</option>'; if(noneLabel) o+='<option value="__none">'+noneLabel+'</option>'; o+=vals.map(function(v){return '<option value="'+esc(v)+'">'+esc(v)+'</option>';}).join(''); sel.innerHTML=o; sel.value=cur; if(sel.value!==cur) sel.value=''; }
+  function cmFillFilters(R,tab){ cmOpt(el('cm-f-pl'), cmDistinct(R,'pl'), 'Semua PL'); cmOpt(el('cm-f-pj'), cmDistinct(R,'pj'), 'Semua penanggung jawab', 'Belum ditugaskan'); var st=el('cm-f-status'); if(st){ var cur=st.value; var A=(tab==='arsip')?[['selesai','Selesai'],['batal','Dibatalkan']]:[['baru','Baru'],['dikontak','Dikontak'],['terjadwal','Terjadwal'],['sesi','Sesi berjalan']]; st.innerHTML='<option value="">Semua status</option>'+A.map(function(o){return '<option value="'+o[0]+'">'+o[1]+'</option>';}).join(''); st.value=cur; if(st.value!==cur) st.value=''; } }
   window.SAHA_RENDER_CM = function(){
     var box=el('cm-list'); if(!box) return;
     var role=window.SAHA_ROLE, can=(role==='admin'||role==='me'||role==='manager'||role==='pm'||role==='case_manager');
@@ -4022,10 +4032,16 @@ tr.me-rawclick{cursor:pointer;}
     // list
     var rows=(window.__CM_TAB==='arsip'?arc:act).slice();
     if(q) rows=rows.filter(function(r){ var k=r.klien||{}; return ((k.julukan||'')+' '+(k.idkd||'')+' '+(r.pl||'')).toLowerCase().indexOf(q)>=0; });
+    var fst=(el('cm-f-status')||{}).value||'', fprio=(el('cm-f-prio')||{}).value||'', fpl=(el('cm-f-pl')||{}).value||'', fpj=(el('cm-f-pj')||{}).value||'';
+    if(fst) rows=rows.filter(function(r){return String(r.status||'')===fst;});
+    if(fprio) rows=rows.filter(function(r){return String(r.priority)===fprio;});
+    if(fpl) rows=rows.filter(function(r){return String(r.pl||'')===fpl;});
+    if(fpj) rows=rows.filter(function(r){ return fpj==='__none'? !String(r.pj||'').trim() : String(r.pj||'')===fpj; });
     rows.sort(function(a,b){ return (a.priority-b.priority)||((b.sort_score||0)-(a.sort_score||0))||String(a.created_at||'').localeCompare(String(b.created_at||'')); });
     var tA=el('cm-tab-aktif'), tR=el('cm-tab-arsip');
     if(tA){ tA.textContent='Aktif ('+act.length+')'; tA.className='cm-tab'+(window.__CM_TAB==='aktif'?' on':''); }
     if(tR){ tR.textContent='Arsip · Selesai ('+arc.length+')'; tR.className='cm-tab'+(window.__CM_TAB==='arsip'?' on':''); }
+    cmFillFilters(R, window.__CM_TAB);
     if(!rows.length){ box.innerHTML='<div class="cm-empty">'+(window.__CM_TAB==='arsip'?'Arsip masih kosong.':'Belum ada rujukan di antrian — tombol 📅 <b>Rujuk ke Konseling</b> ada di detail entri (klik baris di Log Harian / tabel output form).')+'</div>'; renderKas(R); return; }
     var h='<div class="cm-hdr"><div>Prio</div><div>Klien</div><div>Sumber & hasil</div><div>Umur antrian</div><div>Status</div><div>Penanggung jawab</div><div></div></div>';
     rows.forEach(function(r){
@@ -4082,6 +4098,7 @@ tr.me-rawclick{cursor:pointer;}
   }
   document.addEventListener('click', function(e){
     var t=e.target;
+    if(t.closest && t.closest('#cm-f-reset')){ ['cm-f-status','cm-f-prio','cm-f-pl','cm-f-pj'].forEach(function(id){var e2=document.getElementById(id); if(e2)e2.value='';}); var qq=document.getElementById('cm-q'); if(qq)qq.value=''; SAHA_RENDER_CM(); return; }
     if(t.closest && t.closest('#cm-tab-aktif')){ window.__CM_TAB='aktif'; window.__CM_OPEN=null; SAHA_RENDER_CM(); return; }
     if(t.closest && t.closest('#cm-tab-arsip')){ window.__CM_TAB='arsip'; window.__CM_OPEN=null; SAHA_RENDER_CM(); return; }
     var sv=t.closest && t.closest('[data-save]');
@@ -4098,6 +4115,7 @@ tr.me-rawclick{cursor:pointer;}
   });
   var iq=document.getElementById('cm-q');
   if(iq) iq.addEventListener('input', function(){ try{SAHA_RENDER_CM();}catch(e){} });
+  document.addEventListener('change', function(e){ if(e.target&&/^cm-f-/.test(e.target.id||'')) { try{SAHA_RENDER_CM();}catch(e2){} } });
   /* ikut chain rumah: re-render tiap __SAHA_ALL berubah (utk kaskade S1) */
   var prev=window.SAHA_RENDER_HOUSES;
   window.SAHA_RENDER_HOUSES=function(){ if(prev){ try{prev();}catch(e){} } try{ if(document.getElementById('cm-list')) SAHA_RENDER_CM(); }catch(e){} };
